@@ -24,7 +24,7 @@ public class ComunicacionChatImp extends ConexionIrc{
     private String identRecurso;
     private String url = null;
     private String nickname = null;
-    private String chanel="#kiwiirc-default";
+    private String chanel="#kiwiirc-citas";
     private Boolean conectado=false;
     public InterfazUsoAgente itfUsoAgenteGestDialogo;
     private  String identificadorAgenteGestorDialogo;
