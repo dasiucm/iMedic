@@ -1,9 +1,10 @@
 package icaro.infraestructura.entidadesBasicas.componentesBasicos.buzonConTimeout;
+
 /**
- *  Clase de las excepciones de tiempo superado al consumir del buzn
+ * Clase de las excepciones de tiempo superado al consumir del buzn
  *
- *@author     Jorge Gonzlez
- *@created    2 de octubre de 2001
+ * @author Jorge Gonzlez
+ * @created 2 de octubre de 2001
  */
 public class ExcepcionTimeOutSuperado extends java.lang.Exception {
 

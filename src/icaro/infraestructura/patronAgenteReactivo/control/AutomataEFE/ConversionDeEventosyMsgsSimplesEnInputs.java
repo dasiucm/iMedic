@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package icaro.infraestructura.patronAgenteReactivo.control.AutomataEFE;
 
@@ -10,31 +10,32 @@ import icaro.infraestructura.entidadesBasicas.comunicacion.InfoContEvtMsgAgteRea
 import icaro.infraestructura.entidadesBasicas.comunicacion.MensajeSimple;
 
 /**
- *  Clase que traduce objetos de la clase EventoRecAgte en los inputs que tengamos
- *  definidos en el automata
+ * Clase que traduce objetos de la clase EventoRecAgte en los inputs que
+ * tengamos definidos en el automata
  *
  */
 public class ConversionDeEventosyMsgsSimplesEnInputs {
 
 	/**
-	 *  Constructor for the ConversionDeEventosEnInputs object
+	 * Constructor for the ConversionDeEventosEnInputs object
 	 */
-	public ConversionDeEventosyMsgsSimplesEnInputs() { }
-
+	public ConversionDeEventosyMsgsSimplesEnInputs() {
+	}
 
 	/**
-	 *@param  ev  Evento a traducir
-	 *@return     Input procesable por el automata
+	 * @param ev
+	 *            Evento a traducir
+	 * @return Input procesable por el automata
 	 */
-	public static String procesarEventoParaProducirInput(EventoSimple ev)
-	{
-            InfoContEvtMsgAgteReactivo  evContenido = (InfoContEvtMsgAgteReactivo)ev.getContenido();
-            return (evContenido.getInput()).trim();
+	public static String procesarEventoParaProducirInput(EventoSimple ev) {
+		InfoContEvtMsgAgteReactivo evContenido = (InfoContEvtMsgAgteReactivo) ev
+				.getContenido();
+		return (evContenido.getInput()).trim();
 	}
-        public static String procesarMsgSimpleParaProducirInput(MensajeSimple msg)
-	{
 
-            Object[] contenidoMsg = (Object[]) msg.getContenido();
-            return (contenidoMsg[0].toString().trim());
+	public static String procesarMsgSimpleParaProducirInput(MensajeSimple msg) {
+
+		Object[] contenidoMsg = (Object[]) msg.getContenido();
+		return (contenidoMsg[0].toString().trim());
 	}
 }

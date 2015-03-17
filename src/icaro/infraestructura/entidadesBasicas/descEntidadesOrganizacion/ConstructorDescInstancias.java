@@ -1,19 +1,16 @@
 package icaro.infraestructura.entidadesBasicas.descEntidadesOrganizacion;
 
-import icaro.infraestructura.recursosOrganizacion.configuracion.imp.ConfiguracionImp;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
-import icaro.infraestructura.recursosOrganizacion.configuracion.imp.*;
 import icaro.infraestructura.entidadesBasicas.descEntidadesOrganizacion.jaxb.ComponenteGestionado;
 import icaro.infraestructura.entidadesBasicas.descEntidadesOrganizacion.jaxb.Instancia;
 import icaro.infraestructura.entidadesBasicas.descEntidadesOrganizacion.jaxb.InstanciaGestor;
 import icaro.infraestructura.entidadesBasicas.descEntidadesOrganizacion.jaxb.Nodo;
 import icaro.infraestructura.entidadesBasicas.excepciones.UsoRecursoException;
+import icaro.infraestructura.recursosOrganizacion.configuracion.imp.ConfiguracionImp;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-
 
 public class ConstructorDescInstancias {
 	ConfiguracionImp config;
@@ -27,7 +24,8 @@ public class ConstructorDescInstancias {
 		try {
 			DescInstanciaAgenteAplicacion descAgente = new DescInstanciaAgenteAplicacion();
 			descAgente.setId(id);
-                        descAgente.setCategoriaComponente(NombresPredefinidos.NOMBRE_ENTIDAD_AGENTE);
+			descAgente
+					.setCategoriaComponente(NombresPredefinidos.NOMBRE_ENTIDAD_AGENTE);
 			// Obtener la instancia
 			List<Instancia> instanciasAgentes = config.getDescOrganizacion()
 					.getDescInstancias().getAgentesAplicacion().getInstancia();
@@ -46,10 +44,15 @@ public class ConstructorDescInstancias {
 						.getDescComportamientoAgente(instancia
 								.getRefDescripcion()));
 				descAgente.setTipoComponente(config
-						.getDescComportamientoAgente(instancia.getRefDescripcion()).getTipo().value());
-                                descAgente.setRolComponente(config
-						.getDescComportamientoAgente(instancia.getRefDescripcion()).getRol().value());
-                                // Obtener lista de propiedades
+						.getDescComportamientoAgente(
+								instancia.getRefDescripcion()).getTipo()
+						.value());
+				descAgente
+						.setRolComponente(config
+								.getDescComportamientoAgente(
+										instancia.getRefDescripcion()).getRol()
+								.value());
+				// Obtener lista de propiedades
 				descAgente.setPropiedades(ConstructorProperties
 						.obtenerProperties(instancia.getListaPropiedades()));
 				// obtener el nodo especifico
@@ -86,8 +89,9 @@ public class ConstructorDescInstancias {
 		try {
 			DescInstanciaGestor descGestor = new DescInstanciaGestor();
 			descGestor.setId(id);
-                        descGestor.setCategoriaComponente(NombresPredefinidos.NOMBRE_ENTIDAD_AGENTE);
-                        
+			descGestor
+					.setCategoriaComponente(NombresPredefinidos.NOMBRE_ENTIDAD_AGENTE);
+
 			// Obtener la instancia
 			List<InstanciaGestor> instanciasGestores = config
 					.getDescOrganizacion().getDescInstancias().getGestores()
@@ -107,10 +111,15 @@ public class ConstructorDescInstancias {
 						.getDescComportamientoAgente(instancia
 								.getRefDescripcion()));
 				descGestor.setTipoComponente(config
-						.getDescComportamientoAgente(instancia.getRefDescripcion()).getTipo().value());
-                                descGestor.setRolComponente(config
-						.getDescComportamientoAgente(instancia.getRefDescripcion()).getRol().value());
-                                // Obtener lista de propiedades
+						.getDescComportamientoAgente(
+								instancia.getRefDescripcion()).getTipo()
+						.value());
+				descGestor
+						.setRolComponente(config
+								.getDescComportamientoAgente(
+										instancia.getRefDescripcion()).getRol()
+								.value());
+				// Obtener lista de propiedades
 				descGestor.setPropiedades(ConstructorProperties
 						.obtenerProperties(instancia.getListaPropiedades()));
 				// obtener el nodo especfico
@@ -148,23 +157,24 @@ public class ConstructorDescInstancias {
 						break;
 					case AGENTE_APLICACION:
 						inst = this
-								.construirDescInstanciaAgenteAplicacion(componente
-										.getRefId());
+						.construirDescInstanciaAgenteAplicacion(componente
+								.getRefId());
 						break;
 					case RECURSO_APLICACION:
 						inst = this
-								.construirDescInstanciaRecursoAplicacion(componente
-										.getRefId());
+						.construirDescInstanciaRecursoAplicacion(componente
+								.getRefId());
 
 					}
 					componentesGestionados.add(inst);
 				}
 				descGestor.setComponentesGestionados(componentesGestionados);
 
-			} else
+			} else {
 				throw new UsoRecursoException(
 						"Error al interpretar la descripcin de la instancia de gestor con id "
 								+ id);
+			}
 			return descGestor;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -179,7 +189,8 @@ public class ConstructorDescInstancias {
 		try {
 			DescInstanciaRecursoAplicacion descInstanciaRecursoAplicacion = new DescInstanciaRecursoAplicacion();
 			descInstanciaRecursoAplicacion.setId(id);
-                        descInstanciaRecursoAplicacion.setCategoriaComponente(NombresPredefinidos.NOMBRE_ENTIDAD_RECURSO);
+			descInstanciaRecursoAplicacion
+					.setCategoriaComponente(NombresPredefinidos.NOMBRE_ENTIDAD_RECURSO);
 			// Obtener la instancia
 			List<Instancia> instanciasRecursos = config.getDescOrganizacion()
 					.getDescInstancias().getRecursosAplicacion().getInstancia();
@@ -194,16 +205,20 @@ public class ConstructorDescInstancias {
 			}
 			if (encontrado) {
 				// Obtener descripcion
-				descInstanciaRecursoAplicacion.setDescRecurso(config
-						.getDescRecursoAplicacion(instancia
-								.getRefDescripcion()));
+				descInstanciaRecursoAplicacion
+						.setDescRecurso(config
+								.getDescRecursoAplicacion(instancia
+										.getRefDescripcion()));
 				// Obtener lista de propiedades
-				descInstanciaRecursoAplicacion.setPropiedades(ConstructorProperties
-						.obtenerProperties(instancia.getListaPropiedades()));
+				descInstanciaRecursoAplicacion
+						.setPropiedades(ConstructorProperties
+								.obtenerProperties(instancia
+										.getListaPropiedades()));
 				// obtener el nodo especfico
 				Nodo nodo = instancia.getNodoEspecifico();
 				if (nodo == null) {
-					// obtener el nodo comun de las instancias de recursos de aplicacin
+					// obtener el nodo comun de las instancias de recursos de
+					// aplicacin
 					nodo = config.getDescOrganizacion().getDescInstancias()
 							.getRecursosAplicacion().getNodoComun();
 					if (nodo == null) {

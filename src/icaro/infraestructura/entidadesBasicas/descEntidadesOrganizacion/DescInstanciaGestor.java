@@ -2,7 +2,6 @@ package icaro.infraestructura.entidadesBasicas.descEntidadesOrganizacion;
 
 import java.util.List;
 
-
 public class DescInstanciaGestor extends DescInstanciaAgente {
 	private List<DescInstancia> componentesGestionados;
 
@@ -10,8 +9,9 @@ public class DescInstanciaGestor extends DescInstanciaAgente {
 		return componentesGestionados;
 	}
 
-	public void setComponentesGestionados(List<DescInstancia> componentesGestionados) {
+	public void setComponentesGestionados(
+			List<DescInstancia> componentesGestionados) {
 		this.componentesGestionados = componentesGestionados;
 	}
-	
+
 }

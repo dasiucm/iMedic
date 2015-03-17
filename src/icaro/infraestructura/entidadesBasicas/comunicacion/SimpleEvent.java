@@ -12,12 +12,12 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 /**
- *  Ttulo: Descripcion: Copyright: Copyright (c) 2001 Empresa:
+ * Ttulo: Descripcion: Copyright: Copyright (c) 2001 Empresa:
  *
- *@author
- *@created    11 de septiembre de 2001
- *@modified	  20 de junio de 2006
- *@version    2.0
+ * @author
+ * @created 11 de septiembre de 2001
+ * @modified 20 de junio de 2006
+ * @version 2.0
  */
 
 public class SimpleEvent implements Serializable {
@@ -30,7 +30,7 @@ public class SimpleEvent implements Serializable {
 
 	private String origen;
 
-	public SimpleEvent(String msg, String origen ) {
+	public SimpleEvent(String msg, String origen) {
 
 		this.msg = msg;
 		this.origen = origen;
@@ -52,20 +52,18 @@ public class SimpleEvent implements Serializable {
 		this.properties.put("event.sender", this.getOrigen());
 	}
 
-
-
-    /**
-	 * @return  Returns the msg.
-	 * @uml.property  name="msg"
+	/**
+	 * @return Returns the msg.
+	 * @uml.property name="msg"
 	 */
 	public String getMsg() {
 		return msg;
 	}
 
-
 	/**
-	 * @param msg  The msg to set.
-	 * @uml.property  name="msg"
+	 * @param msg
+	 *            The msg to set.
+	 * @uml.property name="msg"
 	 */
 	public void setMsg(String msg) {
 		this.msg = msg;
@@ -73,7 +71,7 @@ public class SimpleEvent implements Serializable {
 
 	/**
 	 * get the properties.
-	 * 
+	 *
 	 * @return the properties.
 	 */
 	public final Dictionary properties() {
@@ -82,7 +80,7 @@ public class SimpleEvent implements Serializable {
 
 	/**
 	 * get a certain property.
-	 * 
+	 *
 	 * @param name
 	 *            the property name.
 	 * @return the value.
@@ -93,18 +91,19 @@ public class SimpleEvent implements Serializable {
 
 	/**
 	 * set a certain property
+	 * 
 	 * @param eventTime
 	 * @param string
 	 */
 	@SuppressWarnings("unchecked")
 	public void setProperty(String name, Object obj) {
 		this.properties.put(name, obj);
-		
+
 	}
-	
+
 	/**
 	 * get the property names.
-	 * 
+	 *
 	 * @return the property names.
 	 */
 	public final String[] getPropertyNames() {
@@ -119,44 +118,41 @@ public class SimpleEvent implements Serializable {
 
 	/**
 	 * @return
-	 * @uml.property  name="origen"
+	 * @uml.property name="origen"
 	 */
-	public String getOrigen(){
-		if (origen!=null)
-
+	public String getOrigen() {
+		if (origen != null) {
 			return origen;
-		else
+		} else {
 			return "no especificado";
+		}
 	}
 
 	/**
 	 * @param origen
-	 * @uml.property  name="origen"
+	 * @uml.property name="origen"
 	 */
-	public void setOrigen(String origen){
+	public void setOrigen(String origen) {
 		this.origen = origen;
 	}
 
-
-
+	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer(this.msg);
 		sb.append(" [");
 		Enumeration keys = properties.keys();
-		for (int i = 0; keys.hasMoreElements(); i++) {
+		for (; keys.hasMoreElements();) {
 			String key = (String) keys.nextElement();
 			sb.append(key);
 			sb.append("=");
-			sb.append( properties.get(key) );
+			sb.append(properties.get(key));
 			sb.append(", ");
 		}
-        return sb.toString();
-    }
-
-	public boolean tieneParams() {
-		return properties != null && properties.size() != 0;
+		return sb.toString();
 	}
 
-
+	public boolean tieneParams() {
+		return (properties != null) && (properties.size() != 0);
+	}
 
 }

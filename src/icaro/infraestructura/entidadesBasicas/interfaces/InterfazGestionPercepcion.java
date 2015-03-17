@@ -10,8 +10,8 @@ package icaro.infraestructura.entidadesBasicas.interfaces;
  * @author Francisco J Garijo
  */
 public interface InterfazGestionPercepcion {
-     
-        public void termina();
+
+	public void termina();
 
 	public void arranca();
 }

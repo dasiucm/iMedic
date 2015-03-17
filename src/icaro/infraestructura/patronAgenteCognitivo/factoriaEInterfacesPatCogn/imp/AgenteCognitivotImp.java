@@ -143,4 +143,4 @@ package icaro.infraestructura.patronAgenteCognitivo.factoriaEInterfacesPatCogn.i
 //	public String getLocalName() {
 //		return this.name;
 //	}
-//}
+// }

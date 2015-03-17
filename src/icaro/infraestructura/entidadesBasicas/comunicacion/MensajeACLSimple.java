@@ -4,8 +4,9 @@
  */
 
 package icaro.infraestructura.entidadesBasicas.comunicacion;
+
 /*
-**
+ **
  * @author Damiano Spina
  * @version 1.0
  * @created 21-ago-2008 10:16:59
@@ -27,7 +28,7 @@ public class MensajeACLSimple extends MensajeSimple {
 	private Object content;
 	private String conversation_id;
 
-	public MensajeACLSimple(){
+	public MensajeACLSimple() {
 
 	}
 

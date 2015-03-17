@@ -10,17 +10,16 @@ import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaE
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.TaskManagerFactory;
 
-
-
 /**
  *
  * @author carf
  */
 public class TaskManagerFactoryImp extends TaskManagerFactory {
 
-    @Override
-    public ItfGestorTareas createTaskManager(AgenteCognitivo agent, ItfProcesadorObjetivos envioHechos) {
-        return new GestorTareasImp(agent,envioHechos);
-    }
+	@Override
+	public ItfGestorTareas createTaskManager(AgenteCognitivo agent,
+			ItfProcesadorObjetivos envioHechos) {
+		return new GestorTareasImp(agent, envioHechos);
+	}
 
 }
