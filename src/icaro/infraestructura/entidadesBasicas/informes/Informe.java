@@ -10,39 +10,43 @@ package icaro.infraestructura.entidadesBasicas.informes;
  * @author Francisco J Garijo
  */
 public class Informe {
-	
-    public Object contenidoInforme;
-    public String identEntidadEmisora;
-    public String referenciaContexto;
-    
 
-    public Informe (String  identEmisor,Object contenido){
-        identEntidadEmisora = identEmisor;
-        contenidoInforme = contenido;
-    }
-    public Informe (String  identEmisor,String refContexto,Object contenido){
-        identEntidadEmisora = identEmisor;
-        contenidoInforme = contenido;
-        referenciaContexto = refContexto;
-    }
-    
-    public String getidentEntidadEmisora() {
+	public Object contenidoInforme;
+	public String identEntidadEmisora;
+	public String referenciaContexto;
+
+	public Informe(String identEmisor, Object contenido) {
+		identEntidadEmisora = identEmisor;
+		contenidoInforme = contenido;
+	}
+
+	public Informe(String identEmisor, String refContexto, Object contenido) {
+		identEntidadEmisora = identEmisor;
+		contenidoInforme = contenido;
+		referenciaContexto = refContexto;
+	}
+
+	public String getidentEntidadEmisora() {
 		return identEntidadEmisora;
 	}
-    
-    public Object getContenidoInforme() {
-        return contenidoInforme;
+
+	public Object getContenidoInforme() {
+		return contenidoInforme;
 	}
-    public String getReferenciaContexto() {
+
+	public String getReferenciaContexto() {
 		return referenciaContexto;
 	}
-    /**
-     *  JM: Cadena de texto para la depuración
-     */    
-    @Override
-    public String toString(){
-    return "Informe: " +  " ; EntidadEmisora->" + this.getidentEntidadEmisora() + " ; referenciaContexto->" + this.getReferenciaContexto()+
-    	    " ; Contenido->" + this.getContenidoInforme() ;
-    }
-    
+
+	/**
+	 * JM: Cadena de texto para la depuración
+	 */
+	@Override
+	public String toString() {
+		return "Informe: " + " ; EntidadEmisora->"
+				+ this.getidentEntidadEmisora() + " ; referenciaContexto->"
+				+ this.getReferenciaContexto() + " ; Contenido->"
+				+ this.getContenidoInforme();
+	}
+
 }

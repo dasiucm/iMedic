@@ -11,8 +11,8 @@ import java.rmi.RemoteException;
  *
  * @author Francisco J Garijo
  */
-public interface  InterfazUsoAgente extends ItfEventoSimpe, ItfMensajeSimple {
+public interface InterfazUsoAgente extends ItfEventoSimpe, ItfMensajeSimple {
 
-    public String getIdentAgente() throws RemoteException;
+	public String getIdentAgente() throws RemoteException;
 
 }

@@ -10,14 +10,15 @@ package icaro.aplicaciones.recursos.comunicacionChat.imp.util;
  * @author FGarijo
  */
 public class IrcException extends Exception {
-      
-    /**
-     * Constructs a new IrcException.
-     *
-     * @param e The error message to report.
-     */
-    public IrcException(String e) {
-        super(e);
-    }
-    
+
+	/**
+	 * Constructs a new IrcException.
+	 *
+	 * @param e
+	 *            The error message to report.
+	 */
+	public IrcException(String e) {
+		super(e);
+	}
+
 }

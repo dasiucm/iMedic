@@ -10,17 +10,15 @@ package icaro.aplicaciones.agentes.AgenteAplicacionDialogoCitasCognitivo.objetiv
 
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 
-
-
 /**
  *
- * @author 
+ * @author
  */
 public class ObtenerInfoInterlocutor extends Objetivo {
-    
-    /** Crea una nueva instancia de DarAcceso */
-    public ObtenerInfoInterlocutor() {
-        super.setgoalId("AutorizarAccesoUsuarios");
-    }
-    
+
+	/** Crea una nueva instancia de DarAcceso */
+	public ObtenerInfoInterlocutor() {
+		super.setgoalId("AutorizarAccesoUsuarios");
+	}
+
 }

@@ -14,38 +14,40 @@ import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaE
  */
 
 public abstract class TareaAsincrona extends TareaSincrona implements Runnable {
-    Thread tareaActiva;
-		
-    public TareaAsincrona(){	
-                this.trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
-                this.repoInterfaces = NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ;
-               
+	Thread tareaActiva;
+
+	public TareaAsincrona() {
+		this.trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
+		this.repoInterfaces = NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ;
+
 	}
-    
-    public TareaAsincrona(ItfProcesadorObjetivos envioHechos, AgenteCognitivo agente) {
-    
-    	this.itfProcObjetivos = envioHechos;
-    	this.agente = agente;
-        this.trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
-        this.identAgente = agente.getIdentAgente();
-        this.repoInterfaces = NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ;
-    }
-	
-    public boolean terminada() {
-    	return terminada;
-    }
-    public void comenzar() {
-        tareaActiva = new Thread (this);
-        tareaActiva.setDaemon(true);
-        tareaActiva.setName(identTarea);
-    	tareaActiva.start();
-    }
-    
-    @Override
-    public void run() {
+
+	public TareaAsincrona(ItfProcesadorObjetivos envioHechos,
+			AgenteCognitivo agente) {
+
+		this.itfProcObjetivos = envioHechos;
+		this.agente = agente;
+		this.trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
+		this.identAgente = agente.getIdentAgente();
+		this.repoInterfaces = NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ;
+	}
+
+	public boolean terminada() {
+		return terminada;
+	}
+
+	public void comenzar() {
+		tareaActiva = new Thread(this);
+		tareaActiva.setDaemon(true);
+		tareaActiva.setName(identTarea);
+		tareaActiva.start();
+	}
+
+	@Override
+	public void run() {
 		this.ejecutar(params);
-                terminada = true;
-               //			this.terminar(CausaTerminacionTarea.EXITO);
-    }
-      
+		terminada = true;
+		// this.terminar(CausaTerminacionTarea.EXITO);
+	}
+
 }
