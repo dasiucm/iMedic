@@ -32,4 +32,7 @@ public class VocabularioGestionCitas {
 	public static final String ExtraccionSemanticaNull = "SinSemantica";
 	public static final String preambuloNoHeEntendido = " No he compredido bien lo que me ha dicho, pero vayamos al grano";
 	public static final String peticionInfoIicialCita1 = " podría decirme con quien quiere la cita ";
+	public static final String RegistroUsuario= "registrarSemantica";
+	public static final String IdentUsuarioRegistro = "Tiene que registrarse para continuar";
+
 }

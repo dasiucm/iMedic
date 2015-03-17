@@ -444,6 +444,7 @@ public class InterpreteMsgsIRC {
 		HashSet anotacionesBusquedaPrueba = new HashSet();
 		anotacionesBusquedaPrueba.add("Saludo");
 		anotacionesBusquedaPrueba.add("Lookup");
+		anotacionesBusquedaPrueba.add("Registro");
 		// esto habria que pasarlo como parametro
 		if (infoConecxInterlocutor == null) {
 			infoConecxInterlocutor = new InfoConexionUsuario();
@@ -1473,6 +1474,10 @@ public class InterpreteMsgsIRC {
 						contextoInterpretacion, annot));
 				// i++;
 			}
+			if (anotType.equalsIgnoreCase("registro")) {
+				anotacionesInterpretadas.add(interpretarAnotacionRegistro(
+						contextoInterpretacion, annot));
+			}
 			// fet = annot.getFeatures();
 
 			// string= (String) annot.getFeatures().get("string");
@@ -1496,6 +1501,27 @@ public class InterpreteMsgsIRC {
 		String msgNotif = conttextoInterpretacion.substring(
 				posicionComienzoTexto, posicionFinTexto);
 		notif.setTipoNotificacion(anotacionSaludo.getType());
+		notif.setMensajeNotificacion(msgNotif);
+		return notif;
+	}
+	
+	
+	private Notificacion interpretarAnotacionRegistro(
+			String conttextoInterpretacion, Annotation anotacionReg) {
+		// if(anotacionSaludo.getType()!="saludo"){
+		// return null;
+		// }
+		Notificacion notif = new Notificacion(
+				this.infoConecxInterlocutor.getuserName());
+		// obtenemos el texto del saludo a partir de la anotacion
+
+		int posicionComienzoTexto = anotacionReg.getStartNode().getOffset()
+				.intValue();
+		int posicionFinTexto = anotacionReg.getEndNode().getOffset()
+				.intValue();
+		String msgNotif = conttextoInterpretacion.substring(
+				posicionComienzoTexto, posicionFinTexto);
+		notif.setTipoNotificacion(anotacionReg.getType());
 		notif.setMensajeNotificacion(msgNotif);
 		return notif;
 	}
