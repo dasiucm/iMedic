@@ -1,5 +1,7 @@
 /log/
 *.log
 
+ConfigRutasExtractorSemantico.java
+
 /build/
 /dist/
