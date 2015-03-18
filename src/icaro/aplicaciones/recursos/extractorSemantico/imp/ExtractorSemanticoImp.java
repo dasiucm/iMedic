@@ -53,6 +53,7 @@ public class ExtractorSemanticoImp {
 		}
 		tiposAnotacionesRelevantes = new HashSet<String>();
 		tiposAnotacionesRelevantes.add("Lookup");
+		tiposAnotacionesRelevantes.add("Saludo");
 		tiposAnotacionesRelevantes.add("InicioPeticion");
 	}
 
@@ -125,7 +126,7 @@ public class ExtractorSemanticoImp {
 		// in this example
 		AnnotationSet defaultAnnotSet = doc.getAnnotations();
 		FeatureMap features = doc.getFeatures();
-		features.toString();
+		System.out.println(features.toString());
 		HashSet<Annotation> conjAnotSalida;
 		conjAnotSalida = new HashSet<>(defaultAnnotSet.get(annotTypesRequired));
 		return conjAnotSalida;
