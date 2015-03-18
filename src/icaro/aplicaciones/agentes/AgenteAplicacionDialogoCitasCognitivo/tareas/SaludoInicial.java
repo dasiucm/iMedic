@@ -18,42 +18,37 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
  *
  * @author F Garijo
  */
-public class SolicitarInfoInicialCita extends TareaSincrona {
-	private String identAgenteOrdenante;
+public class SaludoInicial extends TareaSincrona {
+	// private String identAgenteOrdenante ;
 	private Objetivo contextoEjecucionTarea = null;
 
 	@Override
 	public void ejecutar(Object... params) {
-		// String identRecursoVisualizacionAcceso = "VisualizacionAcceso1";
 		String identDeEstaTarea = this.getIdentTarea();
 		String identAgenteOrdenante = this.getIdentAgente();
-		String identInterlocutor = (String) params[0];
+		String identRecursoComunicacionChat = (String) params[0];
 		try {
 			// // Se busca la interfaz del recurso en el repositorio de
 			// interfaces
 			ItfUsoComunicacionChat recComunicacionChat = (ItfUsoComunicacionChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ
-					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoComunicacionChat);
+					.obtenerInterfaz(NombresPredefinidos.ITF_USO
+							+ identRecursoComunicacionChat);
 			if (recComunicacionChat != null) {
 				recComunicacionChat.comenzar(identAgenteOrdenante);
-				String mensajeAenviar = identInterlocutor + ", ¿" + VocabularioGestionCitas.peticionInfoIicialCita1 + "?";
-				recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
+				recComunicacionChat
+						.enviarMensagePrivado(VocabularioGestionCitas.SaludoInicial1);
 			} else {
 				identAgenteOrdenante = this.getAgente().getIdentAgente();
-				this.generarInformeConCausaTerminacion(
-						identDeEstaTarea,
-						contextoEjecucionTarea,
-						identAgenteOrdenante,
+				this.generarInformeConCausaTerminacion(identDeEstaTarea,
+						contextoEjecucionTarea, identAgenteOrdenante,
 						"Error-AlObtener:Interfaz:"
-								+ VocabularioGestionCitas.IdentRecursoComunicacionChat,
+								+ identRecursoComunicacionChat,
 						CausaTerminacionTarea.ERROR);
 			}
 		} catch (Exception e) {
-			this.generarInformeConCausaTerminacion(
-					identDeEstaTarea,
-					contextoEjecucionTarea,
-					identAgenteOrdenante,
-					"Error-Acceso:Interfaz:"
-							+ VocabularioGestionCitas.IdentRecursoComunicacionChat,
+			this.generarInformeConCausaTerminacion(identDeEstaTarea,
+					contextoEjecucionTarea, identAgenteOrdenante,
+					"Error-Acceso:Interfaz:" + identRecursoComunicacionChat,
 					CausaTerminacionTarea.ERROR);
 			e.printStackTrace();
 		}
