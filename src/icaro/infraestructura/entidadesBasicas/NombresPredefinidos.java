@@ -177,4 +177,7 @@ public class NombresPredefinidos {
 																	// en un
 																	// proyecto
 																	// maven
+	
+	public final static String RECURSO_PERSISTENCIA_USUARIOS = "";
+	
 }
