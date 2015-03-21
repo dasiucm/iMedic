@@ -12,6 +12,7 @@ import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
 import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
 import icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc;
 import icaro.aplicaciones.recursos.extractorSemantico.ItfUsoExtractorSemantico;
+import icaro.aplicaciones.recursos.persistenciaUsuarios.imp.PersistenciaUsuariosImp;
 import icaro.infraestructura.entidadesBasicas.comunicacion.ComunicacionAgentes;
 import icaro.infraestructura.entidadesBasicas.comunicacion.MensajeSimple;
 import icaro.infraestructura.entidadesBasicas.interfaces.InterfazUsoAgente;
@@ -238,6 +239,7 @@ public class InterpreteMsgsIRC {
 				&& (target.startsWith("#") || target.startsWith("&"))) {
 			this.onMessage(target, sourceNick, sourceLogin, sourceHostname,
 					line.substring(line.indexOf(" :") + 2));
+			
 			return;
 		}
 
@@ -401,6 +403,11 @@ public class InterpreteMsgsIRC {
 	 */
 	protected void onMessage(String channel, String sender, String login,
 			String hostname, String message) {
+		if(message.contains("hola agentecitas")){
+			
+			
+		}
+		
 	}
 
 	/**

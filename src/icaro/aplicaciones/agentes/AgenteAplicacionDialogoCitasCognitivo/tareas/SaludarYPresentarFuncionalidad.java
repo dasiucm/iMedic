@@ -49,7 +49,7 @@ public class SaludarYPresentarFuncionalidad extends TareaSincrona {
 						+ VocabularioGestionCitas.InfoGeneralFuncionalidad
 						+ "  "
 						+ VocabularioGestionCitas.PeticionInformacionGeneral1;
-				recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
+				recComunicacionChat.enviarMensagePrivado(identInterlocutor, mensajeAenviar);
 			} else {
 				identAgenteOrdenante = this.getAgente().getIdentAgente();
 				this.generarInformeConCausaTerminacion(

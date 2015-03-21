@@ -36,7 +36,7 @@ public class SolicitarInfoInicialCita extends TareaSincrona {
 			if (recComunicacionChat != null) {
 				recComunicacionChat.comenzar(identAgenteOrdenante);
 				String mensajeAenviar = identInterlocutor + ", ¿" + VocabularioGestionCitas.peticionInfoIicialCita1 + "?";
-				recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
+				recComunicacionChat.enviarMensagePrivado(identInterlocutor,mensajeAenviar);
 			} else {
 				identAgenteOrdenante = this.getAgente().getIdentAgente();
 				this.generarInformeConCausaTerminacion(
