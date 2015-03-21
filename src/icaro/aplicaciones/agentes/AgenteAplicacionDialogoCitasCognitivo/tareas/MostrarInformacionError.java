@@ -36,7 +36,7 @@ public class MostrarInformacionError extends TareaSincrona {
 			if (recComunicacionChat != null) {
 				recComunicacionChat.comenzar(identAgenteOrdenante);
 				String mensajeAenviar = VocabularioGestionCitas.RespuestaNoEniendo1 + " " + identInterlocutor;
-				recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
+				recComunicacionChat.enviarMensagePrivado(identInterlocutor,mensajeAenviar);
 			} else {
 				identAgenteOrdenante = this.getAgente().getIdentAgente();
 				this.generarInformeConCausaTerminacion(
