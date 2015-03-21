@@ -40,22 +40,19 @@ rule "Inicio del proceso de consecucion del  objetivo ObtenerInfoInterlocutor"
     obj.setSolving();
     update(obj);
 end
-//=======================================================================
-///Reglas de Consecucion del Objetivo ObtenerInfoInterlocutor
-rule "Saludo Inicial y peticion de info"
+rule "Saludo Inicial"
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
    then
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Se ejecuta la tarea : SolicitarDatosAcceso",InfoTraza.NivelTraza.debug));
-     TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarInfoInicial.class);
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(SaludoInicial.class);
      tarea.ejecutar(VocabularioGestionCitas.IdentRecursoComunicacionChat);
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
-//=======================================================================
-///Reglas de Consecucion del Objetivo ObtenerInfoInterlocutor
-rule "Saludo Inicial al interlocutor y peticion de datos iniciales "
+
+rule "Saludo al interlocutor y presentar funcionalidad"
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
@@ -66,25 +63,27 @@ rule "Saludo Inicial al interlocutor y peticion de datos iniciales "
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
-rule "No hay extraccion  semantica del texto del interlocutor  "
+
+rule "Petición de datos para citas al interlocutor"
+   when
+    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
+    Focus(foco == obj)
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGestionCitas.NombreTipoNoticacionCita)
+   then
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarInfoInicialCita.class);
+     tarea.ejecutar(identInterlc);
+    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "No hay extraccion  semantica del texto del interlocutor"
    when
     obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
     Focus(foco == obj)
     notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGestionCitas.ExtraccionSemanticaNull)
    then
-     TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarInfoInicialCita.class);
-     tarea.ejecutar(identInterlc,VocabularioGestionCitas.preambuloNoHeEntendido,VocabularioGestionCitas.peticionInfoIicialCita1  );
-    recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
-end
-rule "Registrar usuario  "
-   when
-    obj:ObtenerInfoInterlocutor(state==Objetivo.SOLVING)
-    Focus(foco == obj)
-    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion==VocabularioGestionCitas.NombreTipoNoticacionSaludo)
-   then
-     TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarRegistrarUsuario.class);
-     tarea.ejecutar(identInterlc,VocabularioGestionCitas.preambuloNoHeEntendido,VocabularioGestionCitas.IdentUsuarioRegistro  );
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MostrarInformacionError.class);
+     tarea.ejecutar(identInterlc);
     recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end

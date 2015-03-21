@@ -18,7 +18,7 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
  *
  * @author F Garijo
  */
-public class SolicitarInfoInicial extends TareaSincrona {
+public class SaludoInicial extends TareaSincrona {
 	// private String identAgenteOrdenante ;
 	private Objetivo contextoEjecucionTarea = null;
 

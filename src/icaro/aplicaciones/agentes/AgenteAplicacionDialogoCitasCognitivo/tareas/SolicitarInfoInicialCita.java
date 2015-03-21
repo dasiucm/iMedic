@@ -28,8 +28,6 @@ public class SolicitarInfoInicialCita extends TareaSincrona {
 		String identDeEstaTarea = this.getIdentTarea();
 		String identAgenteOrdenante = this.getIdentAgente();
 		String identInterlocutor = (String) params[0];
-		String preambulo = (String) params[1];
-		String textoPeticion = (String) params[2];
 		try {
 			// // Se busca la interfaz del recurso en el repositorio de
 			// interfaces
@@ -37,9 +35,7 @@ public class SolicitarInfoInicialCita extends TareaSincrona {
 					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoComunicacionChat);
 			if (recComunicacionChat != null) {
 				recComunicacionChat.comenzar(identAgenteOrdenante);
-				String mensajeAenviar = VocabularioGestionCitas.SaludoInicial2
-						+ "  " + identInterlocutor + "  " + preambulo + "  "
-						+ textoPeticion;
+				String mensajeAenviar = identInterlocutor + ", ¿" + VocabularioGestionCitas.peticionInfoIicialCita1 + "?";
 				recComunicacionChat.enviarMensagePrivado(mensajeAenviar);
 			} else {
 				identAgenteOrdenante = this.getAgente().getIdentAgente();

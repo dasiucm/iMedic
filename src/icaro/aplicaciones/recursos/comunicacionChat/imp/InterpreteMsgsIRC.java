@@ -443,8 +443,8 @@ public class InterpreteMsgsIRC {
 		// informaciÃ³n
 		HashSet anotacionesBusquedaPrueba = new HashSet();
 		anotacionesBusquedaPrueba.add("Saludo");
+		anotacionesBusquedaPrueba.add("InicioPeticion");
 		anotacionesBusquedaPrueba.add("Lookup");
-		anotacionesBusquedaPrueba.add("Registro");
 		// esto habria que pasarlo como parametro
 		if (infoConecxInterlocutor == null) {
 			infoConecxInterlocutor = new InfoConexionUsuario();
@@ -454,6 +454,11 @@ public class InterpreteMsgsIRC {
 		infoConecxInterlocutor.setlogin(login);
 		if (itfUsoExtractorSem != null) {
 			try {
+				/**
+				 * Si se le pasa un null en vez de un conjunto de anotaciones de
+				 * prueba, usa las que tiene por defecto el objeto (Lookup, Saludo e
+				 * InicioPeticion)
+				 */
 				anotacionesRelevantes = itfUsoExtractorSem.extraerAnotaciones(
 						anotacionesBusquedaPrueba, textoUsuario);
 				String anot = anotacionesRelevantes.toString();
@@ -1466,17 +1471,24 @@ public class InterpreteMsgsIRC {
 		ArrayList anotacionesInterpretadas = new ArrayList();
 		// int i=0;
 		Iterator annotTypesSal = anotacionesRelevantes.iterator();
+		/*
+		 * Esto es porque, cada vez que detecta la palabra "cita" crea DOS anotaciones de tipo "InicipPeticion"
+		 * lo que provoca que conteste dos veces, es un fix rápido que debería ser corregido en el
+		 * Annie Transducer, cosa que no tengo muy claro cómo hacerlo...
+		 */
+		boolean tienePeticion = false;
 		while (annotTypesSal.hasNext()) {
 			Annotation annot = (Annotation) annotTypesSal.next();
 			String anotType = annot.getType();
 			if (anotType.equalsIgnoreCase("saludo")) {
-				anotacionesInterpretadas.add(interpretarAnotacionSaludo(
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
 						contextoInterpretacion, annot));
 				// i++;
-			}
-			if (anotType.equalsIgnoreCase("registro")) {
-				anotacionesInterpretadas.add(interpretarAnotacionRegistro(
+			} else if (!tienePeticion && anotType.equalsIgnoreCase("iniciopeticion")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
 						contextoInterpretacion, annot));
+
 			}
 			// fet = annot.getFeatures();
 
@@ -1485,7 +1497,7 @@ public class InterpreteMsgsIRC {
 		return anotacionesInterpretadas;
 	}
 
-	private Notificacion interpretarAnotacionSaludo(
+	private Notificacion interpretarAnotacionSaludoEInicioPeticion(
 			String conttextoInterpretacion, Annotation anotacionSaludo) {
 		// if(anotacionSaludo.getType()!="saludo"){
 		// return null;
@@ -1501,27 +1513,6 @@ public class InterpreteMsgsIRC {
 		String msgNotif = conttextoInterpretacion.substring(
 				posicionComienzoTexto, posicionFinTexto);
 		notif.setTipoNotificacion(anotacionSaludo.getType());
-		notif.setMensajeNotificacion(msgNotif);
-		return notif;
-	}
-	
-	
-	private Notificacion interpretarAnotacionRegistro(
-			String conttextoInterpretacion, Annotation anotacionReg) {
-		// if(anotacionSaludo.getType()!="saludo"){
-		// return null;
-		// }
-		Notificacion notif = new Notificacion(
-				this.infoConecxInterlocutor.getuserName());
-		// obtenemos el texto del saludo a partir de la anotacion
-
-		int posicionComienzoTexto = anotacionReg.getStartNode().getOffset()
-				.intValue();
-		int posicionFinTexto = anotacionReg.getEndNode().getOffset()
-				.intValue();
-		String msgNotif = conttextoInterpretacion.substring(
-				posicionComienzoTexto, posicionFinTexto);
-		notif.setTipoNotificacion(anotacionReg.getType());
 		notif.setMensajeNotificacion(msgNotif);
 		return notif;
 	}
