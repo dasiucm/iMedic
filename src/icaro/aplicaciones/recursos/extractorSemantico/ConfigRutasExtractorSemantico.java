@@ -14,6 +14,6 @@ public class ConfigRutasExtractorSemantico {
 	public static final String DirectorioGateHome = "C:\\GATE_Developer_8.0";
 	// public static final String DirectorioAppFile=
 	// "E:\\FicheroRed\\GatePruebas\\anniePruebaEjemplo1";
-	public static final String DirectorioAppFile = "D:\\git\\iMedic\\anniePruebaEjemplo1";
+	public static final String DirectorioAppFile = "C:\\anniePruebaEjemplo1";
 
 }
