@@ -7,12 +7,12 @@ package icaro.aplicaciones.recursos.comunicacionChat.imp;
 
 import static icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc.VERSION;
 import gate.Annotation;
+import icaro.aplicaciones.agentes.componentesInternos.UsuarioContexto;
 import icaro.aplicaciones.informacion.gestionCitas.InfoConexionUsuario;
 import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
 import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
 import icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc;
 import icaro.aplicaciones.recursos.extractorSemantico.ItfUsoExtractorSemantico;
-import icaro.aplicaciones.recursos.persistenciaUsuarios.imp.PersistenciaUsuariosImp;
 import icaro.infraestructura.entidadesBasicas.comunicacion.ComunicacionAgentes;
 import icaro.infraestructura.entidadesBasicas.comunicacion.MensajeSimple;
 import icaro.infraestructura.entidadesBasicas.interfaces.InterfazUsoAgente;
@@ -1512,7 +1512,7 @@ public class InterpreteMsgsIRC {
 		Notificacion notif = new Notificacion(
 				this.infoConecxInterlocutor.getuserName());
 		// obtenemos el texto del saludo a partir de la anotacion
-
+		notif.usuario = new UsuarioContexto();
 		int posicionComienzoTexto = anotacionSaludo.getStartNode().getOffset()
 				.intValue();
 		int posicionFinTexto = anotacionSaludo.getEndNode().getOffset()

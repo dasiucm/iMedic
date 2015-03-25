@@ -5,6 +5,8 @@
  */
 package icaro.aplicaciones.informacion.gestionCitas;
 
+import icaro.aplicaciones.agentes.componentesInternos.UsuarioContexto;
+
 /**
  *
  * @author FGarijo
@@ -15,6 +17,8 @@ public class Notificacion {
 	public Object contexto;
 	public String identObjectRefNotificacion;
 	public String tipoNotificacion;
+	public UsuarioContexto usuario;
+
 
 	public Notificacion() {
 
