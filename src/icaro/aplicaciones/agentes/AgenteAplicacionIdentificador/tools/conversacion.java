@@ -28,5 +28,5 @@ public class conversacion {
 	public static final String inactividad2 = "hola?? hola?? alguien en casa?";
 	public static final String inactividad3= "presumo que ya no se encuentra entre nosotros";
 	
-	public static final String despedida1= "hasta otra ocacion";
+	public static final String despedida1= "hasta otra ocasion";
 }

@@ -180,11 +180,13 @@ rule "Detectar Inactividad prolongada"
    update(m);
 end
 	
-rule "tick"
-when
-	m:MemUsuario()
-then
-update(m);
+	
+rule "Timer Inactividad"
+	timer ( int: 1m )
+	when 
+	 m:MemUsuario()
+	 then
+   update(m);
 end
 	
 

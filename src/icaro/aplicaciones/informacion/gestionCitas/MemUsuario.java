@@ -25,6 +25,7 @@ public class MemUsuario {
 	}
 	
 	public void eliminarUsuario(String usuario) {
+		
 		listUsuario.remove(usuario);
 	}
 
@@ -58,6 +59,7 @@ public class MemUsuario {
 	}
 
 	public String usuarioInactivo(int tiempo){
+		System.out.println("PRueba inactividad");
 		Objetivo ob = new Inactividad();
 		for (UsuarioContexto uc : listUsuario.values()) {
 			if (!uc.foco.getFoco().getgoalId().equals(ob) && uc.inactividad(tiempo)) {
