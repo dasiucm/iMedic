@@ -26,10 +26,15 @@
 	******************   Descripción del comportamiento de los agentes de aplicación   		******************
 	********************************************************************************************************-->		
 			<icaro:DescComportamientoAgentesAplicacion>
-				<icaro:DescComportamientoAgente
-					nombreComportamiento="AgenteAplicacionAcceso" rol="AgenteAplicacion" 
-					localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionDialogoCitasCognitivo"
-                                        localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionDialogoCitasCognitivo.procesoResolucionObjetivos.reglasAgenteDialogoCitas.drl"
+<!-- 				<icaro:DescComportamientoAgente -->
+<!-- 					nombreComportamiento="AgenteAplicacionAcceso" rol="AgenteAplicacion"  -->
+<!-- 					localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionDialogoCitasCognitivo" -->
+<!--                     localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionDialogoCitasCognitivo.procesoResolucionObjetivos.reglasAgenteDialogoCitas.drl" -->
+<!-- 					tipo="Cognitivo" /> -->
+								<icaro:DescComportamientoAgente
+					nombreComportamiento="AgenteAplicacionIdentificador" rol="AgenteAplicacion" 
+					localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionIdentificador"
+                    localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionIdentificador.procesoResolucionObjetivos.reglasAgenteIdentificador.drl"
 					tipo="Cognitivo" />
 			</icaro:DescComportamientoAgentesAplicacion>
 		</icaro:DescComportamientoAgentes>
@@ -58,7 +63,8 @@
 			</icaro:InstanciaGestor>
 			<icaro:InstanciaGestor id="GestorAgentes" refDescripcion="GestorAgentes">
 				<icaro:componentesGestionados>		
-                                <icaro:componenteGestionado refId="AgenteAplicacionDialogoCitas1" tipoComponente="AgenteAplicacion"/>		
+<!--                                 <icaro:componenteGestionado refId="AgenteAplicacionDialogoCitas1" tipoComponente="AgenteAplicacion"/>		 -->
+                                <icaro:componenteGestionado refId="AgenteAplicacionIdentificador1" tipoComponente="AgenteAplicacion"/>
                                 </icaro:componentesGestionados>
 			</icaro:InstanciaGestor>	
 			<icaro:InstanciaGestor id="GestorRecursos" refDescripcion="GestorRecursos" >
@@ -73,7 +79,12 @@
 	******************   Instancias de Agentes de aplicación								******************
 	*******************************************************************************************************-->	
 		<icaro:AgentesAplicacion>
-			<icaro:Instancia id="AgenteAplicacionDialogoCitas1" refDescripcion="AgenteAplicacionAcceso">
+<!-- 			<icaro:Instancia id="AgenteAplicacionDialogoCitas1" refDescripcion="AgenteAplicacionAcceso"> -->
+<!-- 				<icaro:listaPropiedades> -->
+<!-- 					<icaro:propiedad atributo="" valor=""/> -->
+<!-- 				</icaro:listaPropiedades> -->
+<!-- 			</icaro:Instancia>		 -->
+			<icaro:Instancia id="AgenteAplicacionIdentificador1" refDescripcion="AgenteAplicacionIdentificador">
 				<icaro:listaPropiedades>
 					<icaro:propiedad atributo="" valor=""/>
 				</icaro:listaPropiedades>

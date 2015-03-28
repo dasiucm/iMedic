@@ -165,7 +165,7 @@ public class ClaseGeneradoraComunicacionChat extends ImplRecursoSimple
 				throw new Exception();
 			} else {
 				interpreteMsgIrc
-						.setIdentAgenteGestorDialogo(VocabularioGestionCitas.IdentAgenteAplicacionDialogoCitas);
+						.setIdentAgenteGestorDialogo(VocabularioGestionCitas.IdentAgenteIdentificador);
 				interpreteMsgIrc
 						.setIdentConexion(VocabularioGestionCitas.IdentConexionAgte);
 				comunicChat.setVerbose(true);

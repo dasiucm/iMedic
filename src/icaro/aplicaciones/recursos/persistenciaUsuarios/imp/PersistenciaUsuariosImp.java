@@ -1,38 +1,28 @@
 package icaro.aplicaciones.recursos.persistenciaUsuarios.imp;
 
+import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PersistenciaUsuariosImp implements Serializable{
 
-	private static Map<String,String> tablaChatNombre= new HashMap<String,String>();
-	private static Map<String,String> tablaDniChat = new HashMap<String,String>();
+	public static Map<String,UsuarioContexto> tablaChatNombre= new HashMap<String,UsuarioContexto>();
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3791013440695899189L;
 
-	public void insertarUsuario(String nombreChat, String nombre ){
+	public static void insertarUsuario(String nombreChat, UsuarioContexto nombre ){
 		tablaChatNombre.put(nombreChat, nombre);		
 	}
 	
-	public void insertarDNI(String nombreChat, String dni ){
-		tablaDniChat.put(nombreChat, dni);		
-	}
-	
-	public String obtenerNombreUsuario(String nombreChat){
+	public static UsuarioContexto obtenerContextoUsuario(String nombreChat){
 		return tablaChatNombre.get(nombreChat);
 		
 	}
-	
-	public String obtenerDNI(String nombreChat){
-		return tablaDniChat.get(nombreChat);
-		
-	}
-	
-
 	
 	
 }

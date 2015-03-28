@@ -7,15 +7,18 @@ package icaro.aplicaciones.recursos.comunicacionChat.imp;
 
 import static icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc.VERSION;
 import gate.Annotation;
-import icaro.aplicaciones.agentes.componentesInternos.UsuarioContexto;
 import icaro.aplicaciones.informacion.gestionCitas.InfoConexionUsuario;
 import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
+import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
 import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
 import icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc;
 import icaro.aplicaciones.recursos.extractorSemantico.ItfUsoExtractorSemantico;
+import icaro.aplicaciones.recursos.persistenciaUsuarios.ItfPersistenciaUsuarios;
+import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.comunicacion.ComunicacionAgentes;
 import icaro.infraestructura.entidadesBasicas.comunicacion.MensajeSimple;
 import icaro.infraestructura.entidadesBasicas.interfaces.InterfazUsoAgente;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -449,9 +452,11 @@ public class InterpreteMsgsIRC {
 		// de esta forma el agente recibe mensajes con entidades del modelo de
 		// información
 		HashSet anotacionesBusquedaPrueba = new HashSet();
-		anotacionesBusquedaPrueba.add("Saludo");
+		anotacionesBusquedaPrueba.add("saludo");
+		anotacionesBusquedaPrueba.add("dni");
 		anotacionesBusquedaPrueba.add("InicioPeticion");
 		anotacionesBusquedaPrueba.add("Lookup");
+		anotacionesBusquedaPrueba.add("nombre");
 		// esto habria que pasarlo como parametro
 		if (infoConecxInterlocutor == null) {
 			infoConecxInterlocutor = new InfoConexionUsuario();
@@ -1496,6 +1501,16 @@ public class InterpreteMsgsIRC {
 				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
 						contextoInterpretacion, annot));
 
+			}else if (anotType.equalsIgnoreCase("nombre")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
+						contextoInterpretacion, annot));
+
+			}else if (anotType.equalsIgnoreCase("dni")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
+						contextoInterpretacion, annot));
+
 			}
 			// fet = annot.getFeatures();
 
@@ -1509,10 +1524,26 @@ public class InterpreteMsgsIRC {
 		// if(anotacionSaludo.getType()!="saludo"){
 		// return null;
 		// }
-		Notificacion notif = new Notificacion(
+ 		Notificacion notif = new Notificacion(
 				this.infoConecxInterlocutor.getuserName());
+//		UsuarioContexto cu;
 		// obtenemos el texto del saludo a partir de la anotacion
-		notif.usuario = new UsuarioContexto();
+//		try {
+//			ItfPersistenciaUsuarios ItfPersistenciaUsuarios = (ItfPersistenciaUsuarios) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ
+//					.obtenerInterfaz(NombresPredefinidos.ITF_USO +VocabularioGestionCitas.IdentRecursoPersistenciaUsuario);
+//			cu = ItfPersistenciaUsuarios.obtenerContextoUsuario(this.infoConecxInterlocutor.getuserName());
+//			if(cu == null){
+//				cu = new UsuarioContexto();
+//				cu.setUsuario(this.infoConecxInterlocutor.getuserName());
+//			}
+//			notif.usuario = cu;
+//			notif.usuario.foco = new Focus();
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}		
+		
 		int posicionComienzoTexto = anotacionSaludo.getStartNode().getOffset()
 				.intValue();
 		int posicionFinTexto = anotacionSaludo.getEndNode().getOffset()

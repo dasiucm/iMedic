@@ -1,0 +1,190 @@
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTrazas;
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
+import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
+import icaro.infraestructura.entidadesBasicas.PerformativaUsuario;
+import icaro.infraestructura.entidadesBasicas.comunicacion.*
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.objetivos.*;
+import icaro.aplicaciones.informacion.gestionCitas.*;
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas.*;
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.*;
+
+global ItfGestorTareas gestorTareas;
+global ItfUsoRecursoTrazas recursoTrazas;
+global String agentId;
+
+
+rule "Creacion de los objectivos iniciales"
+when 
+then 
+TareaSincrona tarea = gestorTareas.crearTareaSincrona(InicializarInfoWorkMem.class);
+    tarea.ejecutar();
+recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+rule "Saludo Inicial"
+when
+then
+   // recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Se ejecuta la tarea : SolicitarDatosAcceso",InfoTraza.NivelTraza.debug));
+     TareaSincrona tarea = gestorTareas.crearTareaSincrona(SaludoInicial.class);
+     tarea.ejecutar(VocabularioGestionCitas.IdentRecursoComunicacionChat);
+   // recursoTrazas.aceptaNuevaTraza(new InfoTraza(agentId,"Realizando el objetivo : "+obj.getgoalId()+"  Ejecutando la tarea : "+ tarea.getIdentTarea() ,InfoTraza.NivelTraza.debug));
+   // recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+rule "Saludo inicial de usuario"
+ when
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion == tipoNotif.saludo)
+    m:MemUsuario( existeUsuario(identInterlc) == false)
+ then
+ 	m.crearUsuario(identInterlc);
+ 	Objetivo obj = new ObtenerNombreUsuario();
+    m.setFoco(identInterlc,obj);
+  TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+     tarea.ejecutar(identInterlc,conversacion.saludoInicial);
+     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+     retract(notif);
+     update(m);
+end
+
+rule "Resaludar"
+ when
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion == tipoNotif.saludo)
+    m:MemUsuario( existeUsuario(identInterlc))
+    
+ then
+  TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+     tarea.ejecutar(identInterlc,conversacion.resaludo1);
+     m.usuario(identInterlc).actividad();
+     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+     update(m);
+     retract(notif);
+end
+
+
+rule "Regla de focalizacion de obtener nombre"
+ when
+    m:MemUsuario( identInterlc:obtenerUsuarioObjetivo( "ObtenerNombre" , "PENDING" ) != null)
+ then
+  recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
+	m.getFoco(identInterlc).setSolving();
+  TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+     tarea.ejecutar(identInterlc,conversacion.SolicitarNombre2);
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   update(m);
+end
+
+rule "Regla de obtencion de nombre"
+ when
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion == tipoNotif.nombre, msgg:mensajeNotificacion )
+    m:MemUsuario( estadoObjetivo(identInterlc,"ObtenerNombre","SOLVING") )
+ then
+	m.getFoco(identInterlc).setSolved();
+	m.usuario(identInterlc).setNombre(msgg);
+	m.usuario(identInterlc).actividad();
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarNombre.class);
+     tarea.ejecutar(identInterlc,conversacion.obtencionNombre1,msgg);
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   //Introducimos la regla del DNI
+    Objetivo obj = new ObtenerDNIUsuario();
+   	m.setFoco(identInterlc,obj);
+   update(m);
+   retract(notif);
+end
+
+rule "Regla de focalizacion de obtener DNI"
+ when
+    m:MemUsuario(identInterlc:obtenerUsuarioObjetivo( "ObtenerDNI" , "PENDING" ) != null )
+ then
+
+  recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
+	m.getFoco(identInterlc).setSolving();
+	UsuarioContexto user = m.usuario(identInterlc);
+  TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+     tarea.ejecutar(identInterlc, user.getNombre()+ ", " + conversacion.SolicitarDNI1);
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   update(m);
+end
+
+rule "Regla de obtencion de dni"
+ when
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion == tipoNotif.dni, msgg:mensajeNotificacion )
+    m:MemUsuario( estadoObjetivo(identInterlc,"ObtenerDNI","SOLVING") )
+ then
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
+	m.getFoco(identInterlc).setSolved();
+	m.usuario(identInterlc).setDNI(msgg);
+	m.usuario(identInterlc).actividad();
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+     tarea.ejecutar(identInterlc,conversacion.obtencionDNI1);
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+      //Introducimos la regla del DNI
+    Objetivo obj = new DistribuirMensajes();
+   	m.setFoco(identInterlc,obj);
+     
+   update(m);
+   retract(notif);
+end
+
+rule "Focalizacion de distribucion de mensajes"
+ when
+    m:MemUsuario( identInterlc:obtenerUsuarioObjetivo( "DistribuirMensaje" , "PENDING" ) != null )
+ then
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
+	m.getFoco(identInterlc).setSolving();
+	UsuarioContexto user = m.usuario(identInterlc);
+  TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+     tarea.ejecutar(identInterlc, user.getNombre()+ ", " + conversacion.distribucion1);
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   update(m);
+end
+
+rule "Distribucion de mensajes"
+ when
+    notif:Notificacion(identInterlc:identNotificador, tipoNotificacion != tipoNotif.saludo)
+    m:MemUsuario( estadoObjetivo(identInterlc,"DistribuirMensaje","SOLVING") )
+ then
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
+	UsuarioContexto user = m.usuario(identInterlc);
+	user.actividad();
+  TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+     tarea.ejecutar(identInterlc, "#Se envia el mensaje al agente correspondiente#");
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   update(m);
+   retract(notif);
+end
+
+rule "Detectar Inactividad"
+	when 
+	 m:MemUsuario( usuario:usuarioInactivo(1) != null, estadoObjetivo(usuario,"Inactividad","PENDING") == false )
+	 then
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
+	UsuarioContexto user = m.usuario(usuario);
+	user.actividad();
+	m.setFoco(usuario,new Inactividad());
+  TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+     tarea.ejecutar(usuario, user.getNombre() +", "+ conversacion.inactividad1);
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   update(m);
+end
+
+rule "Detectar Inactividad prolongada"
+	when 
+	 m:MemUsuario( usuario:usuarioInactivo(1) != null, estadoObjetivo(usuario,"Inactividad","PENDING") )
+	 then
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
+	m.eliminarUsuario(usuario);
+  TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+     tarea.ejecutar(usuario,  conversacion.despedida1);
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   update(m);
+end
+	
+rule "tick"
+when
+	m:MemUsuario()
+then
+update(m);
+end
+	
+

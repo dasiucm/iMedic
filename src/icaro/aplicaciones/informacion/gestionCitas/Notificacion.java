@@ -5,7 +5,6 @@
  */
 package icaro.aplicaciones.informacion.gestionCitas;
 
-import icaro.aplicaciones.agentes.componentesInternos.UsuarioContexto;
 
 /**
  *
@@ -19,6 +18,14 @@ public class Notificacion {
 	public String tipoNotificacion;
 	public UsuarioContexto usuario;
 
+
+	public UsuarioContexto getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioContexto usuario) {
+		this.usuario = usuario;
+	}
 
 	public Notificacion() {
 
