@@ -1,5 +1,7 @@
 package icaro.aplicaciones.recursos.persistenciaUsuarios;
 
+import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
+import icaro.aplicaciones.recursos.persistenciaUsuarios.imp.PersistenciaUsuariosImp;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 
 import java.rmi.RemoteException;
@@ -17,46 +19,17 @@ public class ClaseGeneradoraPersistenciaUsuarios extends ImplRecursoSimple
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 
 	@Override
-	public void insertarUsuario(String nombreChat, String nombre, String DNI)
+	public void insertarUsuario(String nombreChat, UsuarioContexto usuar)
 			throws Exception {
-		// TODO Auto-generated method stub
-		
+		PersistenciaUsuariosImp.insertarUsuario(nombreChat, usuar);	
 	}
 
 	@Override
-	public void insertarNombreUsuario(String nombreChat, String nombre)
+	public UsuarioContexto obtenerContextoUsuario(String nombreChat)
 			throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void insertarDniUsuario(String nombreChat, String DNI)
-			throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String obtenerNombreUsuario(String nombreChat) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String obtenerDNI(String nombreChat) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean validarUsuario(String nombreChat, String DNI)
-			throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		return PersistenciaUsuariosImp.obtenerContextoUsuario(nombreChat);
 	}
 
 }
