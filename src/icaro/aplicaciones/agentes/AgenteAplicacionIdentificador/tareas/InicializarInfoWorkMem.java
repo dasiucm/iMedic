@@ -28,7 +28,7 @@ public class InicializarInfoWorkMem extends TareaSincrona {
 			this.getItfConfigMotorDeReglas()
 					.setfactHandlesMonitoring_afterActivationFired_DEBUGGING(
 							true);
-			this.getEnvioHechos().insertarHecho(new MemUsuario());
+			//this.getEnvioHechos().insertarHecho(new MemUsuario());
 			//this.getEnvioHechos().insertarHechoWithoutFireRules(new Focus());
 			//this.getEnvioHechos().insertarHecho(new ObtenerInformacionUsuario());
 
