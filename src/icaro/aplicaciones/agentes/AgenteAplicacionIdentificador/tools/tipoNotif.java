@@ -4,4 +4,5 @@ public class tipoNotif {
 	public static String saludo = "saludo";
 	public static String nombre = "nombre";
 	public static String dni = "dni";
+	public static String despedida = "despedida";
 }

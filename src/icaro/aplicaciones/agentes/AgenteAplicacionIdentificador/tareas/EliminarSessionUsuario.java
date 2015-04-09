@@ -8,7 +8,9 @@ package icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoCitasCognitivo.objetivos.ObtenerInfoInterlocutor;
 import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.objetivos.ObtenerNombreUsuario;
 import icaro.aplicaciones.informacion.gestionCitas.MemUsuario;
+import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
@@ -16,18 +18,24 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  *
  * @author Francisco J Garijo
  */
-public class InicializarInfoWorkMem extends TareaSincrona {
+public class EliminarSessionUsuario extends TareaSincrona {
 
 	@Override
 	public void ejecutar(Object... params) {
+		String usuario = (String) params[0];
 		try {
-			this.getIdentTarea();
-			this.getIdentAgente();
-			this.getItfConfigMotorDeReglas()
-					.setDepuracionActivationRulesDebugging(true);
-			this.getItfConfigMotorDeReglas()
-					.setfactHandlesMonitoring_afterActivationFired_DEBUGGING(
-							true);
+			
+			for(Object g : this.getEnvioHechos().getItfMotorDeReglas().getStatefulKnowledgeSession().getObjects()){
+				
+				if(g instanceof Objetivo ){
+					Objetivo ob = (Objetivo) g;
+					if(ob.getobjectReferenceId().equals(usuario)){
+						this.getEnvioHechos().eliminarHechoWithoutFireRules(ob);
+					}
+				}
+			
+			}
+			
 			//this.getEnvioHechos().insertarHecho(new MemUsuario());
 			//this.getEnvioHechos().insertarHechoWithoutFireRules(new Focus());
 			//this.getEnvioHechos().insertarHecho(new ObtenerInformacionUsuario());

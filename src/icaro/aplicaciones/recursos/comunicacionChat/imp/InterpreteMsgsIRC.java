@@ -457,6 +457,7 @@ public class InterpreteMsgsIRC {
 		anotacionesBusquedaPrueba.add("InicioPeticion");
 		anotacionesBusquedaPrueba.add("Lookup");
 		anotacionesBusquedaPrueba.add("nombre");
+		anotacionesBusquedaPrueba.add("despedida");
 		// esto habria que pasarlo como parametro
 		if (infoConecxInterlocutor == null) {
 			infoConecxInterlocutor = new InfoConexionUsuario();
@@ -1507,6 +1508,11 @@ public class InterpreteMsgsIRC {
 						contextoInterpretacion, annot));
 
 			}else if (anotType.equalsIgnoreCase("dni")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
+						contextoInterpretacion, annot));
+
+			}else if (anotType.equalsIgnoreCase("despedida")) {
 				tienePeticion = true;
 				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
 						contextoInterpretacion, annot));
