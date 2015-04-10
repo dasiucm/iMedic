@@ -1,5 +1,6 @@
 package icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas;
 
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tools.tipoNotifPaciente;
 import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
 import icaro.aplicaciones.informacion.gestionCitas.NotificacionPaciente;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
@@ -18,6 +19,7 @@ public class Distribuir extends TareaSincrona {
 		String identInterlocutor = (String) params[0];
 		Notificacion notif = (Notificacion) params[1];
 		try {
+			notif.setTipoNotificacion(tipoNotifPaciente.inicioPeticion);
 			// Ver cómo diferencias si se envía al agente diálogo médico o al paciente
 
 			this.getEnvioHechos().insertarHecho(new NotificacionPaciente(notif));

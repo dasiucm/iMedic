@@ -38,8 +38,13 @@ public class MensajeGenerico extends TareaSincrona {
 			if (recComunicacionChat != null) {
 				recComunicacionChat.comenzar(identAgenteOrdenante);
 				String mensajeAenviar = mensaje;
-				recComunicacionChat.enviarMensagePrivado(identInterlocutor,
-						mensajeAenviar);
+				if (identInterlocutor.isEmpty()) {
+					recComunicacionChat.enviarMensageCanal(mensajeAenviar);
+
+				} else {
+					recComunicacionChat.enviarMensagePrivado(identInterlocutor,
+							mensajeAenviar);
+				}
 			} else {
 				identAgenteOrdenante = this.getAgente().getIdentAgente();
 				this.generarInformeConCausaTerminacion(

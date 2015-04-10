@@ -9,16 +9,13 @@ import static icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc.
 import gate.Annotation;
 import icaro.aplicaciones.informacion.gestionCitas.InfoConexionUsuario;
 import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
-import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
+import icaro.aplicaciones.informacion.gestionCitas.NotificacionPaciente;
 import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
 import icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc;
 import icaro.aplicaciones.recursos.extractorSemantico.ItfUsoExtractorSemantico;
-import icaro.aplicaciones.recursos.persistenciaUsuarios.ItfPersistenciaUsuarios;
-import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.comunicacion.ComunicacionAgentes;
 import icaro.infraestructura.entidadesBasicas.comunicacion.MensajeSimple;
 import icaro.infraestructura.entidadesBasicas.interfaces.InterfazUsoAgente;
-import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;

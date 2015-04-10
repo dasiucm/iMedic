@@ -18,21 +18,20 @@ rule "TEST AGENTE DIALOGO PACIENTE"
 when 
 then 
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    tarea.ejecutar("USUARIO test", "TEST AGENTE DIALOGO PACIENTE");
+    tarea.ejecutar("", "TEST AGENTE DIALOGO PACIENTE");
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
 rule "Inicio obtención datos cita"
  when
-    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.inicioPeticion)
-    m:MemUsuario( existeUsuario(identInterlc) ) 
+    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.inicioPeticion);
  then
- 	m.crearUsuario(identInterlc);
- 	Objetivo obj = new ObtenerInfoCita();
-    m.setFoco(identInterlc,obj);
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita);
+ 	//m.crearUsuario(identInterlc);
+ 	//Objetivo obj = new ObtenerInfoCita();
+    //m.setFoco(identInterlc,obj);
+    //TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    //tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
-    update(m);
+    //update(m);
 end

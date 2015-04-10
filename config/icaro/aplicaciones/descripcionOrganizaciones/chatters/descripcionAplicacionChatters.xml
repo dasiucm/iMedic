@@ -69,8 +69,9 @@
 			<icaro:InstanciaGestor id="GestorAgentes" refDescripcion="GestorAgentes">
 				<icaro:componentesGestionados>		
 <!--                                 <icaro:componenteGestionado refId="AgenteAplicacionDialogoCitas1" tipoComponente="AgenteAplicacion"/>		 -->
+  							<icaro:componenteGestionado refId="AgenteAplicacionDialogoPaciente1" tipoComponente="AgenteAplicacion"/>	
                                 <icaro:componenteGestionado refId="AgenteAplicacionIdentificador1" tipoComponente="AgenteAplicacion"/>
-                                 <icaro:componenteGestionado refId="AgenteAplicacionDialogoPaciente1" tipoComponente="AgenteAplicacion"/>
+                               
                 </icaro:componentesGestionados>
 			</icaro:InstanciaGestor>	
 			<icaro:InstanciaGestor id="GestorRecursos" refDescripcion="GestorRecursos" >
@@ -85,6 +86,11 @@
 	******************   Instancias de Agentes de aplicación								******************
 	*******************************************************************************************************-->	
 		<icaro:AgentesAplicacion>
+			<icaro:Instancia id="AgenteAplicacionDialogoPaciente1" refDescripcion="AgenteAplicacionDialogoPaciente">
+				<icaro:listaPropiedades>
+					<icaro:propiedad atributo="" valor=""/>
+				</icaro:listaPropiedades>
+			</icaro:Instancia>	
 <!-- 			<icaro:Instancia id="AgenteAplicacionDialogoCitas1" refDescripcion="AgenteAplicacionAcceso"> -->
 <!-- 				<icaro:listaPropiedades> -->
 <!-- 					<icaro:propiedad atributo="" valor=""/> -->
@@ -95,11 +101,7 @@
 					<icaro:propiedad atributo="" valor=""/>
 				</icaro:listaPropiedades>
 			</icaro:Instancia>	
-			<icaro:Instancia id="AgenteAplicacionDialogoPaciente1" refDescripcion="AgenteAplicacionDialogoPaciente">
-				<icaro:listaPropiedades>
-					<icaro:propiedad atributo="" valor=""/>
-				</icaro:listaPropiedades>
-			</icaro:Instancia>		
+			
 		</icaro:AgentesAplicacion>
 	<!--******************************************************************************************************
 	******************   Instancias de Recursos de aplicación								******************
