@@ -36,6 +36,11 @@
 					localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionIdentificador"
                     localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionIdentificador.procesoResolucionObjetivos.reglasAgenteIdentificador.drl"
 					tipo="Cognitivo" />
+					<icaro:DescComportamientoAgente
+					nombreComportamiento="AgenteAplicacionDialogoPaciente" rol="AgenteAplicacion" 
+					localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionDialogoPaciente"
+                    localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionDialogoPaciente.procesoResolucionObjetivos.reglasAgenteDialogoPaciente.drl"
+					tipo="Cognitivo" />
 			</icaro:DescComportamientoAgentesAplicacion>
 		</icaro:DescComportamientoAgentes>
 	<!--******************************************************************************************************
@@ -65,7 +70,8 @@
 				<icaro:componentesGestionados>		
 <!--                                 <icaro:componenteGestionado refId="AgenteAplicacionDialogoCitas1" tipoComponente="AgenteAplicacion"/>		 -->
                                 <icaro:componenteGestionado refId="AgenteAplicacionIdentificador1" tipoComponente="AgenteAplicacion"/>
-                                </icaro:componentesGestionados>
+                                 <icaro:componenteGestionado refId="AgenteAplicacionDialogoPaciente1" tipoComponente="AgenteAplicacion"/>
+                </icaro:componentesGestionados>
 			</icaro:InstanciaGestor>	
 			<icaro:InstanciaGestor id="GestorRecursos" refDescripcion="GestorRecursos" >
 				<icaro:componentesGestionados>
@@ -85,6 +91,11 @@
 <!-- 				</icaro:listaPropiedades> -->
 <!-- 			</icaro:Instancia>		 -->
 			<icaro:Instancia id="AgenteAplicacionIdentificador1" refDescripcion="AgenteAplicacionIdentificador">
+				<icaro:listaPropiedades>
+					<icaro:propiedad atributo="" valor=""/>
+				</icaro:listaPropiedades>
+			</icaro:Instancia>	
+			<icaro:Instancia id="AgenteAplicacionDialogoPaciente1" refDescripcion="AgenteAplicacionDialogoPaciente">
 				<icaro:listaPropiedades>
 					<icaro:propiedad atributo="" valor=""/>
 				</icaro:listaPropiedades>

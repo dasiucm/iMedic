@@ -1,0 +1,38 @@
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTrazas;
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
+import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
+import icaro.infraestructura.entidadesBasicas.PerformativaUsuario;
+import icaro.infraestructura.entidadesBasicas.comunicacion.*
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.objetivos.*;
+import icaro.aplicaciones.informacion.gestionCitas.*;
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tareas.*;
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tools.*;
+
+global ItfGestorTareas gestorTareas;
+global ItfUsoRecursoTrazas recursoTrazas;
+global String agentId;
+
+// LOL si pongo esta regla no funciona nada WHAT?
+rule "TEST AGENTE DIALOGO PACIENTE"
+when 
+then 
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar("USUARIO test", "TEST AGENTE DIALOGO PACIENTE");
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+rule "Inicio obtención datos cita"
+ when
+    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.inicioPeticion)
+    m:MemUsuario( existeUsuario(identInterlc) ) 
+ then
+ 	m.crearUsuario(identInterlc);
+ 	Objetivo obj = new ObtenerInfoCita();
+    m.setFoco(identInterlc,obj);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita);
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+    retract(notif);
+    update(m);
+end
