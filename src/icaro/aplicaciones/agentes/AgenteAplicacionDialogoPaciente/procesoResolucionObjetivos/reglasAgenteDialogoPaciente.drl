@@ -29,8 +29,8 @@ rule "Inicio obtención datos cita"
  	//m.crearUsuario(identInterlc);
  	//Objetivo obj = new ObtenerInfoCita();
     //m.setFoco(identInterlc,obj);
-    //TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    //tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
     //update(m);

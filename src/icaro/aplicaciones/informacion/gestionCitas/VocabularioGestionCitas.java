@@ -29,6 +29,7 @@ public class VocabularioGestionCitas {
 	public static final String NombreTipoNoticacionSaludo = "Saludo";
 	public static final String NombreTipoNoticacionCita = "InicioPeticion";
 	public static final String ExtraccionSemanticaNull = "SinSemantica";
+	public static final String IdentAgenteAplicacionDialogoPaciente = "AgenteAplicacionDialogoPaciente1";
 	
 	
 	/*

@@ -155,7 +155,7 @@ rule "Distribucion de mensajes"
  then
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
 	cu.actividad();
-  TareaSincrona tarea = gestorTareas.crearTareaSincrona(Distribuir.class);
+  Tarea tarea = gestorTareas.crearTarea(Distribuir.class);
      tarea.ejecutar(identInterlc, notif);
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
    retract(notif);
