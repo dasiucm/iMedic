@@ -69,12 +69,12 @@ rule "Regla de focalizacion de obtener nombre"
  when
  	obj:IdentificarUsuario(state == Objetivo.PENDING ,user:objectReferenceId)
  then
-  recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
-  obj.setSolving();
-  TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-     tarea.ejecutar(user,conversacion.SolicitarNombre2);
-   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
-   update(obj);
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
+  	obj.setSolving();
+  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(user,conversacion.SolicitarNombre2);
+   	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   	update(obj);
 end
 
 rule "Regla de obtencion de nombre"
@@ -90,10 +90,10 @@ rule "Regla de obtencion de nombre"
  	insert( nobj );
  	cu.actividad();
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarNombre.class);
-     tarea.ejecutar(identInterlc,conversacion.obtencionNombre1,msgg);
-   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
-   update(obj);
-   retract(notif);
+    tarea.ejecutar(identInterlc,conversacion.obtencionNombre1,msgg);
+   	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   	update(obj);
+   	retract(notif);
 end
 
 
