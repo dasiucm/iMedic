@@ -36,6 +36,11 @@
 					localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionIdentificador"
                     localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionIdentificador.procesoResolucionObjetivos.reglasAgenteIdentificador.drl"
 					tipo="Cognitivo" />
+					<icaro:DescComportamientoAgente
+					nombreComportamiento="AgenteAplicacionDialogoPaciente" rol="AgenteAplicacion" 
+					localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionDialogoPaciente"
+                    localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionDialogoPaciente.procesoResolucionObjetivos.reglasAgenteDialogoPaciente.drl"
+					tipo="Cognitivo" />
 			</icaro:DescComportamientoAgentesAplicacion>
 		</icaro:DescComportamientoAgentes>
 	<!--******************************************************************************************************
@@ -64,8 +69,10 @@
 			<icaro:InstanciaGestor id="GestorAgentes" refDescripcion="GestorAgentes">
 				<icaro:componentesGestionados>		
 <!--                                 <icaro:componenteGestionado refId="AgenteAplicacionDialogoCitas1" tipoComponente="AgenteAplicacion"/>		 -->
+  							<icaro:componenteGestionado refId="AgenteAplicacionDialogoPaciente1" tipoComponente="AgenteAplicacion"/>	
                                 <icaro:componenteGestionado refId="AgenteAplicacionIdentificador1" tipoComponente="AgenteAplicacion"/>
-                                </icaro:componentesGestionados>
+                               
+                </icaro:componentesGestionados>
 			</icaro:InstanciaGestor>	
 			<icaro:InstanciaGestor id="GestorRecursos" refDescripcion="GestorRecursos" >
 				<icaro:componentesGestionados>
@@ -79,6 +86,11 @@
 	******************   Instancias de Agentes de aplicación								******************
 	*******************************************************************************************************-->	
 		<icaro:AgentesAplicacion>
+			<icaro:Instancia id="AgenteAplicacionDialogoPaciente1" refDescripcion="AgenteAplicacionDialogoPaciente">
+				<icaro:listaPropiedades>
+					<icaro:propiedad atributo="" valor=""/>
+				</icaro:listaPropiedades>
+			</icaro:Instancia>	
 <!-- 			<icaro:Instancia id="AgenteAplicacionDialogoCitas1" refDescripcion="AgenteAplicacionAcceso"> -->
 <!-- 				<icaro:listaPropiedades> -->
 <!-- 					<icaro:propiedad atributo="" valor=""/> -->
@@ -88,7 +100,8 @@
 				<icaro:listaPropiedades>
 					<icaro:propiedad atributo="" valor=""/>
 				</icaro:listaPropiedades>
-			</icaro:Instancia>		
+			</icaro:Instancia>	
+			
 		</icaro:AgentesAplicacion>
 	<!--******************************************************************************************************
 	******************   Instancias de Recursos de aplicación								******************

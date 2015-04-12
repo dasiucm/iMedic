@@ -146,7 +146,7 @@ public class ClaseGeneradoraComunicacionChat extends ImplRecursoSimple
 		InterfazUsoAgente itfAgteControlador;
 		try {
 			itfAgteControlador = (InterfazUsoAgente) this.repoIntfaces
-					.obtenerInterfazUso(identAgteControlador);
+					.obtenerInterfazUso(VocabularioGestionCitas.IdentAgenteIdentificador);
 			if (itfAgteControlador == null) {
 				this.generarErrorCreacionComponente("itfAgteControlador es null");
 			} else {
