@@ -21,8 +21,6 @@ public class Distribuir extends TareaComunicacion {
 		String identInterlocutor = (String) params[0];
 		Notificacion notif = (Notificacion) params[1];
 		try {
-			
-			notif.setTipoNotificacion(tipoNotifPaciente.inicioPeticion);
 			// Ver cómo diferencias si se envía al agente diálogo médico o al paciente
 			this.informaraOtroAgente(new NotificacionPaciente(notif), VocabularioGestionCitas.IdentAgenteAplicacionDialogoPaciente);
 			//this.getEnvioHechos().insertarHecho(new NotificacionPaciente(notif));
