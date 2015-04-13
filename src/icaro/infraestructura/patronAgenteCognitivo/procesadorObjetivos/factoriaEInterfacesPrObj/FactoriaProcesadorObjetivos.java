@@ -5,7 +5,7 @@ import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoriaE
 
 /**
  * Factory for Cognitive Control
- * 
+ *
  * @author Carlos Celorrio
  *
  */
@@ -17,7 +17,7 @@ public abstract class FactoriaProcesadorObjetivos {
 
 	/**
 	 * Gets the singleton instance of this factory.
-	 * 
+	 *
 	 * @return A cognitive agent control factory
 	 */
 	public static FactoriaProcesadorObjetivos instance() {

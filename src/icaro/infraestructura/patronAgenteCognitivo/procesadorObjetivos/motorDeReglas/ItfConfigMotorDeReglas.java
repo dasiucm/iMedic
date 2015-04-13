@@ -12,16 +12,16 @@ public interface ItfConfigMotorDeReglas {
 	public void setDepuracionActivationRulesDebugging(boolean boolValor);
 
 	public void setDepuracionHechosInsertados(boolean boolValor); // traza los
-																	// hechos
-																	// insertados
-																	// en el
-																	// motor
+	// hechos
+	// insertados
+	// en el
+	// motor
 
 	public void setDepuracionHechosModificados(boolean boolValor);// traza los
-																	// hechos
-																	// modificados
-																	// en el
-																	// motor
+	// hechos
+	// modificados
+	// en el
+	// motor
 
 	public void setFactHandlesMonitoring_beforeActivationFired_DEBUGGING(
 			boolean boolValor);

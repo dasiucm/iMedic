@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
  * Esta clase genera evidencias a partir de la informacion contenida en un
  * evento simple o posiblemente en varios eventos. Por ahora solo consideramos
  * un evento
- * 
+ *
  * @author Francisco J Garijo
  */
 public class InterpreteEventosSimples {

@@ -6,7 +6,7 @@ import icaro.infraestructura.recursosOrganizacion.repositorioInterfaces.ItfUsoRe
 /**
  * Definiciones de los nombres de las interfaces. Se puede heredar de esta clase
  * en cada aplicaci�n
- * 
+ *
  * @author Francisco J Garijo
  * @version 1.0
  */
@@ -170,14 +170,14 @@ public class NombresPredefinidos {
 	// añadir los nombres de cada aplicacion en concreto
 	public final static String RUTA_PRUEBAS = "icaro.pruebas";
 	public static String RUTA_Carpeta_CodigoFuente_ICARO = "src/"; // cambiar el
-																	// valor a
-																	// "src/main/java"
-																	// si pone
-																	// el icaro
-																	// en un
-																	// proyecto
-																	// maven
-	
+	// valor a
+	// "src/main/java"
+	// si pone
+	// el icaro
+	// en un
+	// proyecto
+	// maven
+
 	public final static String RECURSO_PERSISTENCIA_USUARIOS = "";
-	
+
 }

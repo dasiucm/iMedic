@@ -47,9 +47,9 @@ public class PropiedadesGlobales {
 
 	/**
 	 * Gets the value of the intervaloMonitorizacionGestores property.
-	 * 
+	 *
 	 * @return possible object is {@link Integer }
-	 * 
+	 *
 	 */
 	public Integer getIntervaloMonitorizacionGestores() {
 		return intervaloMonitorizacionGestores;
@@ -57,10 +57,10 @@ public class PropiedadesGlobales {
 
 	/**
 	 * Sets the value of the intervaloMonitorizacionGestores property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link Integer }
-	 * 
+	 *
 	 */
 	public void setIntervaloMonitorizacionGestores(Integer value) {
 		this.intervaloMonitorizacionGestores = value;
@@ -68,9 +68,9 @@ public class PropiedadesGlobales {
 
 	/**
 	 * Gets the value of the activarPanelTrazasDebug property.
-	 * 
+	 *
 	 * @return possible object is {@link Boolean }
-	 * 
+	 *
 	 */
 	public Boolean isActivarPanelTrazasDebug() {
 		return activarPanelTrazasDebug;
@@ -78,10 +78,10 @@ public class PropiedadesGlobales {
 
 	/**
 	 * Sets the value of the activarPanelTrazasDebug property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link Boolean }
-	 * 
+	 *
 	 */
 	public void setActivarPanelTrazasDebug(Boolean value) {
 		this.activarPanelTrazasDebug = value;
@@ -89,9 +89,9 @@ public class PropiedadesGlobales {
 
 	/**
 	 * Gets the value of the listaPropiedades property.
-	 * 
+	 *
 	 * @return possible object is {@link ListaPropiedades }
-	 * 
+	 *
 	 */
 	public ListaPropiedades getListaPropiedades() {
 		return listaPropiedades;
@@ -99,10 +99,10 @@ public class PropiedadesGlobales {
 
 	/**
 	 * Sets the value of the listaPropiedades property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link ListaPropiedades }
-	 * 
+	 *
 	 */
 	public void setListaPropiedades(ListaPropiedades value) {
 		this.listaPropiedades = value;

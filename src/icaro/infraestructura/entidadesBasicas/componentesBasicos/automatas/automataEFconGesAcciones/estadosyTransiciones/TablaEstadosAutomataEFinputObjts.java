@@ -24,7 +24,7 @@ public class TablaEstadosAutomataEFinputObjts implements Cloneable,
 	/**
 	 * Tabla que almacena si los estados son iniciales / finales / etc, indexa
 	 * por estado
-	 * 
+	 *
 	 * @uml.property name="clasificacionEstados"
 	 * @uml.associationEnd 
 	 *                     qualifier="identificador:java.lang.String java.lang.Integer"
@@ -37,7 +37,7 @@ public class TablaEstadosAutomataEFinputObjts implements Cloneable,
 
 	/**
 	 * El estado inicial
-	 * 
+	 *
 	 * @uml.property name="identificadorEstadoInicial"
 	 */
 	// private String identificadorEstadoInicial = "";
@@ -45,7 +45,7 @@ public class TablaEstadosAutomataEFinputObjts implements Cloneable,
 	/**
 	 * Tabla de tablas que almacena las tablas input/estado siguiente y las
 	 * indexa por estado
-	 * 
+	 *
 	 * @uml.property name="inputsDeEstados"
 	 * @uml.associationEnd qualifier="input:java.lang.String java.lang.String"
 	 */
@@ -150,8 +150,8 @@ public class TablaEstadosAutomataEFinputObjts implements Cloneable,
 			// identsInputsEstado.add(input);
 			if ((tipoEstado < 1) || (tipoEstado >= 3)) {
 				tipoEstado = TIPO_DE_ESTADO_INTERMEDIO; // sacar un mensaje
-														// indicando que se ha
-														// corregido
+				// indicando que se ha
+				// corregido
 			}
 			infoEstados.put(input, new ParTipoEstadoConjInputs(tipoEstado,
 					identsInputsEstado));
@@ -249,7 +249,7 @@ public class TablaEstadosAutomataEFinputObjts implements Cloneable,
 				tipoEstado = infoEstados.get(estadoOrigen).tipoEstado;
 			}
 		} else { // no existe el estado origen => se saca mensaje de error y se
-					// crea
+			// crea
 			identsInputsEstado = new TreeSet<>();
 			identsInputsEstado.add(input);
 			tipoEstado = TIPO_DE_ESTADO_INTERMEDIO;
@@ -290,7 +290,7 @@ public class TablaEstadosAutomataEFinputObjts implements Cloneable,
 				} // no se anyade la transicion y se sigue el proceso
 				else if (esInputValidoDeEstado(estadoPivote, input)) {
 					hayErrores = true; // damos preferencia al input definido y
-										// no se incluye la transicion
+					// no se incluye la transicion
 					InfoErrores += "\n" + " Input repetido " + input
 							+ " En el estado :" + estadoPivote;
 				} else {

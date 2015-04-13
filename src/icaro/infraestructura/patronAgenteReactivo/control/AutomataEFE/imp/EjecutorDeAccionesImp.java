@@ -6,35 +6,35 @@ import icaro.infraestructura.patronAgenteReactivo.control.acciones.ExcepcionEjec
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.logging.Logger;
 /**
  *  Define la clase de objetos que pueden contener acciones semnticas, que se
  *  ejecutarn dinmicamente por el automata
  *
- *	
+ *
  *	@modified	22 de junio de 2006
  *	@version	2.0
  */
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EjecutorDeAccionesImp extends EjecutorDeAccionesAbstracto {
 
 	/**
 	 * Objeto que almacena las funciones
-	 * 
+	 *
 	 * @uml.property name="accionesSemanticas"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
 	protected AccionesSemanticasAgenteReactivo accionesSemanticas;
 	/**
 	 * Prxima accin que ejecutamos
-	 * 
+	 *
 	 * @uml.property name="accionSemanticaAEjecutar"
 	 */
 	protected String accionSemanticaAEjecutar;
 	/**
 	 * Lista de parmetros de la accin semntica a ejecutar
-	 * 
+	 *
 	 * @uml.property name="parametros" multiplicity="(0 -1)" dimension="1"
 	 */
 	protected Object[] parametros;
@@ -63,7 +63,7 @@ public class EjecutorDeAccionesImp extends EjecutorDeAccionesAbstracto {
 
 	/**
 	 * Asigna los parmetros de la accin a ejecutar
-	 * 
+	 *
 	 * @param parametros
 	 *            Lista de parmetros de la accin
 	 * @uml.property name="parametros"

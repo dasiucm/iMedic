@@ -291,7 +291,7 @@ public class AccionesSemanticasIniciador extends
 		if (configuracionExterna.despliegueOrgEnUnSoloNodo()) {
 			identGestorNodo = NombresPredefinidos.NOMBRE_GESTOR_ORGANIZACION;
 		} else { // Si la organizacion es distribuida el iniciador mira si esta
-					// en el nodo del GO o en otro nodo
+			// en el nodo del GO o en otro nodo
 			String identNodoGO = configuracionExterna
 					.getHostComponente(NombresPredefinidos.NOMBRE_GESTOR_ORGANIZACION);
 			String thisHost = InetAddress.getLocalHost().getHostName();
@@ -299,11 +299,11 @@ public class AccionesSemanticasIniciador extends
 				identGestorNodo = NombresPredefinidos.NOMBRE_GESTOR_ORGANIZACION;
 			} else {
 				identGestorNodo = NombresPredefinidos.NOMBRE_GESTOR_NODO; // Se
-																			// crea
-																			// un
-																			// Gestor
-																			// de
-																			// Nodo
+				// crea
+				// un
+				// Gestor
+				// de
+				// Nodo
 			}
 		}
 
@@ -461,7 +461,7 @@ public class AccionesSemanticasIniciador extends
 
 	/**
 	 * Devuelve cierto si es necesario arrancar el agente
-	 * 
+	 *
 	 * @param nombreAgente
 	 * @return
 	 */

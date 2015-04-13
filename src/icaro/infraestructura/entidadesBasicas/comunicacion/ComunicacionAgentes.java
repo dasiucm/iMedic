@@ -23,7 +23,7 @@ public class ComunicacionAgentes {
 	private ItfUsoRepositorioInterfaces repoInterfaces;
 	private IdentityHashMap itfsAgtesConLosQComunico;
 	private Integer initialmMxSizeOfAgtesConLosQComunico = 8; // Esto es
-																// arbitrario
+	// arbitrario
 	protected Logger logger;
 
 	public ComunicacionAgentes(String propietario) {

@@ -78,7 +78,7 @@ public class FactoriaAgenteCognitivoImp2 extends FactoriaAgenteCognitivo {
 			// logger.error("Error al crear El CONTROL del agente. La factoria no puede crear la instancia o no se pueden obtener la interfaces : "
 			// + nombreInstanciaAgente, exc);
 			System.err
-			.println(" No se puede crear el control del agente. La factoria no puede crear la instancia.");
+					.println(" No se puede crear el control del agente. La factoria no puede crear la instancia.");
 			exc.putCompDondeEstaContenido("patronAgenteCognitivo.contol");
 			exc.putParteAfectada("FactoriaControlAgenteCognitivoImp");
 			throw exc;
@@ -195,7 +195,7 @@ public class FactoriaAgenteCognitivoImp2 extends FactoriaAgenteCognitivo {
 							+ ":No se puede crear el agente. El comportamiento no esta bien definido",
 					NivelTraza.error));
 			System.err
-			.println(" No se puede crear la Instancia del agente . La descrpcion del comportamiento no es correcta.");
+					.println(" No se puede crear la Instancia del agente . La descrpcion del comportamiento no es correcta.");
 		}
 	}
 

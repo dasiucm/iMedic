@@ -577,10 +577,10 @@ public class Hora implements Comparable, Cloneable, java.io.Serializable {
 		if (this.momentoDia == Utilidades.int_INDEFINIDO) {
 			momento = "INDEF";
 		} else if (this.momentoDia == Hora.MOMENTO_DIA_AM) {
-				momento = "AM";
-			} else {
-				momento = "PM";
-			}
+			momento = "AM";
+		} else {
+			momento = "PM";
+		}
 
 		cad = "(HORA: " + hora + "h " + minutos + "m " + segundos
 				+ "s ,AM/PM-> " + momento + ")";
@@ -652,7 +652,7 @@ public class Hora implements Comparable, Cloneable, java.io.Serializable {
 
 	/**
 	 * M�todo que devuelve el n�mero de campos no indefinidos
-	 * 
+	 *
 	 * @return int N�mero de campos no indefinidos
 	 */
 	public int numCamposDef() {
@@ -675,7 +675,7 @@ public class Hora implements Comparable, Cloneable, java.io.Serializable {
 	/**
 	 * M�todo que nos dice si esta hora es m�s completa que la hora pasada
 	 * como par�metro
-	 * 
+	 *
 	 * @param hora
 	 *            Hora con la que queremos comparar
 	 * @return boolean Devolver� true si esta hora es m�s completa, esto es,
@@ -695,7 +695,7 @@ public class Hora implements Comparable, Cloneable, java.io.Serializable {
 	/**
 	 * Metodo que intenta completar una hora mediante sentido comun y mediante
 	 * el horario laboral
-	 * 
+	 *
 	 * @param listaSugerencias
 	 */
 	public void completar() {
@@ -724,7 +724,7 @@ public class Hora implements Comparable, Cloneable, java.io.Serializable {
 	/**
 	 * M�todo que intenta completar una hora primero con la lista de
 	 * sugerencias y luego mediante sentido com�n
-	 * 
+	 *
 	 * @param listaSugerencias
 	 */
 	public void completar(Vector listaSugerencias) {
@@ -806,7 +806,7 @@ public class Hora implements Comparable, Cloneable, java.io.Serializable {
 	 * M�todo que comprueba si todas las Fecha de la lista de entrada tienen
 	 * en su hora el mismo campo hora Si todas tienen el mismo campo hora
 	 * devuelve dichas horas y Utilidades.int_INDEFINIDO en caso contrario
-	 * 
+	 *
 	 * @param listaSugerencias
 	 * @return int
 	 */
@@ -833,7 +833,7 @@ public class Hora implements Comparable, Cloneable, java.io.Serializable {
 	 * como momento del d�a el mismo momento Si todas tienen el mismo momento
 	 * del d�a devuelve dicho momento y Utilidades.int_INDEFINIDO en caso
 	 * contrario
-	 * 
+	 *
 	 * @param listaSugerencias
 	 * @return int
 	 */
@@ -888,7 +888,7 @@ public class Hora implements Comparable, Cloneable, java.io.Serializable {
 
 	/**
 	 * Metodo que indica si la hora esta dentro del horario laboral
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean horaEnHorarioLaboral() {

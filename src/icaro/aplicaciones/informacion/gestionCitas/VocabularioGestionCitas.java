@@ -9,9 +9,10 @@ package icaro.aplicaciones.informacion.gestionCitas;
  * @author FGarijo
  */
 public class VocabularioGestionCitas {
-	
+
 	/*
-	 * Estos son identificadores no cadenas de texto, tienen un proósito distinto.
+	 * Estos son identificadores no cadenas de texto, tienen un proósito
+	 * distinto.
 	 */
 	public static final String ResultadoAutenticacion_DatosNoValidos = "usuarioNoValido";
 	public static final String ResultadoAutenticacion_DatosValidos = "usuarioValido";
@@ -30,10 +31,10 @@ public class VocabularioGestionCitas {
 	public static final String NombreTipoNoticacionCita = "InicioPeticion";
 	public static final String ExtraccionSemanticaNull = "SinSemantica";
 	public static final String IdentAgenteAplicacionDialogoPaciente = "AgenteAplicacionDialogoPaciente1";
-	
-	
+
 	/*
-	 * Cadenas de texto mostradas por el chat, normalmente accedidas desde las tareas.
+	 * Cadenas de texto mostradas por el chat, normalmente accedidas desde las
+	 * tareas.
 	 */
 	public static final String SaludoInicial2 = "Hola ";
 	public static final String SaludoInicial1 = "Hola soy un conversador que te ayudarÃ¡ a gestionar tus citas mÃ©dicas";

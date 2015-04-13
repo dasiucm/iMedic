@@ -23,8 +23,8 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
 /**
  * Clase que contiene las acciones necesarias para el gestor de la
  * organizaci�n
- * 
- * 
+ *
+ *
  * @created 3 de Diciembre de 2007
  */
 public class AccionesSemanticasGestorOrganizacion extends
@@ -37,7 +37,7 @@ public class AccionesSemanticasGestorOrganizacion extends
 
 	/**
 	 * Hebra para que inyecte eventos de monitorizacion cada cierto tiempo
-	 * 
+	 *
 	 * @uml.property name="hebra"
 	 * @uml.associationEnd
 	 */
@@ -180,7 +180,7 @@ public class AccionesSemanticasGestorOrganizacion extends
 			((ItfGestionAgenteReactivo) itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_GESTION
 							+ NombresPredefinidos.NOMBRE_GESTOR_RECURSOS))
-							.setGestorAReportar(NombresPredefinidos.NOMBRE_GESTOR_ORGANIZACION);
+					.setGestorAReportar(NombresPredefinidos.NOMBRE_GESTOR_ORGANIZACION);
 
 			logger.debug("GestorOrganizacion: Creando gestor de agentes ...");
 			trazas.aceptaNuevaTraza(new InfoTraza(nombreAgente,
@@ -275,7 +275,7 @@ public class AccionesSemanticasGestorOrganizacion extends
 			((ItfGestionAgenteReactivo) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_GESTION
 							+ NombresPredefinidos.NOMBRE_GESTOR_AGENTES))
-							.arranca();
+					.arranca();
 			this.informaraMiAutomata("gestor_agentes_arrancado_ok");
 			// this.itfUsoAgente.aceptaEvento(new
 			// EventoRecAgte("gestor_agentes_arrancado_ok"));
@@ -307,7 +307,7 @@ public class AccionesSemanticasGestorOrganizacion extends
 			((ItfGestionAgenteReactivo) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_GESTION
 							+ NombresPredefinidos.NOMBRE_GESTOR_RECURSOS))
-							.arranca();
+					.arranca();
 			this.informaraMiAutomata("gestor_recursos_arrancado_ok");
 			// this.itfUsoAgente.aceptaEvento(new
 			// EventoRecAgte("gestor_recursos_arrancado_ok"));
@@ -424,11 +424,11 @@ public class AccionesSemanticasGestorOrganizacion extends
 			monitAgentes = ((ItfGestionAgenteReactivo) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_GESTION
 							+ NombresPredefinidos.NOMBRE_GESTOR_AGENTES))
-							.obtenerEstado();
+					.obtenerEstado();
 			monitRecursos = ((ItfGestionAgenteReactivo) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_GESTION
 							+ NombresPredefinidos.NOMBRE_GESTOR_RECURSOS))
-							.obtenerEstado();
+					.obtenerEstado();
 
 			// � hay problemas con el gestor de agentes ?
 			errorAlMonitorizar = ((monitAgentes == InterfazGestion.ESTADO_ERRONEO_IRRECUPERABLE)
@@ -644,7 +644,7 @@ public class AccionesSemanticasGestorOrganizacion extends
 			((ItfGestionAgenteReactivo) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_GESTION
 							+ NombresPredefinidos.NOMBRE_GESTOR_ORGANIZACION))
-							.termina();
+					.termina();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

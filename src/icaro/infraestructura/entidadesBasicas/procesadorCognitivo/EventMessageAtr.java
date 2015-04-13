@@ -7,7 +7,7 @@ package icaro.infraestructura.entidadesBasicas.procesadorCognitivo;
 
 /**
  * Esta clase crea objetos que contienen el mensaje de los eventos simples
- * 
+ *
  * @author Francisco J Garijo
  */
 public class EventMessageAtr {

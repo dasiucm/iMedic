@@ -9,7 +9,7 @@ import org.drools.runtime.StatefulKnowledgeSession;
 
 /**
  * Interfaz del motorl de reglas
- * 
+ *
  * @author Carlos Rodriguez Fernandez & F Garijo
  * @author Carlos Celorrio
  */

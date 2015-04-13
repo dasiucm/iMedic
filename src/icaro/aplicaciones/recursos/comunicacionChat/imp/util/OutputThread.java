@@ -16,14 +16,14 @@ public class OutputThread extends Thread {
 	 * to the IRC server are sent by this OutputThread to avoid hammering the
 	 * server. Messages are sent immediately if possible. If there are multiple
 	 * messages queued, then there is a one second delay imposed.
-	 * 
+	 *
 	 * @param bot
 	 *            The underlying PircBot instance.
 	 * @param outQueue
 	 *            The Queue from which we will obtain our messages.
 	 * @param bwriter
 	 *            The BufferedWriter to send lines to the IRC server.
-	 * 
+	 *
 	 */
 	protected OutputThread(ConexionIrc bot, Queue outQueue) {
 		_bot = bot;

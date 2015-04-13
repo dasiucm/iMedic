@@ -32,7 +32,7 @@ public class DirectorioOrganizacionImp extends
 	/**
 	 * Almacena una interfaz en el repositorio En caso de existir el nombre
 	 * previamente, se actualiza la referencia
-	 * 
+	 *
 	 * @param nombre
 	 * @param interfaz
 	 */
@@ -47,7 +47,7 @@ public class DirectorioOrganizacionImp extends
 
 	/**
 	 * Recupera una interfaz del repositorio
-	 * 
+	 *
 	 * @param nombre
 	 *            Nombre de la interfaz a recuperar
 	 * @return Interfaz asociada a ese nombre o null si no se ha encontrado ese
@@ -71,7 +71,7 @@ public class DirectorioOrganizacionImp extends
 
 	/**
 	 * Cancela el registro de una interfaz en el repositorio
-	 * 
+	 *
 	 * @param nombre
 	 *            Nombre de la interfaz a eliminar del repositorio
 	 * @throws RemoteException
@@ -86,14 +86,14 @@ public class DirectorioOrganizacionImp extends
 						+ " del repositorio de interfaces.");
 			}
 		} else if (DEBUG) {
-				System.out.println("Se intent eliminar la referencia " + nombre
+			System.out.println("Se intent eliminar la referencia " + nombre
 					+ " del repositorio, pero no estaba definida.");
-			}
+		}
 	}
 
 	/**
 	 * Devuelve una lista con los nombres de todos los interfaces registrados
-	 * 
+	 *
 	 * @return
 	 * @throws RemoteException
 	 */
@@ -214,22 +214,22 @@ public class DirectorioOrganizacionImp extends
 		return "";
 		/**
 		 * Pruebas
-		 * 
+		 *
 		 * public static void main(String[] args) { Object obj1 = new Object();
 		 * Object obj2 = new Object(); Object obj3 = new Object();
-		 * 
-		 * 
+		 *
+		 *
 		 * try { ItfUsoRepositorioInterfaces rep =
 		 * RepositorioInterfaces.instance();
-		 * 
+		 *
 		 * rep.registrarInterfaz("Objeto UNO",obj1);
 		 * rep.registrarInterfaz("Objeto DOS",obj2);
 		 * rep.registrarInterfaz("Objeto tRES",obj3);
-		 * 
+		 *
 		 * System.out.println("El objeto uno es "+rep.obtenerInterfaz(
 		 * "Objeto UNO")); System.out.println(""+rep.toString()); } catch
 		 * (Exception ex) { ex.printStackTrace(); }
-		 * 
+		 *
 		 * }
 		 */
 	}

@@ -46,7 +46,7 @@ import org.drools.runtime.rule.WorkingMemoryEntryPoint;
 
 /**
  * Drools implementation of the Rule Engine
- * 
+ *
  * @author Carlos Rodr&iacute;guez Fern&aacute;ndez
  * @author Carlos Celorrio
  * @author JM Gascuegna
@@ -56,9 +56,9 @@ public class MotorDeReglasDroolsImp5 implements ItfMotorDeReglas,
 
 	private AgenteCognitivo agent; // inicializada en el constructor
 	private StatefulKnowledgeSession kSesion = null; // inicializada en el
-														// metodo compileRules
+	// metodo compileRules
 	private WorkingMemoryEntryPoint entrypoint; // inicializada en el metodo
-												// compileRules
+	// compileRules
 	private ItfUsoRecursoTrazas trazas = NombresPredefinidos.RECURSO_TRAZAS_OBJ;
 	private ArrayList<String> ficheroReglasCompilados = new ArrayList();
 	private ArrayList<KnowledgeBuilder> KbuildersObtenidos = new ArrayList();
@@ -72,7 +72,7 @@ public class MotorDeReglasDroolsImp5 implements ItfMotorDeReglas,
 	private boolean factHandlesMonitoringRETRACT_DEBUGGING = false;
 	private boolean factHandlesMonitoring_beforeActivationFired_DEBUGGING = false;
 	private boolean factHandlesMonitoring_DEBUGGING = false; // ANTES ESTABA A
-																// true
+	// true
 	private boolean factHandlesMonitoringUPDATE_DEBUGGING = false;
 	private boolean factHandlesMonitoring_afterActivationFired_DEBUGGING = false;
 	// variables para la depuracion
@@ -85,7 +85,7 @@ public class MotorDeReglasDroolsImp5 implements ItfMotorDeReglas,
 
 	/**
 	 * Constructor for the drools implementation
-	 * 
+	 *
 	 * @param agent
 	 *            Cognitive Agent
 	 */

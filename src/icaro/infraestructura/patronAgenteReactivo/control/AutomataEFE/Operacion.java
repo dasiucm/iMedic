@@ -15,20 +15,20 @@ public class Operacion {
 
 	/**
 	 * Nombre de la accin a ejecutar
-	 * 
+	 *
 	 * @uml.property name="accionSemantica"
 	 */
 	public String accionSemantica;
 	/**
 	 * Estado que se alcanza tras la ejecucin de la accin
-	 * 
+	 *
 	 * @uml.property name="estadoSiguiente"
 	 */
 	public String estadoSiguiente;
 	/**
 	 * determina si la accin se ejecutar de forma bloqueante y se esperar su
 	 * resultado antes de cambiar de estado o no
-	 * 
+	 *
 	 * @uml.property name="modoTransicionBloqueante"
 	 */
 	public boolean modoTransicionBloqueante;

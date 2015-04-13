@@ -447,9 +447,9 @@ public class XMLParserTablaEstadosAutomataEFinputObj {
 			if (claseAccion != null) {
 			} // si la clase se ha encontrado no hace nada
 			else if (claseAccionesSemanticas == null) { // No se encuentra la
-														// clase y no existe
-														// clase acciones
-														// semanticas
+				// clase y no existe
+				// clase acciones
+				// semanticas
 				hayErrores = true;
 				String msgError = "Debe existir una clase: "
 						+ idAccion
@@ -462,7 +462,7 @@ public class XMLParserTablaEstadosAutomataEFinputObj {
 				// mensajeError(idEstado, " No se encuentra la clase : "+
 				// idAccion);
 			} else { // Existe la clase AS deberiamos validar que el
-						// identAcciones es un metodo de la clase
+				// identAcciones es un metodo de la clase
 				// pero lo dejamos para la ejecución
 				claseAccion = this.claseAccionesSemanticas;
 				metodo = idAccion;

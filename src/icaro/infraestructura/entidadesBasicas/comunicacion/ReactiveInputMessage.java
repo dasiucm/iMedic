@@ -1,7 +1,7 @@
 package icaro.infraestructura.entidadesBasicas.comunicacion;
 
 /**
- * 
+ *
  *
  * @author Carlos Celorrio
  * @created 11 de septiembre de 2001

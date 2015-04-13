@@ -48,26 +48,26 @@ public class Gestores {
 
 	/**
 	 * Gets the value of the instanciaGestor property.
-	 * 
+	 *
 	 * <p>
 	 * This accessor method returns a reference to the live list, not a
 	 * snapshot. Therefore any modification you make to the returned list will
 	 * be present inside the JAXB object. This is why there is not a
 	 * <CODE>set</CODE> method for the instanciaGestor property.
-	 * 
+	 *
 	 * <p>
 	 * For example, to add a new item, do as follows:
-	 * 
+	 *
 	 * <pre>
 	 * getInstanciaGestor().add(newItem);
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link InstanciaGestor }
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public List<InstanciaGestor> getInstanciaGestor() {
 		if (instanciaGestor == null) {
@@ -78,9 +78,9 @@ public class Gestores {
 
 	/**
 	 * Gets the value of the nodoComun property.
-	 * 
+	 *
 	 * @return possible object is {@link Nodo }
-	 * 
+	 *
 	 */
 	public Nodo getNodoComun() {
 		return nodoComun;
@@ -88,10 +88,10 @@ public class Gestores {
 
 	/**
 	 * Sets the value of the nodoComun property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link Nodo }
-	 * 
+	 *
 	 */
 	public void setNodoComun(Nodo value) {
 		this.nodoComun = value;

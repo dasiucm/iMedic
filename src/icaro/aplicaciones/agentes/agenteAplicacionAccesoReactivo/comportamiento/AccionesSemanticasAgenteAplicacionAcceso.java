@@ -146,7 +146,7 @@ public class AccionesSemanticasAgenteAplicacionAcceso extends
 			ItfUsoPersistenciaAccesoSimple itfUsoRec = (ItfUsoPersistenciaAccesoSimple) AdaptadorRegRMI
 					.getItfUsoRecursoRemoto(identHostRecurso, nombreRec);
 			if (itfUsoRec == null)// la intf es null El recruso no ha sido
-									// registrado
+			// registrado
 			{
 				logger.debug("AgenteAcceso: No se puede dar la orden de arranque al recurso "
 						+ nombreRec + ". Porque su interfaz es null");

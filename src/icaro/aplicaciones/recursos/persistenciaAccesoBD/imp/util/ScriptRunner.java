@@ -129,7 +129,7 @@ public class ScriptRunner {
 	 *             if there is an error reading from the Reader
 	 */
 	private void runScript(Connection conn, Reader reader) throws IOException,
-	SQLException {
+			SQLException {
 		StringBuffer command = null;
 		try {
 			LineNumberReader lineReader = new LineNumberReader(reader);

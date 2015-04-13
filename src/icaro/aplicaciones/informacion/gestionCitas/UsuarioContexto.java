@@ -9,10 +9,10 @@ public class UsuarioContexto {
 	public String DNI;
 	public boolean medico;
 	public long tiempo;
-	
+
 	public Focus foco;
-	
-	public UsuarioContexto(){
+
+	public UsuarioContexto() {
 		foco = new Focus();
 		tiempo = System.currentTimeMillis();
 	}
@@ -21,10 +21,10 @@ public class UsuarioContexto {
 		return usuario;
 	}
 
-	public void actividad(){
+	public void actividad() {
 		tiempo = System.currentTimeMillis();
 	}
-	
+
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
@@ -62,8 +62,8 @@ public class UsuarioContexto {
 	}
 
 	public boolean inactividad(int i) {
-		long tim = ((System.currentTimeMillis() - tiempo) /1000)/60;
+		long tim = ((System.currentTimeMillis() - tiempo) / 1000) / 60;
 		return tim >= i;
 	}
-	
+
 }

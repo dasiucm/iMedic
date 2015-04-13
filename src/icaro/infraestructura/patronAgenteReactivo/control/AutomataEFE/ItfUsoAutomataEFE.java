@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Interfaz de uso de un autmata
- * 
+ *
  * @author F Garijo
  * @created 3 de Mayo de 2014
  */

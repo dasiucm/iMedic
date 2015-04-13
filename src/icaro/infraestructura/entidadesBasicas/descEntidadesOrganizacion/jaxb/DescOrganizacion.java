@@ -53,9 +53,9 @@ public class DescOrganizacion {
 
 	/**
 	 * Gets the value of the propiedadesGlobales property.
-	 * 
+	 *
 	 * @return possible object is {@link PropiedadesGlobales }
-	 * 
+	 *
 	 */
 	public PropiedadesGlobales getPropiedadesGlobales() {
 		return propiedadesGlobales;
@@ -63,10 +63,10 @@ public class DescOrganizacion {
 
 	/**
 	 * Sets the value of the propiedadesGlobales property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link PropiedadesGlobales }
-	 * 
+	 *
 	 */
 	public void setPropiedadesGlobales(PropiedadesGlobales value) {
 		this.propiedadesGlobales = value;
@@ -74,9 +74,9 @@ public class DescOrganizacion {
 
 	/**
 	 * Gets the value of the nodosDespliegue property.
-	 * 
+	 *
 	 * @return possible object is {@link ListaNodosEjecucion }
-	 * 
+	 *
 	 */
 	public ListaNodosEjecucion getNodosDespliegue() {
 		return nodosDespliegue;
@@ -84,10 +84,10 @@ public class DescOrganizacion {
 
 	/**
 	 * Sets the value of the nodosDespliegue property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link ListaNodosEjecucion }
-	 * 
+	 *
 	 */
 	public void setNodosDespliegue(ListaNodosEjecucion value) {
 		this.nodosDespliegue = value;
@@ -95,9 +95,9 @@ public class DescOrganizacion {
 
 	/**
 	 * Gets the value of the descripcionComponentes property.
-	 * 
+	 *
 	 * @return possible object is {@link DescripcionComponentes }
-	 * 
+	 *
 	 */
 	public DescripcionComponentes getDescripcionComponentes() {
 		return descripcionComponentes;
@@ -105,10 +105,10 @@ public class DescOrganizacion {
 
 	/**
 	 * Sets the value of the descripcionComponentes property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link DescripcionComponentes }
-	 * 
+	 *
 	 */
 	public void setDescripcionComponentes(DescripcionComponentes value) {
 		this.descripcionComponentes = value;
@@ -116,9 +116,9 @@ public class DescOrganizacion {
 
 	/**
 	 * Gets the value of the descInstancias property.
-	 * 
+	 *
 	 * @return possible object is {@link DescInstancias }
-	 * 
+	 *
 	 */
 	public DescInstancias getDescInstancias() {
 		return descInstancias;
@@ -126,10 +126,10 @@ public class DescOrganizacion {
 
 	/**
 	 * Sets the value of the descInstancias property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link DescInstancias }
-	 * 
+	 *
 	 */
 	public void setDescInstancias(DescInstancias value) {
 		this.descInstancias = value;

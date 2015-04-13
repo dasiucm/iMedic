@@ -2,7 +2,7 @@ package icaro.infraestructura.patronAgenteCognitivo.percepcion;
 
 /**
  * Management Interface for Cognitive Agent Perception
- * 
+ *
  * @author Carlos Celorrio
  *
  */

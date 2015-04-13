@@ -46,9 +46,9 @@ public class Propiedad {
 
 	/**
 	 * Gets the value of the atributo property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getAtributo() {
 		return atributo;
@@ -56,10 +56,10 @@ public class Propiedad {
 
 	/**
 	 * Sets the value of the atributo property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setAtributo(String value) {
 		this.atributo = value;
@@ -67,9 +67,9 @@ public class Propiedad {
 
 	/**
 	 * Gets the value of the valor property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getValor() {
 		return valor;
@@ -77,10 +77,10 @@ public class Propiedad {
 
 	/**
 	 * Sets the value of the valor property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setValor(String value) {
 		this.valor = value;

@@ -153,7 +153,7 @@ public class AccionesSemanticasAgenteAplicacionAcceso extends
 			ItfUsoPersistenciaAccesoSimple itfUsoRec = (ItfUsoPersistenciaAccesoSimple) AdaptadorRegRMI
 					.getItfUsoRecursoRemoto(identHostRecurso, nombreRec);
 			if (itfUsoRec == null)// la intf es null El recruso no ha sido
-									// registrado
+			// registrado
 			{
 				logger.debug("AgenteAcceso: No se puede dar la orden de arranque al recurso "
 						+ nombreRec + ". Porque su interfaz es null");
@@ -403,8 +403,8 @@ public class AccionesSemanticasAgenteAplicacionAcceso extends
 				resultadoBusqueda = AdaptadorRegRMI.getItfAgenteRemoto(
 						identAgente, tipoInterfaz);
 			} else if (resultadoBusqueda == null) { // No se ha conseguido
-													// encontrar la interfaz del
-													// agente
+				// encontrar la interfaz del
+				// agente
 				trazas.aceptaNuevaTraza(new InfoTraza(nombreAgente,
 						"No se ha podido encontrar la interfaz del agente : "
 								+ identAgente, InfoTraza.NivelTraza.error));
@@ -431,8 +431,8 @@ public class AccionesSemanticasAgenteAplicacionAcceso extends
 				resultadoBusqueda = AdaptadorRegRMI.getItfRecursoRemoto(
 						identRecurso, tipoInterfaz);
 			} else if (resultadoBusqueda == null) { // No se ha conseguido
-													// encontrar la interfaz del
-													// agente
+				// encontrar la interfaz del
+				// agente
 				trazas.aceptaNuevaTraza(new InfoTraza(nombreAgente,
 						"No se ha podido encontrar la interfaz del agente : "
 								+ identRecurso, InfoTraza.NivelTraza.error));

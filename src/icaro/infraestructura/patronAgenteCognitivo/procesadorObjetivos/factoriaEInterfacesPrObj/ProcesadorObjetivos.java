@@ -2,7 +2,7 @@ package icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.factoria
 
 /**
  * Abstract Class for Cognitive Control
- * 
+ *
  * @author Carlos Celorrio
  *
  */
@@ -10,7 +10,7 @@ public abstract class ProcesadorObjetivos implements ItfProcesadorObjetivos {
 
 	/**
 	 * Recieves an evidence to process
-	 * 
+	 *
 	 * @param ev
 	 *            The evidence
 	 * @return Whether the evidence has been processed successfully

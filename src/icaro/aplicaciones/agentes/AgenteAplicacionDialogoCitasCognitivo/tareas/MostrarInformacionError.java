@@ -35,8 +35,10 @@ public class MostrarInformacionError extends TareaSincrona {
 					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoComunicacionChat);
 			if (recComunicacionChat != null) {
 				recComunicacionChat.comenzar(identAgenteOrdenante);
-				String mensajeAenviar = VocabularioGestionCitas.RespuestaNoEniendo1 + " " + identInterlocutor;
-				recComunicacionChat.enviarMensagePrivado(identInterlocutor,mensajeAenviar);
+				String mensajeAenviar = VocabularioGestionCitas.RespuestaNoEniendo1
+						+ " " + identInterlocutor;
+				recComunicacionChat.enviarMensagePrivado(identInterlocutor,
+						mensajeAenviar);
 			} else {
 				identAgenteOrdenante = this.getAgente().getIdentAgente();
 				this.generarInformeConCausaTerminacion(

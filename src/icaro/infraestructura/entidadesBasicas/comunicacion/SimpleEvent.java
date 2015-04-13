@@ -91,7 +91,7 @@ public class SimpleEvent implements Serializable {
 
 	/**
 	 * set a certain property
-	 * 
+	 *
 	 * @param eventTime
 	 * @param string
 	 */

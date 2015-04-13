@@ -17,15 +17,15 @@ import java.util.concurrent.PriorityBlockingQueue;
  * excluyen los objetivos internos que implican procesos de razomiento o
  * decision Se utiliza una cola de prioridad donde se insertan los objetivos
  * pendientes y se eliminan cuando estan realizados
- * 
+ *
  * @author FGarijo
  */
 public class MisObjetivos {
 	protected PriorityBlockingQueue<Objetivo> misObjetivosPriorizados;
 	protected SortedSet<String> setOfIGoalRefIds; // idetificadores de los
-													// objetos a los que se
-													// refieren los objetivos ej
-													// Identif de vicitmas
+	// objetos a los que se
+	// refieren los objetivos ej
+	// Identif de vicitmas
 	public Objetivo objetivoMasPrioritario;
 	protected Comparator c;
 

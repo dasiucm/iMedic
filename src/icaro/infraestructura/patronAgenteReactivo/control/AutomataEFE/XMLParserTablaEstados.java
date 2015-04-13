@@ -56,7 +56,7 @@ public class XMLParserTablaEstados {
 			}
 			System.out
 					.println("Se ha producido un error al procesar el fichero XML: "
-					+ x.getMessage());
+							+ x.getMessage());
 			throw new ExcepcionNoSePudoCrearAutomataEFE(
 					"XMLParserTablaEstados", "error al procesar el fichero XML"
 							+ nombreFich,
@@ -66,8 +66,8 @@ public class XMLParserTablaEstados {
 		} catch (ParserConfigurationException pce) {
 			// Parser with specified options can't be built
 			System.out
-			.println("No se pudo construir un analizador XML con las opciones especificadas referido al fichero XML: "
-					+ nombreFich);
+					.println("No se pudo construir un analizador XML con las opciones especificadas referido al fichero XML: "
+							+ nombreFich);
 			throw new ExcepcionNoSePudoCrearAutomataEFE(
 					"XMLParserTablaEstados",
 					"no se pudo construir un analizador XML a partir del  fichero XML: "
@@ -77,7 +77,7 @@ public class XMLParserTablaEstados {
 		} catch (IOException ioe) {
 			System.out
 					.println("Error de lectura en el fichero XML. Est usted seguro de que el fichero '"
-					+ nombreFich + "' esta ahi?");
+							+ nombreFich + "' esta ahi?");
 			throw new ExcepcionNoSePudoCrearAutomataEFE(
 					"XMLParserTablaEstados",
 					"Error de lectura en el fichero XML : " + nombreFich,

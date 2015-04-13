@@ -34,12 +34,10 @@ public class SolicitarDNI extends TareaSincrona {
 					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoComunicacionChat);
 			if (recComunicacionChat != null) {
 				recComunicacionChat.comenzar(identAgenteOrdenante);
-				String mensajeAenviar = mensaje + nombre ;
+				String mensajeAenviar = mensaje + nombre;
 				recComunicacionChat.enviarMensagePrivado(identInterlocutor,
 						mensajeAenviar);
-				
-		
-				
+
 			} else {
 				identAgenteOrdenante = this.getAgente().getIdentAgente();
 				this.generarInformeConCausaTerminacion(

@@ -47,9 +47,9 @@ public class DescripcionComponentes {
 
 	/**
 	 * Gets the value of the descComportamientoAgentes property.
-	 * 
+	 *
 	 * @return possible object is {@link DescComportamientoAgentes }
-	 * 
+	 *
 	 */
 	public DescComportamientoAgentes getDescComportamientoAgentes() {
 		return descComportamientoAgentes;
@@ -57,10 +57,10 @@ public class DescripcionComponentes {
 
 	/**
 	 * Sets the value of the descComportamientoAgentes property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link DescComportamientoAgentes }
-	 * 
+	 *
 	 */
 	public void setDescComportamientoAgentes(DescComportamientoAgentes value) {
 		this.descComportamientoAgentes = value;
@@ -68,9 +68,9 @@ public class DescripcionComponentes {
 
 	/**
 	 * Gets the value of the descRecursosAplicacion property.
-	 * 
+	 *
 	 * @return possible object is {@link DescRecursosAplicacion }
-	 * 
+	 *
 	 */
 	public DescRecursosAplicacion getDescRecursosAplicacion() {
 		return descRecursosAplicacion;
@@ -78,10 +78,10 @@ public class DescripcionComponentes {
 
 	/**
 	 * Sets the value of the descRecursosAplicacion property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link DescRecursosAplicacion }
-	 * 
+	 *
 	 */
 	public void setDescRecursosAplicacion(DescRecursosAplicacion value) {
 		this.descRecursosAplicacion = value;

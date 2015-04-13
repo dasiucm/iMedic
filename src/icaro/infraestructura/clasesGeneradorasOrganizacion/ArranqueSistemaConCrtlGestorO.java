@@ -20,7 +20,7 @@ public class ArranqueSistemaConCrtlGestorO {
 
 	/**
 	 * M�todo de arranque principal de la organizaci�n
-	 * 
+	 *
 	 * @param args
 	 *            Entrada: ruta completa hasta el fichero de configuraci�n
 	 */

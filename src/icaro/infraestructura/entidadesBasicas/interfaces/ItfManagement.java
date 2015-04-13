@@ -6,7 +6,7 @@ package icaro.infraestructura.entidadesBasicas.interfaces;
 /**
  * Management Interface for all ICARO components Copyright: Copyright (c) 2001
  * Empresa: Telefnica I+D
- * 
+ *
  * @author Felipe Polo
  * @author Carlos Celorrio
  * @created 3 de diciembre de 2007

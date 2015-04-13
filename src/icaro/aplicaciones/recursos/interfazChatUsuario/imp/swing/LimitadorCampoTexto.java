@@ -17,7 +17,7 @@ public class LimitadorCampoTexto extends PlainDocument {
 
 	/**
 	 * Crea una instancia de LimitadorCampoTexto.
-	 * 
+	 *
 	 * @param componenteTexto
 	 *            Componente de Texto en el que se quieren limitar los
 	 *            caracteres.

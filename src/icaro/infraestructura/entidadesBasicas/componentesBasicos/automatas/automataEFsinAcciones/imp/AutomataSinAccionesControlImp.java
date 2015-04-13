@@ -36,14 +36,14 @@ public class AutomataSinAccionesControlImp extends
 
 	/**
 	 * Indica si se deben mostrar mensajes de depuracin o no
-	 * 
+	 *
 	 * @uml.property name="dEBUG"
 	 */
 	public boolean DEBUG = false;
 
 	/**
 	 * Controla la profundidad de las trazas
-	 * 
+	 *
 	 * @uml.property name="traza"
 	 */
 	protected int traza = 0;
@@ -55,7 +55,7 @@ public class AutomataSinAccionesControlImp extends
 
 	/**
 	 * Tabla que representa los estados del autmata
-	 * 
+	 *
 	 * @uml.property name="interpTablaEstados"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
@@ -218,7 +218,7 @@ public class AutomataSinAccionesControlImp extends
 
 	/**
 	 * Dice el estado del autmata en el que se encuentra el recurso
-	 * 
+	 *
 	 * @return el estado en que se encuentra
 	 */
 	@Override

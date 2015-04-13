@@ -47,11 +47,11 @@ public class FactoriaRecursoSimpleImp extends FactoriaRecursoSimple {
 					+ NombresPredefinidos.CONFIGURACION);
 			String nombreRecurso = recurso.getDescRecurso().getNombre();
 			String primero = nombreRecurso.substring(0, 1).toLowerCase(); // obtengo
-																			// el
-																			// primer
-																			// carcter
-																			// en
-																			// minsculas
+			// el
+			// primer
+			// carcter
+			// en
+			// minsculas
 			String nombrePaqueteRecurso = nombreRecurso.replaceFirst(
 					nombreRecurso.substring(0, 1), primero);
 
@@ -106,7 +106,7 @@ public class FactoriaRecursoSimpleImp extends FactoriaRecursoSimple {
 			trazas.aceptaNuevaTraza(new InfoTraza(idRecurso,
 					"Factoria de recurso simple: Registrando el recurso "
 							+ idRecurso + " en el repositorio de interfaces.",
-							InfoTraza.NivelTraza.debug));
+					InfoTraza.NivelTraza.debug));
 			repoIntfaces.registrarInterfaz(NombresPredefinidos.ITF_GESTION
 					+ idRecurso, objRecurso);
 			repoIntfaces.registrarInterfaz(NombresPredefinidos.ITF_USO

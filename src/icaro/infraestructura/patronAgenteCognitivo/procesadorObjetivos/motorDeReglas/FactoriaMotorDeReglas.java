@@ -16,7 +16,7 @@ import java.io.InputStream;
 
 /**
  * Factory for Rule Engine
- * 
+ *
  * @author Carlos Rodr&iacute;guez Fern&aacute;ndez
  * @author Carlos Celorrio
  */

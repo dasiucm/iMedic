@@ -79,7 +79,7 @@ public class ConexionIrc {
 	 *
 	 * @param hostname
 	 *            The hostname of the server to connect to.
-	 * 
+	 *
 	 * @throws IOException
 	 *             if it was not possible to connect to the server.
 	 * @throws icaro.aplicaciones.recursos.comunicacionChat.imp.util.IrcException
@@ -102,7 +102,7 @@ public class ConexionIrc {
 	 *            The hostname of the server to connect to.
 	 * @param port
 	 *            The port number to connect to on the server.
-	 * 
+	 *
 	 * @throws IOException
 	 *             if it was not possible to connect to the server.
 	 * @throws IrcException
@@ -280,7 +280,7 @@ public class ConexionIrc {
 
 	/**
 	 * Joins a channel.
-	 * 
+	 *
 	 * @param channel
 	 *            The name of the channel to join (eg "#cs").
 	 */
@@ -290,7 +290,7 @@ public class ConexionIrc {
 
 	/**
 	 * Joins a channel with a key.
-	 * 
+	 *
 	 * @param channel
 	 *            The name of the channel to join (eg "#cs").
 	 * @param key
@@ -423,13 +423,13 @@ public class ConexionIrc {
 	 * For example, if the bot has operator status, we can grant operator status
 	 * to "Dave" on the #cs channel by calling setMode("#cs", "+o Dave"); An
 	 * alternative way of doing this would be to use the op method.
-	 * 
+	 *
 	 * @param channel
 	 *            The channel on which to perform the mode change.
 	 * @param mode
 	 *            The new mode to apply to the channel. This may include zero or
 	 *            more arguments if necessary.
-	 * 
+	 *
 	 */
 	public final void setMode(String channel, String mode) {
 		this.sendRawLine("MODE " + channel + " " + mode);
@@ -439,12 +439,12 @@ public class ConexionIrc {
 	 * Sends an invitation to join a channel. Some channels can be marked as
 	 * "invite-only", so it may be useful to allow a bot to invite people into
 	 * it.
-	 * 
+	 *
 	 * @param nick
 	 *            The nick of the user to invite
 	 * @param channel
 	 *            The channel you are inviting the user to join.
-	 * 
+	 *
 	 */
 	public final void sendInvite(String nick, String channel) {
 		this.sendRawLine("INVITE " + nick + " :" + channel);
@@ -455,7 +455,7 @@ public class ConexionIrc {
 	 * "*!*compu@*.18hp.net". This may be used in conjunction with the kick
 	 * method to permanently remove a user from a channel. Successful use of
 	 * this method may require the bot to have operator status itself.
-	 * 
+	 *
 	 * @param channel
 	 *            The channel to ban the user from.
 	 * @param hostmask
@@ -469,7 +469,7 @@ public class ConexionIrc {
 	 * Unbans a user from a channel. An example of a valid hostmask is
 	 * "*!*compu@*.18hp.net". Successful use of this method may require the bot
 	 * to have operator status itself.
-	 * 
+	 *
 	 * @param channel
 	 *            The channel to unban the user from.
 	 * @param hostmask
@@ -482,7 +482,7 @@ public class ConexionIrc {
 	/**
 	 * Grants operator privilidges to a user on a channel. Successful use of
 	 * this method may require the bot to have operator status itself.
-	 * 
+	 *
 	 * @param channel
 	 *            The channel we're opping the user on.
 	 * @param nick
@@ -495,7 +495,7 @@ public class ConexionIrc {
 	/**
 	 * Removes operator privilidges from a user on a channel. Successful use of
 	 * this method may require the bot to have operator status itself.
-	 * 
+	 *
 	 * @param channel
 	 *            The channel we're deopping the user on.
 	 * @param nick
@@ -508,7 +508,7 @@ public class ConexionIrc {
 	/**
 	 * Grants voice privilidges to a user on a channel. Successful use of this
 	 * method may require the bot to have operator status itself.
-	 * 
+	 *
 	 * @param channel
 	 *            The channel we're voicing the user on.
 	 * @param nick
@@ -521,7 +521,7 @@ public class ConexionIrc {
 	/**
 	 * Removes voice privilidges from a user on a channel. Successful use of
 	 * this method may require the bot to have operator status itself.
-	 * 
+	 *
 	 * @param channel
 	 *            The channel we're devoicing the user on.
 	 * @param nick
@@ -535,12 +535,12 @@ public class ConexionIrc {
 	 * Set the topic for a channel. This method attempts to set the topic of a
 	 * channel. This may require the bot to have operator status if the topic is
 	 * protected.
-	 * 
+	 *
 	 * @param channel
 	 *            The channel on which to perform the mode change.
 	 * @param topic
 	 *            The new topic for the channel.
-	 * 
+	 *
 	 */
 	public final void setTopic(String channel, String topic) {
 		this.sendRawLine("TOPIC " + channel + " :" + topic);
@@ -549,7 +549,7 @@ public class ConexionIrc {
 	/**
 	 * Kicks a user from a channel. This method attempts to kick a user from a
 	 * channel and may require the bot to have operator status in the channel.
-	 * 
+	 *
 	 * @param channel
 	 *            The channel to kick the user from.
 	 * @param nick
@@ -563,7 +563,7 @@ public class ConexionIrc {
 	 * Kicks a user from a channel, giving a reason. This method attempts to
 	 * kick a user from a channel and may require the bot to have operator
 	 * status in the channel.
-	 * 
+	 *
 	 * @param channel
 	 *            The channel to kick the user from.
 	 * @param nick
@@ -584,7 +584,7 @@ public class ConexionIrc {
 	 * no data is sent for a 30 second period. This methods starts a new Thread
 	 * to operate in and thus returns immediately. The method performs no action
 	 * if the filename does not exist.
-	 * 
+	 *
 	 * @param filename
 	 *            A File object representing the file to send to the recipient.
 	 * @param nick
@@ -757,7 +757,7 @@ public class ConexionIrc {
 	 * @param timeout
 	 *            The number of milliseconds to wait for the recipient to accept
 	 *            the chat connection (we recommend about 120000).
-	 * 
+	 *
 	 * @return a DccChat object that can be used to send and recieve lines of
 	 *         text. Returns <b>null</b> if the connection could not be made.
 	 */
@@ -829,7 +829,7 @@ public class ConexionIrc {
 	 * This implementation of the method will only cause log entries to be
 	 * output if the ConexionIrc has had its verbose mode turned on by calling
 	 * setVerbose(true);
-	 * 
+	 *
 	 * @param line
 	 *            The line to add to the log.
 	 */
@@ -843,7 +843,7 @@ public class ConexionIrc {
 	 * This method handles events when any line of text arrives from the server,
 	 * then calling the appropriate method in the ConexionIrc. This method is
 	 * protected and only called by the InputThread for this instance.
-	 * 
+	 *
 	 * @param line
 	 *            The raw line of text from the server.
 	 */
@@ -1122,12 +1122,12 @@ public class ConexionIrc {
 	 * <p>
 	 * The implementation of this method in the ConexionIrc abstract class
 	 * performs no actions and may be overridden as required.
-	 * 
+	 *
 	 * @param code
 	 *            The three-digit numerical code for the response.
 	 * @param response
 	 *            The full response from the IRC server.
-	 * 
+	 *
 	 */
 	public void onServerResponse(int code, String response) {
 	}
@@ -1187,7 +1187,7 @@ public class ConexionIrc {
 	 * events generated by typing "/me goes shopping" in most IRC clients. The
 	 * implementation of this method in the ConexionIrc abstract class performs
 	 * no actions and may be overridden as required.
-	 * 
+	 *
 	 * @param sender
 	 *            The nick of the user that sent the action.
 	 * @param login
@@ -1263,7 +1263,7 @@ public class ConexionIrc {
 	 * of the channels that we are in. The implementation of this method in the
 	 * ConexionIrc abstract class performs no actions and may be overridden as
 	 * required.
-	 * 
+	 *
 	 * @param channel
 	 *            The channel from which the recipient was kicked.
 	 * @param kickerNick
@@ -1288,7 +1288,7 @@ public class ConexionIrc {
 	 * to which we are connected. The implementation of this method in the
 	 * ConexionIrc abstract class performs no actions and may be overridden as
 	 * required.
-	 * 
+	 *
 	 * @param sourceNick
 	 *            The nick of the user that quit from the server.
 	 * @param sourceLogin
@@ -1321,7 +1321,7 @@ public class ConexionIrc {
 	 *            The hostname of the user that set the mode.
 	 * @param mode
 	 *            The mode that has been set.
-	 * 
+	 *
 	 */
 	protected void onMode(String channel, String sourceNick,
 			String sourceLogin, String sourceHostname, String mode) {
@@ -1896,7 +1896,7 @@ public class ConexionIrc {
 	 * Called when we are invited to a channel by a user. The implementation of
 	 * this method in the ConexionIrc abstract class performs no actions and may
 	 * be overridden as required.
-	 * 
+	 *
 	 * @param targetNick
 	 *            The nick of the user being invited - should be us!
 	 * @param sourceNick
@@ -1937,10 +1937,10 @@ public class ConexionIrc {
 	 * dccReceiveFile method will cause a file to be written to disk. Please
 	 * ensure that you make adequate security checks to make sure that this file
 	 * will not overwrite anything important!
-	 * 
+	 *
 	 * The implementation of this method in the ConexionIrc abstract class
 	 * performs no actions and may be overridden as required.
-	 * 
+	 *
 	 * @param sender
 	 *            The nick of the user that sent the DCC SEND request.
 	 * @param login
@@ -1999,7 +1999,7 @@ public class ConexionIrc {
 	 * <p>
 	 * The implementation of this method in the ConexionIrc abstract class
 	 * performs no actions and may be overridden as required.
-	 * 
+	 *
 	 * @param sender
 	 *            The nick of the user that sent the DCC CHAT request.
 	 * @param login
@@ -2020,7 +2020,7 @@ public class ConexionIrc {
 	 * abstract implementation responds with the ConexionIrc's _version string,
 	 * so if you override this method, be sure to either mimic its functionality
 	 * or to call super.onVersion(...);
-	 * 
+	 *
 	 * @param sourceNick
 	 *            The nick of the user that sent the VERSION request.
 	 * @param sourceLogin
@@ -2041,7 +2041,7 @@ public class ConexionIrc {
 	 * This method is called whenever we receive a PING request. This abstract
 	 * implementation responds correctly, so if you override this method, be
 	 * sure to either mimic its functionality or to call super.onPing(...);
-	 * 
+	 *
 	 * @param sourceNick
 	 *            The nick of the user that sent the PING request.
 	 * @param sourceLogin
@@ -2065,7 +2065,7 @@ public class ConexionIrc {
 	 * This method is called whenever we receive a TIME request. This abstract
 	 * implementation responds correctly, so if you override this method, be
 	 * sure to either mimic its functionality or to call super.onTime(...);
-	 * 
+	 *
 	 * @param sourceNick
 	 *            The nick of the user that sent the TIME request.
 	 * @param sourceLogin
@@ -2086,7 +2086,7 @@ public class ConexionIrc {
 	 * This method is called whenever we receive a FINGER request. This abstract
 	 * implementation responds correctly, so if you override this method, be
 	 * sure to either mimic its functionality or to call super.onFinger(...);
-	 * 
+	 *
 	 * @param sourceNick
 	 *            The nick of the user that sent the FINGER request.
 	 * @param sourceLogin
@@ -2107,7 +2107,7 @@ public class ConexionIrc {
 	 * This method is called whenever we receive a notice. The implementation of
 	 * this method in the ConexionIrc abstract class performs no actions and may
 	 * be overridden as required.
-	 * 
+	 *
 	 * @param sourceNick
 	 *            The nick of the user that sent the notice.
 	 * @param sourceLogin
@@ -2128,7 +2128,7 @@ public class ConexionIrc {
 	 * ConexionIrc has not been programmed to recognise. The implementation of
 	 * this method in the ConexionIrc abstract class performs no actions and may
 	 * be overridden as required.
-	 * 
+	 *
 	 * @param line
 	 *            The raw line that was received from the server.
 	 */
@@ -2255,7 +2255,7 @@ public class ConexionIrc {
 	 *
 	 * @param delay
 	 *            The number of milliseconds between each outgoing message.
-	 * 
+	 *
 	 */
 	public final void setMessageDelay(long delay) {
 		if (delay < 0) {
@@ -2280,7 +2280,7 @@ public class ConexionIrc {
 	 * not exceed 512 bytes. Hence, there is currently no option to change this
 	 * value in ConexionIrc. All lines greater than this length will be
 	 * truncated before being sent to the IRC server.
-	 * 
+	 *
 	 * @return The maximum line length (currently fixed at 512)
 	 */
 	public final int getMaxLineLength() {
@@ -2303,7 +2303,7 @@ public class ConexionIrc {
 	 * to. This does not imply that the connection attempt to the server was
 	 * successful (we suggest you look at the onConnect method). A value of null
 	 * is returned if the ConexionIrc has never tried to connect to a server.
-	 * 
+	 *
 	 * @return The name of the last machine we tried to connect to. Returns null
 	 *         if no connection attempts have ever been made.
 	 */
@@ -2317,10 +2317,10 @@ public class ConexionIrc {
 	 * server was successful (we suggest you look at the onConnect method). A
 	 * value of -1 is returned if the ConexionIrc has never tried to connect to
 	 * a server.
-	 * 
+	 *
 	 * @return The port number of the last IRC server we connected to. Returns
 	 *         -1 if no connection attempts have ever been made.
-	 * 
+	 *
 	 */
 	public final int getPort() {
 		return _port;
@@ -2332,11 +2332,11 @@ public class ConexionIrc {
 	 * successful (we suggest you look at the onConnect method). A value of null
 	 * is returned if the ConexionIrc has never tried to connect to a server
 	 * using a password.
-	 * 
+	 *
 	 * @return The last password that we used when connecting to an IRC server.
 	 *         Returns null if we have not previously connected using a
 	 *         password.
-	 * 
+	 *
 	 */
 	public final String getPassword() {
 		return _password;
@@ -2348,7 +2348,7 @@ public class ConexionIrc {
 	 *
 	 * @param address
 	 *            the long value representing the IP address.
-	 * 
+	 *
 	 * @return An int[] of size 4.
 	 */
 	public int[] longToIp(long address) {
@@ -2366,7 +2366,7 @@ public class ConexionIrc {
 	 *
 	 * @param address
 	 *            the byte[] of size 4 representing the IP address.
-	 * 
+	 *
 	 * @return a long representation of the IP address.
 	 */
 	public long ipToLong(byte[] address) {
@@ -2402,7 +2402,7 @@ public class ConexionIrc {
 	 * Returns the hashCode of this ConexionIrc. This method can be called by
 	 * hashed collection classes and is useful for managing multiple instances
 	 * of ConexionIrcs in such collections.
-	 * 
+	 *
 	 * @return the hash code for this instance of ConexionIrc.
 	 */
 	@Override

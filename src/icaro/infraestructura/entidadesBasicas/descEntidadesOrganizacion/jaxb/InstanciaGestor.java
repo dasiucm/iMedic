@@ -43,9 +43,9 @@ public class InstanciaGestor extends Instancia {
 
 	/**
 	 * Gets the value of the componentesGestionados property.
-	 * 
+	 *
 	 * @return possible object is {@link ComponentesGestionados }
-	 * 
+	 *
 	 */
 	public ComponentesGestionados getComponentesGestionados() {
 		return componentesGestionados;
@@ -53,10 +53,10 @@ public class InstanciaGestor extends Instancia {
 
 	/**
 	 * Sets the value of the componentesGestionados property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link ComponentesGestionados }
-	 * 
+	 *
 	 */
 	public void setComponentesGestionados(ComponentesGestionados value) {
 		this.componentesGestionados = value;

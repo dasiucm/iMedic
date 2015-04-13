@@ -5,7 +5,6 @@
  */
 package icaro.aplicaciones.informacion.gestionCitas;
 
-
 /**
  *
  * @author FGarijo
@@ -17,7 +16,6 @@ public class Notificacion {
 	public String identObjectRefNotificacion;
 	public String tipoNotificacion;
 	public UsuarioContexto usuario;
-
 
 	public UsuarioContexto getUsuario() {
 		return usuario;

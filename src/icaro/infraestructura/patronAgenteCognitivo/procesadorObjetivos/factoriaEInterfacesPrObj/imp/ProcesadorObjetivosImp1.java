@@ -18,7 +18,7 @@ import org.drools.runtime.StatefulKnowledgeSession;
 
 /**
  * Implementation for Cognitive Control
- * 
+ *
  * @author F Garijo
  *
  */

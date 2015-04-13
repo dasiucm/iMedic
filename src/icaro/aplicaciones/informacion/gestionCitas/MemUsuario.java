@@ -1,7 +1,6 @@
 package icaro.aplicaciones.informacion.gestionCitas;
 
 import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.objetivos.Inactividad;
-import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 
 import java.util.HashMap;
@@ -23,9 +22,9 @@ public class MemUsuario {
 		}
 		return null;
 	}
-	
+
 	public void eliminarUsuario(String usuario) {
-		
+
 		listUsuario.remove(usuario);
 	}
 
@@ -58,18 +57,19 @@ public class MemUsuario {
 		return null;
 	}
 
-	public String usuarioInactivo(int tiempo){
+	public String usuarioInactivo(int tiempo) {
 		System.out.println("PRueba inactividad");
 		Objetivo ob = new Inactividad();
 		for (UsuarioContexto uc : listUsuario.values()) {
-			if (!uc.foco.getFoco().getgoalId().equals(ob) && uc.inactividad(tiempo)) {
+			if (!uc.foco.getFoco().getgoalId().equals(ob)
+					&& uc.inactividad(tiempo)) {
 				return uc.usuario;
 			}
 		}
 		return null;
-	
+
 	}
-	
+
 	public boolean estadoObjetivo(String usuario, String ob, String estado) {
 		if (existeUsuario(usuario)
 				&& listUsuario.get(usuario).foco.getFoco().getgoalId()

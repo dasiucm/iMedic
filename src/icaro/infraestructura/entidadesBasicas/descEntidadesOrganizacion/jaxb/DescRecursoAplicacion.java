@@ -44,9 +44,9 @@ public class DescRecursoAplicacion {
 
 	/**
 	 * Gets the value of the nombre property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getNombre() {
 		return nombre;
@@ -54,10 +54,10 @@ public class DescRecursoAplicacion {
 
 	/**
 	 * Sets the value of the nombre property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setNombre(String value) {
 		this.nombre = value;
@@ -65,9 +65,9 @@ public class DescRecursoAplicacion {
 
 	/**
 	 * Gets the value of the localizacionClaseGeneradora property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getLocalizacionClaseGeneradora() {
 		return localizacionClaseGeneradora;
@@ -75,10 +75,10 @@ public class DescRecursoAplicacion {
 
 	/**
 	 * Sets the value of the localizacionClaseGeneradora property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setLocalizacionClaseGeneradora(String value) {
 		this.localizacionClaseGeneradora = value;

@@ -49,9 +49,9 @@ public class ComponenteGestionado {
 
 	/**
 	 * Gets the value of the refId property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getRefId() {
 		return refId;
@@ -59,10 +59,10 @@ public class ComponenteGestionado {
 
 	/**
 	 * Sets the value of the refId property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setRefId(String value) {
 		this.refId = value;
@@ -70,9 +70,9 @@ public class ComponenteGestionado {
 
 	/**
 	 * Gets the value of the refDescripcion property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getRefDescripcion() {
 		return refDescripcion;
@@ -80,10 +80,10 @@ public class ComponenteGestionado {
 
 	/**
 	 * Sets the value of the refDescripcion property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setRefDescripcion(String value) {
 		this.refDescripcion = value;
@@ -91,9 +91,9 @@ public class ComponenteGestionado {
 
 	/**
 	 * Gets the value of the tipoComponente property.
-	 * 
+	 *
 	 * @return possible object is {@link TipoComponente }
-	 * 
+	 *
 	 */
 	public TipoComponente getTipoComponente() {
 		return tipoComponente;
@@ -101,10 +101,10 @@ public class ComponenteGestionado {
 
 	/**
 	 * Sets the value of the tipoComponente property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link TipoComponente }
-	 * 
+	 *
 	 */
 	public void setTipoComponente(TipoComponente value) {
 		this.tipoComponente = value;

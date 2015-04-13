@@ -13,7 +13,8 @@ public interface ItfUsoComunicacionChat extends ItfUsoRecursoSimple {
 	// public Boolean enviarMensage(String idReceptor, String mensaje);
 	public void enviarMensageCanal(String mensaje) throws Exception;
 
-	public void enviarMensagePrivado(String inter, String mensaje) throws Exception;
+	public void enviarMensagePrivado(String inter, String mensaje)
+			throws Exception;
 
 	public void desconectar() throws Exception;
 

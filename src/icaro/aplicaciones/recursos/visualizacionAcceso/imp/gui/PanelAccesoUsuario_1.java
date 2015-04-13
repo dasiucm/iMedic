@@ -27,7 +27,8 @@ public class PanelAccesoUsuario_1 extends VentanaEstandar {
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
 	private NotificacionesEventosVisAcceso usoAgente; // comunicaci�n con el
-														// agente (control)
+
+	// agente (control)
 
 	/** Creates new form NewJFrame */
 	public PanelAccesoUsuario_1() {

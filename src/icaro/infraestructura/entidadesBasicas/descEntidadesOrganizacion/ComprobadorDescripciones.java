@@ -211,7 +211,7 @@ public class ComprobadorDescripciones {
 			rutaFicheroAutomata = rutaDirectorioCompt + "."
 					+ NombresPredefinidos.FICHERO_AUTOMATA;
 		} else if (rutaFicheroAutomata == null) {// se toma la ruta de la clase
-													// acciones
+			// acciones
 			rutaDirectorioCompt = rutaClaseAcciones
 					.substring(
 							0,
@@ -242,7 +242,7 @@ public class ComprobadorDescripciones {
 		// Si no se ha especificado directorio del comportamiento se pone el
 		// directorio por defecto
 		if (rutaFicheroReglas == null) {// se valida la ruta y luego que exista
-										// la entidad
+			// la entidad
 			if (rutaDirectorioCompt == null) {
 				rutaDirectorioCompt = NombresPredefinidos.RUTA_AGENTES_APLICACION
 						+ "."
@@ -254,10 +254,10 @@ public class ComprobadorDescripciones {
 					+ NombresPredefinidos.CARPETA_REGLAS + "."
 					+ NombresPredefinidos.FICHERO_REGLAS;
 		} // si la ruta del fichero de reglas esta definida se valida
-		// if
-		// (validarRutaEntidadComportamiento(rutaFicheroReglas,rutaDirectorioCompt,identComportmto))
-		// return true;
-		// else return false;
+			// if
+			// (validarRutaEntidadComportamiento(rutaFicheroReglas,rutaDirectorioCompt,identComportmto))
+			// return true;
+			// else return false;
 		comptAgente
 				.setLocalizacionFicheroReglas(validarRutaEntidadComportamiento(
 						rutaFicheroReglas, rutaDirectorioCompt, identComportmto));
@@ -483,7 +483,7 @@ public class ComprobadorDescripciones {
 			logger.fatal(msgInfoUsuario);
 		}
 		if (rutaValida && ficheroValido) { // se valida la existencia del
-											// recurso
+			// recurso
 			rutaEntidad = "/"
 					+ rutaEntidad.substring(0, rutaEntidad.lastIndexOf("."))
 							.replace(".", "/") + extensionFicheroRuta;
@@ -813,7 +813,7 @@ public class ComprobadorDescripciones {
 
 	/**
 	 * Load all classes from a package.
-	 * 
+	 *
 	 * @param packageName
 	 * @return
 	 * @throws ClassNotFoundException
@@ -840,7 +840,7 @@ public class ComprobadorDescripciones {
 
 	/**
 	 * Find file in package.
-	 * 
+	 *
 	 * @param directory
 	 * @param packageName
 	 * @return

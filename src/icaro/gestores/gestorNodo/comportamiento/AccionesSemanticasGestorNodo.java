@@ -36,12 +36,12 @@ import java.util.logging.Logger;
 
 /**
  * Clase que contiene las acciones necesarias para el gestor de Nodo
- * 
- * 
+ *
+ *
  * @created Enero 2011
  */
 public class AccionesSemanticasGestorNodo extends
-AccionesSemanticasAgenteReactivo implements Serializable {
+		AccionesSemanticasAgenteReactivo implements Serializable {
 	// Tiempo que fijaremos para las monitorizaciones ciclicas
 	/**
 	 * @uml.property name="tiempoParaNuevaMonitorizacion"
@@ -50,7 +50,7 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 
 	/**
 	 * Hebra para que inyecte eventos de monitorizaci�n cada cierto tiempo
-	 * 
+	 *
 	 * @uml.property name="hebra"
 	 * @uml.associationEnd
 	 */
@@ -244,8 +244,8 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 								.instance()
 								.obtenerInterfaz(
 										NombresPredefinidos.FACTORIA_AGENTE_REACTIVO
-										+ nodoDestino))
-										.crearAgenteReactivo(descGestor);
+												+ nodoDestino))
+								.crearAgenteReactivo(descGestor);
 						ok = true;
 					} catch (Exception e) {
 						trazas.aceptaNuevaTraza(new InfoTraza(
@@ -257,7 +257,7 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 										+ " segundos...\n nodo origen: "
 										+ esteNodo + "\t nodo destino: "
 										+ nodoDestino,
-										InfoTraza.NivelTraza.error));
+								InfoTraza.NivelTraza.error));
 						logger.error("Error al crear el agente "
 								+ NombresPredefinidos.NOMBRE_GESTOR_AGENTES
 								+ " en un nodo remoto. Se volvera a intentar en "
@@ -345,8 +345,8 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 								.instance()
 								.obtenerInterfaz(
 										NombresPredefinidos.FACTORIA_AGENTE_REACTIVO
-										+ nodoDestino))
-										.crearAgenteReactivo(gestorAgentes);
+												+ nodoDestino))
+								.crearAgenteReactivo(gestorAgentes);
 						ok = true;
 					} catch (Exception e) {
 						trazas.aceptaNuevaTraza(new InfoTraza(
@@ -358,7 +358,7 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 										+ " segundos...\n nodo origen: "
 										+ esteNodo + "\t nodo destino: "
 										+ nodoDestino,
-										InfoTraza.NivelTraza.error));
+								InfoTraza.NivelTraza.error));
 						logger.error("Error al crear el agente "
 								+ NombresPredefinidos.NOMBRE_GESTOR_AGENTES
 								+ " en un nodo remoto. Se volver� a intentar en "
@@ -384,7 +384,7 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 			((ItfGestionAgenteReactivo) itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_GESTION
 							+ NombresPredefinidos.NOMBRE_GESTOR_AGENTES))
-							.setGestorAReportar(NombresPredefinidos.NOMBRE_GESTOR_ORGANIZACION);
+					.setGestorAReportar(NombresPredefinidos.NOMBRE_GESTOR_ORGANIZACION);
 
 			logger.debug("GestorOrganizaci�n: Creando gestor de recursos ...");
 			trazas.aceptaNuevaTraza(new InfoTraza("GestorOrganizacion",
@@ -409,8 +409,8 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 								.instance()
 								.obtenerInterfaz(
 										NombresPredefinidos.FACTORIA_AGENTE_REACTIVO
-										+ nodoDestino))
-										.crearAgenteReactivo(gestorRecursos);
+												+ nodoDestino))
+								.crearAgenteReactivo(gestorRecursos);
 						ok = true;
 					} catch (Exception e) {
 						trazas.aceptaNuevaTraza(new InfoTraza(
@@ -422,7 +422,7 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 										+ " segundos...\n nodo origen: "
 										+ esteNodo + "\t nodo destino: "
 										+ nodoDestino,
-										InfoTraza.NivelTraza.error));
+								InfoTraza.NivelTraza.error));
 						logger.error("Error al crear agente "
 								+ NombresPredefinidos.NOMBRE_GESTOR_RECURSOS
 								+ " en un nodo remoto. Se volver� a intentar en "
@@ -443,8 +443,8 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 					.instance()
 					.obtenerInterfaz(
 							NombresPredefinidos.ITF_GESTION
-							+ NombresPredefinidos.NOMBRE_GESTOR_RECURSOS))
-							.setGestorAReportar(NombresPredefinidos.NOMBRE_GESTOR_ORGANIZACION);
+									+ NombresPredefinidos.NOMBRE_GESTOR_RECURSOS))
+					.setGestorAReportar(NombresPredefinidos.NOMBRE_GESTOR_ORGANIZACION);
 
 			logger.debug("GestorOrganizaci�n: Gestores registrados correctamente.");
 
@@ -487,7 +487,7 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 			((ItfGestionAgenteReactivo) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_GESTION
 							+ NombresPredefinidos.NOMBRE_GESTOR_AGENTES))
-							.arranca();
+					.arranca();
 			// this.itfUsoAgente.aceptaEvento(new
 			// EventoRecAgte("gestor_agentes_arrancado_ok"));
 
@@ -518,7 +518,7 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 			((ItfGestionAgenteReactivo) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_GESTION
 							+ NombresPredefinidos.NOMBRE_GESTOR_RECURSOS))
-							.arranca();
+					.arranca();
 			// this.itfUsoAgente.aceptaEvento(new
 			// EventoRecAgte("gestor_recursos_arrancado_ok"));
 		} catch (Exception e) {
@@ -632,11 +632,11 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 			monitAgentes = ((ItfGestionAgenteReactivo) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_GESTION
 							+ NombresPredefinidos.NOMBRE_GESTOR_AGENTES))
-							.obtenerEstado();
+					.obtenerEstado();
 			monitRecursos = ((ItfGestionAgenteReactivo) this.itfUsoRepositorio
 					.obtenerInterfaz(NombresPredefinidos.ITF_GESTION
 							+ NombresPredefinidos.NOMBRE_GESTOR_RECURSOS))
-							.obtenerEstado();
+					.obtenerEstado();
 
 			// � hay problemas con el gestor de agentes ?
 			errorAlMonitorizar = ((monitAgentes == InterfazGestion.ESTADO_ERRONEO_IRRECUPERABLE)
@@ -1141,8 +1141,8 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 				} else
 
 				if (tipoAgenteAcrear != TipoAgente.COGNITIVO) { // no es ni
-																// cognitivo ni
-																// reactivo
+					// cognitivo ni
+					// reactivo
 					trazas.aceptaNuevaTraza(new InfoTraza(
 							nombreAgente,
 							"El subtipo del agente "
@@ -1432,7 +1432,7 @@ AccionesSemanticasAgenteReactivo implements Serializable {
 			errorEnArranque = true;
 		}
 		if (errorEnArranque) { // ha ocurrido alg�n problema en el arranque
-								// del
+			// del
 			// recurso
 			try {
 				this.informaraMiAutomata("error_en_arranque_recurso");

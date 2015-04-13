@@ -43,7 +43,7 @@ public class AgenteReactivoImp extends AgenteReactivoAbstracto {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Control del agente
-	 * 
+	 *
 	 * @uml.property name="control"
 	 * @uml.associationEnd
 	 */
@@ -56,7 +56,7 @@ public class AgenteReactivoImp extends AgenteReactivoAbstracto {
 	protected InterfazGestion itfGesControl; // Control
 	/**
 	 * Percepcion del agente
-	 * 
+	 *
 	 * @uml.property name="itfConsumidorPercepcion"
 	 * @uml.associationEnd
 	 */
@@ -68,20 +68,20 @@ public class AgenteReactivoImp extends AgenteReactivoAbstracto {
 	protected ItfProductorPercepcion itfProductorPercepcion;
 	/**
 	 * Nombre del agente a efectos de traza
-	 * 
+	 *
 	 * @uml.property name="nombre"
 	 */
 	protected String nombre;
 	protected String estadoAgente;
 	/**
 	 * Estado del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="estado"
 	 */
 	protected int estado = InterfazGestion.ESTADO_OTRO;
 	/**
 	 * Acciones sem�nticas del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="accionesSemanticas"
 	 * @uml.associationEnd
 	 */
@@ -92,7 +92,7 @@ public class AgenteReactivoImp extends AgenteReactivoAbstracto {
 	private boolean DEBUG = false;
 	/**
 	 * Conocimiento del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="itfUsoGestorAReportar"
 	 * @uml.associationEnd
 	 */
@@ -170,7 +170,7 @@ public class AgenteReactivoImp extends AgenteReactivoAbstracto {
 	/**
 	 * Constructor sin par�metros: HAY QUE UTILIZAR INMEDIATAMENTE DESPU�S
 	 * EL M�TODO setParametrosAgReactivo
-	 * 
+	 *
 	 * @throws RemoteException
 	 */
 	public AgenteReactivoImp() throws RemoteException {
@@ -181,7 +181,7 @@ public class AgenteReactivoImp extends AgenteReactivoAbstracto {
 	 * Fija los par�metros necesarios del agente reactivo para permitir la
 	 * creaci�n de las clases herederas de esta en 2 pasos y facilitar la
 	 * obtenci�n de la clase que implementa las acciones
-	 * 
+	 *
 	 * @param objetoContenedorAcciones
 	 * @param nombreFicheroTablaEstados
 	 * @param nombreDelAgente
@@ -534,12 +534,12 @@ public class AgenteReactivoImp extends AgenteReactivoAbstracto {
 	// @Override
 	/**
 	 * Establece el gestor a reportar
-	 * 
+	 *
 	 * @param nombreGestor
 	 *            nombre del gestor a reportar
 	 * @param listaEventos
 	 *            lista de posibles eventos que le puede enviar.
-	 * 
+	 *
 	 *            El gestionador obtendr� las interfaces del gestor a partir
 	 *            del repositorio de interfaces y podr� validar la
 	 *            informaci�n.

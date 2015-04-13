@@ -31,7 +31,7 @@ public class ProcesadorInfoReactivoAutInObjImp0 extends
 	// private boolean DEBUG = false;
 	/**
 	 * autmata que describe el control
-	 * 
+	 *
 	 * @uml.property name="automataControl"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
@@ -44,14 +44,14 @@ public class ProcesadorInfoReactivoAutInObjImp0 extends
 	// private AccionesSemanticasAgenteReactivo accionesSemanticasAgenteCreado;
 	/**
 	 * estado interno del componente control
-	 * 
+	 *
 	 * @uml.property name="estado"
 	 */
 	// private int estado = InterfazGestion.ESTADO_CREADO;
 
 	/**
 	 * Nombre del componente a efectos de traza
-	 * 
+	 *
 	 * @param interpAutom
 	 * @param gestAcciones
 	 * @param implItfsagente
@@ -202,7 +202,7 @@ public class ProcesadorInfoReactivoAutInObjImp0 extends
 	// @Override
 	/**
 	 * Establece el gestor a reportar
-	 * 
+	 *
 	 * @param nombreGestor
 	 *            nombre del gestor a reportar
 	 * @param listaEventos

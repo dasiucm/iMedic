@@ -18,7 +18,7 @@ public class TablaEstadosAutomataEF implements Cloneable, Serializable {
 	/**
 	 * Tabla que almacena si los estados son iniciales / finales / etc, indexa
 	 * por estado
-	 * 
+	 *
 	 * @uml.property name="clasificacionEstados"
 	 * @uml.associationEnd 
 	 *                     qualifier="identificador:java.lang.String java.lang.Integer"
@@ -27,7 +27,7 @@ public class TablaEstadosAutomataEF implements Cloneable, Serializable {
 
 	/**
 	 * El estado inicial
-	 * 
+	 *
 	 * @uml.property name="identificadorEstadoInicial"
 	 */
 	private String identificadorEstadoInicial = "";
@@ -35,7 +35,7 @@ public class TablaEstadosAutomataEF implements Cloneable, Serializable {
 	/**
 	 * Tabla de tablas que almacena las tablas input/estado siguiente y las
 	 * indexa por estado
-	 * 
+	 *
 	 * @uml.property name="inputsDeEstados"
 	 * @uml.associationEnd qualifier="input:java.lang.String java.lang.String"
 	 */

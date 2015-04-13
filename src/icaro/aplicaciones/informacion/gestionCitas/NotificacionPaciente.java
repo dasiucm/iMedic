@@ -10,8 +10,8 @@ public class NotificacionPaciente {
 
 	public NotificacionPaciente() {
 	}
-	
-	public NotificacionPaciente(Notificacion notif) {		
+
+	public NotificacionPaciente(Notificacion notif) {
 		identNotificador = notif.getidentNotificador();
 		setMensajeNotificacion(notif.getMensajeNotificacion());
 		setcontexto(notif.getcontexto());
@@ -19,7 +19,7 @@ public class NotificacionPaciente {
 		setTipoNotificacion(notif.getTipoNotificacion());
 		setUsuario(notif.getUsuario());
 	}
-	
+
 	public UsuarioContexto getUsuario() {
 		return usuario;
 	}

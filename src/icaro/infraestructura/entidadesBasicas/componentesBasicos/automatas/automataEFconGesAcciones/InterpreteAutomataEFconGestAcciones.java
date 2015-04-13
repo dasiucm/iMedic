@@ -1,5 +1,5 @@
 /*
-    
+
  */
 package icaro.infraestructura.entidadesBasicas.componentesBasicos.automatas.automataEFconGesAcciones;
 
@@ -45,14 +45,14 @@ public class InterpreteAutomataEFconGestAcciones implements ItfUsoAutomataEFE,
 
 	/**
 	 * Indica si se deben mostrar mensajes de depuracin o no
-	 * 
+	 *
 	 * @uml.property name="dEBUG"
 	 */
 	public boolean DEBUG = false;
 
 	/**
 	 * Controla la profundidad de las trazas
-	 * 
+	 *
 	 * @uml.property name="traza"
 	 */
 	protected int traza = 0;
@@ -64,7 +64,7 @@ public class InterpreteAutomataEFconGestAcciones implements ItfUsoAutomataEFE,
 
 	/**
 	 * Tabla que representa los estados del autmata
-	 * 
+	 *
 	 * @uml.property name="interpTablaEstados"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
@@ -255,10 +255,10 @@ public class InterpreteAutomataEFconGestAcciones implements ItfUsoAutomataEFE,
 				return false;
 			}
 		} else if (tipoTransicion == NombresPredefinidos.AUTOMATA_EF_TIPO_TRANSICION_METODO_AS_CONCURR) {// ejecutar
-																											// el
-																											// metodo
-																											// como
-																											// thread
+			// el
+			// metodo
+			// como
+			// thread
 			return false; // por no estar implementado
 		} else {
 			try {
@@ -386,9 +386,9 @@ public class InterpreteAutomataEFconGestAcciones implements ItfUsoAutomataEFE,
 		if (tipoTransicion == NombresPredefinidos.AUTOMATA_EF_TIPO_TRANSICION_SIN_ACCION) {
 			transita(input);
 		} else { // ****** revisar
-		// if (transicion.getTipoTransicion()==
-		// NombresPredefinidos.TRANSICION_AUTOMATA_EF_ACCION_BLOQ)
-		// this.itfGestAcciones.
+			// if (transicion.getTipoTransicion()==
+			// NombresPredefinidos.TRANSICION_AUTOMATA_EF_ACCION_BLOQ)
+			// this.itfGestAcciones.
 		}
 	}
 
@@ -403,13 +403,13 @@ public class InterpreteAutomataEFconGestAcciones implements ItfUsoAutomataEFE,
 		Object[] parametroAccion = new Object[1];
 
 		if (input instanceof String) { // Si el input es de tipo String Tomamos
-										// como input la cadena que representa
-										// el input
+			// como input la cadena que representa
+			// el input
 			inputAutomata = (String) input;
 			parametroAccion[0] = null;
 			// return ejecutarTransicion( inputAutomata,null);
 		} else {// tomamos como input el nombre de la clase del input y le
-				// pasamos el objeto como primer parametro
+			// pasamos el objeto como primer parametro
 			inputAutomata = input.getClass().getSimpleName();
 			// Object[] parametroAccion = new Object [0];
 			parametroAccion[0] = input;
@@ -612,7 +612,7 @@ public class InterpreteAutomataEFconGestAcciones implements ItfUsoAutomataEFE,
 
 	/**
 	 * Dice el estado del autmata en el que se encuentra el recurso
-	 * 
+	 *
 	 * @return el estado en que se encuentra
 	 */
 	// @Override
@@ -640,18 +640,18 @@ public class InterpreteAutomataEFconGestAcciones implements ItfUsoAutomataEFE,
 	 * @param logger
 	 * @uml.property name="logger"
 	 */
-	 @Override
-	 public void setLogger(Logger logger) {
-		 this.logger = logger;
-	 }
+	@Override
+	public void setLogger(Logger logger) {
+		this.logger = logger;
+	}
 
 	/**
-	  * @return
-	  * @uml.property name="logger"
-	  */
-	 @Override
-	 public Logger getLogger() {
-		 return logger;
-	 }
+	 * @return
+	 * @uml.property name="logger"
+	 */
+	@Override
+	public Logger getLogger() {
+		return logger;
+	}
 
 }

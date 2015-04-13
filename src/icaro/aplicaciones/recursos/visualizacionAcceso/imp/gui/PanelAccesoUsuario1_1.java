@@ -25,7 +25,8 @@ public class PanelAccesoUsuario1_1 extends VentanaEstandar {
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
 	private NotificacionesEventosVisAcceso usoAgente; // comunicaci�n con el
-														// agente (control)
+
+	// agente (control)
 
 	public PanelAccesoUsuario1_1(ClaseGeneradoraVisualizacionAcceso visualizador) {
 		usoAgente = new NotificacionesEventosVisAcceso(visualizador);

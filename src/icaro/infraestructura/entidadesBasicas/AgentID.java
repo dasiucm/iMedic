@@ -22,7 +22,7 @@ public class AgentID implements Serializable {
 
 	/**
 	 * Constructor for AgentID
-	 * 
+	 *
 	 * @param localName
 	 *            Name of the agent instance
 	 */
@@ -39,7 +39,7 @@ public class AgentID implements Serializable {
 
 	/**
 	 * Constructor for AgentID
-	 * 
+	 *
 	 * @param localName
 	 *            Name of the agent instance
 	 * @param nodeId

@@ -41,9 +41,9 @@ public class DescComportamientoAgenteCognitivo extends DescComportamientoAgente 
 
 	/**
 	 * Gets the value of the rutaReglas property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getRutaReglas() {
 		return rutaReglas;
@@ -51,10 +51,10 @@ public class DescComportamientoAgenteCognitivo extends DescComportamientoAgente 
 
 	/**
 	 * Sets the value of the rutaReglas property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setRutaReglas(String value) {
 		this.rutaReglas = value;

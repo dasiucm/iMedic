@@ -19,7 +19,7 @@ public abstract class ProcesadorInfoReactivoAbstracto extends Thread implements
 	public boolean DEBUG = false;
 	/**
 	 * autmata que describe el control
-	 * 
+	 *
 	 * @uml.property name="automataControl"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
@@ -28,14 +28,14 @@ public abstract class ProcesadorInfoReactivoAbstracto extends Thread implements
 	public AccionesSemanticasAgenteReactivo accionesSemanticasAgenteCreado;
 	/**
 	 * estado interno del componente control
-	 * 
+	 *
 	 * @uml.property name="estado"
 	 */
 	public int estado = InterfazGestion.ESTADO_CREADO;
 
 	/**
 	 * Nombre del componente a efectos de traza
-	 * 
+	 *
 	 * @uml.property name="nombre"
 	 */
 	public String identAgte;

@@ -30,7 +30,7 @@ public class ProcesadorInfoReactivoImp extends ProcesadorInfoReactivoAbstracto
 	private boolean DEBUG = false;
 	/**
 	 * autmata que describe el control
-	 * 
+	 *
 	 * @uml.property name="automataControl"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
@@ -39,14 +39,14 @@ public class ProcesadorInfoReactivoImp extends ProcesadorInfoReactivoAbstracto
 	// private AccionesSemanticasAgenteReactivo accionesSemanticasAgenteCreado;
 	/**
 	 * estado interno del componente control
-	 * 
+	 *
 	 * @uml.property name="estado"
 	 */
 	// private int estado = InterfazGestion.ESTADO_CREADO;
 
 	/**
 	 * Nombre del componente a efectos de traza
-	 * 
+	 *
 	 * @uml.property name="nombre"
 	 */
 	// private String nombre;
@@ -170,21 +170,21 @@ public class ProcesadorInfoReactivoImp extends ProcesadorInfoReactivoAbstracto
 	 *
 	 * @param ei
 	 *            Evento de input a tratar
-	 * 
-	 * 
+	 *
+	 *
 	 *            private void tratarEventoInput(EventoSimple ei) { // Se extrae
 	 *            del evento el mensaje (msg) y los objetos enviados como
 	 *            parametros (msgElements) // Se envian al automata para que
 	 *            transite y ejecute las acciones correspondientes // El control
 	 *            vuelve si la ejecucion de las acciones termina. Si la accion
 	 *            es no bloqueante siempre vuelve
-	 * 
+	 *
 	 *            String inputExtraido = ei.getMsg().trim();
 	 *            automataControl.procesaInput(inputExtraido,
 	 *            ei.getMsgElements());
-	 * 
+	 *
 	 *            if (automataControl.esEstadoFinal()) { this.termina(); } }
-	 * 
+	 *
 	 *            private void tratarMensajeSimple(MensajeSimple msg) { // Se
 	 *            extrae del evento el mensaje (msg) y los objetos enviados como
 	 *            parametros (msgElements) // Se envian al automata para que
@@ -197,7 +197,7 @@ public class ProcesadorInfoReactivoImp extends ProcesadorInfoReactivoAbstracto
 	 *            (contenidoMsg.size() > 1) { contenidoMsg.remove(0); }
 	 *            automataControl
 	 *            .procesaInput(inputExtraido,contenidoMsg.toArray());
-	 * 
+	 *
 	 *            if (automataControl.esEstadoFinal()) { this.termina(); } }
 	 */
 	@Override
@@ -283,7 +283,7 @@ public class ProcesadorInfoReactivoImp extends ProcesadorInfoReactivoAbstracto
 	// @Override
 	/**
 	 * Establece el gestor a reportar
-	 * 
+	 *
 	 * @param nombreGestor
 	 *            nombre del gestor a reportar
 	 * @param listaEventos

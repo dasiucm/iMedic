@@ -33,7 +33,7 @@ public class FactoriaControlAgteReactivoImp2 extends
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Control del agente
-	 * 
+	 *
 	 * @uml.property name="control"
 	 * @uml.associationEnd
 	 */
@@ -45,7 +45,7 @@ public class FactoriaControlAgteReactivoImp2 extends
 	protected InterfazGestion itfGesControl; // Control
 	/**
 	 * Percepcion del agente
-	 * 
+	 *
 	 * @uml.property name="itfConsumidorPercepcion"
 	 * @uml.associationEnd
 	 */
@@ -57,20 +57,20 @@ public class FactoriaControlAgteReactivoImp2 extends
 	protected ItfProductorPercepcion itfProductorPercepcion;
 	/**
 	 * Nombre del agente a efectos de traza
-	 * 
+	 *
 	 * @uml.property name="nombre"
 	 */
 	protected String nombreAgente;
 	protected AgenteReactivoAbstracto agente;
 	/**
 	 * Estado del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="estado"
 	 */
 	protected int estado = InterfazGestion.ESTADO_OTRO;
 	/**
 	 * Acciones semnticas del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="accionesSemanticas"
 	 * @uml.associationEnd
 	 */
@@ -83,7 +83,7 @@ public class FactoriaControlAgteReactivoImp2 extends
 	private boolean DEBUG = false;
 	/**
 	 * Conocimiento del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="itfUsoGestorAReportar"
 	 * @uml.associationEnd
 	 */

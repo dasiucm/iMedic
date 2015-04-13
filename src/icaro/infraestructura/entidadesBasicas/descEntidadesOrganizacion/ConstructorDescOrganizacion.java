@@ -155,7 +155,7 @@ public class ConstructorDescOrganizacion implements Serializable {
 				} else if (!nombrecompletoHost.isEmpty()) {
 					return nombrecompletoHost;
 				} else {// se avisa que no se han definido valores validos para
-						// los nombres del host
+					// los nombres del host
 					trazas.aceptaNuevaTraza(new InfoTraza("Iniciador",
 							"Los identificadores definidos para el nodo localHost SON NULL "
 									+ identHost + ",nombrecompletoHost :  "
@@ -179,7 +179,7 @@ public class ConstructorDescOrganizacion implements Serializable {
 	public void actualizarTablaNodosDefinidos(Instancia instanciaComponente) {
 		Nodo nodoInstancia = instanciaComponente.getNodoEspecifico();
 		if (nodoInstancia == null) { // definimos el nodo de la instancia como
-										// el nodo comun
+			// el nodo comun
 			nodoInstancia = nodocomunDefinido;
 		}
 		TreeSet<String> identificadoresInstanciasEnNodo;
@@ -191,7 +191,7 @@ public class ConstructorDescOrganizacion implements Serializable {
 			identificadoresInstanciasEnNodo = tablaEntidadesEnNodosDefinidos
 					.get(identNodoInstancia);
 		} else { // El nodo no esta en la tabla de nodos : Se crea una entrada
-					// con la lista de instancias
+			// con la lista de instancias
 			identificadoresInstanciasEnNodo = new TreeSet<String>();
 		}
 		if (identificadoresInstanciasEnNodo.add(instanciaComponente.getId())) {

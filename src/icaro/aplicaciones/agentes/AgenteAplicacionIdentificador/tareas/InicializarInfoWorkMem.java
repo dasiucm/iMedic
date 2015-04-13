@@ -5,10 +5,6 @@
 
 package icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas;
 
-import icaro.aplicaciones.agentes.AgenteAplicacionDialogoCitasCognitivo.objetivos.ObtenerInfoInterlocutor;
-import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.objetivos.ObtenerNombreUsuario;
-import icaro.aplicaciones.informacion.gestionCitas.MemUsuario;
-import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
@@ -28,9 +24,10 @@ public class InicializarInfoWorkMem extends TareaSincrona {
 			this.getItfConfigMotorDeReglas()
 					.setfactHandlesMonitoring_afterActivationFired_DEBUGGING(
 							true);
-			//this.getEnvioHechos().insertarHecho(new MemUsuario());
-			//this.getEnvioHechos().insertarHechoWithoutFireRules(new Focus());
-			//this.getEnvioHechos().insertarHecho(new ObtenerInformacionUsuario());
+			// this.getEnvioHechos().insertarHecho(new MemUsuario());
+			// this.getEnvioHechos().insertarHechoWithoutFireRules(new Focus());
+			// this.getEnvioHechos().insertarHecho(new
+			// ObtenerInformacionUsuario());
 
 		} catch (Exception e) {
 			e.printStackTrace();

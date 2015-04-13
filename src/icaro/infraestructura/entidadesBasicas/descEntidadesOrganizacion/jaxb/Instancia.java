@@ -52,9 +52,9 @@ public class Instancia {
 
 	/**
 	 * Gets the value of the listaPropiedades property.
-	 * 
+	 *
 	 * @return possible object is {@link ListaPropiedades }
-	 * 
+	 *
 	 */
 	public ListaPropiedades getListaPropiedades() {
 		return listaPropiedades;
@@ -62,10 +62,10 @@ public class Instancia {
 
 	/**
 	 * Sets the value of the listaPropiedades property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link ListaPropiedades }
-	 * 
+	 *
 	 */
 	public void setListaPropiedades(ListaPropiedades value) {
 		this.listaPropiedades = value;
@@ -73,9 +73,9 @@ public class Instancia {
 
 	/**
 	 * Gets the value of the nodoEspecifico property.
-	 * 
+	 *
 	 * @return possible object is {@link Nodo }
-	 * 
+	 *
 	 */
 	public Nodo getNodoEspecifico() {
 		return nodoEspecifico;
@@ -83,10 +83,10 @@ public class Instancia {
 
 	/**
 	 * Sets the value of the nodoEspecifico property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link Nodo }
-	 * 
+	 *
 	 */
 	public void setNodoEspecifico(Nodo value) {
 		this.nodoEspecifico = value;
@@ -94,9 +94,9 @@ public class Instancia {
 
 	/**
 	 * Gets the value of the id property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getId() {
 		return id;
@@ -104,10 +104,10 @@ public class Instancia {
 
 	/**
 	 * Sets the value of the id property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setId(String value) {
 		this.id = value;
@@ -115,9 +115,9 @@ public class Instancia {
 
 	/**
 	 * Gets the value of the refDescripcion property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getRefDescripcion() {
 		return refDescripcion;
@@ -125,10 +125,10 @@ public class Instancia {
 
 	/**
 	 * Sets the value of the refDescripcion property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setRefDescripcion(String value) {
 		this.refDescripcion = value;

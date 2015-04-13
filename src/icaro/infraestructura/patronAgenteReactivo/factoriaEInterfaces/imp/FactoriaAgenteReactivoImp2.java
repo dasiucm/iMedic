@@ -45,7 +45,7 @@ public class FactoriaAgenteReactivoImp2 extends FactoriaAgenteReactivo {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Control del agente
-	 * 
+	 *
 	 * @uml.property name="control"
 	 * @uml.associationEnd
 	 */
@@ -65,7 +65,7 @@ public class FactoriaAgenteReactivoImp2 extends FactoriaAgenteReactivo {
 	// protected InterfazGestion itfGesControl; //Control
 	/**
 	 * Percepcion del agente
-	 * 
+	 *
 	 * @uml.property name="itfConsumidorPercepcion"
 	 * @uml.associationEnd
 	 */
@@ -77,19 +77,19 @@ public class FactoriaAgenteReactivoImp2 extends FactoriaAgenteReactivo {
 	protected ItfProductorPercepcion itfProductorPercepcion;
 	/**
 	 * Nombre del agente a efectos de traza
-	 * 
+	 *
 	 * @uml.property name="nombre"
 	 */
 	protected String nombre;
 	/**
 	 * Estado del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="estado"
 	 */
 	// protected int estado = InterfazGestion.ESTADO_OTRO;
 	/**
 	 * Acciones sem�nticas del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="accionesSemanticas"
 	 * @uml.associationEnd
 	 */
@@ -100,7 +100,7 @@ public class FactoriaAgenteReactivoImp2 extends FactoriaAgenteReactivo {
 	private boolean DEBUG = false;
 	/**
 	 * Conocimiento del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="itfUsoGestorAReportar"
 	 * @uml.associationEnd
 	 */
@@ -231,7 +231,7 @@ public class FactoriaAgenteReactivoImp2 extends FactoriaAgenteReactivo {
 							+ ":No se puede crear el agente. El comportamiento no esta bien definido",
 					NivelTraza.error));
 			System.err
-			.println(" No se puede crear la Instancia del agente . La descrpcion del comportamiento no es correcta.");
+					.println(" No se puede crear la Instancia del agente . La descrpcion del comportamiento no es correcta.");
 		}
 	}
 
@@ -334,7 +334,7 @@ public class FactoriaAgenteReactivoImp2 extends FactoriaAgenteReactivo {
 					"Error al crear El CONTROL del agente. La factoria no puede crear la instancia o no se pueden obtener la interfaces : "
 							+ nombreInstanciaAgente, exc);
 			System.err
-			.println(" No se puede crear el control del agente. La factoria no puede crear la instancia.");
+					.println(" No se puede crear el control del agente. La factoria no puede crear la instancia.");
 			exc.putCompDondeEstaContenido("patronAgenteReactivo.contol");
 			exc.putParteAfectada("FactoriaControlAgenteReactivoImp");
 			throw exc;
@@ -347,7 +347,7 @@ public class FactoriaAgenteReactivoImp2 extends FactoriaAgenteReactivo {
 							+ " La ruta del  clase A Semanticas  es "
 							+ rutaComportamiento, ex);
 			System.err
-			.println(" No se puede crear la Percepcion del agente. La factoria no puede crear la instancia.");
+					.println(" No se puede crear la Percepcion del agente. La factoria no puede crear la instancia.");
 			throw new ExcepcionEnComponente("patronAgenteReactivo.contol",
 					"posible error al crear la percepcion", "percepcion", "");
 		}
@@ -535,9 +535,9 @@ public class FactoriaAgenteReactivoImp2 extends FactoriaAgenteReactivo {
 			trazas.trazar(nombreCptoAgte, msgUsuario, NivelTraza.error);
 			System.err.println(msgUsuario);
 			System.err
-			.println("La clase "
-					+ rutaAcciones
-					+ "que debe implementar las acciones semanticas, no existe.");
+					.println("La clase "
+							+ rutaAcciones
+							+ "que debe implementar las acciones semanticas, no existe.");
 		}
 		// si falla algo, devuelvo un null
 		return null;

@@ -33,14 +33,14 @@ public class AutomataEFEImp implements ItfUsoAutomataEFE {
 
 	/**
 	 * Indica si se deben mostrar mensajes de depuracin o no
-	 * 
+	 *
 	 * @uml.property name="dEBUG"
 	 */
 	public boolean DEBUG = false;
 
 	/**
 	 * Controla la profundidad de las trazas
-	 * 
+	 *
 	 * @uml.property name="traza"
 	 */
 	protected int traza = 0;
@@ -58,7 +58,7 @@ public class AutomataEFEImp implements ItfUsoAutomataEFE {
 
 	/**
 	 * Tabla que representa los estados del autmata
-	 * 
+	 *
 	 * @uml.property name="theTablaEstadosControl"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
@@ -66,7 +66,7 @@ public class AutomataEFEImp implements ItfUsoAutomataEFE {
 
 	/**
 	 * Nombre del agente al que pertenece el control
-	 * 
+	 *
 	 * @uml.property name="nombreAgente"
 	 */
 	protected String nombreAgente;

@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Implementation for Cognitive Agent Control Factory
- * 
+ *
  * @author Carlos Celorrio Modificacion F Garijo 28/08/2012
  *
  */

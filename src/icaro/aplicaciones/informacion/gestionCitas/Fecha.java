@@ -20,7 +20,7 @@ import java.util.Vector;
  * <p>
  * Company: Telef�nica I+D
  * </p>
- * 
+ *
  * @author Emilio Bobadilla �lvarez, Carlos Delgado Estremera
  * @version 3.0
  */
@@ -59,16 +59,16 @@ public class Fecha implements Comparable, Cloneable, java.io.Serializable {
 	 */
 	public final static int FECHA_VALIDA = 0; // Fecha valida
 	public final static int ERROR_FEBRERO = 1; // Fecha con mes igual a Febrero
-												// y con un valor para dia mayor
-												// que 28
+	// y con un valor para dia mayor
+	// que 28
 	public final static int ERROR_NO_FEBRERO = 2; // Fecha con mes distinto a
-													// Febrero pero de 30 dias y
-													// con
-													// un valor para dia mayor
-													// que 30
+	// Febrero pero de 30 dias y
+	// con
+	// un valor para dia mayor
+	// que 30
 	public final static int FECHA_YA_HA_PASADO = 3; // La fecha ya ha pasado
 	public final static int FECHA_FIN_DE_SEMANA = 4; // La fecha pertenece al
-														// fin de semana
+	// fin de semana
 
 	/**
 	 * Atributo d��
@@ -319,7 +319,7 @@ public class Fecha implements Comparable, Cloneable, java.io.Serializable {
 	/**
 	 * Comprueba si la fecha se corresponde con un d�a de fin de semana, esto
 	 * es, s�bado o domingo
-	 * 
+	 *
 	 * @param fecha
 	 * @return boolean Ser� igual a true si es un dia de fin de semana y false
 	 *         e.o.c.
@@ -364,7 +364,7 @@ public class Fecha implements Comparable, Cloneable, java.io.Serializable {
 
 	/**
 	 * Completa la fecha con sentido com�n
-	 * 
+	 *
 	 * @return
 	 */
 	public void completar() {
@@ -666,7 +666,7 @@ public class Fecha implements Comparable, Cloneable, java.io.Serializable {
 
 	/**
 	 * M�todo que devuelve el n�mero de campos no indefinidos
-	 * 
+	 *
 	 * @return int N�mero de campos no indefinidos
 	 */
 	public int numCamposDef() {
@@ -686,7 +686,7 @@ public class Fecha implements Comparable, Cloneable, java.io.Serializable {
 	/**
 	 * M�todo que nos dice si esta fecha es m�s completa que la fecha pasada
 	 * como par�metro
-	 * 
+	 *
 	 * @param fecha
 	 *            Fecha con la que queremos comparar
 	 * @return boolean Devolver� true si esta fecha es m�s completa, esto
@@ -732,7 +732,7 @@ public class Fecha implements Comparable, Cloneable, java.io.Serializable {
 	/**
 	 * M�todo que intenta completar una fecha primero con la lista de Fecha y
 	 * luego mediante sentido com�n
-	 * 
+	 *
 	 * @param listaSugerencias
 	 */
 	public void completar(Vector listaSugerencias) {
@@ -792,7 +792,7 @@ public class Fecha implements Comparable, Cloneable, java.io.Serializable {
 	 * M�todo que comprueba si todas las Fecha de la lista de entrada tienen
 	 * en su fecha el mismo campo dia Si todas tienen el mismo campo dia
 	 * devuelve dicho dia y Utilidades.int_INDEFINIDO en caso contrario
-	 * 
+	 *
 	 * @param listaSugerencias
 	 * @return int
 	 */
@@ -818,7 +818,7 @@ public class Fecha implements Comparable, Cloneable, java.io.Serializable {
 	 * M�todo que comprueba si todas las Fecha de la lista de entrada tienen
 	 * en su fecha el mismo campo mes Si todas tienen el mismo campo mes
 	 * devuelve dicho mes y Utilidades.int_INDEFINIDO en caso contrario
-	 * 
+	 *
 	 * @param listaSugerencias
 	 * @return int
 	 */
@@ -844,7 +844,7 @@ public class Fecha implements Comparable, Cloneable, java.io.Serializable {
 	 * M�todo que comprueba si todas las Fecha de la lista de entrada tienen
 	 * en su fecha el mismo campo a�o Si todas tienen el mismo campo a�o
 	 * devuelve dicho a�o y Utilidades.int_INDEFINIDO en caso contrario
-	 * 
+	 *
 	 * @param listaSugerencias
 	 * @return int
 	 */

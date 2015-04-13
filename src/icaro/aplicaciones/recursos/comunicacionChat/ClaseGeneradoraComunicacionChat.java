@@ -223,7 +223,8 @@ public class ClaseGeneradoraComunicacionChat extends ImplRecursoSimple
 	}
 
 	@Override
-	public void enviarMensagePrivado(String interlocutor,String mensaje) throws Exception {
+	public void enviarMensagePrivado(String interlocutor, String mensaje)
+			throws Exception {
 		comunicChat.sendMessage(interlocutor, mensaje);
 	}
 

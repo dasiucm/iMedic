@@ -28,7 +28,8 @@ public class PanelChatUsuario extends VentanaEstandar {
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
 	private NotificacionesEventosVisAccesoAlta usoAgente; // comunicacion con el
-															// agente (control)
+
+	// agente (control)
 
 	/** Creates new form NewJFrame */
 	public PanelChatUsuario() {

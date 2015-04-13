@@ -60,7 +60,7 @@ public class InfoPersonaqDaCitas extends InfoUsuarioqPideCita {
 
 	/**
 	 * Metodo que transforma un String que contiene el cargo en un entero
-	 * 
+	 *
 	 * @param cargo
 	 *            String que contiene el cargo
 	 * @return int Entero que es igual a una de las constantes del cargo
@@ -87,7 +87,7 @@ public class InfoPersonaqDaCitas extends InfoUsuarioqPideCita {
 
 	/**
 	 * Expresa el contenido en lenguaje natural
-	 * 
+	 *
 	 * @return
 	 */
 	public String expresar() {

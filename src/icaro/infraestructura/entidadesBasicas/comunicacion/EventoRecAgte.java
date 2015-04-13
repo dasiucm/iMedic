@@ -6,9 +6,8 @@
  */
 package icaro.infraestructura.entidadesBasicas.comunicacion;
 
-
 /**
- * 
+ *
  *
  * @author
  * @created 11 de septiembre de 2001
