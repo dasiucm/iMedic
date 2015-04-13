@@ -1515,6 +1515,11 @@ public class InterpreteMsgsIRC {
 				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
 						contextoInterpretacion, annot));
 
+			}else if (anotType.equalsIgnoreCase("fecha")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
+						contextoInterpretacion, annot));
+
 			}
 			// fet = annot.getFeatures();
 
