@@ -18,16 +18,18 @@ rule "Inicio obtención datos cita"
     notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.inicioPeticion);
  then
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    // la funcion ejecutar recibe dos strings, el identificador de usuario(dni) y el mensaje que quieras enviarle.
     tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita1dameDatos);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
  	Objetivo id = new IdentificarMedico();
+ 	// Objetivo id2 = new ObtenerFechaCita();
  	id.setSolving();
  	id.setobjectReferenceId(identInterlc);
  	insert(id);
 end
 
-rule "Obtención datos médico cita, antes que la fecha fecha"
+rule "Obtención datos médico cita, antes que la fecha"
  when
     notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.nombre, msgg:mensajeNotificacion )
     not( exists ObtenerFechaCita(state == Objetivo.SOLVED, objectReferenceId == identInterlc)) 
@@ -49,6 +51,7 @@ end
 rule "Obtención datos médico cita, teniendo la fecha"
  when
     notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.nombre, msgg:mensajeNotificacion )
+    //notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.nombre, msgg:mensajeNotificacion )
     ObtenerFechaCita(state == Objetivo.SOLVED, objectReferenceId == identInterlc) 
     obj:IdentificarMedico(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
     // cu:UsuarioContexto(usuario == identInterlc)
@@ -89,6 +92,18 @@ rule "Obtención datos fecha cita, teniendo el médico"
  	obj.setSolved();
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
     tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita4todoCompletado);
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+    retract(notif);
+end
+
+// Regla para consultar las citas por parte del paciente
+rule "Consultar citas, teniendo el paciente"
+ when
+    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.consulta, msgg:mensajeNotificacion )
+ then
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(identInterlc,conversacionPaciente.mostrarCitasPaciente);
+    // aqui habria que ir al recurso calendario para obtener las citas una a una
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
 end
