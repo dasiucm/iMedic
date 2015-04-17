@@ -446,6 +446,9 @@ public class InterpreteMsgsIRC {
 		// anotaciones y se envia el contenido al agente de dialogo
 		// de esta forma el agente recibe mensajes con entidades del modelo de
 		// información
+		
+		// hay que aniadir las anotaciones que se desean buscar. Si no se aniade aqui, no buscara la anotacion del 
+		// lookup del gazetero y no se obtendra informacion sobre el mensaje para el agente
 		HashSet anotacionesBusquedaPrueba = new HashSet();
 		anotacionesBusquedaPrueba.add("saludo");
 		anotacionesBusquedaPrueba.add("dni");
@@ -454,6 +457,7 @@ public class InterpreteMsgsIRC {
 		anotacionesBusquedaPrueba.add("nombre");
 		anotacionesBusquedaPrueba.add("despedida");
 		anotacionesBusquedaPrueba.add("fecha");
+		anotacionesBusquedaPrueba.add("consulta");
 		// esto habria que pasarlo como parametro
 		if (infoConecxInterlocutor == null) {
 			infoConecxInterlocutor = new InfoConexionUsuario();
@@ -1473,6 +1477,10 @@ public class InterpreteMsgsIRC {
 		}
 	}
 
+	/** Este metodo convierte anotaciones al objeto {@link Notificacion}
+	 * 
+	 * 
+	 */
 	private ArrayList interpretarAnotaciones(String interlocutor,
 			String contextoInterpretacion, HashSet anotacionesRelevantes) {
 		// recorremos las anotaciones obtenidas y las traducimos a objetos del
@@ -1525,7 +1533,10 @@ public class InterpreteMsgsIRC {
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
 								contextoInterpretacion, annot));
-
+			} else if (anotType.equalsIgnoreCase("consulta")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
+								contextoInterpretacion, annot));
 			}
 			// fet = annot.getFeatures();
 
@@ -1534,11 +1545,20 @@ public class InterpreteMsgsIRC {
 		return anotacionesInterpretadas;
 	}
 
+	/**
+	 * Este metodo tiene como entrada una anotacion recogida del mensaje y la transforma en una notificacion
+	 * utilizada por los agentes. De ahi que devuelva el objeto Notificacion
+	 * 
+	 * @param conttextoInterpretacion
+	 * @param anotacionSaludo
+	 * @return Notificacion
+	 */
 	private Notificacion interpretarAnotacionSaludoEInicioPeticion(
 			String conttextoInterpretacion, Annotation anotacionSaludo) {
 		// if(anotacionSaludo.getType()!="saludo"){
 		// return null;
 		// }
+		// se crea objeto notificacion con los datos extraidos
 		Notificacion notif = new Notificacion(
 				this.infoConecxInterlocutor.getuserName());
 		// UsuarioContexto cu;
@@ -1569,6 +1589,8 @@ public class InterpreteMsgsIRC {
 				.intValue();
 		String msgNotif = conttextoInterpretacion.substring(
 				posicionComienzoTexto, posicionFinTexto);
+		
+		// Se copia el mensaje y el tipo de anotacion en el objeto notificacion.
 		notif.setTipoNotificacion(anotacionSaludo.getType());
 		notif.setMensajeNotificacion(msgNotif);
 		return notif;
