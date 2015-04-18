@@ -12,6 +12,7 @@ public class Objetivo {
 	static public final int SOLVED = 2;
 	static public final int REFINED = 3;
 	static public final int FAILED = 4;
+	
 	private String goalId;
 	private String objectReferenceId; // identificador del objeto al que se
 	// refiere el objetivo p ej el ident de

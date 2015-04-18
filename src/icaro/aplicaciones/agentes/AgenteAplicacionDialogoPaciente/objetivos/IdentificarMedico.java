@@ -17,7 +17,7 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 public class IdentificarMedico extends Objetivo {
 
 	public IdentificarMedico() {
-		super.setgoalId("ObtenerDNI");
+		super.setgoalId("IdentificarMedico");
 	}
 
 }
