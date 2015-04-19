@@ -33,14 +33,14 @@ public class InicializarInfoWorkMem extends TareaSincrona {
 			this.getItfConfigMotorDeReglas()
 					.setfactHandlesMonitoring_afterActivationFired_DEBUGGING(
 							true);
-			Collection<Object> objetosAinsertar = new ArrayList<Object>();
-			objetosAinsertar.add(new DistribuirMensajes());
-			objetosAinsertar.add(new IdentificarUsuario());
-			objetosAinsertar.add(new Inactividad());
-			objetosAinsertar.add(new InactividadProlongada());
-			objetosAinsertar.add(new ObtenerDNIUsuario());
-			objetosAinsertar.add(new ObtenerNombreUsuario());
-			this.getEnvioHechos().insertarObjetosEnMiMemoria(objetosAinsertar);
+			//Collection<Object> objetosAinsertar = new ArrayList<Object>();
+			//objetosAinsertar.add(new DistribuirMensajes());
+			//objetosAinsertar.add(new IdentificarUsuario());
+			//objetosAinsertar.add(new Inactividad());
+			//objetosAinsertar.add(new InactividadProlongada());
+			//objetosAinsertar.add(new ObtenerDNIUsuario());
+			//objetosAinsertar.add(new ObtenerNombreUsuario());
+			//this.getEnvioHechos().insertarObjetosEnMiMemoria(objetosAinsertar);
 			//this.getEnvioHechos().insertarHecho(new MemUsuario());
 			//this.getEnvioHechos().insertarHechoWithoutFireRules(new Focus());
 			//this.getEnvioHechos().insertarHecho(new ObtenerInformacionUsuario());

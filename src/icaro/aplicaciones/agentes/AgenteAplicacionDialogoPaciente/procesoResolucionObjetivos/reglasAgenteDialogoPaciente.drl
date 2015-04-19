@@ -19,12 +19,14 @@ rule "Inicio obtención datos cita"
  then
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
     tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita1dameDatos);
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
-    retract(notif);
  	Objetivo id = new IdentificarMedico();
  	id.setSolving();
  	id.setobjectReferenceId(identInterlc);
+	Tarea tareadist = gestorTareas.crearTarea(NotificarObjetivo.class);
+    tareadist.ejecutar(identInterlc,notif); 	
  	insert(id);
+ 	retract(notif);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
 rule "Obtención datos médico cita, antes que la fecha fecha"
