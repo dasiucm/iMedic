@@ -21,6 +21,10 @@ rule "Inicio obtención datos anulacion cita"
     tarea.ejecutar(identInterlc,conversacionMedico.obtenerInfoAnulacion);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
+    
+    TareaSincrona tarea2 = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    // TODO - Coger el nombre del recurso calendario
+    tarea2.ejecutar("josecgon","Lo siento pero el medico " + identInterlc + " ha anulado tu cita");
  	
  	Objetivo id = new IdentificarFechaInicio();
  	id.setSolving();
