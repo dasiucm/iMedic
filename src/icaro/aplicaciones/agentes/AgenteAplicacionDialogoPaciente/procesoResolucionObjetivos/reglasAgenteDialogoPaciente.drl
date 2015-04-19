@@ -92,6 +92,11 @@ rule "Obtención datos fecha cita, teniendo el médico"
  	obj.setSolved();
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
     tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita4todoCompletado);
+    
+    TareaSincrona tarea2 = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    // TODO - Coger el nombre del medico y la fecha del recurso cita
+    tarea2.ejecutar("medico","El paciente " + identInterlc + " ha pedido una cita para la fecha fecha.");
+    
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
 end

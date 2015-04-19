@@ -31,6 +31,7 @@ public class VocabularioGestionCitas {
 	public static final String NombreTipoNoticacionCita = "InicioPeticion";
 	public static final String ExtraccionSemanticaNull = "SinSemantica";
 	public static final String IdentAgenteAplicacionDialogoPaciente = "AgenteAplicacionDialogoPaciente1";
+	public static final String IdentAgenteAplicacionDialogoMedico = "AgenteAplicacionDialogoMedico1";
 
 	/*
 	 * Cadenas de texto mostradas por el chat, normalmente accedidas desde las

@@ -1,6 +1,7 @@
 package icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas;
 
 import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
+import icaro.aplicaciones.informacion.gestionCitas.NotificacionMedico;
 import icaro.aplicaciones.informacion.gestionCitas.NotificacionPaciente;
 import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaComunicacion;
@@ -20,9 +21,15 @@ public class Distribuir extends TareaComunicacion {
 		try {
 			// Ver cómo diferencias si se envía al agente diálogo médico o al
 			// paciente
-			this.informaraOtroAgente(
-					new NotificacionPaciente(notif),
-					VocabularioGestionCitas.IdentAgenteAplicacionDialogoPaciente);
+			if ( (notif.tipoNotificacion).equals("inicioAnulacion") ){
+				this.informaraOtroAgente(
+						new NotificacionMedico(notif),
+						VocabularioGestionCitas.IdentAgenteAplicacionDialogoMedico);
+			} else{
+				this.informaraOtroAgente(
+						new NotificacionPaciente(notif),
+						VocabularioGestionCitas.IdentAgenteAplicacionDialogoPaciente);
+			}
 			// this.getEnvioHechos().insertarHecho(new
 			// NotificacionPaciente(notif));
 		} catch (Exception e) {
