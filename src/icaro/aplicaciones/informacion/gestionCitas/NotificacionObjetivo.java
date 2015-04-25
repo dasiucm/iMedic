@@ -40,6 +40,7 @@ public class NotificacionObjetivo {
 	}
 	
 	public NotificacionObjetivo(NotificacionPaciente notif){
+		
 		identNotificador = notif.getidentNotificador();
 		setMensajeNotificacion(notif.getMensajeNotificacion());
 		setcontexto(notif.getcontexto());

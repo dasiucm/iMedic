@@ -9,5 +9,7 @@ public interface ItfPersistenciaUsuarios extends ItfUsoRecursoSimple {
 			throws Exception;
 
 	UsuarioContexto obtenerContextoUsuario(String nombreChat) throws Exception;
+	
+	UsuarioContexto obtenerContextoUsuarioDNI(String dni) throws Exception;
 
 }

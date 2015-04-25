@@ -5,8 +5,12 @@
 
 package icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas;
 
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.objetivos.ObtenerNombreUsuario;
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.conversacion;
+import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
 import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
 import icaro.aplicaciones.recursos.comunicacionChat.ItfUsoComunicacionChat;
+import icaro.aplicaciones.recursos.persistenciaUsuarios.ItfPersistenciaUsuarios;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.CausaTerminacionTarea;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
@@ -25,29 +29,46 @@ public class SolicitarDNI extends TareaSincrona {
 		String identDeEstaTarea = this.getIdentTarea();
 		String identAgenteOrdenante = this.getIdentAgente();
 		String identInterlocutor = (String) params[0];
-		String mensaje = (String) params[1];
-		String nombre = (String) params[2];
+		UsuarioContexto cu = (UsuarioContexto) params[1];
 		try {
+
 			// // Se busca la interfaz del recurso en el repositorio de
 			// interfaces
+
 			ItfUsoComunicacionChat recComunicacionChat = (ItfUsoComunicacionChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ
 					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoComunicacionChat);
-			if (recComunicacionChat != null) {
-				recComunicacionChat.comenzar(identAgenteOrdenante);
-				String mensajeAenviar = mensaje + nombre;
-				recComunicacionChat.enviarMensagePrivado(identInterlocutor,
-						mensajeAenviar);
+
+			ItfPersistenciaUsuarios persistencia = (ItfPersistenciaUsuarios) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ
+					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoPersistenciaUsuario);
+			UsuarioContexto ncu = persistencia.obtenerContextoUsuarioDNI(cu
+					.getDNI());
+			if (ncu != null) {
+				cu.setNombre(ncu.getNombre());
+				
+				Objetivo f = new ObtenerNombreUsuario();
+				f.setSolved();
+				f.setobjectReferenceId(cu.getUsuario());
+				this.getEnvioHechos().insertarHechoWithoutFireRules(f);
+				this.getEnvioHechos().actualizarHecho(cu);
+
+				if (recComunicacionChat != null) {
+					recComunicacionChat.comenzar(identAgenteOrdenante);
+					String mensajeAenviar = conversacion.usuarioRegistrado;
+					recComunicacionChat.enviarMensagePrivado(identInterlocutor,
+							mensajeAenviar);
+				}
 
 			} else {
-				identAgenteOrdenante = this.getAgente().getIdentAgente();
-				this.generarInformeConCausaTerminacion(
-						identDeEstaTarea,
-						contextoEjecucionTarea,
-						identAgenteOrdenante,
-						"Error-AlObtener:Interfaz:"
-								+ VocabularioGestionCitas.IdentRecursoComunicacionChat,
-						CausaTerminacionTarea.ERROR);
+
+				if (recComunicacionChat != null) {
+					recComunicacionChat.comenzar(identAgenteOrdenante);
+					String mensajeAenviar = conversacion.usuarioNoRegistrado;
+					recComunicacionChat.enviarMensagePrivado(identInterlocutor,
+							mensajeAenviar);
+				}
+
 			}
+
 		} catch (Exception e) {
 			this.generarInformeConCausaTerminacion(
 					identDeEstaTarea,

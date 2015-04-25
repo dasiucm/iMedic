@@ -51,7 +51,7 @@ public class MemUsuario {
 		for (UsuarioContexto uc : listUsuario.values()) {
 			if (uc.foco.getFoco().getgoalId().equals(ob)
 					&& uc.foco.getFoco().getStateAsString().equals(estado)) {
-				return uc.usuario;
+				return uc.getUsuario();
 			}
 		}
 		return null;
@@ -63,7 +63,7 @@ public class MemUsuario {
 		for (UsuarioContexto uc : listUsuario.values()) {
 			if (!uc.foco.getFoco().getgoalId().equals(ob)
 					&& uc.inactividad(tiempo)) {
-				return uc.usuario;
+				return uc.getUsuario();
 			}
 		}
 		return null;

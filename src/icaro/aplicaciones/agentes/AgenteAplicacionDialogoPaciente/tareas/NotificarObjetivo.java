@@ -21,9 +21,17 @@ public class NotificarObjetivo extends TareaComunicacion {
 		String identAgenteOrdenante = this.getIdentAgente();
 		String identInterlocutor = (String) params[0];
 		NotificacionPaciente notif = (NotificacionPaciente) params[1];
+		String Objetivo = (String) params[2];
 		try {
-			NotificacionObjetivo no = new NotificacionObjetivo(notif);
-			no.agente = "PACIENTE";
+			NotificacionObjetivo no =null;
+			if(notif != null){
+				no = new NotificacionObjetivo(notif);
+				no.agente = Objetivo;
+			}else{
+				no = new NotificacionObjetivo();
+				no.agente = Objetivo;
+				no.identNotificador = identInterlocutor;
+			}
 			// Ver cómo diferencias si se envía al agente diálogo médico o al paciente
 			this.informaraOtroAgente(no, VocabularioGestionCitas.IdentAgenteIdentificador);
 			//this.getEnvioHechos().insertarHecho(new NotificacionPaciente(notif));
