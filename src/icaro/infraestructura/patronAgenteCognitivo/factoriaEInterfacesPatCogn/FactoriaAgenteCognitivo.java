@@ -8,7 +8,7 @@ import icaro.infraestructura.patronAgenteCognitivo.factoriaEInterfacesPatCogn.im
 
 /**
  * Abstract Factory for Cognitive Agents
- * 
+ *
  * @author carf
  * @author Carlos Celorrio
  */
@@ -24,7 +24,7 @@ public abstract class FactoriaAgenteCognitivo extends FactoriaComponenteIcaro {
 
 	/**
 	 * Gets the singleton instance of this factory.
-	 * 
+	 *
 	 * @return A cognitive agent factory
 	 */
 	public static FactoriaAgenteCognitivo instance() {

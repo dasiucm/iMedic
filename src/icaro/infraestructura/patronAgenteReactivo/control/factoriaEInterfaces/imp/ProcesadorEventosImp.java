@@ -34,7 +34,7 @@ public class ProcesadorEventosImp extends ProcesadorInfoReactivoAbstracto {
 	private boolean DEBUG = false;
 	/**
 	 * autmata que describe el control
-	 * 
+	 *
 	 * @uml.property name="automataControl"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
@@ -43,14 +43,14 @@ public class ProcesadorEventosImp extends ProcesadorInfoReactivoAbstracto {
 	private AccionesSemanticasAgenteReactivo accionesSemanticasAgenteCreado;
 	/**
 	 * estado interno del componente control
-	 * 
+	 *
 	 * @uml.property name="estado"
 	 */
 	private int estado = InterfazGestion.ESTADO_CREADO;
 
 	/**
 	 * Nombre del componente a efectos de traza
-	 * 
+	 *
 	 * @uml.property name="nombre"
 	 */
 	private String nombre;
@@ -410,12 +410,12 @@ public class ProcesadorEventosImp extends ProcesadorInfoReactivoAbstracto {
 	// @Override
 	/**
 	 * Establece el gestor a reportar
-	 * 
+	 *
 	 * @param nombreGestor
 	 *            nombre del gestor a reportar
 	 * @param listaEventos
 	 *            lista de posibles eventos que le puede enviar.
-	 * 
+	 *
 	 *            El gestionador obtendr las interfaces del gestor a partir del
 	 *            repositorio de interfaces y podr validar la informacin.
 	 *

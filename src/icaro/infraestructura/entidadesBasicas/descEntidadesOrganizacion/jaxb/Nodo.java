@@ -48,9 +48,9 @@ public class Nodo {
 
 	/**
 	 * Gets the value of the nombreUso property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getNombreUso() {
 		return nombreUso;
@@ -58,10 +58,10 @@ public class Nodo {
 
 	/**
 	 * Sets the value of the nombreUso property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setNombreUso(String value) {
 		this.nombreUso = value;
@@ -69,9 +69,9 @@ public class Nodo {
 
 	/**
 	 * Gets the value of the nombreCompletoHost property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getNombreCompletoHost() {
 		return nombreCompletoHost;
@@ -79,10 +79,10 @@ public class Nodo {
 
 	/**
 	 * Sets the value of the nombreCompletoHost property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setNombreCompletoHost(String value) {
 		this.nombreCompletoHost = value;

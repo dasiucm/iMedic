@@ -1,0 +1,125 @@
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTrazas;
+import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
+import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
+import icaro.infraestructura.entidadesBasicas.PerformativaUsuario;
+import icaro.infraestructura.entidadesBasicas.comunicacion.*
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoMedico.objetivos.*;
+import icaro.aplicaciones.informacion.gestionCitas.*;
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoMedico.tareas.*;
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoMedico.tools.*;
+
+global ItfGestorTareas gestorTareas;
+global ItfUsoRecursoTrazas recursoTrazas;
+global String agentId;
+
+rule "Inicio obtención datos anulacion cita"
+ when
+    notif:NotificacionMedico(identInterlc:identNotificador, tipoNotificacion == tipoNotifMedico.inicioAnulacion);
+ then
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(identInterlc,conversacionMedico.obtenerInfoAnulacion);
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+    retract(notif);
+    
+    TareaSincrona tarea2 = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    // TODO - Coger el nombre del recurso calendario
+    tarea2.ejecutar("josecgon","Lo siento pero el medico " + identInterlc + " ha anulado tu cita");
+ 	
+ 	Objetivo id = new IdentificarFechaInicio();
+ 	id.setSolving();
+ 	id.setobjectReferenceId(identInterlc);
+ 	insert(id);
+ 	
+ 	Objetivo id2 = new IdentificarFechaFin();
+ 	id2.setSolving();
+ 	id2.setobjectReferenceId(identInterlc);
+ 	insert(id2);
+end
+
+/*
+rule "Obtencion de la fecha inicio sin tener la fecha fin"
+ when
+    notif:NotificacionMedico(identInterlc:identNotificador, tipoNotificacion == tipoNotifMedico.fechaInicio, msgg:mensajeNotificacion )
+    not( exists IdentificarFechaFin(state == Objetivo.SOLVED, objectReferenceId == identInterlc)) 
+    obj:IdentificarFechaInicio(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+ then
+ 	obj.setSolved();
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(identInterlc,conversacionMedico.obtenerFechaInicioOK);
+    tarea.ejecutar(identInterlc,conversacionMedico.obtenerFechaFin);
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+    
+    Objetivo nobj = new IdentificarFechaFin();
+ 	nobj.setobjectReferenceId(identInterlc);
+ 	nobj.setSolving();
+ 	insert(nobj);
+ 	
+ 	update(obj);
+    retract(notif);
+end
+
+rule "Obtencion de la fecha fin sin tener la fecha inicio"
+ when
+    notif:NotificacionMedico(identInterlc:identNotificador, tipoNotificacion == tipoNotifMedico.fechaFin, msgg:mensajeNotificacion )
+    not( exists IdentificarFechaInicio(state == Objetivo.SOLVED, objectReferenceId == identInterlc)) 
+    obj:IdentificarFechaFin(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+ then
+ 	obj.setSolved();
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(identInterlc,conversacionMedico.obtenerFechaFinOK);
+    tarea.ejecutar(identInterlc,conversacionMedico.obtenerFechaInicio);
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+    
+    Objetivo nobj = new IdentificarFechaFin();
+ 	nobj.setobjectReferenceId(identInterlc);
+ 	nobj.setSolving();
+ 	insert(nobj);
+ 	
+ 	update(obj);
+    retract(notif);
+end
+
+rule "Obtencion de la fecha inicio y fecha fin"
+ when
+    obj1:IdentificarFechaInicio(state == Objetivo.SOLVED, identInterlc:objectReferenceId) 
+    obj2:IdentificarFechaFin(state == Objetivo.SOLVED, objectReferenceId == identInterlc)
+ then
+ 	obj1.setSolved();
+    obj2.setSolved();
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(identInterlc,conversacionMedico.validarAnulacionCitas1);
+    //tarea.ejecutar(identInterlc,conversacionMedico.validarAnulacionCitas1 + "fechaInicio" + validarAnulacionCitas2 + "fechaFin" + validarAnulacionCitas3);
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+    
+    Objetivo nobj = new ValidarAnulacion();
+ 	nobj.setobjectReferenceId(identInterlc);
+ 	nobj.setSolving();
+ 	insert(nobj);
+ 	
+ 	update(obj1);
+ 	update(obj2);
+end
+
+rule "Validar anulacion de citas"
+ when
+    notif:NotificacionMedico(identInterlc:identNotificador, tipoNotificacion == tipoNotifMedico.validarAnulacion, msgg:mensajeNotificacion )
+    obj1:IdentificarFechaInicio(state == Objetivo.SOLVED, objectReferenceId == identInterlc) 
+    obj2:IdentificarFechaFin(state == Objetivo.SOLVED, objectReferenceId == identInterlc)
+ then
+ 	obj1.setSolved();
+    obj2.setSolved();
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(identInterlc,conversacionMedico.anulacionCitasCompleta1);
+    //tarea.ejecutar(identInterlc,conversacionMedico.anulacionCitasCompleta1 + "fechaInicio" + anulacionCitasCompleta2 + "fechaFin" + anulacionCitasCompleta3);
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+    
+    Objetivo nobj = new ValidarAnulacion();
+ 	nobj.setobjectReferenceId(identInterlc);
+ 	nobj.setSolving();
+ 	insert(nobj);
+ 	
+ 	update(obj1);
+ 	update(obj2);
+end
+*/

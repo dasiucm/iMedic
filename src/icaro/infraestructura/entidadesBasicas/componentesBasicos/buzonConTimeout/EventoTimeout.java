@@ -13,7 +13,7 @@ public class EventoTimeout {
 
 	/**
 	 * Explicaciones adicionales si las hubiera
-	 * 
+	 *
 	 * @uml.property name="justificacion"
 	 */
 	public String justificacion;

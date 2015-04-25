@@ -61,7 +61,7 @@ public class InfoUsuarioqPideCita {
 
 	/**
 	 * Expresa el contenido en lenguaje natural
-	 * 
+	 *
 	 * @return
 	 */
 	// public String expresar(){

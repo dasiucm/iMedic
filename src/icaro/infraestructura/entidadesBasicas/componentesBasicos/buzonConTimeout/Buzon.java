@@ -13,20 +13,20 @@ public class Buzon implements Itf_ProductorBuzonTimeout,
 		Itf_ConsumidorBuzonTimeout {
 	/**
 	 * Temporizador
-	 * 
+	 *
 	 * @uml.property name="theTimer"
 	 * @uml.associationEnd readOnly="true"
 	 */
 	public Timer theTimer;
 	/**
 	 * Tamao mximo que tendr la cola
-	 * 
+	 *
 	 * @uml.property name="tAM_MAX_COLA_CIRCULAR"
 	 */
 	private int TAM_MAX_COLA_CIRCULAR = 5000;
 	/**
 	 * Cola circular de contenidos
-	 * 
+	 *
 	 * @uml.property name="contenido"
 	 */
 	private java.util.Vector<Object> contenido;

@@ -9,7 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Abstract Class for Cognitive Agent Perception
- * 
+ *
  * @author Carlos Celorrio
  *
  */

@@ -13,7 +13,7 @@ public class ConfiguracionTrazas {
 	/**
 	 * Clase que carga la configuracion de las trazas de un archivo de
 	 * configuracion
-	 * 
+	 *
 	 * @uml.property name="logger"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */

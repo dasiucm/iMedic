@@ -13,21 +13,21 @@ public class HebraMonitorizacion extends Thread {
 
 	/**
 	 * Milisegundos que esperar antes de lanzar otra monitorizacin
-	 * 
+	 *
 	 * @uml.property name="milis"
 	 */
 	protected long milis;
 
 	/**
 	 * Indica cundo debe dejar de monitorizar
-	 * 
+	 *
 	 * @uml.property name="finalizar"
 	 */
 	protected boolean finalizar;
 
 	/**
 	 * Agente reactivo al que se pasan los eventos de monitorizacin
-	 * 
+	 *
 	 * @uml.property name="agente"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
@@ -35,7 +35,7 @@ public class HebraMonitorizacion extends Thread {
 
 	/**
 	 * Evento a producir
-	 * 
+	 *
 	 * @uml.property name="evento"
 	 */
 	protected String evento = "";

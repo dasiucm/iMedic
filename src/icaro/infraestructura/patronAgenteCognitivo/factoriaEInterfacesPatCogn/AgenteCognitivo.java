@@ -11,7 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 /**
  * Cognitive Agent abstract class that provides use and management interfaces
- * 
+ *
  * @author carf
  * @author Carlos Celorrio
  */

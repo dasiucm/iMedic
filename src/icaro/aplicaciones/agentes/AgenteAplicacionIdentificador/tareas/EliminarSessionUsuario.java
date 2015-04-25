@@ -25,16 +25,17 @@ public class EliminarSessionUsuario extends TareaSincrona {
 	public void ejecutar(Object... params) {
 		String usuario = (String) params[0];
 		try {
-			
-			for(Object g : this.getEnvioHechos().getItfMotorDeReglas().getStatefulKnowledgeSession().getObjects()){
-				
-				if(g instanceof Objetivo ){
+
+			for (Object g : this.getEnvioHechos().getItfMotorDeReglas()
+					.getStatefulKnowledgeSession().getObjects()) {
+
+				if (g instanceof Objetivo) {
 					Objetivo ob = (Objetivo) g;
-					if(ob.getobjectReferenceId().equals(usuario)){
+					if (ob.getobjectReferenceId().equals(usuario)) {
 						this.getEnvioHechos().eliminarHechoWithoutFireRules(ob);
 					}
 				}
-				
+
 				if(g instanceof FocoUsuario ){
 					FocoUsuario ob = (FocoUsuario) g;
 					if(ob.getUsuario().equals(usuario)){
@@ -43,10 +44,11 @@ public class EliminarSessionUsuario extends TareaSincrona {
 				}
 			
 			}
-			
-			//this.getEnvioHechos().insertarHecho(new MemUsuario());
-			//this.getEnvioHechos().insertarHechoWithoutFireRules(new Focus());
-			//this.getEnvioHechos().insertarHecho(new ObtenerInformacionUsuario());
+
+			// this.getEnvioHechos().insertarHecho(new MemUsuario());
+			// this.getEnvioHechos().insertarHechoWithoutFireRules(new Focus());
+			// this.getEnvioHechos().insertarHecho(new
+			// ObtenerInformacionUsuario());
 
 		} catch (Exception e) {
 			e.printStackTrace();

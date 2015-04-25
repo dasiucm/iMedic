@@ -52,7 +52,7 @@ public class InfoConexionUsuario {
 
 	/**
 	 * Expresa el contenido en lenguaje natural
-	 * 
+	 *
 	 * @return
 	 */
 	// public String expresar(){

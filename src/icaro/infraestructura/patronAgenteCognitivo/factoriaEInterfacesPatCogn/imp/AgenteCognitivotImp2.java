@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Implementation for Cognitive Agent
- * 
+ *
  * @author carf
  * @author Carlos Celorrio
  */
@@ -40,7 +40,7 @@ public class AgenteCognitivotImp2 extends AgenteCognitivo implements
 
 	/**
 	 * Constructor for Cognitive Agent
-	 * 
+	 *
 	 * @param name
 	 *            Agent name
 	 * @throws Exception

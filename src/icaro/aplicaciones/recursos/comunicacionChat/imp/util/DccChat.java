@@ -74,7 +74,7 @@ public class DccChat {
 	/**
 	 * Sends a line of text to the client at the other end of our DCC Chat
 	 * connection.
-	 * 
+	 *
 	 * @param line
 	 *            The line of text to be sent. This should not include linefeed
 	 *            characters.

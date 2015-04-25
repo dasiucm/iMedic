@@ -292,7 +292,7 @@ public class AdaptadorRegRMI {
 									+ identHost, InfoTraza.NivelTraza.debug));
 					return true;
 				} else { // No se ha podido obtener un registro RMI para ese
-							// host
+					// host
 					logger.error("Error al  obtener el RMI registro del host --: "
 							+ identHost
 							+ " Es posible que no se haya creado: Revisar la descripcion de la organizacion");
@@ -521,8 +521,8 @@ public class AdaptadorRegRMI {
 				logger.error("Error Los registros local y remoto son null:  No se puede reallizar la busqueda : Revisar la descripcion de la organizacion");
 				trazas.aceptaNuevaTraza(new InfoTraza(
 						"AdaptadorRegRMI",
-							"Error Los registros local y remoto son null:  No se puede reallizar la busqueda : Revisar la descripcion de la organizacion",
-							InfoTraza.NivelTraza.error));
+						"Error Los registros local y remoto son null:  No se puede reallizar la busqueda : Revisar la descripcion de la organizacion",
+						InfoTraza.NivelTraza.error));
 			}
 		} catch (Exception e) {
 			logger.error("Error al acceder al Registro --: "
@@ -570,8 +570,8 @@ public class AdaptadorRegRMI {
 							identHostAgente, puertoRMI, identObjetoBusqueda);
 				} else // lo buscamos en el registro RMI de la organización
 				if (!thisHost.equalsIgnoreCase(hostRMIOrganizacionconfigurado)) {
-						resultadoBusqueda = getRemoteEntityFromRegistryRMIOg(identObjetoBusqueda);
-					}
+					resultadoBusqueda = getRemoteEntityFromRegistryRMIOg(identObjetoBusqueda);
+				}
 			}
 			if (resultadoBusqueda != null) {
 				addElement2LocalRegRMI(identObjetoBusqueda, resultadoBusqueda);
@@ -627,8 +627,8 @@ public class AdaptadorRegRMI {
 							identHostAgente, puertoRMI, identObjetoBusqueda);
 				} else // lo buscamos en el registro RMI de la organización
 				if (!thisHost.equalsIgnoreCase(hostRMIOrganizacionconfigurado)) {
-						resultadoBusqueda = getRemoteEntityFromRegistryRMIOg(identObjetoBusqueda);
-					}
+					resultadoBusqueda = getRemoteEntityFromRegistryRMIOg(identObjetoBusqueda);
+				}
 			}
 			if (resultadoBusqueda != null) {
 				addElement2LocalRegRMI(identObjetoBusqueda, resultadoBusqueda);
@@ -681,8 +681,8 @@ public class AdaptadorRegRMI {
 							identHostComponente, puertoRMI, identObjetoBusqueda);
 				} else // lo buscamos en el registro RMI de la organización
 				if (!thisHost.equalsIgnoreCase(hostRMIOrganizacionconfigurado)) {
-						resultadoBusqueda = getRemoteEntityFromRegistryRMIOg(identObjetoBusqueda);
-					}
+					resultadoBusqueda = getRemoteEntityFromRegistryRMIOg(identObjetoBusqueda);
+				}
 			}
 			if (resultadoBusqueda != null) {
 				addElement2LocalRegRMI(identObjetoBusqueda, resultadoBusqueda);

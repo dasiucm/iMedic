@@ -47,9 +47,9 @@ public class DescComportamientoAgentes {
 
 	/**
 	 * Gets the value of the descComportamientoGestores property.
-	 * 
+	 *
 	 * @return possible object is {@link DescComportamientoGestores }
-	 * 
+	 *
 	 */
 	public DescComportamientoGestores getDescComportamientoGestores() {
 		return descComportamientoGestores;
@@ -57,10 +57,10 @@ public class DescComportamientoAgentes {
 
 	/**
 	 * Sets the value of the descComportamientoGestores property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link DescComportamientoGestores }
-	 * 
+	 *
 	 */
 	public void setDescComportamientoGestores(DescComportamientoGestores value) {
 		this.descComportamientoGestores = value;
@@ -68,9 +68,9 @@ public class DescComportamientoAgentes {
 
 	/**
 	 * Gets the value of the descComportamientoAgentesAplicacion property.
-	 * 
+	 *
 	 * @return possible object is {@link DescComportamientoAgentesAplicacion }
-	 * 
+	 *
 	 */
 	public DescComportamientoAgentesAplicacion getDescComportamientoAgentesAplicacion() {
 		return descComportamientoAgentesAplicacion;
@@ -78,10 +78,10 @@ public class DescComportamientoAgentes {
 
 	/**
 	 * Sets the value of the descComportamientoAgentesAplicacion property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link DescComportamientoAgentesAplicacion }
-	 * 
+	 *
 	 */
 	public void setDescComportamientoAgentesAplicacion(
 			DescComportamientoAgentesAplicacion value) {

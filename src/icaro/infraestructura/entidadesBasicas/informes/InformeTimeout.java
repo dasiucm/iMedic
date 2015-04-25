@@ -23,14 +23,14 @@ public class InformeTimeout extends Thread {
 
 	/**
 	 * Indica cuando debe dejar de monitorizar
-	 * 
+	 *
 	 * @uml.property name="finalizar"
 	 */
 	protected boolean finalizar;
 
 	/**
 	 * Agente reactivo al que se pasan los eventos de monitorizacion
-	 * 
+	 *
 	 * @uml.property name="agente"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
@@ -38,7 +38,7 @@ public class InformeTimeout extends Thread {
 
 	/**
 	 * Evento a producir
-	 * 
+	 *
 	 * @uml.property name="evento"
 	 */
 	protected Informe informeAGenerar;

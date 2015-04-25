@@ -12,10 +12,11 @@ public class Objetivo {
 	static public final int SOLVED = 2;
 	static public final int REFINED = 3;
 	static public final int FAILED = 4;
+	
 	private String goalId;
 	private String objectReferenceId; // identificador del objeto al que se
-										// refiere el objetivo p ej el ident de
-										// una victima
+	// refiere el objetivo p ej el ident de
+	// una victima
 	private int state;
 	private int priority;
 	private boolean isfocused;
@@ -108,7 +109,7 @@ public class Objetivo {
 
 	/**
 	 * Returns the state of this goal
-	 * 
+	 *
 	 * @return A string with the name of the state
 	 */
 	public String getStateAsString() {

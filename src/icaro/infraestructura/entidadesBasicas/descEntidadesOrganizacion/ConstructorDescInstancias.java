@@ -157,13 +157,13 @@ public class ConstructorDescInstancias {
 						break;
 					case AGENTE_APLICACION:
 						inst = this
-						.construirDescInstanciaAgenteAplicacion(componente
-								.getRefId());
+								.construirDescInstanciaAgenteAplicacion(componente
+										.getRefId());
 						break;
 					case RECURSO_APLICACION:
 						inst = this
-						.construirDescInstanciaRecursoAplicacion(componente
-								.getRefId());
+								.construirDescInstanciaRecursoAplicacion(componente
+										.getRefId());
 
 					}
 					componentesGestionados.add(inst);

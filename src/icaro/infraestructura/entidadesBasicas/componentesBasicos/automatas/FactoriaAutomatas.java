@@ -102,8 +102,8 @@ public class FactoriaAutomatas extends FactoriaComponenteIcaro {
 		interpretePrueba.cambiaEstado("creandoRecursosNucleoOrganizacion");
 		interpretePrueba.getEstadoAutomata();
 		interpretePrueba.cambiaEstado("arrancandoGestorInicial"); // deben salir
-																	// las
-																	// trazas
+		// las
+		// trazas
 		new InformeArranqueGestor("Prueba Factoria",
 				VocabularioGestores.ResultadoArranqueGestorOK);
 	}

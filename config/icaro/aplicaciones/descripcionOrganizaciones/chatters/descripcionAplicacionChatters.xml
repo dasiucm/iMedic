@@ -41,6 +41,11 @@
 					localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionDialogoPaciente"
                     localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionDialogoPaciente.procesoResolucionObjetivos.reglasAgenteDialogoPaciente.drl"
 					tipo="Cognitivo" />
+					<icaro:DescComportamientoAgente
+					nombreComportamiento="AgenteAplicacionDialogoMedico" rol="AgenteAplicacion" 
+					localizacionComportamiento="icaro.aplicaciones.agentes.agenteAplicacionDialogoMedico"
+                    localizacionFicheroReglas="icaro.aplicaciones.agentes.agenteAplicacionDialogoMedico.procesoResolucionObjetivos.reglasAgenteDialogoMedico.drl"
+					tipo="Cognitivo" />
 			</icaro:DescComportamientoAgentesAplicacion>
 		</icaro:DescComportamientoAgentes>
 	<!--******************************************************************************************************
@@ -70,6 +75,7 @@
 				<icaro:componentesGestionados>		
 <!--                                 <icaro:componenteGestionado refId="AgenteAplicacionDialogoCitas1" tipoComponente="AgenteAplicacion"/>		 -->
   							<icaro:componenteGestionado refId="AgenteAplicacionDialogoPaciente1" tipoComponente="AgenteAplicacion"/>	
+  							<icaro:componenteGestionado refId="AgenteAplicacionDialogoMedico1" tipoComponente="AgenteAplicacion"/>	
                                 <icaro:componenteGestionado refId="AgenteAplicacionIdentificador1" tipoComponente="AgenteAplicacion"/>
                                
                 </icaro:componentesGestionados>
@@ -87,6 +93,11 @@
 	*******************************************************************************************************-->	
 		<icaro:AgentesAplicacion>
 			<icaro:Instancia id="AgenteAplicacionDialogoPaciente1" refDescripcion="AgenteAplicacionDialogoPaciente">
+				<icaro:listaPropiedades>
+					<icaro:propiedad atributo="" valor=""/>
+				</icaro:listaPropiedades>
+			</icaro:Instancia>	
+			<icaro:Instancia id="AgenteAplicacionDialogoMedico1" refDescripcion="AgenteAplicacionDialogoMedico">
 				<icaro:listaPropiedades>
 					<icaro:propiedad atributo="" valor=""/>
 				</icaro:listaPropiedades>

@@ -38,9 +38,9 @@ public class DescNodo extends Nodo {
 		} else {
 			logger.fatal("El identificador de este nodo :"
 					+ nombreUso
-						+ "Es diferente del nodo al que se deben asignar   los gestores"
+					+ "Es diferente del nodo al que se deben asignar   los gestores"
 					+ nodoId
-						+ ".\n Compruebe la asignacion de gestores  a nodos.");
+					+ ".\n Compruebe la asignacion de gestores  a nodos.");
 			return false;
 		}
 	}
@@ -70,9 +70,9 @@ public class DescNodo extends Nodo {
 			return true;
 		} else {
 			logger.fatal("El identificador de este nodo :" + nombreUso
-						+ "Es diferente del nodo al que se asignan  los agentes"
+					+ "Es diferente del nodo al que se asignan  los agentes"
 					+ nodoId
-						+ ".\n Compruebe la asignacion de agentes a nodos.");
+					+ ".\n Compruebe la asignacion de agentes a nodos.");
 			return false;
 		}
 	}
@@ -102,9 +102,9 @@ public class DescNodo extends Nodo {
 			return true;
 		} else {
 			logger.fatal("El identificador de este nodo :" + nombreUso
-						+ "Es diferente del nodo al que se asignan  los recrusos"
+					+ "Es diferente del nodo al que se asignan  los recrusos"
 					+ nodoId
-						+ ".\n Compruebe la asignacion de recrusos a nodos.");
+					+ ".\n Compruebe la asignacion de recrusos a nodos.");
 			return false;
 		}
 	}

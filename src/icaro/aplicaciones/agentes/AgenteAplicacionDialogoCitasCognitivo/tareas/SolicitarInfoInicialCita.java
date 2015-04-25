@@ -35,8 +35,10 @@ public class SolicitarInfoInicialCita extends TareaSincrona {
 					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoComunicacionChat);
 			if (recComunicacionChat != null) {
 				recComunicacionChat.comenzar(identAgenteOrdenante);
-				String mensajeAenviar = identInterlocutor + ", ¿" + VocabularioGestionCitas.peticionInfoIicialCita1 + "?";
-				recComunicacionChat.enviarMensagePrivado(identInterlocutor,mensajeAenviar);
+				String mensajeAenviar = identInterlocutor + ", ¿"
+						+ VocabularioGestionCitas.peticionInfoIicialCita1 + "?";
+				recComunicacionChat.enviarMensagePrivado(identInterlocutor,
+						mensajeAenviar);
 			} else {
 				identAgenteOrdenante = this.getAgente().getIdentAgente();
 				this.generarInformeConCausaTerminacion(

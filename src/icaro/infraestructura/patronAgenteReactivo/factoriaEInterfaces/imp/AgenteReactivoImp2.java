@@ -41,7 +41,7 @@ public class AgenteReactivoImp2 extends AgenteReactivoAbstracto implements
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Control del agente
-	 * 
+	 *
 	 * @uml.property name="control"
 	 * @uml.associationEnd
 	 */
@@ -54,7 +54,7 @@ public class AgenteReactivoImp2 extends AgenteReactivoAbstracto implements
 	protected InterfazGestion itfGesControl; // Control
 	/**
 	 * Percepcion del agente
-	 * 
+	 *
 	 * @uml.property name="itfConsumidorPercepcion"
 	 * @uml.associationEnd
 	 */
@@ -66,20 +66,20 @@ public class AgenteReactivoImp2 extends AgenteReactivoAbstracto implements
 	protected ItfProductorPercepcion itfProductorPercepcion;
 	/**
 	 * Nombre del agente a efectos de traza
-	 * 
+	 *
 	 * @uml.property name="nombre"
 	 */
 	protected String nombre;
 	protected String estadoAgente;
 	/**
 	 * Estado del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="estado"
 	 */
 	protected int estado = InterfazGestion.ESTADO_OTRO;
 	/**
 	 * Acciones semnticas del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="accionesSemanticas"
 	 * @uml.associationEnd
 	 */
@@ -90,7 +90,7 @@ public class AgenteReactivoImp2 extends AgenteReactivoAbstracto implements
 	private boolean DEBUG = false;
 	/**
 	 * Conocimiento del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="itfUsoGestorAReportar"
 	 * @uml.associationEnd
 	 */
@@ -156,7 +156,7 @@ public class AgenteReactivoImp2 extends AgenteReactivoAbstracto implements
 	/**
 	 * Constructor sin parmetros: HAY QUE UTILIZAR INMEDIATAMENTE DESPUS EL
 	 * MTODO setParametrosAgReactivo
-	 * 
+	 *
 	 * @throws RemoteException
 	 */
 	public AgenteReactivoImp2(String nombreAgente) throws RemoteException {

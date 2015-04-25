@@ -26,7 +26,7 @@ import org.drools.io.ResourceFactory;
 
 /**
  * Drools Rule Engine Factory
- * 
+ *
  * @author F Garijo
  *
  */
@@ -80,9 +80,9 @@ public class FactoriaMotorDeReglasDroolsImp1 extends FactoriaMotorDeReglas {
 		if (indiceFicheroEnArray >= 0) {
 			return KbuildersObtenidos.get(indiceFicheroEnArray);
 		} else { // se debe compilar
-		// PackageBuilder builder = new PackageBuilder();
-		// KnowledgeBuilderConfiguration kbuilderConf =
-		// KnowledgeBuilderFactory.newKnowledgeBuilderConfiguration();
+			// PackageBuilder builder = new PackageBuilder();
+			// KnowledgeBuilderConfiguration kbuilderConf =
+			// KnowledgeBuilderFactory.newKnowledgeBuilderConfiguration();
 			try {
 				kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 				Resource rsc = ResourceFactory.newInputStreamResource(fichero);

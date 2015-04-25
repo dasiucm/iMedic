@@ -11,7 +11,7 @@ import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTar
 
 /**
  * Factory for Task Manager of the Cognitive Agent
- * 
+ *
  * @author carf
  * @author Carlos Celorrio
  */
@@ -23,7 +23,7 @@ public abstract class TaskManagerFactory {
 
 	/**
 	 * Gets the singleton instance of this factory.
-	 * 
+	 *
 	 * @return A cognitive agent task manager factory
 	 */
 	public static TaskManagerFactory instance() {

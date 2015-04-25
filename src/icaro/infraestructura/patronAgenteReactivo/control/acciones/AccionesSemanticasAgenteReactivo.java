@@ -31,7 +31,7 @@ public abstract class AccionesSemanticasAgenteReactivo {
 	/**
 	 * Itf de uso del agente al que pertenecen estas acciones para permitir la
 	 * realimentacin de inputs
-	 * 
+	 *
 	 * @uml.property name="itfUsoAgente"
 	 * @uml.associationEnd
 	 */
@@ -59,7 +59,7 @@ public abstract class AccionesSemanticasAgenteReactivo {
 	/**
 	 * Pizarra para almacenar parametros enviados por la clase que implementa el
 	 * interfaz de uso del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="tablaParametros"
 	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true"
 	 *                     elementType="java.lang.Object" qualifier=
@@ -80,7 +80,7 @@ public abstract class AccionesSemanticasAgenteReactivo {
 
 	/**
 	 * Interfaz de uso del Repositorio de Interfaces
-	 * 
+	 *
 	 * @uml.property name="itfUsoRepositorio"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 */
@@ -155,7 +155,7 @@ public abstract class AccionesSemanticasAgenteReactivo {
 	/**
 	 * Fija el interfaz de uso del agente para que pueda realimentarse la tabla
 	 * con inputs procidos por las acciones
-	 * 
+	 *
 	 * @param itfUsoA
 	 */
 	// public void setItfUsoAgenteReactivo(ItfUsoAgenteReactivo itfUsoA)
@@ -324,7 +324,7 @@ public abstract class AccionesSemanticasAgenteReactivo {
 
 	/**
 	 * Fija un parmetro para que sea recogido por alguna accin semntica
-	 * 
+	 *
 	 * @param nombre
 	 *            Nombre del parmetro
 	 * @param valor
@@ -338,7 +338,7 @@ public abstract class AccionesSemanticasAgenteReactivo {
 
 	/**
 	 * Obtiene el parmetro
-	 * 
+	 *
 	 * @param nombre
 	 *            Nombre del parmetro
 	 * @return Object Valor del parmetro o null si el parmetro no existe en la
@@ -358,7 +358,7 @@ public abstract class AccionesSemanticasAgenteReactivo {
 	/**
 	 * Este mtodo debe ser implementado por todos los agentes para realizar el
 	 * necesario tratamiento de los errores.
-	 * 
+	 *
 	 * @uml.property name="nombreAgente"
 	 */
 

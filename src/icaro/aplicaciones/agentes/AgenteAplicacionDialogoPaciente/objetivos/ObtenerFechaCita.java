@@ -5,7 +5,7 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 public class ObtenerFechaCita extends Objetivo {
 
 	public ObtenerFechaCita() {
-		super.setgoalId("ObtenerInfoCita");
+		super.setgoalId("ObtenerFechaCita");
 	}
 
 }

@@ -153,7 +153,7 @@ public class InfoCita implements Serializable {
 
 	/**
 	 * Clasifica el UPA
-	 * 
+	 *
 	 * @return true si upa tiene alg�n atributo definido
 	 */
 	public boolean estaUPADefinido() {
@@ -162,7 +162,7 @@ public class InfoCita implements Serializable {
 
 	/**
 	 * Clasifica el UDC
-	 * 
+	 *
 	 * @return true si upa tiene alg�n atributo definido
 	 */
 	public boolean estaUDCDefinido() {
@@ -171,7 +171,7 @@ public class InfoCita implements Serializable {
 
 	/**
 	 * Clasifica el OP
-	 * 
+	 *
 	 * @return true si upa tiene algun atributo definido
 	 */
 	public boolean estaOPDefinido() {
@@ -188,7 +188,7 @@ public class InfoCita implements Serializable {
 
 	/**
 	 * Clasifica el PARAM
-	 * 
+	 *
 	 * @return true si upa tiene alg�n atributo definido
 	 */
 	public boolean estaPARAMDefinido() {
@@ -198,7 +198,7 @@ public class InfoCita implements Serializable {
 
 	/**
 	 * Comprueba si est�n todos los atributos PARAM indefinidos
-	 * 
+	 *
 	 * @return true si todos los PARAM est�n indefinidos
 	 */
 	public boolean estaPARAMIndefinido() {
@@ -214,7 +214,7 @@ public class InfoCita implements Serializable {
 
 	/**
 	 * Comprueba si estan todos los atributos PARAM definidos
-	 * 
+	 *
 	 * @return true si todos los PARAM est�n definidos
 	 */
 	public boolean estaPARAMTotalmenteDefinido() {
@@ -347,7 +347,7 @@ public class InfoCita implements Serializable {
 	/**
 	 * Metodo que hace una union machacante entre la cita actual y la cita
 	 * pasada como parametro pero solo con los parametros
-	 * 
+	 *
 	 * @param cita
 	 * @return Cita Cita resultado de la uni�n machacante
 	 */
@@ -388,7 +388,7 @@ public class InfoCita implements Serializable {
 	/**
 	 * M�todo que devuelve true si los par�metros de la cita pasada como
 	 * par�metro son iguales a los de la cita actual y false e.o.c.
-	 * 
+	 *
 	 * @param motivo
 	 * @return boolean
 	 */

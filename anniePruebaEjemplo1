@@ -1,3 +1,4 @@
+@@ -1,407 +0,0 @@
 <gate.util.persistence.GateApplication>
   <urlList class="gate.util.persistence.CollectionPersistence">
     <localList>
@@ -405,3 +406,4 @@
     </features>
   </application>
 </gate.util.persistence.GateApplication>
+\ No newline at end of file

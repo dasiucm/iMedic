@@ -1,6 +1,5 @@
 package icaro.aplicaciones.recursos.interfazChatUsuario;
 
-
 /**
  *
  * @author

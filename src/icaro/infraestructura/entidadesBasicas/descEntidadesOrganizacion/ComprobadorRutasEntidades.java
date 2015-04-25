@@ -144,9 +144,9 @@ public class ComprobadorRutasEntidades {
 	private String normalizarRuta(String ruta) {
 		/* Esta funcin cambia la primera letra del nombre y la pone en minsculas */
 		String primero = ruta.substring(0, 1).toLowerCase(); // obtengo el
-																// primer
-																// carcter en
-																// minsculas
+		// primer
+		// carcter en
+		// minsculas
 		String rutaNormalizada = primero + ruta.substring(1, ruta.length());
 
 		return rutaNormalizada;
@@ -406,7 +406,7 @@ public class ComprobadorRutasEntidades {
 
 	/**
 	 * Load all classes from a package.
-	 * 
+	 *
 	 * @param packageName
 	 * @return
 	 * @throws ClassNotFoundException
@@ -433,7 +433,7 @@ public class ComprobadorRutasEntidades {
 
 	/**
 	 * Find file in package.
-	 * 
+	 *
 	 * @param directory
 	 * @param packageName
 	 * @return

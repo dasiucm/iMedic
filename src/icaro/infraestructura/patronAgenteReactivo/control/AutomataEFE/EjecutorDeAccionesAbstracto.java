@@ -3,7 +3,7 @@ package icaro.infraestructura.patronAgenteReactivo.control.AutomataEFE;
 import icaro.infraestructura.patronAgenteReactivo.control.acciones.ExcepcionEjecucionAcciones;
 
 /**
- * 
+ *
  *
  * @author Felipe Polo
  * @created 3 de Diciembre de 2007

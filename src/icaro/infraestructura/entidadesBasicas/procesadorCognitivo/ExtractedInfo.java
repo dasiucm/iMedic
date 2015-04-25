@@ -10,12 +10,12 @@ public class ExtractedInfo {
 	// una colección vacía a la que
 	// se van añadiendo elementos
 	private Object origen; // JM: Identificador de la entidad que creo (y lo
-							// envio) el mensaje/evento
+	// envio) el mensaje/evento
 	private Object creador; // JM: Identificdor del agente que recibe el
-							// mensaje/evento (es decir el destinatario del
-							// mensaje/evento)
+	// mensaje/evento (es decir el destinatario del
+	// mensaje/evento)
 	private Object contenido; // JM: Contenido del mensaje/evento que fue creado
-								// en el origen
+	// en el origen
 	private Boolean esElContenidoUnaColeccion = false;
 
 	public ExtractedInfo() {

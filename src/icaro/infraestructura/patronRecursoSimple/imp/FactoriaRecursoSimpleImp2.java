@@ -183,9 +183,9 @@ public class FactoriaRecursoSimpleImp2 extends FactoriaRecursoSimple {
 	private String normalizarRuta(String ruta) {
 		/* Esta funcin cambia la primera letra del nombre y la pone en minsculas */
 		String primero = ruta.substring(0, 1).toLowerCase(); // obtengo el
-																// primer
-																// carcter en
-																// minsculas
+		// primer
+		// carcter en
+		// minsculas
 		String rutaNormalizada = primero + ruta.substring(1, ruta.length());
 
 		return rutaNormalizada;

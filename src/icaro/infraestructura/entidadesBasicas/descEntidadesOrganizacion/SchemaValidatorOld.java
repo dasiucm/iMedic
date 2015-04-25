@@ -65,8 +65,8 @@ public class SchemaValidatorOld {
 			log.error(ex.toString());
 			logger.fatal(
 					"\n\nEl fichero de descripcion del XML "
-					+ xmlDoc
-					+ "  no es valido. Compruebe la sintaxis de la descripcion y vuelva a intentarlo",
+							+ xmlDoc
+							+ "  no es valido. Compruebe la sintaxis de la descripcion y vuelva a intentarlo",
 					ex);
 			valid = false;
 		}

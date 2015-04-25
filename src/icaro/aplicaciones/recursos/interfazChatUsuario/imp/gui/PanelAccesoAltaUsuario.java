@@ -22,8 +22,9 @@ public class PanelAccesoAltaUsuario extends VentanaEstandar {
 	private static final long serialVersionUID = 1L;
 
 	private NotificacionesEventosVisAccesoAlta usoAgente; // comunicaci�n con
-															// el agente
-															// (control)
+
+	// el agente
+	// (control)
 
 	public PanelAccesoAltaUsuario(NotificacionesEventosVisAccesoAlta notifAgente)
 			throws Exception {

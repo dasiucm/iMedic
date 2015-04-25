@@ -45,7 +45,7 @@ public class FactoriaAgenteReactivoImp extends FactoriaAgenteReactivo {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Control del agente
-	 * 
+	 *
 	 * @uml.property name="control"
 	 * @uml.associationEnd
 	 */
@@ -59,7 +59,7 @@ public class FactoriaAgenteReactivoImp extends FactoriaAgenteReactivo {
 	// protected InterfazGestion itfGesControl; //Control
 	/**
 	 * Percepcion del agente
-	 * 
+	 *
 	 * @uml.property name="itfConsumidorPercepcion"
 	 * @uml.associationEnd
 	 */
@@ -71,19 +71,19 @@ public class FactoriaAgenteReactivoImp extends FactoriaAgenteReactivo {
 	protected ItfProductorPercepcion itfProductorPercepcion;
 	/**
 	 * Nombre del agente a efectos de traza
-	 * 
+	 *
 	 * @uml.property name="nombre"
 	 */
 	protected String nombre;
 	/**
 	 * Estado del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="estado"
 	 */
 	// protected int estado = InterfazGestion.ESTADO_OTRO;
 	/**
 	 * Acciones sem�nticas del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="accionesSemanticas"
 	 * @uml.associationEnd
 	 */
@@ -94,7 +94,7 @@ public class FactoriaAgenteReactivoImp extends FactoriaAgenteReactivo {
 	private boolean DEBUG = false;
 	/**
 	 * Conocimiento del agente reactivo
-	 * 
+	 *
 	 * @uml.property name="itfUsoGestorAReportar"
 	 * @uml.associationEnd
 	 */
@@ -238,7 +238,7 @@ public class FactoriaAgenteReactivoImp extends FactoriaAgenteReactivo {
 							+ ":No se puede crear el agente. El comportamiento no esta bien definido",
 					NivelTraza.error));
 			System.err
-			.println(" No se puede crear la Instancia del agente . La descrpcion del comportamiento no es correcta.");
+					.println(" No se puede crear la Instancia del agente . La descrpcion del comportamiento no es correcta.");
 		}
 	}
 
@@ -385,7 +385,7 @@ public class FactoriaAgenteReactivoImp extends FactoriaAgenteReactivo {
 					"Error al crear El CONTROL del agente. La factoria no puede crear la instancia o no se pueden obtener la interfaces : "
 							+ nombreInstanciaAgente, exc);
 			System.err
-			.println(" No se puede crear el control del agente. La factoria no puede crear la instancia.");
+					.println(" No se puede crear el control del agente. La factoria no puede crear la instancia.");
 			exc.putCompDondeEstaContenido("patronAgenteReactivo.contol");
 			exc.putParteAfectada("FactoriaControlAgenteReactivoImp");
 			throw exc;
@@ -396,7 +396,7 @@ public class FactoriaAgenteReactivoImp extends FactoriaAgenteReactivo {
 					"Error AL CREAR LA PERCEPCON. La factoria no puede crear la instancia : "
 							+ nombreInstanciaAgente, ex);
 			System.err
-			.println(" No se puede crear la Percepcion del agente. La factoria no puede crear la instancia.");
+					.println(" No se puede crear la Percepcion del agente. La factoria no puede crear la instancia.");
 			throw new ExcepcionEnComponente("patronAgenteReactivo.contol",
 					"posible error al crear l paercepcion", "percepcion", "");
 		}
@@ -451,9 +451,9 @@ public class FactoriaAgenteReactivoImp extends FactoriaAgenteReactivo {
 		 * min�sculas
 		 */
 		String primero = ruta.substring(0, 1).toLowerCase(); // obtengo el
-																// primer
-																// car�cter en
-																// min�sculas
+		// primer
+		// car�cter en
+		// min�sculas
 		String rutaNormalizada = primero + ruta.substring(1, ruta.length());
 
 		return rutaNormalizada;
@@ -553,19 +553,19 @@ public class FactoriaAgenteReactivoImp extends FactoriaAgenteReactivo {
 			return acciones;
 		} catch (InstantiationException ex) {
 			System.err
-			.println("La clase "
-					+ ruta
-					+ "que debe implementar las acciones del gestor de recursos, no puede instanciarse.");
+					.println("La clase "
+							+ ruta
+							+ "que debe implementar las acciones del gestor de recursos, no puede instanciarse.");
 		} catch (IllegalAccessException ex) {
 			System.err
-			.println("La clase "
-					+ ruta
-					+ "que debe implementar las acciones del gestor de recursos, no tiene un constructor sin par�metros.");
+					.println("La clase "
+							+ ruta
+							+ "que debe implementar las acciones del gestor de recursos, no tiene un constructor sin par�metros.");
 		} catch (ClassNotFoundException ex) {
 			System.err
-			.println("La clase "
-					+ ruta
-					+ "que debe implementar las acciones sem�nticas, no existe.");
+					.println("La clase "
+							+ ruta
+							+ "que debe implementar las acciones sem�nticas, no existe.");
 		}
 		// si falla algo, devuelvo un null
 		return null;

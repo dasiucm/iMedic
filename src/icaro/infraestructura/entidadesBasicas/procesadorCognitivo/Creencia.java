@@ -2,7 +2,7 @@ package icaro.infraestructura.entidadesBasicas.procesadorCognitivo;
 
 /**
  * Represents a believe of the cognitive agent mental state
- * 
+ *
  * @author Carlos Celorrio
  *
  */

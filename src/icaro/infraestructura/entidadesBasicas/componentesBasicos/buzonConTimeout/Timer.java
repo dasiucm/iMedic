@@ -12,7 +12,7 @@ package icaro.infraestructura.entidadesBasicas.componentesBasicos.buzonConTimeou
 public class Timer extends java.lang.Thread {
 	/**
 	 * Descipcin del campo
-	 * 
+	 *
 	 * @uml.property name="activo"
 	 */
 	public boolean activo = true;

@@ -21,7 +21,7 @@ public class TransicionAutomataEF {
 
 	/**
 	 * Crea una transición a partir de los datos extraidos del fichero XML
-	 * 
+	 *
 	 * @param idEstadoOrigen
 	 * @param input
 	 *            identificador del input. En el caso de que se procesen objetos
@@ -71,7 +71,7 @@ public class TransicionAutomataEF {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getidentEstadoOrigen() {

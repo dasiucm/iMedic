@@ -4,7 +4,7 @@ import icaro.infraestructura.entidadesBasicas.comunicacion.ReactiveInputMessage;
 
 /**
  * Interface for components that are able to receive reactive input messages
- * 
+ *
  * @author Carlos Celorrio
  *
  */
@@ -13,7 +13,7 @@ public interface ItfReactiveInputMessageReceiver extends
 
 	/**
 	 * Receives and deals with a new reactive input message
-	 * 
+	 *
 	 * @param input
 	 *            The reactive input message
 	 * @throws Exception

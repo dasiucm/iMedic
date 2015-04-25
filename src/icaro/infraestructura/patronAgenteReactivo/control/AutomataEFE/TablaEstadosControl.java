@@ -16,7 +16,7 @@ public class TablaEstadosControl {
 	/**
 	 * Tabla que almacena si los estados son iniciales / finales / etc, indexa
 	 * por estado
-	 * 
+	 *
 	 * @uml.property name="clasificacionEstados"
 	 * @uml.associationEnd 
 	 *                     qualifier="identificador:java.lang.String java.lang.Integer"
@@ -25,7 +25,7 @@ public class TablaEstadosControl {
 
 	/**
 	 * El estado inicial
-	 * 
+	 *
 	 * @uml.property name="identificadorEstadoInicial"
 	 */
 	private String identificadorEstadoInicial = "";
@@ -35,7 +35,7 @@ public class TablaEstadosControl {
 	/**
 	 * Tabla de tablas que almacena las tablas input/accion,estado siguiente y
 	 * las indexa por estado
-	 * 
+	 *
 	 * @uml.property name="inputsDeEstados"
 	 * @uml.associationEnd qualifier=
 	 *                     "input:java.lang.String icaro.infraestructura.entidadesBasicas.componentesBasicos.automata.imp.Operacion"

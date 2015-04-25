@@ -44,9 +44,9 @@ public class DescComportamientoAgenteReactivo extends DescComportamientoAgente {
 
 	/**
 	 * Gets the value of the rutaAutomata property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getRutaAutomata() {
 		return rutaAutomata;
@@ -54,10 +54,10 @@ public class DescComportamientoAgenteReactivo extends DescComportamientoAgente {
 
 	/**
 	 * Sets the value of the rutaAutomata property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setRutaAutomata(String value) {
 		this.rutaAutomata = value;
@@ -65,9 +65,9 @@ public class DescComportamientoAgenteReactivo extends DescComportamientoAgente {
 
 	/**
 	 * Gets the value of the rutaAcciones property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getRutaAcciones() {
 		return rutaAcciones;
@@ -75,10 +75,10 @@ public class DescComportamientoAgenteReactivo extends DescComportamientoAgente {
 
 	/**
 	 * Sets the value of the rutaAcciones property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setRutaAcciones(String value) {
 		this.rutaAcciones = value;

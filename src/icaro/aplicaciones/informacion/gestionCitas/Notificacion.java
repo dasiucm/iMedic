@@ -5,19 +5,23 @@
  */
 package icaro.aplicaciones.informacion.gestionCitas;
 
-
 /**
  *
  * @author FGarijo
  */
 public class Notificacion {
-	public String identNotificador;
-	public String mensajeNotificacion;
-	public Object contexto;
-	public String identObjectRefNotificacion;
-	public String tipoNotificacion;
-	public UsuarioContexto usuario;
 
+	public String identNotificador;
+	// mensaje completo del usuario 
+	public String mensajeNotificacion;
+	// objeto de ayuda para realizar el analisis que no se utiliza aun.
+	public Object contexto;
+	// no se usa aun
+	public String identObjectRefNotificacion;
+	// anotaciones del gazetero de annie
+	public String tipoNotificacion;
+	// anotaciones del gazetero de annie
+	public UsuarioContexto usuario;
 
 	public UsuarioContexto getUsuario() {
 		return usuario;

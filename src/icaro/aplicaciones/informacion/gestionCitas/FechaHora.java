@@ -15,7 +15,7 @@ import java.util.Vector;
  * <p>
  * Company: Telef�nica I+D
  * </p>
- * 
+ *
  * @author Sonia Bravo Silva
  * @version 1.0
  */
@@ -152,7 +152,7 @@ public class FechaHora implements Comparable, Cloneable, java.io.Serializable {
 	/**
 	 * M�todo que intenta completar una FechaHora primero con la lista de
 	 * FechaHora y luego mediante sentido com�n
-	 * 
+	 *
 	 * @param listaSugerencias
 	 */
 	public void completar(Vector listaSugerencias) {
@@ -187,7 +187,7 @@ public class FechaHora implements Comparable, Cloneable, java.io.Serializable {
 	/**
 	 * M�todo que devuelve una lista de Fecha extrayendo las fechas de la
 	 * lista de FechaHora pasada como par�metro
-	 * 
+	 *
 	 * @param listaFechaHora
 	 * @return Lista de Fecha
 	 */
@@ -202,7 +202,7 @@ public class FechaHora implements Comparable, Cloneable, java.io.Serializable {
 	/**
 	 * M�todo que devuelve una lista de Hora extrayendo las horas de la lista
 	 * de FechaHora pasada como par�metro
-	 * 
+	 *
 	 * @param listaFechaHora
 	 * @return Lista de Fecha
 	 */

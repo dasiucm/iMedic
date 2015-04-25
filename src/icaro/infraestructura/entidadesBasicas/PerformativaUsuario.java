@@ -5,7 +5,6 @@
 
 package icaro.infraestructura.entidadesBasicas;
 
-
 /**
  *
  * @author Francisco J Garijo

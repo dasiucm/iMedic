@@ -32,19 +32,19 @@ public class PersistenciaAccesoImp {
 	 * Nombre de usuario de acceso (con privilegios de root) a la bbdd
 	 */
 	static private String LOGIN;// =
-								// Configuracion.obtenerParametro("MYSQL_USER");
+	// Configuracion.obtenerParametro("MYSQL_USER");
 	// static private final String LOGIN="root";
 	/**
 	 * Clave de acceso correspondiente con el usuario indicado
 	 */
 	static private String PASSWORD;// =
-									// Configuracion.obtenerParametro("MYSQL_PASSWORD");
+	// Configuracion.obtenerParametro("MYSQL_PASSWORD");
 	// static private final String PASSWORD= "adminwww";
 	/**
 	 * Url en d�nde se situa la bbdd
 	 */
 	static private String URL_CONEXION;// =
-										// Configuracion.obtenerParametro("MYSQL_URL");
+	// Configuracion.obtenerParametro("MYSQL_URL");
 	// static private final String URL_CONEXION="jdbc:mysql://localhost:3306/";
 	/**
 	 * Objeto resultante de la comunicaci�n establecida con la bbdd
@@ -55,7 +55,7 @@ public class PersistenciaAccesoImp {
 	 * Script de creacion de tablas de la bbdd
 	 */
 	static private String ejecutable;// =
-										// Configuracion.obtenerParametro("MYSQL_SCRIPT_ITEMS");
+	// Configuracion.obtenerParametro("MYSQL_SCRIPT_ITEMS");
 	// static private final String ejecutable="createTablasItems.bat";
 
 	private Statement query;
@@ -200,7 +200,7 @@ public class PersistenciaAccesoImp {
 
 	/**
 	 * Realiza una conexion (principio de la comunicaci�n) sobre la bbdd
-	 * 
+	 *
 	 * @throws ErrorEnRecursoException
 	 */
 
@@ -265,7 +265,7 @@ public class PersistenciaAccesoImp {
 
 	/**
 	 * Realiza la desconexion (fin de la comunicaci�n) sobre la bbdd
-	 * 
+	 *
 	 * @throws ErrorEnRecursoException
 	 */
 

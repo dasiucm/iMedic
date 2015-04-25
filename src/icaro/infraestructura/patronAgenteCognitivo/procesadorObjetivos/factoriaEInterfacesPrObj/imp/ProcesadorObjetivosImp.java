@@ -17,7 +17,7 @@ import org.drools.runtime.StatefulKnowledgeSession;
 
 /**
  * Implementacion del procesdor de objetivos
- * 
+ *
  * @author F Garijo
  *
  */
@@ -151,7 +151,7 @@ public class ProcesadorObjetivosImp extends ProcesadorObjetivos {
 
 	/**
 	 * Decide whether to assimilate evidence or not
-	 * 
+	 *
 	 * @param ev
 	 *            The evidence
 	 * @return A believe yield from the evidence

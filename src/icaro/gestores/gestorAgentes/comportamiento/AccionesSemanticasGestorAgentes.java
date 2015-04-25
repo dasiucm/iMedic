@@ -126,7 +126,7 @@ public class AccionesSemanticasGestorAgentes extends
 	/**
 	 * Crea los agentes que se especifiquen en la configuracion o los localiza
 	 * si se encuentran remotos
-	 * 
+	 *
 	 */
 	public void crearAgentes() {
 		// Si se produce excepcion al crear alguno de los agentes, se aborta el
@@ -166,11 +166,11 @@ public class AccionesSemanticasGestorAgentes extends
 						InfoTraza.NivelTraza.debug));
 
 			} else if (indiceAgteACrear == listaDescripcionesAgtesACrear.size()) { // Se
-																					// han
-																					// creado
-																					// todos
-																					// los
-																					// agentes
+				// han
+				// creado
+				// todos
+				// los
+				// agentes
 				this.informaraMiAutomata("agentes_creados", sinParametros);
 			} else
 			//
@@ -277,7 +277,7 @@ public class AccionesSemanticasGestorAgentes extends
 	/**
 	 * Localiza un agente cognitivo que está creado remotamente vía RMI y lo
 	 * registra en el repositorio de interfaces.
-	 * 
+	 *
 	 * @param agente
 	 */
 	// private void localizarYRegistrarUnAgenteCognitivoRemoto(Agente agente)
@@ -305,7 +305,7 @@ public class AccionesSemanticasGestorAgentes extends
 	// }
 	/**
 	 * Crea un agente reactivo y lo registra en el repositorio
-	 * 
+	 *
 	 * @param nombreAgente
 	 */
 	private void crearAgenteReactivoEnEsteNodo(
@@ -594,8 +594,8 @@ public class AccionesSemanticasGestorAgentes extends
 		String identNodoAgente = descAgenteAcrear.getNodo().getNombreUso();
 		String identAgenteAcrear = descAgenteAcrear.getId();
 		if (!misInterfacesEstanEnElRegistroRMILocal) { // Las añado -por ahora
-														// solo la interafz de
-														// uso
+			// solo la interafz de
+			// uso
 			if (!AdaptadorRegRMI.registroRMILocalCreado) {
 				AdaptadorRegRMI.inicializar();
 			}
@@ -808,8 +808,8 @@ public class AccionesSemanticasGestorAgentes extends
 				// arrancamos el agente
 
 				if (itfGesAg == null) {// puede ser que se trate de un agente en
-										// un nodo remoto buscamos en los
-										// repositorios RMI
+					// un nodo remoto buscamos en los
+					// repositorios RMI
 					itfGesAg = (InterfazGestion) AdaptadorRegRMI
 							.getItfAgenteRemoto(nombre,
 									NombresPredefinidos.ITF_GESTION);
@@ -818,7 +818,7 @@ public class AccionesSemanticasGestorAgentes extends
 					}
 				}
 				if (itfGesAg != null) { // arrancamos el agente que puede ser
-										// local o remoto
+					// local o remoto
 					trazas.aceptaNuevaTraza(new InfoTraza("GestorAgentes",
 							"Arrancando el agente " + nombre + ".",
 							InfoTraza.NivelTraza.debug));
@@ -922,7 +922,7 @@ public class AccionesSemanticasGestorAgentes extends
 
 	/**
 	 * Devuelve cierto si es necesario arrancar el agente
-	 * 
+	 *
 	 * @param nombreAgente
 	 * @return
 	 */

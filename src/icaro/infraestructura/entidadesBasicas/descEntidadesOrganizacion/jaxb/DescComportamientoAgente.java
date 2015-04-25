@@ -64,9 +64,9 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Gets the value of the nombreComportamiento property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getNombreComportamiento() {
 		return nombreComportamiento;
@@ -74,10 +74,10 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Sets the value of the nombreComportamiento property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setNombreComportamiento(String value) {
 		this.nombreComportamiento = value;
@@ -85,9 +85,9 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Gets the value of the localizacionComportamiento property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getLocalizacionComportamiento() {
 		return localizacionComportamiento;
@@ -95,10 +95,10 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Sets the value of the localizacionComportamiento property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setLocalizacionComportamiento(String value) {
 		this.localizacionComportamiento = value;
@@ -106,9 +106,9 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Gets the value of the tipo property.
-	 * 
+	 *
 	 * @return possible object is {@link TipoAgente }
-	 * 
+	 *
 	 */
 	public TipoAgente getTipo() {
 		return tipo;
@@ -116,10 +116,10 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Sets the value of the tipo property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link TipoAgente }
-	 * 
+	 *
 	 */
 	public void setTipo(TipoAgente value) {
 		this.tipo = value;
@@ -127,9 +127,9 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Gets the value of the rol property.
-	 * 
+	 *
 	 * @return possible object is {@link RolAgente }
-	 * 
+	 *
 	 */
 	public RolAgente getRol() {
 		return rol;
@@ -137,10 +137,10 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Sets the value of the rol property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link RolAgente }
-	 * 
+	 *
 	 */
 	public void setRol(RolAgente value) {
 		this.rol = value;
@@ -148,9 +148,9 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Gets the value of the localizacionClaseAcciones property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getLocalizacionClaseAcciones() {
 		return localizacionClaseAcciones;
@@ -158,10 +158,10 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Sets the value of the localizacionClaseAcciones property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setLocalizacionClaseAcciones(String value) {
 		this.localizacionClaseAcciones = value;
@@ -169,9 +169,9 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Gets the value of the localizacionFicheroReglas property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getLocalizacionFicheroReglas() {
 		return localizacionFicheroReglas;
@@ -179,10 +179,10 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Sets the value of the localizacionFicheroReglas property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setLocalizacionFicheroReglas(String value) {
 		this.localizacionFicheroReglas = value;
@@ -190,9 +190,9 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Gets the value of the localizacionFicheroAutomata property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getLocalizacionFicheroAutomata() {
 		return localizacionFicheroAutomata;
@@ -200,10 +200,10 @@ public class DescComportamientoAgente {
 
 	/**
 	 * Sets the value of the localizacionFicheroAutomata property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setLocalizacionFicheroAutomata(String value) {
 		this.localizacionFicheroAutomata = value;

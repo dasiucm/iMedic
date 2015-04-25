@@ -9,7 +9,7 @@ import java.util.Collection;
 
 /**
  * Interface for Cognitive Control
- * 
+ *
  * @author Carlos Celorrio
  *
  */
@@ -17,7 +17,7 @@ public interface ItfProcesadorObjetivos {
 
 	/**
 	 * Recieves an evidence to process
-	 * 
+	 *
 	 * @param ev
 	 *            The evidence
 	 * @return Whether the evidence has been processed successfully

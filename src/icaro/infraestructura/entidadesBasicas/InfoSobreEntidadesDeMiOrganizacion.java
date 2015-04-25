@@ -10,7 +10,7 @@ package icaro.infraestructura.entidadesBasicas;
  * de la organización Se trata de elementos dinámicos que se crean con la
  * propia creación del o que el agente va construyendo a medida que va
  * funcionando
- * 
+ *
  * @author FGarijo
  */
 public class InfoSobreEntidadesDeMiOrganizacion {

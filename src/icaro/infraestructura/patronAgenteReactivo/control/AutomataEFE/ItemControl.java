@@ -16,7 +16,7 @@ package icaro.infraestructura.patronAgenteReactivo.control.AutomataEFE;
 public class ItemControl {
 	/**
 	 * Tipo de evento de control
-	 * 
+	 *
 	 * @uml.property name="operacion"
 	 */
 	public int operacion;
