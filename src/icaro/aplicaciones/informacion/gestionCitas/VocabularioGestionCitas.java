@@ -23,7 +23,7 @@ public class VocabularioGestionCitas {
 	public static final String IdentRecursoComunicacionChat = "ComunicacionChat1";
 	public static final String IdentAgenteAplicacionDialogoCitas = "AgenteAplicacionDialogoCitas1";
 	public static final String IdentAgenteIdentificador = "AgenteAplicacionIdentificador1";
-	public static final String IdentConexionAgte = "AgteCitas";
+	public static final String IdentConexionAgte = "AgteCitasMedicas";
 	public static final String IdentRecursoPersistenciaChat = "PersistenciaChat1";
 	public static final String InfoUsuarioYaExiste = "infoUsuarioYaExistente";
 	public static final String InfoUsuarioAltaGuardada = "InfoAltaUsuarioGuardada";

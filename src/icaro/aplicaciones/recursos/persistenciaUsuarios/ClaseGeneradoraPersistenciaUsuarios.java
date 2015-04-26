@@ -30,5 +30,11 @@ public class ClaseGeneradoraPersistenciaUsuarios extends ImplRecursoSimple
 			throws Exception {
 		return PersistenciaUsuariosImp.obtenerContextoUsuario(nombreChat);
 	}
+	
+	@Override
+	public UsuarioContexto obtenerContextoUsuarioDNI(String dni)
+			throws Exception {
+		return PersistenciaUsuariosImp.obtenerContextoUsuario(dni);
+	}
 
 }

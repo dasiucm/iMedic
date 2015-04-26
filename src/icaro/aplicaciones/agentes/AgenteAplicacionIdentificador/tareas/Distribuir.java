@@ -19,8 +19,6 @@ public class Distribuir extends TareaComunicacion {
 		this.getIdentAgente();
 		Notificacion notif = (Notificacion) params[1];
 		try {
-			// Ver cómo diferencias si se envía al agente diálogo médico o al
-			// paciente
 			if ( (notif.tipoNotificacion).equals("inicioAnulacion") ){
 				this.informaraOtroAgente(
 						new NotificacionMedico(notif),

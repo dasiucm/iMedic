@@ -20,7 +20,7 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
  *
  * @author Francisco J Garijo
  */
-public class SolicitarDNI extends TareaSincrona {
+public class UsuarioIdentificado extends TareaSincrona {
 	private Objetivo contextoEjecucionTarea = null;
 
 	@Override
@@ -34,40 +34,12 @@ public class SolicitarDNI extends TareaSincrona {
 
 			// // Se busca la interfaz del recurso en el repositorio de
 			// interfaces
-
-			ItfUsoComunicacionChat recComunicacionChat = (ItfUsoComunicacionChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ
-					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoComunicacionChat);
-
 			ItfPersistenciaUsuarios persistencia = (ItfPersistenciaUsuarios) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ
 					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoPersistenciaUsuario);
 			UsuarioContexto ncu = persistencia.obtenerContextoUsuarioDNI(cu
 					.getDNI());
-			if (ncu != null) {
-				cu.setNombre(ncu.getNombre());
-				
-				Objetivo f = new ObtenerNombreUsuario();
-				f.setSolved();
-				f.setobjectReferenceId(cu.getUsuario());
-				this.getEnvioHechos().insertarHechoWithoutFireRules(f);
-				this.getEnvioHechos().actualizarHecho(cu);
-
-				if (recComunicacionChat != null) {
-					recComunicacionChat.comenzar(identAgenteOrdenante);
-					String mensajeAenviar = conversacion.usuarioRegistrado;
-					recComunicacionChat.enviarMensagePrivado(identInterlocutor,
-							mensajeAenviar);
-				}
-
-			} else {
-
-				if (recComunicacionChat != null) {
-					recComunicacionChat.comenzar(identAgenteOrdenante);
-					String mensajeAenviar = conversacion.usuarioNoRegistrado;
-					recComunicacionChat.enviarMensagePrivado(identInterlocutor,
-							mensajeAenviar);
-				}
-
-			}
+			persistencia.insertarUsuario(cu.getDNI(),cu);
+		
 
 		} catch (Exception e) {
 			this.generarInformeConCausaTerminacion(

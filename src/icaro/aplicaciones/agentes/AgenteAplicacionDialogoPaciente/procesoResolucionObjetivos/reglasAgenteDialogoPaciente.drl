@@ -13,93 +13,167 @@ global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
 global String agentId;
 
-rule "Inicio obtención datos cita"
- when
-    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.inicioPeticion);
+rule "crear foco usuario"
+ when 
+ 	notif:NotificacionPaciente(identInterlc:identNotificador)
+ 	not( exists( FocoUsuario(usuario == identInterlc ) ))
  then
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    // la funcion ejecutar recibe dos strings, el identificador de usuario(dni) y el mensaje que quieras enviarle.
-    tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita1dameDatos);
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
-    retract(notif);
- 	Objetivo id = new IdentificarMedico();
- 	// Objetivo id2 = new ObtenerFechaCita();
- 	id.setSolving();
- 	id.setobjectReferenceId(identInterlc);
- 	insert(id);
+ 	//Establezco el foco del usuario
+ 	FocoUsuario fu = new FocoUsuario(identInterlc);
+ 	insert(fu);
+ 	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
-rule "Obtención datos médico cita, antes que la fecha"
- when
-    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.nombre, msgg:mensajeNotificacion )
-    not( exists ObtenerFechaCita(state == Objetivo.SOLVED, objectReferenceId == identInterlc)) 
-    obj:IdentificarMedico(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
-    // cu:UsuarioContexto(usuario == identInterlc)
- then
- 	obj.setSolved();
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita3medicoRegistrado);
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
-    Objetivo nobj = new ObtenerFechaCita();
- 	nobj.setobjectReferenceId(identInterlc);
- 	nobj.setSolving();
- 	insert(nobj);
- 	update(obj);
-    retract(notif);
+rule "Solicitud peticion de cita"
+ when 	
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.inicioPeticion);
+	fu:FocoUsuario(usuario == identInterlc, foco == null)
+ then 
+ 	Tarea tareadist = gestorTareas.crearTarea(NotificarObjetivo.class);
+    tareadist.ejecutar(identInterlc,notif,"PACIENTE"); 	
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+ 	tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita1dameDatos);
+ 	Objetivo cita = new CrearCita();
+ 	cita.setobjectReferenceId(identInterlc);
+ 	Objetivo idmedico = new IdentificarMedico();
+ 	idmedico.setobjectReferenceId(identInterlc);
+ 	Objetivo idfecha = new ObtenerFechaCita();
+ 	idfecha.setobjectReferenceId(identInterlc);
+ 	CitaMedica citamed = new CitaMedica();
+ 	citamed.usuario = identInterlc;
+ 	insert(citamed);
+ 	fu.setFoco(cita);
+ 	insert(cita);
+ 	insert(idmedico);
+ 	insert(idfecha);
+ 	retract(notif);
+ 	update(fu);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
-rule "Obtención datos médico cita, teniendo la fecha"
+rule "Obtener nombre medico"
  when
-    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.nombre, msgg:mensajeNotificacion )
-    //notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.nombre, msgg:mensajeNotificacion )
-    ObtenerFechaCita(state == Objetivo.SOLVED, objectReferenceId == identInterlc) 
-    obj:IdentificarMedico(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
-    // cu:UsuarioContexto(usuario == identInterlc)
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.nombre,  msgg:mensajeNotificacion );
+ 	nom:IdentificarMedico(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+ 	obj:CrearCita(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+	fu:FocoUsuario(usuario == identInterlc, foco == obj)
+	cm:CitaMedica(usuario == identInterlc)
  then
- 	obj.setSolved();
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita4todoCompletado);
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
-    retract(notif);
+ 	nom.setSolved();
+ 	cm.nombreMedico = msgg;
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+ 	tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita3medicoRegistrado);
+ 	update(nom);
+ 	retract(notif);
+ 	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
-rule "Obtención datos fecha cita, antes que el médico"
+rule "Obtener fecha"
  when
-    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.fecha, msgg:mensajeNotificacion )
-    not( exists IdentificarMedico(state == Objetivo.SOLVED, objectReferenceId == identInterlc))
-    obj:ObtenerFechaCita(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
-    // cu:UsuarioContexto(usuario == identInterlc)
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.fecha,  msgg:mensajeNotificacion );
+ 	nom:ObtenerFechaCita(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+ 	obj:CrearCita(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+	fu:FocoUsuario(usuario == identInterlc, foco == obj)
+	cm:CitaMedica(usuario == identInterlc)
  then
- 	obj.setSolved();
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita2fechaRegistrada);
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
-    Objetivo nobj = new IdentificarMedico();
- 	nobj.setobjectReferenceId(identInterlc);
- 	nobj.setSolving();
- 	insert(nobj);
- 	update(obj);
-    retract(notif);
+ 	nom.setSolved();
+ 	cm.fecha = msgg;
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+ 	tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita2fechaRegistrada);
+ 	update(nom);
+ 	retract(notif);
+ 	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
-rule "Obtención datos fecha cita, teniendo el médico"
+rule "Focalizar crear cita"
  when
-    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.fecha, msgg:mensajeNotificacion )
-    IdentificarMedico(state == Objetivo.SOLVED, objectReferenceId == identInterlc)
-    obj:ObtenerFechaCita(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
-    // cu:UsuarioContexto(usuario == identInterlc)
+ 	ofc:ObtenerFechaCita(state == Objetivo.SOLVED, identInterlc:objectReferenceId)
+ 	im:IdentificarMedico(state == Objetivo.SOLVED, objectReferenceId == identInterlc)
+ 	cc:CrearCita(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+ 	cm:CitaMedica(usuario == identInterlc)
  then
- 	obj.setSolved();
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita4todoCompletado);
-    
-    TareaSincrona tarea2 = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    // TODO - Coger el nombre del medico y la fecha del recurso cita
-    tarea2.ejecutar("medico","El paciente " + identInterlc + " ha pedido una cita para la fecha fecha.");
-    
-    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
-    retract(notif);
+ 	cc.setSolving();
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(identInterlc,"Necesito que me confirmes la cita, estos datos son correctos fecha: "+cm.fecha +" , con el Medico: "+cm.nombreMedico+", estas de acuerdo?");
+ 	retract(ofc);
+ 	retract(im);
+ 	update(cc);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
+
+rule "Confirmacion de cita"
+ when
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.si, msgg:mensajeNotificacion )
+ 	cc:CrearCita(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+ then
+ 	
+ 	Objetivo confirmar = new Confirmacion();
+ 	confirmar.setobjectReferenceId(identInterlc);
+ 	confirmar.setSolving();
+ 	insert(confirmar);
+ 
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+rule "No confirmacion de cita"
+ when
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.no, msgg:mensajeNotificacion )
+ 	cc:CrearCita(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+ then
+ 	
+ 	Objetivo confirmar = new Confirmacion();
+ 	confirmar.setobjectReferenceId(identInterlc);
+ 	confirmar.setFailed();
+ 	insert(confirmar);
+ 
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+
+rule "Establecer cita"
+ when
+ 	obj:CrearCita(state == Objetivo.SOLVING, identInterlc:objectReferenceId)
+	fu:FocoUsuario(usuario == identInterlc, foco == obj)
+	cc:Confirmacion(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+	cm:CitaMedica(usuario == identInterlc)
+ then
+ 	TareaSincrona tareadist = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tareadist.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita4todoCompletado); 	
+ 	Tarea tareadist2 = gestorTareas.crearTarea(NotificarObjetivo.class);
+    tareadist2.ejecutar(identInterlc,null,"RESET"); 
+ 	
+ 	fu.setFoco(null);
+ 	
+ 	// AQUI LLAMAREMOS AL RECURSO DE CANLENDARIO Y ALMACENAMOS TODO
+ 	update(fu);
+ 	retract(cm);
+ 	retract(cc);
+ 	retract(obj);
+ 	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+rule "Cancelar cita"
+ when
+ 	obj:CrearCita(state == Objetivo.SOLVING, identInterlc:objectReferenceId)
+	fu:FocoUsuario(usuario == identInterlc, foco == obj)
+	cc:Confirmacion(state == Objetivo.FAILED, objectReferenceId == identInterlc)
+	cm:CitaMedica(usuario == identInterlc)
+ then
+ 	TareaSincrona tareadist = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tareadist.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita4cancelado); 	
+ 	Tarea tareadist2 = gestorTareas.crearTarea(NotificarObjetivo.class);
+    tareadist2.ejecutar(identInterlc,null,"RESET"); 
+ 	
+ 	fu.setFoco(null);
+ 	
+ 	// AQUI LLAMAREMOS AL RECURSO DE CANLENDARIO Y ALMACENAMOS TODO
+ 	update(fu);
+ 	retract(cm);
+ 	retract(cc);
+ 	retract(obj);
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
 
 // Regla para consultar las citas por parte del paciente
 rule "Consultar citas, teniendo el paciente"

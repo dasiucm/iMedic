@@ -5,4 +5,6 @@ public class tipoNotif {
 	public static String nombre = "nombre";
 	public static String dni = "dni";
 	public static String despedida = "despedida";
+	public static String pordefinir = "definido";
+	public static String objetivo = "objetivo";
 }

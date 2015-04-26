@@ -459,6 +459,8 @@ public class InterpreteMsgsIRC {
 		anotacionesBusquedaPrueba.add("fecha");
 		anotacionesBusquedaPrueba.add("inicioAnulacion");
 		anotacionesBusquedaPrueba.add("consulta");
+		anotacionesBusquedaPrueba.add("si");
+		anotacionesBusquedaPrueba.add("no");
 		// esto habria que pasarlo como parametro
 		if (infoConecxInterlocutor == null) {
 			infoConecxInterlocutor = new InfoConexionUsuario();
@@ -1544,7 +1546,35 @@ public class InterpreteMsgsIRC {
 			} else if (anotType.equalsIgnoreCase("consulta")) {
 				tienePeticion = true;
 				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
-								contextoInterpretacion, annot));
+						contextoInterpretacion, annot));
+
+			}else if (anotType.equalsIgnoreCase("nombre")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
+						contextoInterpretacion, annot));
+
+			}else if (anotType.equalsIgnoreCase("dni")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
+						contextoInterpretacion, annot));
+
+			}else if (anotType.equalsIgnoreCase("despedida")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
+						contextoInterpretacion, annot));
+
+			}else if (anotType.equalsIgnoreCase("fecha")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
+						contextoInterpretacion, annot));
+			}else if (anotType.equalsIgnoreCase("si")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
+						contextoInterpretacion, annot));
+			}else if (anotType.equalsIgnoreCase("no")) {
+				tienePeticion = true;
+				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
+						contextoInterpretacion, annot));
 			}
 			// fet = annot.getFeatures();
 

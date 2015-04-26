@@ -47,6 +47,8 @@ public class Focus {
 
 	}
 
+	
+	
 	/**
 	 * Fija el foco al objetivo obj
 	 *

@@ -28,5 +28,8 @@ public class conversacion {
 	public static final String inactividad2 = "hola?? hola?? alguien en casa?";
 	public static final String inactividad3 = "presumo que ya no se encuentra entre nosotros";
 
+	public static final String usuarioRegistrado = "Veo que ya se encuentras en el sistema";
+	public static final String usuarioNoRegistrado = "Veo que aun no te encuentras registrado en el sistema";
+	
 	public static final String despedida1 = "hasta otra ocasion";
 }

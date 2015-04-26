@@ -5,6 +5,12 @@
 
 package icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas;
 
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoCitasCognitivo.objetivos.ObtenerInfoInterlocutor;
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.objetivos.ObtenerNombreUsuario;
+import icaro.aplicaciones.informacion.gestionCitas.FocoUsuario;
+import icaro.aplicaciones.informacion.gestionCitas.MemUsuario;
+import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
@@ -30,6 +36,13 @@ public class EliminarSessionUsuario extends TareaSincrona {
 					}
 				}
 
+				if(g instanceof FocoUsuario ){
+					FocoUsuario ob = (FocoUsuario) g;
+					if(ob.getUsuario().equals(usuario)){
+						this.getEnvioHechos().eliminarHechoWithoutFireRules(ob);
+					}
+				}
+			
 			}
 
 			// this.getEnvioHechos().insertarHecho(new MemUsuario());

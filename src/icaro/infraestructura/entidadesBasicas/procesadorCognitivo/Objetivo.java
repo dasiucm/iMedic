@@ -24,6 +24,11 @@ public class Objetivo {
 	public Objetivo() {
 		this.state = PENDING;
 	}
+	
+	public Objetivo(String usuario) {
+		this.state = PENDING;
+		objectReferenceId = usuario;
+	}
 
 	public void setState(int state) {
 		this.state = state;
