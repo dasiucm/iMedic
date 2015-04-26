@@ -1,6 +1,7 @@
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tareas;
 
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tools.tipoNotifPaciente;
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.tipoNotif;
 import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
 import icaro.aplicaciones.informacion.gestionCitas.NotificacionObjetivo;
 import icaro.aplicaciones.informacion.gestionCitas.NotificacionPaciente;
@@ -27,10 +28,12 @@ public class NotificarObjetivo extends TareaComunicacion {
 			if(notif != null){
 				no = new NotificacionObjetivo(notif);
 				no.agente = Objetivo;
+				no.tipoNotificacion = tipoNotif.objetivo;
 			}else{
 				no = new NotificacionObjetivo();
 				no.agente = Objetivo;
 				no.identNotificador = identInterlocutor;
+				no.tipoNotificacion = tipoNotif.objetivo;
 			}
 			// Ver cómo diferencias si se envía al agente diálogo médico o al paciente
 			this.informaraOtroAgente(no, VocabularioGestionCitas.IdentAgenteIdentificador);

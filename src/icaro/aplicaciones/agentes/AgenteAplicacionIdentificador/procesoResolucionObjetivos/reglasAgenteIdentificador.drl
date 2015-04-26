@@ -289,11 +289,13 @@ end
 
 rule "Recibir Objetivo Completado"
  when 
- 	notif:NotificacionObjetivo(identInterlc:identNotificador, agente == "RESET")
- 	obj:DistribuirMensajes(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
-    fc:FocoUsuario(usuario == identInterlc, foco == obj)
+ 	notif:NotificacionObjetivo(identInterlc:identNotificador, tipoNotificacion == tipoNotif.objetivo, agente == "RESET")
+ 	//obj:DistribuirMensajes(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+    fc:FocoUsuario(usuario == identInterlc, foco != null)
     cu:UsuarioContexto(usuario == identInterlc)
  then
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+  	tarea.ejecutar(identInterlc, "Dime, en que mas puedo ayudarte?");	
  	cu.actividad();
 	fc.refocus();
 	update(fc);
