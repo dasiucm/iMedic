@@ -90,13 +90,43 @@ rule "Focalizar crear cita"
  	ofc:ObtenerFechaCita(state == Objetivo.SOLVED, identInterlc:objectReferenceId)
  	im:IdentificarMedico(state == Objetivo.SOLVED, objectReferenceId == identInterlc)
  	cc:CrearCita(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+ 	cm:CitaMedica(usuario == identInterlc)
  then
  	cc.setSolving();
- 	
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(identInterlc,"Necesito que me confirmes la cita, estos datos son correctos fecha: "+cm.fecha +" , con el Medico: "+cm.nombreMedico+", estas de acuerdo?");
  	retract(ofc);
  	retract(im);
  	update(cc);
- 	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+rule "Confirmacion de cita"
+ when
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.si, msgg:mensajeNotificacion )
+ 	cc:CrearCita(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+ then
+ 	
+ 	Objetivo confirmar = new Confirmacion();
+ 	confirmar.setobjectReferenceId(identInterlc);
+ 	confirmar.setSolving();
+ 	insert(confirmar);
+ 
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+rule "No confirmacion de cita"
+ when
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.no, msgg:mensajeNotificacion )
+ 	cc:CrearCita(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+ then
+ 	
+ 	Objetivo confirmar = new Confirmacion();
+ 	confirmar.setobjectReferenceId(identInterlc);
+ 	confirmar.setFailed();
+ 	insert(confirmar);
+ 
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
 
@@ -104,20 +134,46 @@ rule "Establecer cita"
  when
  	obj:CrearCita(state == Objetivo.SOLVING, identInterlc:objectReferenceId)
 	fu:FocoUsuario(usuario == identInterlc, foco == obj)
-	cm:CitaMedica(usuario == usuario)
+	cc:Confirmacion(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+	cm:CitaMedica(usuario == identInterlc)
  then
  	TareaSincrona tareadist = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
     tareadist.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita4todoCompletado); 	
  	Tarea tareadist2 = gestorTareas.crearTarea(NotificarObjetivo.class);
-    tareadist2.ejecutar(identInterlc,null,"PACIENTE"); 
+    tareadist2.ejecutar(identInterlc,null,"RESET"); 
  	
  	fu.setFoco(null);
  	
  	// AQUI LLAMAREMOS AL RECURSO DE CANLENDARIO Y ALMACENAMOS TODO
+ 	update(fu);
  	retract(cm);
+ 	retract(cc);
  	retract(obj);
  	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
+
+rule "Cancelar cita"
+ when
+ 	obj:CrearCita(state == Objetivo.SOLVING, identInterlc:objectReferenceId)
+	fu:FocoUsuario(usuario == identInterlc, foco == obj)
+	cc:Confirmacion(state == Objetivo.FAILED, objectReferenceId == identInterlc)
+	cm:CitaMedica(usuario == identInterlc)
+ then
+ 	TareaSincrona tareadist = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tareadist.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita4cancelado); 	
+ 	Tarea tareadist2 = gestorTareas.crearTarea(NotificarObjetivo.class);
+    tareadist2.ejecutar(identInterlc,null,"RESET"); 
+ 	
+ 	fu.setFoco(null);
+ 	
+ 	// AQUI LLAMAREMOS AL RECURSO DE CANLENDARIO Y ALMACENAMOS TODO
+ 	update(fu);
+ 	retract(cm);
+ 	retract(cc);
+ 	retract(obj);
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
 
 // Regla para consultar las citas por parte del paciente
 rule "Consultar citas, teniendo el paciente"
