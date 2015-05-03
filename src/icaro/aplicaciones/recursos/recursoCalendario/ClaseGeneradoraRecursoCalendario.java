@@ -15,28 +15,40 @@ public class ClaseGeneradoraRecursoCalendario extends ImplRecursoSimple implemen
 	}
 
 	@Override
-	public void insertaCita(UsuarioContexto paciente, String medico, String fecha) throws Exception {
+	public void insertaCita(String usuario, String medico, String fecha) throws Exception {
 		// TODO Auto-generated method stub
-		RecursoCalendarioImp.insertaCita(paciente, medico, fecha);
+		RecursoCalendarioImp.insertaCita(usuario, medico, fecha);
+	}
+	
+	@Override
+	public void insertaCita(CitaMedica cita) throws Exception {
+		// TODO Auto-generated method stub
+		RecursoCalendarioImp.insertaCita(cita);
 	}
 
 	@Override
-	public String consultaCitas(UsuarioContexto paciente) throws Exception {
+	public String consultaCitas(String usuario) throws Exception {
 		// TODO Auto-generated method stub
-		return RecursoCalendarioImp.consultaCitas(paciente);
+		return RecursoCalendarioImp.consultaCitas(usuario);
 	}
 
 	@Override
-	public Boolean darBajaCita(UsuarioContexto paciente, String fecha) throws Exception {
+	public Boolean darBajaCita(String usuario, String fecha) throws Exception {
 		// TODO Auto-generated method stub
-		return RecursoCalendarioImp.darBajaCita(paciente, fecha);
+		return RecursoCalendarioImp.darBajaCita(usuario, fecha);
+	}
+	
+	@Override
+	public Boolean darBajaCita(CitaMedica cita) throws Exception{
+		// TODO Auto-generated method stub
+		return RecursoCalendarioImp.darBajaCita(cita);
 	}
 
 	@Override
-	public Boolean cambiarCita(UsuarioContexto paciente, String medico, String fechaNueva, String fechaAntigua)
+	public Boolean cambiarCita(String usuario, String medico, String fechaNueva, String fechaAntigua)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return RecursoCalendarioImp.cambiarCita(paciente, medico, fechaNueva, fechaAntigua);
+		return RecursoCalendarioImp.cambiarCita(usuario, medico, fechaNueva, fechaAntigua);
 	}
 
 	@Override

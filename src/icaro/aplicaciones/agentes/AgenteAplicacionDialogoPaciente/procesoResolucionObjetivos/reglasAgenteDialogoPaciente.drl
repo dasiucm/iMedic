@@ -8,10 +8,12 @@ import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.objetivos.*;
 import icaro.aplicaciones.informacion.gestionCitas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tareas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tools.*;
+import icaro.aplicaciones.recursos.recursoCalendario.*;
 
 global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
 global String agentId;
+global ItfUsoRecursoCalendario recursoCalendario;
 
 rule "crear foco usuario"
  when 
@@ -144,7 +146,9 @@ rule "Establecer cita"
  	
  	fu.setFoco(null);
  	
- 	// AQUI LLAMAREMOS AL RECURSO DE CANLENDARIO Y ALMACENAMOS TODO
+ 	// AQUI LLAMAREMOS AL RECURSO DE CALENDARIO Y ALMACENAMOS TODO
+ 	recursoCalendario.insertaCita(cm);
+ 	
  	update(fu);
  	retract(cm);
  	retract(cc);
@@ -167,6 +171,8 @@ rule "Cancelar cita"
  	fu.setFoco(null);
  	
  	// AQUI LLAMAREMOS AL RECURSO DE CANLENDARIO Y ALMACENAMOS TODO
+ 	recursoCalendario.darBajaCita(cm);
+ 	 	
  	update(fu);
  	retract(cm);
  	retract(cc);
@@ -180,9 +186,12 @@ rule "Consultar citas, teniendo el paciente"
  when
     notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.consulta, msgg:mensajeNotificacion )
  then
+ 	// aqui habria que ir al recurso calendario para obtener las citas una a una
+    String citas = recursoCalendario.consultaCitas(identInterlc);
+    
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    tarea.ejecutar(identInterlc,conversacionPaciente.mostrarCitasPaciente);
-    // aqui habria que ir al recurso calendario para obtener las citas una a una
+    tarea.ejecutar(identInterlc,citas);
+    
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
 end

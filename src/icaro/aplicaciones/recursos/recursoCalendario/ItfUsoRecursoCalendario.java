@@ -10,13 +10,17 @@ public interface ItfUsoRecursoCalendario extends ItfUsoRecursoSimple {
 
 	/*------ Funcionalidad de paciente --------*/
 
-	void insertaCita(UsuarioContexto paciente, String medico, String fecha) throws Exception;
+	void insertaCita(String usuario, String medico, String fecha) throws Exception;
+	
+	void insertaCita(CitaMedica cita) throws Exception;
 
-	String consultaCitas(UsuarioContexto paciente) throws Exception;
+	String consultaCitas(String usuario) throws Exception;
 
-	Boolean darBajaCita(UsuarioContexto paciente, String fecha) throws Exception;
+	Boolean darBajaCita(String usuario, String fecha) throws Exception;
+	
+	Boolean darBajaCita(CitaMedica cita) throws Exception;
 
-	Boolean cambiarCita(UsuarioContexto paciente, String medico, String fechaNueva, String fechaAntigua)
+	Boolean cambiarCita(String usuario, String medico, String fechaNueva, String fechaAntigua)
 			throws Exception;
 
 	/*------ Funcionalidad de medico --------*/

@@ -1,7 +1,6 @@
 package icaro.aplicaciones.recursos.recursoCalendario.imp;
 
 import icaro.aplicaciones.informacion.gestionCitas.CitaMedica;
-import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -20,16 +19,24 @@ public class RecursoCalendarioImp implements Serializable {
 
 	/*------ Funcionalidad de paciente --------*/
 
-	public static void insertaCita(UsuarioContexto paciente, String medico, String fecha) throws Exception {
-		CitaMedica cita = new CitaMedica(paciente, medico, fecha);
+	public static void insertaCita(String usuario, String medico, String fecha) throws Exception {
+		CitaMedica cita = new CitaMedica(usuario, medico, fecha);
 		if (citaValida(medico, fecha)) {
-			calendarioCitas_pacienteIdx.put(paciente.getNombre(), cita);
+			calendarioCitas_pacienteIdx.put(usuario, cita);
 			calendarioCitas_medicoIdx.put(medico, cita);
 		}
 
 	}
 
-	public static String consultaCitas(UsuarioContexto paciente) throws Exception {
+	public static void insertaCita(CitaMedica cita) throws Exception {
+		if (citaValida(cita.getMedico(), cita.getFecha())) {
+			calendarioCitas_pacienteIdx.put(cita.getUsuario(), cita);
+			calendarioCitas_medicoIdx.put(cita.getMedico(), cita);
+		}
+
+	}
+
+	public static String consultaCitas(String usuario) throws Exception {
 		String msg = "No tiene citas.";
 		Iterator<Entry<String, CitaMedica>> it = calendarioCitas_pacienteIdx.entrySet().iterator();
 		if (it.hasNext()) {
@@ -37,12 +44,14 @@ public class RecursoCalendarioImp implements Serializable {
 		}
 		while (it.hasNext()) {
 			Entry<String, CitaMedica> cita = it.next();
-			msg += "\t" + convertToString(cita.getValue()) + "\n";
+			if (cita.getKey().equals(usuario)) {
+				msg += "\t" + convertToString(cita.getValue()) + "\n";
+			}
 		}
 		return msg;
 	}
 
-	public static Boolean darBajaCita(UsuarioContexto paciente, String fecha) throws Exception {
+	public static Boolean darBajaCita(String usuario, String fecha) throws Exception {
 
 		Boolean borrado = false;
 
@@ -50,7 +59,7 @@ public class RecursoCalendarioImp implements Serializable {
 
 		while (it.hasNext() && !borrado) {
 			Entry<String, CitaMedica> cita = it.next();
-			if (citaEnFecha(cita.getValue(), fecha)) {
+			if (cita.getKey().equals(usuario) && citaEnFecha(cita.getValue(), fecha)) {
 				calendarioCitas_pacienteIdx.remove(cita);
 				calendarioCitas_medicoIdx.remove(cita.getValue().getMedico());
 			}
@@ -60,10 +69,28 @@ public class RecursoCalendarioImp implements Serializable {
 
 	}
 
-	public static Boolean cambiarCita(UsuarioContexto paciente, String medico, String fechaNueva, String fechaAntigua)
+	public static Boolean darBajaCita(CitaMedica cita) throws Exception {
+
+		Boolean borrado = false;
+
+		Iterator<Entry<String, CitaMedica>> it = calendarioCitas_pacienteIdx.entrySet().iterator();
+
+		while (it.hasNext() && !borrado) {
+			Entry<String, CitaMedica> cita_int = it.next();
+			if (cita_int.getKey().equals(cita.getUsuario()) && citaEnFecha(cita_int.getValue(), cita.getFecha())) {
+				calendarioCitas_pacienteIdx.remove(cita_int);
+				calendarioCitas_medicoIdx.remove(cita_int.getValue().getMedico());
+			}
+		}
+
+		return borrado;
+
+	}
+
+	public static Boolean cambiarCita(String usuario, String medico, String fechaNueva, String fechaAntigua)
 			throws Exception {
-		if (darBajaCita(paciente, fechaAntigua)) {
-			insertaCita(paciente, medico, fechaNueva);
+		if (darBajaCita(usuario, fechaAntigua)) {
+			insertaCita(usuario, medico, fechaNueva);
 			return true;
 		} else {
 			return false;
