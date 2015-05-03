@@ -38,13 +38,17 @@ public class RecursoCalendarioImp implements Serializable {
 
 	public static String consultaCitas(String usuario) throws Exception {
 		String msg = "No tiene citas.";
+		Boolean first = false;
+
 		Iterator<Entry<String, CitaMedica>> it = calendarioCitas_pacienteIdx.entrySet().iterator();
-		if (it.hasNext()) {
-			msg = "Tiene las citas: \n";
-		}
+
 		while (it.hasNext()) {
 			Entry<String, CitaMedica> cita = it.next();
 			if (cita.getKey().equals(usuario)) {
+				if (!first) {
+					msg = "Tiene las citas: \n";
+					first = true;
+				}
 				msg += "\t" + convertToString(cita.getValue()) + "\n";
 			}
 		}
