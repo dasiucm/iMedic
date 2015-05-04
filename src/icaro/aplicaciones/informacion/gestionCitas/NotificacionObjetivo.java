@@ -48,6 +48,16 @@ public class NotificacionObjetivo {
 		setTipoNotificacion(notif.getTipoNotificacion());
 		setUsuario(notif.getUsuario());
 	}
+	
+	public NotificacionObjetivo(NotificacionMedico notif){
+		
+		identNotificador = notif.getidentNotificador();
+		setMensajeNotificacion(notif.getMensajeNotificacion());
+		setcontexto(notif.getcontexto());
+		setidentObjectRefNotificacion(notif.getidentObjectRefNotificacion());
+		setTipoNotificacion(notif.getTipoNotificacion());
+		setUsuario(notif.getUsuario());
+	}
 
 	public NotificacionObjetivo(String usuarioId) {
 		identNotificador = usuarioId;
