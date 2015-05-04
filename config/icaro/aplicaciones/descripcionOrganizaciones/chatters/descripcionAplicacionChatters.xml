@@ -54,10 +54,12 @@
 		<icaro:DescRecursosAplicacion>
 			<icaro:DescRecursoAplicacion nombre="ComunicacionChat"
 			localizacionClaseGeneradora="icaro.aplicaciones.recursos.comunicacionChat.ClaseGeneradoraComunicacionChat"/>
-					<icaro:DescRecursoAplicacion nombre="PersistenciaUsuarios"
+			<icaro:DescRecursoAplicacion nombre="PersistenciaUsuarios"
 			localizacionClaseGeneradora="icaro.aplicaciones.recursos.persistenciaUsuarios.ClaseGeneradoraPersistenciaUsuarios"/>
 			<icaro:DescRecursoAplicacion nombre="ExtractorSemantico"
                         localizacionClaseGeneradora="icaro.aplicaciones.recursos.extractorSemantico.ClaseGeneradoraExtractorSemantico"/>
+            <icaro:DescRecursoAplicacion nombre="RecursoCalendario"
+                        localizacionClaseGeneradora="icaro.aplicaciones.recursos.recursoCalendario.ClaseGeneradoraRecursoCalendario"/>
 		</icaro:DescRecursosAplicacion>
 	</icaro:DescripcionComponentes>
 	<icaro:DescInstancias>
@@ -85,6 +87,7 @@
 					<icaro:componenteGestionado refId="ExtractorSemantico1" tipoComponente="RecursoAplicacion"/>
                     <icaro:componenteGestionado refId="ComunicacionChat1" tipoComponente="RecursoAplicacion"/>
                     <icaro:componenteGestionado refId="PersistenciaUsuarios1" tipoComponente="RecursoAplicacion"/>  
+                    <icaro:componenteGestionado refId="RecursoCalendario1" tipoComponente="RecursoAplicacion"/>  
 				</icaro:componentesGestionados>
 			</icaro:InstanciaGestor>
 		</icaro:Gestores>
@@ -128,6 +131,7 @@
 				</icaro:listaPropiedades>
 			</icaro:Instancia>
 				<icaro:Instancia id="PersistenciaUsuarios1" refDescripcion="PersistenciaUsuarios" xsi:type="icaro:Instancia"/>
+				<icaro:Instancia id="RecursoCalendario1" refDescripcion="RecursoCalendario" xsi:type="icaro:Instancia"/>
 				<icaro:Instancia id="ComunicacionChat1" refDescripcion="ComunicacionChat" xsi:type="icaro:Instancia"/>
 				<icaro:Instancia id="ExtractorSemantico1" refDescripcion="ExtractorSemantico" xsi:type="icaro:Instancia"/>
 		</icaro:RecursosAplicacion>
