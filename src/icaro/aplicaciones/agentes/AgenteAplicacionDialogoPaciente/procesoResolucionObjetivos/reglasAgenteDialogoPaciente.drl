@@ -1,5 +1,6 @@
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTrazas;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
+import static icaro.aplicaciones.recursos.recursoCalendario.imp.RecursoCalendarioImp.*;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
 import icaro.infraestructura.entidadesBasicas.PerformativaUsuario;
@@ -8,12 +9,10 @@ import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.objetivos.*;
 import icaro.aplicaciones.informacion.gestionCitas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tareas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tools.*;
-import icaro.aplicaciones.recursos.recursoCalendario.*;
 
 global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
 global String agentId;
-global ItfUsoRecursoCalendario recursoCalendario;
 
 rule "crear foco usuario"
  when 
@@ -147,7 +146,7 @@ rule "Establecer cita"
  	fu.setFoco(null);
  	
  	// AQUI LLAMAREMOS AL RECURSO DE CALENDARIO Y ALMACENAMOS TODO
- 	recursoCalendario.insertaCita(cm);
+ 	insertaCita(cm);
  	
  	update(fu);
  	retract(cm);
@@ -171,7 +170,7 @@ rule "Cancelar cita"
  	fu.setFoco(null);
  	
  	// AQUI LLAMAREMOS AL RECURSO DE CANLENDARIO Y ALMACENAMOS TODO
- 	recursoCalendario.darBajaCita(cm);
+ 	darBajaCita(cm);
  	 	
  	update(fu);
  	retract(cm);
@@ -187,7 +186,7 @@ rule "Consultar citas, teniendo el paciente"
     notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.consulta, msgg:mensajeNotificacion )
  then
  	// aqui habria que ir al recurso calendario para obtener las citas una a una
-    String citas = recursoCalendario.consultaCitas(identInterlc);
+    String citas = consultaCitas(identInterlc);
     
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
     tarea.ejecutar(identInterlc,citas);

@@ -14,8 +14,8 @@ public class RecursoCalendarioImp implements Serializable {
 	 */
 	private static final long serialVersionUID = -5636331096703718484L;
 
-	public static HashMap<String, CitaMedica> calendarioCitas_pacienteIdx = new HashMap<String, CitaMedica>();
-	public static HashMap<String, CitaMedica> calendarioCitas_medicoIdx = new HashMap<String, CitaMedica>();
+	public static final HashMap<String, CitaMedica> calendarioCitas_pacienteIdx = new HashMap<String, CitaMedica>();
+	public static final HashMap<String, CitaMedica> calendarioCitas_medicoIdx = new HashMap<String, CitaMedica>();
 
 	/*------ Funcionalidad de paciente --------*/
 
@@ -46,10 +46,10 @@ public class RecursoCalendarioImp implements Serializable {
 			Entry<String, CitaMedica> cita = it.next();
 			if (cita.getKey().equals(usuario)) {
 				if (!first) {
-					msg = "Tiene las citas: \n";
+					msg = "Tiene las citas: ";
 					first = true;
 				}
-				msg += "\t" + convertToString(cita.getValue()) + "\n";
+				msg += convertToString(cita.getValue()) + ", ";
 			}
 		}
 		return msg;
