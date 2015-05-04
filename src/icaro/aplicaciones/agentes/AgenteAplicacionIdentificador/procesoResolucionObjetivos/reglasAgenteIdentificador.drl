@@ -189,7 +189,8 @@ end
 rule "Solicita Distribucion de mensajes paciente"
  when
     notif:Notificacion(identInterlc:identNotificador, 
-    		tipoNotificacion == tipoNotifPaciente.inicioPeticion && 
+    		(tipoNotificacion == tipoNotifPaciente.inicioPeticion ||
+    		tipoNotificacion == tipoNotifPaciente.consulta ) && 
     		tipoNotificacion != tipoNotif.saludo && tipoNotificacion != tipoNotif.despedida)
     obj:DistribuirMensajes(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
     fc:FocoUsuario(usuario == identInterlc, foco == obj)
