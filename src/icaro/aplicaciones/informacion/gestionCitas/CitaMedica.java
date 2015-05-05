@@ -71,4 +71,9 @@ public class CitaMedica {
 	public String getFecha() {
 		return fecha;
 	}
+	
+	@Override
+	public String toString() {
+		return getFecha() + " --> " + getMedico();
+	}
 }
