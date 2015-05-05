@@ -2,14 +2,18 @@ package icaro.aplicaciones.informacion.gestionCitas;
 
 import icaro.aplicaciones.recursos.persistenciaUsuarios.imp.PersistenciaUsuariosImp;
 
-public class CitaMedica {
+import java.io.Serializable;
+
+public class CitaMedica implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5902449218356230485L;
 	public String usuario;
 	public String nombrePaciente;
 	public String dniPaciente;
 	public String nombreMedico;
-	//public UsuarioContexto paciente;
-	//public String medico;
 	public String fecha;
 	
 	public CitaMedica(){

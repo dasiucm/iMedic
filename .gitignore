@@ -2,6 +2,7 @@
 *.log
 
 ConfigRutasExtractorSemantico.java
-
+/medicos
+/pacientes
 /build/
 /dist/

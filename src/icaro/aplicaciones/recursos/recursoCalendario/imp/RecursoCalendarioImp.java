@@ -3,6 +3,12 @@ package icaro.aplicaciones.recursos.recursoCalendario.imp;
 import icaro.aplicaciones.informacion.gestionCitas.CitaMedica;
 import icaro.aplicaciones.recursos.recursoCalendario.DateUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,8 +24,18 @@ public class RecursoCalendarioImp implements Serializable {
 	 */
 	private static final long serialVersionUID = -5636331096703718484L;
 
-	public static final Map<String, List<CitaMedica>> calendarioCitas_pacienteIdx = new HashMap<String, List<CitaMedica>>();
-	public static final Map<String, List<CitaMedica>> calendarioCitas_medicoIdx = new HashMap<String, List<CitaMedica>>();
+	private static final String slash = "/";
+	private static final String dash = "-";
+	private static final SimpleDateFormat slashFormatter = new SimpleDateFormat(
+			"dd/MM/yyyy");
+	private static final SimpleDateFormat dashFormatter = new SimpleDateFormat(
+			"dd-MM-yyyy");
+
+	private static final String PACIENTES_PATH = "pacientes";
+	private static final String MEDICOS_PATH = "medicos";
+
+	private static final Map<String, List<CitaMedica>> calendarioCitas_pacienteIdx = read(PACIENTES_PATH);
+	private static final Map<String, List<CitaMedica>> calendarioCitas_medicoIdx = read(MEDICOS_PATH);
 
 	private RecursoCalendarioImp() {
 		// Ocultar el constructor
@@ -50,6 +66,7 @@ public class RecursoCalendarioImp implements Serializable {
 			}
 			citasMedico.add(cita);
 			calendarioCitas_medicoIdx.put(cita.getMedico(), citasMedico);
+			guardaCalendarios();
 		}
 	}
 
@@ -99,6 +116,9 @@ public class RecursoCalendarioImp implements Serializable {
 			}
 		}
 
+		if (borrado) {
+			guardaCalendarios();
+		}
 		return borrado;
 
 	}
@@ -176,13 +196,6 @@ public class RecursoCalendarioImp implements Serializable {
 		return false;
 	}
 
-	private static final String slash = "/";
-	private static final String dash = "-";
-	private static final SimpleDateFormat slashFormatter = new SimpleDateFormat(
-			"dd/MM/yyyy");
-	private static final SimpleDateFormat dashFormatter = new SimpleDateFormat(
-			"dd-MM-yyyy");
-
 	/**
 	 * 
 	 * @param strDate
@@ -201,12 +214,86 @@ public class RecursoCalendarioImp implements Serializable {
 				return DateUtil.parse(strDate);
 			}
 		} catch (Exception parseEx) {
+			parseEx.printStackTrace();
 			try {
 				return DateUtil.parse(strDate);
 			} catch (Exception nestedParseException) {
+				nestedParseException.printStackTrace();
 				return null;
 			}
 		}
 	}
 
+	/**
+	 * 
+	 * @param path
+	 * @return un Mapa vacío si no ha podido leer el archivo o sino el mapa
+	 *         leido
+	 */
+	@SuppressWarnings("unchecked")
+	private static Map<String, List<CitaMedica>> read(String path) {
+		File file = new File(path);
+		if (!file.exists() || !file.isFile()) {
+			return new HashMap<String, List<CitaMedica>>();
+		}
+		FileInputStream f = null;
+		ObjectInputStream s = null;
+		Map<String, List<CitaMedica>> res = null;
+		try {
+			f = new FileInputStream(file);
+			s = new ObjectInputStream(f);
+			res = (Map<String, List<CitaMedica>>) s.readObject();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (s != null) {
+				try {
+					s.close();
+				} catch (IOException ignoredEx) {
+					// Ignore the exception
+				} finally {
+					s = null;
+				}
+			}
+		}
+		if (res == null) {
+			res = new HashMap<String, List<CitaMedica>>();
+		}
+		return res;
+	}
+
+	/**
+	 * Escribe en el archivo el mapa del argumento
+	 * 
+	 * @param path
+	 * @param map
+	 */
+	private static void write(String path, Map<String, List<CitaMedica>> map) {
+		File file = new File(path);
+		FileOutputStream fos = null;
+		ObjectOutputStream oos = null;
+		try {
+			fos = new FileOutputStream(file);
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(map);
+			oos.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (oos != null) {
+				try {
+					oos.close();
+				} catch (IOException ignoredEx) {
+					// Ignore the exception
+				} finally {
+					oos = null;
+				}
+			}
+		}
+	}
+
+	private static void guardaCalendarios() {
+		write(PACIENTES_PATH, calendarioCitas_pacienteIdx);
+		write(MEDICOS_PATH, calendarioCitas_medicoIdx);
+	}
 }
