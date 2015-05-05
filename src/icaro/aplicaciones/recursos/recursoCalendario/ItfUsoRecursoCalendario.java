@@ -1,31 +1,30 @@
 package icaro.aplicaciones.recursos.recursoCalendario;
 
 import icaro.aplicaciones.informacion.gestionCitas.CitaMedica;
-import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
 import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
-
-import java.util.HashMap;
 
 public interface ItfUsoRecursoCalendario extends ItfUsoRecursoSimple {
 
 	/*------ Funcionalidad de paciente --------*/
 
-	void insertaCita(String usuario, String medico, String fecha) throws Exception;
-	
+	void insertaCita(String usuario, String medico, String fecha)
+			throws Exception;
+
 	void insertaCita(CitaMedica cita) throws Exception;
 
 	String consultaCitas(String usuario) throws Exception;
 
 	Boolean darBajaCita(String usuario, String fecha) throws Exception;
-	
+
 	Boolean darBajaCita(CitaMedica cita) throws Exception;
 
-	Boolean cambiarCita(String usuario, String medico, String fechaNueva, String fechaAntigua)
-			throws Exception;
+	Boolean cambiarCita(String usuario, String medico, String fechaNueva,
+			String fechaAntigua) throws Exception;
 
 	/*------ Funcionalidad de medico --------*/
 
-	Boolean darBajaCitas(String medico, String fechaInicio, String fechaFin) throws Exception;
+	Boolean darBajaCitas(String medico, String fechaInicio, String fechaFin)
+			throws Exception;
 
 	String consultarHorario(String medico) throws Exception;
 

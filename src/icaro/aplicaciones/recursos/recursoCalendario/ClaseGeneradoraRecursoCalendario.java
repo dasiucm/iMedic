@@ -1,7 +1,6 @@
 package icaro.aplicaciones.recursos.recursoCalendario;
 
 import icaro.aplicaciones.informacion.gestionCitas.CitaMedica;
-import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
 import icaro.aplicaciones.recursos.recursoCalendario.imp.RecursoCalendarioImp;
 import icaro.infraestructura.patronRecursoSimple.imp.ImplRecursoSimple;
 
