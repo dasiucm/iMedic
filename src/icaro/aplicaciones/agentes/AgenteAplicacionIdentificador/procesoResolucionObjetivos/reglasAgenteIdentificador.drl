@@ -9,6 +9,7 @@ import icaro.aplicaciones.informacion.gestionCitas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tools.*;
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoMedico.tools.*;
 
 global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
@@ -190,7 +191,7 @@ rule "Solicita Distribucion de mensajes paciente"
  when
     notif:Notificacion(identInterlc:identNotificador, 
     		(tipoNotificacion == tipoNotifPaciente.inicioPeticion ||
-    		tipoNotificacion == tipoNotifPaciente.consulta ) && 
+    		tipoNotificacion == tipoNotifPaciente.consulta) && 
     		tipoNotificacion != tipoNotif.saludo && tipoNotificacion != tipoNotif.despedida)
     obj:DistribuirMensajes(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
     fc:FocoUsuario(usuario == identInterlc, foco == obj)
@@ -199,7 +200,7 @@ rule "Solicita Distribucion de mensajes paciente"
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
 	cu.actividad();
     Tarea tarea = gestorTareas.crearTarea(Distribuir.class);
-    tarea.ejecutar(identInterlc, notif);
+    tarea.ejecutar(identInterlc, notif, VocabularioGestionCitas.IdentAgenteAplicacionDialogoPaciente);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
     retract(notif);
 end
@@ -214,7 +215,7 @@ rule "Distribucion de mensajes paciente"
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
 	cu.actividad();
   	Tarea tarea = gestorTareas.crearTarea(Distribuir.class);
-    tarea.ejecutar(identInterlc, notif);
+    tarea.ejecutar(identInterlc, notif, VocabularioGestionCitas.IdentAgenteAplicacionDialogoPaciente);
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
    retract(notif);
 end
@@ -241,7 +242,7 @@ end
 rule "Solicita Distribucion de mensajes medico"
  when
     notif:Notificacion(identInterlc:identNotificador, 
-    		tipoNotificacion == tipoNotifPaciente.inicioPeticion && 
+    		tipoNotificacion == tipoNotifMedico.inicioAnulacion && 
     		tipoNotificacion != tipoNotif.saludo && tipoNotificacion != tipoNotif.despedida)
     obj:DistribuirMensajes(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
     fc:FocoUsuario(usuario == identInterlc, foco == obj)
@@ -250,7 +251,7 @@ rule "Solicita Distribucion de mensajes medico"
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
 	cu.actividad();
     Tarea tarea = gestorTareas.crearTarea(Distribuir.class);
-    tarea.ejecutar(identInterlc, notif);
+    tarea.ejecutar(identInterlc, notif, VocabularioGestionCitas.IdentAgenteAplicacionDialogoMedico);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
     retract(notif);
 end
@@ -265,7 +266,7 @@ rule "Distribucion de mensajes medico"
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
 	cu.actividad();
   	Tarea tarea = gestorTareas.crearTarea(Distribuir.class);
-    tarea.ejecutar(identInterlc, notif);
+    tarea.ejecutar(identInterlc, notif, VocabularioGestionCitas.IdentAgenteAplicacionDialogoMedico);
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
    retract(notif);
 end
