@@ -16,8 +16,10 @@ global String agentId;
 rule "Inicio obtención datos anulacion cita"
  when
     notif:NotificacionMedico(identInterlc:identNotificador, tipoNotificacion == tipoNotifMedico.inicioAnulacion);
-    fu:FocoUsuario(usuario == identInterlc, foco == null)
  then
+ 	Tarea tareadist = gestorTareas.crearTarea(NotificarObjetivo.class);
+    tareadist.ejecutar(identInterlc,notif,"MEDICO"); 	
+ 
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
     tarea.ejecutar(identInterlc,conversacionMedico.obtenerInfoAnulacion);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
@@ -25,6 +27,7 @@ rule "Inicio obtención datos anulacion cita"
     
     Objetivo anularCitas = new AnularCitas();
     anularCitas.setobjectReferenceId(identInterlc);
+ 	insert(anularCitas);
     
     Objetivo idFechaInicio = new IdentificarFechaInicio();
  	idFechaInicio.setobjectReferenceId(identInterlc);
@@ -34,7 +37,9 @@ rule "Inicio obtención datos anulacion cita"
  	idFechaFin.setobjectReferenceId(identInterlc);
  	insert(idFechaFin);
     
+    FocoUsuario fu = new FocoUsuario(identInterlc);
     fu.setFoco(anularCitas);
+ 	insert( fu );
  	
 end
 
@@ -54,10 +59,6 @@ rule "Obtencion de la fecha inicio sin tener la fecha fin"
     tarea.ejecutar(identInterlc,conversacionMedico.obtenerFechaInicioOK);
     tarea.ejecutar(identInterlc,conversacionMedico.obtenerFechaFin);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
-    
-    Objetivo idFechaFin = new IdentificarFechaFin();
- 	idFechaFin.setobjectReferenceId(identInterlc);
- 	insert(idFechaFin);
  	
  	update(fechaIni);
     retract(notif);
@@ -78,10 +79,6 @@ rule "Obtencion de la fecha fin sin tener la fecha inicio"
     tarea.ejecutar(identInterlc,conversacionMedico.obtenerFechaFinOK);
     tarea.ejecutar(identInterlc,conversacionMedico.obtenerFechaInicio);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
-    
-    Objetivo fechaIni = new IdentificarFechaFin();
- 	fechaIni.setobjectReferenceId(identInterlc);
- 	insert(fechaIni);
  	
  	update(fechaFin);
     retract(notif);
@@ -96,8 +93,7 @@ rule "Focalizar anular cita"
     obj.setSolving();
     
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    tarea.ejecutar(identInterlc,conversacionMedico.validarAnulacionCitas1);
-    //tarea.ejecutar(identInterlc,conversacionMedico.validarAnulacionCitas1 + "fechaInicio" + validarAnulacionCitas2 + "fechaFin" + validarAnulacionCitas3);
+    tarea.ejecutar(identInterlc,conversacionMedico.validarAnulacionCitas1 + obj.getFechaInicio() + conversacionMedico.validarAnulacionCitas2 + obj.getFechaFin() + conversacionMedico.validarAnulacionCitas3);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
  	
  	retract(fechaIni);
@@ -116,6 +112,8 @@ rule "Validar anulacion de citas"
  	validar.setobjectReferenceId(identInterlc);
  	validar.setSolving();
  	insert(validar);
+ 	
+    retract(notif);
 
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
@@ -125,10 +123,11 @@ rule "No validar anulacion de citas"
  	notif:NotificacionMedico(identInterlc:identNotificador, tipoNotificacion == tipoNotifMedico.no, msgg:mensajeNotificacion )
     obj:AnularCitas(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
  then
- 	Objetivo validar = new ValidarAnular();
- 	validar.setobjectReferenceId(identInterlc);
- 	validar.setFailed();
- 	insert(validar);
+ 	
+    retract(notif);
+ 	
+ 	Tarea tareadist2 = gestorTareas.crearTarea(NotificarObjetivo.class);
+    tareadist2.ejecutar(identInterlc,null,"RESET"); 
 
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
@@ -148,10 +147,8 @@ rule "Anulacion confirmada"
  	Tarea tareadist2 = gestorTareas.crearTarea(NotificarObjetivo.class);
     tareadist2.ejecutar(identInterlc,null,"RESET"); 
     
-    fu.setFoco(null);
-    
     // AQUI LLAMAREMOS AL RECURSO DE CANLENDARIO PARA BORRAR LAS FECHAS QUE TOQUEN Y AVISAR A LOS USUARIOS 	
- 	update(fu);
+ 	retract(fu);
  	retract(anular);
  	retract(validar);
 	
