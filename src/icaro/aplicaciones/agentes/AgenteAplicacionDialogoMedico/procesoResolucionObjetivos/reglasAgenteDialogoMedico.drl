@@ -13,9 +13,21 @@ global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
 global String agentId;
 
+rule "crear foco usuario"
+ when 
+ 	notif:NotificacionMedico(identInterlc:identNotificador)
+ 	not( exists( FocoUsuario(usuario == identInterlc ) ))
+ then
+ 	//Establezco el foco del usuario
+ 	FocoUsuario fu = new FocoUsuario(identInterlc);
+ 	insert(fu);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
 rule "Inicio obtención datos anulacion cita"
  when
     notif:NotificacionMedico(identInterlc:identNotificador, tipoNotificacion == tipoNotifMedico.inicioAnulacion);
+    fu:FocoUsuario(usuario == identInterlc);
  then
  	Tarea tareadist = gestorTareas.crearTarea(NotificarObjetivo.class);
     tareadist.ejecutar(identInterlc,notif,"MEDICO"); 	
@@ -23,6 +35,7 @@ rule "Inicio obtención datos anulacion cita"
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
     tarea.ejecutar(identInterlc,conversacionMedico.obtenerInfoAnulacion);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+    
     retract(notif);
     
     Objetivo anularCitas = new AnularCitas();
@@ -36,10 +49,9 @@ rule "Inicio obtención datos anulacion cita"
  	Objetivo idFechaFin = new IdentificarFechaFin();
  	idFechaFin.setobjectReferenceId(identInterlc);
  	insert(idFechaFin);
-    
-    FocoUsuario fu = new FocoUsuario(identInterlc);
-    fu.setFoco(anularCitas);
- 	insert( fu );
+ 	
+ 	fu.setFoco(anularCitas);
+ 	update(fu);
  	
 end
 
@@ -148,7 +160,9 @@ rule "Anulacion confirmada"
     tareadist2.ejecutar(identInterlc,null,"RESET"); 
     
     // AQUI LLAMAREMOS AL RECURSO DE CANLENDARIO PARA BORRAR LAS FECHAS QUE TOQUEN Y AVISAR A LOS USUARIOS 	
- 	retract(fu);
+ 	fu.setFoco(null);
+ 	update(fu);
+ 	
  	retract(anular);
  	retract(validar);
 	
