@@ -121,7 +121,7 @@ rule "Regla de solicitud de obtener DNI"
 	fc.setFoco(ob);
   	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
   	if(cu.getNombre() == null){
-  	   tarea.ejecutar(fcuser, "Para acelerar un poco las cosas necesito que de digas tu DNI");	
+  	   tarea.ejecutar(fcuser, conversacion.msg("peticionDNI"));	
   	}else{
   	   tarea.ejecutar(fcuser, cu.getNombre()+ ", " + conversacion.msg("solicitarDNI"));
   	}
@@ -151,6 +151,20 @@ rule "Regla de obtencion de dni"
    	retract(notif);
 end
 
+rule "Notificar desconocimiento"
+ when
+ 	notif:Notificacion(user:identNotificador, tipoNotificacion == VocabularioGestionCitas.ExtraccionSemanticaNull )
+ 	fc:FocoUsuario(usuario == user)
+ 	cu:UsuarioContexto(usuario ==user);
+ then
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(NotificarAlUsuarioSinContexto.class);
+    tarea.ejecutar(fc);
+    cu.actividad();
+    retract(notif);
+    update(fc);
+    update(cu);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
 
 rule "Finalizar la identificacion"
  when
@@ -319,6 +333,11 @@ rule "Detectar Inactividad"
 	insert( obb );
 	cu.actividad();
   TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+  	if( cu.getNombre() == null){
+  		tarea.ejecutar(cu.getUsuario(), conversacion.msg("inactividad"));
+  	}else{
+  		tarea.ejecutar(cu.getUsuario(), cu.getNombre() +", "+ conversacion.msg("inactividad"));
+  	}
      tarea.ejecutar(cu.getUsuario(), cu.getNombre() +", "+ conversacion.msg("inactividad"));
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
@@ -333,7 +352,7 @@ rule "Detectar Inactividad prolongada"
   TareaSincrona tarea2 = gestorTareas.crearTareaSincrona(EliminarSessionUsuario.class);
      tarea2.ejecutar(cu.usuario);
   TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-     tarea.ejecutar(user,  conversacion.despedida1);
+     tarea.ejecutar(user,  conversacion.msg("despedida"));
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
    retract( cu );
 end

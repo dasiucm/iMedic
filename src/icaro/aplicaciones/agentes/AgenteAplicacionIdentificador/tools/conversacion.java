@@ -1,6 +1,7 @@
 package icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -12,7 +13,7 @@ public class conversacion {
 	
 	static{
 		conversacion = new HashMap<String, List<String>>();
-		randomGenerator = new Random();
+		
 		List<String> saludoInicial = new ArrayList<String>();
 		saludoInicial.add("Hola, soy un agente encargado en recepcion y solicitud de citas medicas");
 		saludoInicial.add("Buenas, soy tu agente de confianza para manejo de citas medicas");
@@ -23,6 +24,12 @@ public class conversacion {
 		solicitarNombre.add("me darias tu nombre?");
 		solicitarNombre.add("tengo que comprobarte en el sistema, Cual es tu nombre?");
 		solicitarNombre.add("dime tu nombre?");
+		
+		List<String> solicitarNombreImperativo = new ArrayList<String>();
+		solicitarNombreImperativo.add("Para continuar le recuerdo que necesito su nombre");
+		solicitarNombreImperativo.add("por favor coopere, digame su nombre");
+		solicitarNombreImperativo.add("realmente necesito su nombre, por favor");
+	
 		
 		List<String> obtencionNombre = new ArrayList<String>();
 		obtencionNombre.add("Perfecto, te llamare de ahora en adelante ");
@@ -78,6 +85,16 @@ public class conversacion {
 		despedida.add("hasta la proxima");
 		despedida.add("bye");
 		
+		List<String> peticionDNI = new ArrayList<String>(); 
+		peticionDNI.add("Para acelerar las cosas necesito tu DNI?");
+		peticionDNI.add("quiero tu DNI para validar que estas en el sistema");
+		peticionDNI.add("serias tan amable de darme tu DNI para revisarte en el sistema");
+		
+		List<String> peticionDNIimperativo = new ArrayList<String>(); 
+		peticionDNIimperativo.add("Disculpe, pero de verdad necesito el DNI para poder continuar");
+		peticionDNIimperativo.add("realmente necesito su DNI, el sistema no permite avanzar si el");
+		peticionDNIimperativo.add("NECESITO SU DNI, DEJE DE JUGAR");
+		
 		
 		conversacion.put("saludoInicial", saludoInicial);
 		conversacion.put("solicitarNombre", solicitarNombre);
@@ -91,12 +108,17 @@ public class conversacion {
 		conversacion.put("distribucion", distribucion);
 		conversacion.put("objetivoLogrado", objetivoLogrado);
 		conversacion.put("despedida", despedida);
+		conversacion.put("peticionDNI", peticionDNI);
+		conversacion.put("solicitarNombreImperativo", solicitarNombreImperativo);
+		conversacion.put("peticionDNIimperativo", peticionDNIimperativo);
+		
+	
 	}
 	
 	
 	public static String msg(String tipo){
 		String result = null;
-		
+		randomGenerator = new Random(new Date().getTime());
 		if(conversacion.get(tipo) != null && conversacion.get(tipo).size() > 0){
 	        int index = randomGenerator.nextInt(conversacion.get(tipo).size());
 	        String item = conversacion.get(tipo).get(index);		
