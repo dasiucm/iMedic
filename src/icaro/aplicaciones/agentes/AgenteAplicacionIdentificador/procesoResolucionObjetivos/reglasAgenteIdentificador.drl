@@ -47,7 +47,7 @@ rule "Saludo inicial de usuario"
  	insert( fu );
  	insert( id );
   	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    tarea.ejecutar(identInterlc,conversacion.saludoInicial);
+    tarea.ejecutar(identInterlc,conversacion.msg("saludoInicial"));
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
 end
@@ -58,7 +58,7 @@ rule "Resaludar"
    	cu:UsuarioContexto(usuario == identInterlc)
  then
   	 TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-     tarea.ejecutar(identInterlc,conversacion.resaludo1);
+     tarea.ejecutar(identInterlc,conversacion.msg("resaludar"));
      recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
      cu.actividad();
      retract(notif);
@@ -78,7 +78,7 @@ rule "Regla de solicitar nombre"
   	fc.setFoco(no);
   	
   	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    tarea.ejecutar(fcuser,conversacion.SolicitarNombre2);
+    tarea.ejecutar(fcuser,conversacion.msg("solicitarNombre"));
    	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
    	update(fc);
    	insert(no);
@@ -96,7 +96,7 @@ rule "Regla de obtencion de nombre"
  	cu.actividad();
  	fc.setFoco(null);
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarNombre.class);
-    tarea.ejecutar(user,conversacion.obtencionNombre1,msgg);
+    tarea.ejecutar(user,conversacion.msg("obtencionNombre"),msgg);
    	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
    	
    	update(obj);
@@ -122,7 +122,7 @@ rule "Regla de solicitud de obtener DNI"
   	if(cu.getNombre() == null){
   	   tarea.ejecutar(fcuser, "Para acelerar un poco las cosas necesito que de digas tu DNI");	
   	}else{
-  	   tarea.ejecutar(fcuser, cu.getNombre()+ ", " + conversacion.SolicitarDNI1);
+  	   tarea.ejecutar(fcuser, cu.getNombre()+ ", " + conversacion.msg("solicitarDNI"));
   	}
   
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
@@ -179,7 +179,7 @@ rule "Focalizacion de distribucion de mensajes"
 	dm.setSolving();
 
   TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-     tarea.ejecutar(user, cu.getNombre()+ ", " + conversacion.distribucion1);
+     tarea.ejecutar(user, cu.getNombre()+ ", " + conversacion.msg("distribucion"));
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
    update(obj);
    	insert(dm);
@@ -295,7 +295,7 @@ rule "Recibir Objetivo Completado"
     cu:UsuarioContexto(usuario == identInterlc)
  then
  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-  	tarea.ejecutar(identInterlc, "Dime, en que mas puedo ayudarte?");	
+  	tarea.ejecutar(identInterlc, conversacion.msg("objetivoLogrado"));	
  	cu.actividad();
 	fc.refocus();
 	update(fc);
@@ -317,7 +317,7 @@ rule "Detectar Inactividad"
 	insert( obb );
 	cu.actividad();
   TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-     tarea.ejecutar(cu.getUsuario(), cu.getNombre() +", "+ conversacion.inactividad1);
+     tarea.ejecutar(cu.getUsuario(), cu.getNombre() +", "+ conversacion.msg("inactividad"));
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
@@ -345,7 +345,7 @@ rule "Despedirse"
    TareaSincrona tarea = gestorTareas.crearTareaSincrona(EliminarSessionUsuario.class);
      tarea.ejecutar(cu.usuario);
    TareaSincrona tarea2 = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-     tarea2.ejecutar(cu.usuario,  conversacion.despedida1);
+     tarea2.ejecutar(cu.usuario,  conversacion.msg("despedida"));
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
    retract( cu );
    retract( notif );
