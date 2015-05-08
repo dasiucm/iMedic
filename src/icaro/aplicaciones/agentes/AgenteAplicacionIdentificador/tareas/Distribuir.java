@@ -18,21 +18,19 @@ public class Distribuir extends TareaComunicacion {
 		this.getIdentTarea();
 		this.getIdentAgente();
 		Notificacion notif = (Notificacion) params[1];
+		String identidadPaciente = (String) params[2];
 		try {
-			if ( (notif.tipoNotificacion).equals("inicioAnulacion") ){
-				this.informaraOtroAgente(
-						new NotificacionMedico(notif),
-						VocabularioGestionCitas.IdentAgenteAplicacionDialogoMedico);
-			} else{
-				this.informaraOtroAgente(
-						new NotificacionPaciente(notif),
-						VocabularioGestionCitas.IdentAgenteAplicacionDialogoPaciente);
+			if (identidadPaciente
+					.equals(VocabularioGestionCitas.IdentAgenteAplicacionDialogoMedico)) {
+				this.informaraOtroAgente(new NotificacionMedico(notif),
+						identidadPaciente);
+			} else if (identidadPaciente
+					.equals(VocabularioGestionCitas.IdentAgenteAplicacionDialogoPaciente)) {
+				this.informaraOtroAgente(new NotificacionPaciente(notif),
+						identidadPaciente);
 			}
-			// this.getEnvioHechos().insertarHecho(new
-			// NotificacionPaciente(notif));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 }
