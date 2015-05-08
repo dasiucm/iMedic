@@ -26,7 +26,7 @@ public class RecursoCalendarioImp implements Serializable {
 
 	private static final String slash = "/";
 	private static final String dash = "-";
-	private static final SimpleDateFormat slashFormatter = new SimpleDateFormat(
+	public static final SimpleDateFormat slashFormatter = new SimpleDateFormat(
 			"dd/MM/yyyy");
 	private static final SimpleDateFormat dashFormatter = new SimpleDateFormat(
 			"dd-MM-yyyy");

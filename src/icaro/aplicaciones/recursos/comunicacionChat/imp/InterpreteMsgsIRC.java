@@ -10,6 +10,7 @@ import gate.Annotation;
 import icaro.aplicaciones.informacion.gestionCitas.InfoConexionUsuario;
 import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
 import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
+import icaro.aplicaciones.recursos.comunicacionChat.ParserFecha;
 import icaro.aplicaciones.recursos.comunicacionChat.imp.util.ConexionIrc;
 import icaro.aplicaciones.recursos.extractorSemantico.ItfUsoExtractorSemantico;
 import icaro.infraestructura.entidadesBasicas.comunicacion.ComunicacionAgentes;
@@ -446,9 +447,11 @@ public class InterpreteMsgsIRC {
 		// anotaciones y se envia el contenido al agente de dialogo
 		// de esta forma el agente recibe mensajes con entidades del modelo de
 		// información
-		
-		// hay que aniadir las anotaciones que se desean buscar. Si no se aniade aqui, no buscara la anotacion del 
-		// lookup del gazetero y no se obtendra informacion sobre el mensaje para el agente
+
+		// hay que aniadir las anotaciones que se desean buscar. Si no se aniade
+		// aqui, no buscara la anotacion del
+		// lookup del gazetero y no se obtendra informacion sobre el mensaje
+		// para el agente
 		HashSet anotacionesBusquedaPrueba = new HashSet();
 		anotacionesBusquedaPrueba.add("saludo");
 		anotacionesBusquedaPrueba.add("dni");
@@ -1480,7 +1483,8 @@ public class InterpreteMsgsIRC {
 		}
 	}
 
-	/** Este metodo convierte anotaciones al objeto {@link Notificacion}
+	/**
+	 * Este metodo convierte anotaciones al objeto {@link Notificacion}
 	 * 
 	 * 
 	 */
@@ -1533,9 +1537,9 @@ public class InterpreteMsgsIRC {
 
 			} else if (anotType.equalsIgnoreCase("fecha")) {
 				tienePeticion = true;
-				anotacionesInterpretadas
-						.add(interpretarAnotacionSaludoEInicioPeticion(
-								contextoInterpretacion, annot));
+				anotacionesInterpretadas.add(ParserFecha
+						.parseaFecha(interpretarAnotacionSaludoEInicioPeticion(
+								contextoInterpretacion, annot)));
 
 			} else if (anotType.equalsIgnoreCase("inicioAnulacion")) {
 				tienePeticion = true;
@@ -1545,36 +1549,38 @@ public class InterpreteMsgsIRC {
 
 			} else if (anotType.equalsIgnoreCase("consulta")) {
 				tienePeticion = true;
-				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
-						contextoInterpretacion, annot));
+				anotacionesInterpretadas
+						.add(interpretarAnotacionSaludoEInicioPeticion(
+								contextoInterpretacion, annot));
 
-			}else if (anotType.equalsIgnoreCase("nombre")) {
+			} else if (anotType.equalsIgnoreCase("nombre")) {
 				tienePeticion = true;
-				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
-						contextoInterpretacion, annot));
+				anotacionesInterpretadas
+						.add(interpretarAnotacionSaludoEInicioPeticion(
+								contextoInterpretacion, annot));
 
-			}else if (anotType.equalsIgnoreCase("dni")) {
+			} else if (anotType.equalsIgnoreCase("dni")) {
 				tienePeticion = true;
-				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
-						contextoInterpretacion, annot));
+				anotacionesInterpretadas
+						.add(interpretarAnotacionSaludoEInicioPeticion(
+								contextoInterpretacion, annot));
 
-			}else if (anotType.equalsIgnoreCase("despedida")) {
+			} else if (anotType.equalsIgnoreCase("despedida")) {
 				tienePeticion = true;
-				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
-						contextoInterpretacion, annot));
+				anotacionesInterpretadas
+						.add(interpretarAnotacionSaludoEInicioPeticion(
+								contextoInterpretacion, annot));
 
-			}else if (anotType.equalsIgnoreCase("fecha")) {
+			} else if (anotType.equalsIgnoreCase("si")) {
 				tienePeticion = true;
-				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
-						contextoInterpretacion, annot));
-			}else if (anotType.equalsIgnoreCase("si")) {
+				anotacionesInterpretadas
+						.add(interpretarAnotacionSaludoEInicioPeticion(
+								contextoInterpretacion, annot));
+			} else if (anotType.equalsIgnoreCase("no")) {
 				tienePeticion = true;
-				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
-						contextoInterpretacion, annot));
-			}else if (anotType.equalsIgnoreCase("no")) {
-				tienePeticion = true;
-				anotacionesInterpretadas.add(interpretarAnotacionSaludoEInicioPeticion(
-						contextoInterpretacion, annot));
+				anotacionesInterpretadas
+						.add(interpretarAnotacionSaludoEInicioPeticion(
+								contextoInterpretacion, annot));
 			}
 			// fet = annot.getFeatures();
 
@@ -1584,8 +1590,9 @@ public class InterpreteMsgsIRC {
 	}
 
 	/**
-	 * Este metodo tiene como entrada una anotacion recogida del mensaje y la transforma en una notificacion
-	 * utilizada por los agentes. De ahi que devuelva el objeto Notificacion
+	 * Este metodo tiene como entrada una anotacion recogida del mensaje y la
+	 * transforma en una notificacion utilizada por los agentes. De ahi que
+	 * devuelva el objeto Notificacion
 	 * 
 	 * @param conttextoInterpretacion
 	 * @param anotacionSaludo
@@ -1627,7 +1634,7 @@ public class InterpreteMsgsIRC {
 				.intValue();
 		String msgNotif = conttextoInterpretacion.substring(
 				posicionComienzoTexto, posicionFinTexto);
-		
+
 		// Se copia el mensaje y el tipo de anotacion en el objeto notificacion.
 		notif.setTipoNotificacion(anotacionSaludo.getType());
 		notif.setMensajeNotificacion(msgNotif);
