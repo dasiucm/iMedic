@@ -17,7 +17,7 @@ public class conversacion {
 		List<String> saludoInicial = new ArrayList<String>();
 		saludoInicial.add("Hola, soy un agente encargado en recepcion y solicitud de citas medicas");
 		saludoInicial.add("Buenas, soy tu agente de confianza para manejo de citas medicas");
-		saludoInicial.add("Buenos dias, soy tu para manejo de citas medicas");
+		saludoInicial.add("Buenos dias, soy asistente tu para manejo de citas medicas");
 		
 		List<String> solicitarNombre = new ArrayList<String>();
 		solicitarNombre.add("Con quien tengo el gusto de hablar?");
@@ -30,12 +30,16 @@ public class conversacion {
 		solicitarNombreImperativo.add("por favor coopere, digame su nombre");
 		solicitarNombreImperativo.add("realmente necesito su nombre, por favor");
 	
+		List<String> solicitarAccionImperativo = new ArrayList<String>();
+		solicitarAccionImperativo.add("Me gustaria saber si me piensa decir que quiere hacer");
+		solicitarAccionImperativo.add("Por favor sea concreto, digame que quiere");
+		solicitarAccionImperativo.add("Le recuerdo que solo puedo ayudarlo con asuntos de citas medicas");
 		
 		List<String> obtencionNombre = new ArrayList<String>();
 		obtencionNombre.add("Perfecto, te llamare de ahora en adelante ");
 		obtencionNombre.add("De acuerdo ");
 		obtencionNombre.add("Muchas gracias, ");
-		obtencionNombre.add("dime tu nombre?");
+		obtencionNombre.add("Esta todo listo, ");
 		
 		List<String> obtencionDNI = new ArrayList<String>();
 		obtencionDNI.add("Perfecto, te estoy registrando en el sistema ");
@@ -111,8 +115,8 @@ public class conversacion {
 		conversacion.put("peticionDNI", peticionDNI);
 		conversacion.put("solicitarNombreImperativo", solicitarNombreImperativo);
 		conversacion.put("peticionDNIimperativo", peticionDNIimperativo);
+		conversacion.put("solicitarAccionImperativo", solicitarAccionImperativo);
 		
-	
 	}
 	
 	

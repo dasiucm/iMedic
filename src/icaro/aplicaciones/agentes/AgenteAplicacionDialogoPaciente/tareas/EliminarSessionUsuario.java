@@ -3,23 +3,23 @@
  * and open the template in the editor.
  */
 
-package icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas;
+package icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tareas;
 
-import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.tipoNotif;
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoCitasCognitivo.objetivos.ObtenerInfoInterlocutor;
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.objetivos.ObtenerNombreUsuario;
 import icaro.aplicaciones.informacion.gestionCitas.FocoUsuario;
-import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
-import icaro.aplicaciones.informacion.gestionCitas.NotificacionMedico;
-import icaro.aplicaciones.informacion.gestionCitas.NotificacionPaciente;
-import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
+import icaro.aplicaciones.informacion.gestionCitas.MemUsuario;
+import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
-import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaComunicacion;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
 /**
  *
  * @author Francisco J Garijo
  */
-public class EliminarSessionUsuario extends TareaComunicacion{
+public class EliminarSessionUsuario extends TareaSincrona {
 
 	@Override
 	public void ejecutar(Object... params) {
@@ -44,16 +44,7 @@ public class EliminarSessionUsuario extends TareaComunicacion{
 				}
 			
 			}
-			Notificacion notif = new Notificacion(usuario);
-			notif.tipoNotificacion = tipoNotif.session;
 
-			this.informaraOtroAgente(new NotificacionMedico(notif),
-					VocabularioGestionCitas.IdentAgenteAplicacionDialogoMedico);
-
-			this.informaraOtroAgente(new NotificacionPaciente(notif),
-					VocabularioGestionCitas.IdentAgenteAplicacionDialogoPaciente);
-
-			
 			// this.getEnvioHechos().insertarHecho(new MemUsuario());
 			// this.getEnvioHechos().insertarHechoWithoutFireRules(new Focus());
 			// this.getEnvioHechos().insertarHecho(new

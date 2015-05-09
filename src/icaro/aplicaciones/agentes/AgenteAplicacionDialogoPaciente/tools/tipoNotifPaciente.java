@@ -7,4 +7,5 @@ public class tipoNotifPaciente {
 	public static String si = "si";
 	public static String no = "no";
 	public static String consulta = "consulta";
+	public static String session = "session";
 }

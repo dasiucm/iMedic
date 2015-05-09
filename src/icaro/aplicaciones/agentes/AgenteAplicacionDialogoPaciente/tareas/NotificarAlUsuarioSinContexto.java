@@ -1,16 +1,14 @@
 package icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tareas;
 
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tools.conversacionPaciente;
 import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.conversacion;
+import icaro.aplicaciones.informacion.gestionCitas.CitaMedica;
 import icaro.aplicaciones.informacion.gestionCitas.FocoUsuario;
-import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
-import icaro.aplicaciones.informacion.gestionCitas.NotificacionMedico;
-import icaro.aplicaciones.informacion.gestionCitas.NotificacionPaciente;
 import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
 import icaro.aplicaciones.recursos.comunicacionChat.ItfUsoComunicacionChat;
 import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.CausaTerminacionTarea;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
-import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaComunicacion;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
 
 /**
@@ -30,18 +28,39 @@ public class NotificarAlUsuarioSinContexto extends TareaSincrona {
 			ItfUsoComunicacionChat recComunicacionChat = (ItfUsoComunicacionChat) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ
 					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoComunicacionChat);
 			
-			if(foUsuario.intentos < 3){
+			if(foUsuario.intentos < 2){
 				mensajeAenviar = conversacion.msg("sincontexto");
 				foUsuario.intentos = foUsuario.intentos+1;
 			}else{
-				if(foUsuario.getFoco().getgoalId().equals("ObtenerFechaCita")){
-					mensajeAenviar = conversacion.msg("peticionDNIimperativo");
-					foUsuario.intentos =0 ;
-				}else if(foUsuario.getFoco().getgoalId().equals("IdentificarMedico")){
-					mensajeAenviar = conversacion.msg("solicitarNombreImperativo");
-					foUsuario.intentos =0 ;
+					
+			
+				
+				for (Object g : this.getEnvioHechos().getItfMotorDeReglas()
+						.getStatefulKnowledgeSession().getObjects()) {
+
+					if (g instanceof CitaMedica) {
+						CitaMedica ob = (CitaMedica) g;
+						if(!ob.usuario.equals(foUsuario.getUsuario())) continue;
+						
+							
+						if(ob.getFecha()== null && ob.getMedico() == null){
+							mensajeAenviar = conversacionPaciente.msg("imperativoPedirDatos");
+						}
+						if(ob.getFecha()!= null && ob.getMedico() == null){
+							mensajeAenviar = conversacionPaciente.msg("imperativoPedirDoctor");
+						}
+						if(ob.getFecha()== null && ob.getMedico() != null){
+							mensajeAenviar = conversacionPaciente.msg("imperativoPedirFecha");
+						}
+						break;
+					}
+				
 				}
 				
+				if(foUsuario.getFoco()!= null && foUsuario.getFoco().getgoalId().equals("ObtenerInfoCita") && foUsuario.getFoco().getState() == Objetivo.SOLVING){
+					mensajeAenviar = conversacionPaciente.msg("imperativoConfirmar");
+				}
+				foUsuario.intentos = 0;
 			}
 			
 			if (recComunicacionChat != null) {

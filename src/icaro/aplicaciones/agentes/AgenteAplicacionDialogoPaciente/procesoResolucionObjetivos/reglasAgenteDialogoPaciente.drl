@@ -16,16 +16,13 @@ global String agentId;
 
 rule "Notificar desconocimiento"
  when
- 	notif:Notificacion(user:identNotificador, tipoNotificacion == VocabularioGestionCitas.ExtraccionSemanticaNull )
+ 	notif:NotificacionPaciente(user:identNotificador, tipoNotificacion == VocabularioGestionCitas.ExtraccionSemanticaNull )
  	fc:FocoUsuario(usuario == user )
- 	cu:UsuarioContexto(usuario ==user);
  then
  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(NotificarAlUsuarioSinContexto.class);
     tarea.ejecutar(fc);
-    cu.actividad();
     retract(notif);
     update(fc);
-    update(cu);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
@@ -90,7 +87,7 @@ rule "Obtener nombre medico"
  	nom.setSolved();
  	cm.nombreMedico = msgg;
  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
- 	tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita3medicoRegistrado);
+ 	tarea.ejecutar(identInterlc,conversacionPaciente.msg("medicoRegistrado"));
  	update(nom);
  	retract(notif);
  	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
@@ -107,7 +104,7 @@ rule "Obtener fecha"
  	nom.setSolved();
  	cm.fecha = msgg;
  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
- 	tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita2fechaRegistrada);
+ 	tarea.ejecutar(identInterlc,conversacionPaciente.msg("fechaRegistrada"));
  	update(nom);
  	retract(notif);
  	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
@@ -216,6 +213,18 @@ rule "Consultar citas, teniendo el paciente"
     
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
     tarea.ejecutar(identInterlc,citas);
+    
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+    retract(notif);
+end
+
+rule "Eliminar Session"
+ when
+    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.session )
+ then
+    
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(EliminarSessionUsuario.class);
+    tarea.ejecutar(identInterlc);
     
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
