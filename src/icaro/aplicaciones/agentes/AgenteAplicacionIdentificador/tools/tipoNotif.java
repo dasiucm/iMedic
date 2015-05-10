@@ -7,4 +7,6 @@ public class tipoNotif {
 	public static String despedida = "despedida";
 	public static String pordefinir = "definido";
 	public static String objetivo = "objetivo";
+	public static String session = "session";
+	
 }
