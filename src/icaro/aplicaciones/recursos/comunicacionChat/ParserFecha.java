@@ -1,5 +1,6 @@
 package icaro.aplicaciones.recursos.comunicacionChat;
 
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.tipoNotif;
 import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
 import icaro.aplicaciones.recursos.recursoCalendario.DateUtil;
 import icaro.aplicaciones.recursos.recursoCalendario.imp.RecursoCalendarioImp;
@@ -56,7 +57,8 @@ public final class ParserFecha {
 	};
 
 	/**
-	 * Los valores de estas claves serán usados para obtener la fecha correspondiente al día de la semana
+	 * Los valores de estas claves serán usados para obtener la fecha
+	 * correspondiente al día de la semana
 	 */
 	private static final Map<String, Integer> MAPEO_DIAS = new HashMap<String, Integer>() {
 
@@ -94,10 +96,19 @@ public final class ParserFecha {
 		String msg = notif.getMensajeNotificacion();
 
 		Integer dias = MAPEO_FECHAS.get(msg);
+		
 		if (dias != null) {
-			Date nuevaFecha = DateUtil.addDays(new Date(), dias);
-			msg = RecursoCalendarioImp.slashFormatter.format(nuevaFecha);
-			notif.setMensajeNotificacion(msg);
+			Date date = new Date();
+			Date nuevaFecha = DateUtil.addDays(date, dias);
+			if (nuevaFecha.before(date)) {
+				// enviar notificacion a usuario de que la fecha es anterior a la actual.
+				// poner anotacion de fecha anterior a la actual y que el agente espere esta 
+				// notificacion para enviar mensaje al usuario.
+				notif.setTipoNotificacion(tipoNotif.fechaAnterior);
+			} else {
+				msg = RecursoCalendarioImp.slashFormatter.format(nuevaFecha);
+				notif.setMensajeNotificacion(msg);
+			}
 		} else {
 
 			Integer diaSemana = MAPEO_DIAS.get(msg);
@@ -106,9 +117,17 @@ public final class ParserFecha {
 				Date date = new Date();
 				calendar.setTime(date);
 				calendar.set(Calendar.DAY_OF_WEEK, diaSemana);
-				msg = RecursoCalendarioImp.slashFormatter.format(calendar
-						.getTime());
-				notif.setMensajeNotificacion(msg);
+
+				Date msgDate = calendar.getTime();
+				if (msgDate.before(date)) {
+					// enviar notificacion a usuario de que la fecha es anterior a la actual.
+					// poner anotacion de fecha anterior a la actual y que el agente espere esta 
+					// notificacion para enviar mensaje al usuario.
+					notif.setTipoNotificacion(tipoNotif.fechaAnterior);
+				} else {
+					msg = RecursoCalendarioImp.slashFormatter.format(msgDate);
+					notif.setMensajeNotificacion(msg);
+				}
 			}
 		}
 

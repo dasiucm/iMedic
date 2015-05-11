@@ -96,8 +96,15 @@ public class conversacion {
 		
 		List<String> peticionDNIimperativo = new ArrayList<String>(); 
 		peticionDNIimperativo.add("Disculpe, pero de verdad necesito el DNI para poder continuar");
-		peticionDNIimperativo.add("realmente necesito su DNI, el sistema no permite avanzar si el");
+		peticionDNIimperativo.add("realmente necesito su DNI, el sistema no permite avanzar sin el DNI");
 		peticionDNIimperativo.add("NECESITO SU DNI, DEJE DE JUGAR");
+		
+		List<String> fechaAnterior = new ArrayList<String>(); 
+		fechaAnterior.add("Disculpe, la fecha en la que quiere la cita es anterior a la fecha actual, introduzca una fecha válida");
+		fechaAnterior.add("Parece que ya ha pasado el día deseado para la cita");
+		fechaAnterior.add("Introduzca una fecha futura");
+		
+		
 		
 		
 		conversacion.put("saludoInicial", saludoInicial);
@@ -116,6 +123,7 @@ public class conversacion {
 		conversacion.put("solicitarNombreImperativo", solicitarNombreImperativo);
 		conversacion.put("peticionDNIimperativo", peticionDNIimperativo);
 		conversacion.put("solicitarAccionImperativo", solicitarAccionImperativo);
+		conversacion.put("fechaAnterior", fechaAnterior);
 		
 	}
 	
