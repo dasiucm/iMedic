@@ -39,7 +39,8 @@ public final class ParserFecha {
 			put("mes que viene", MES);
 			put("mes siguiente", MES);
 			put("año siguiente", AÑO);
-			put("axo próximo", AÑO);
+			put("año próximo", AÑO);
+			put("año proximo", AÑO);
 			put("próximo año", AÑO);
 			put("mes próximo", MES);
 			put("mes proximo", MES);
