@@ -60,7 +60,7 @@ public final class ParserFecha {
 	 * Los valores de estas claves serán usados para obtener la fecha
 	 * correspondiente al día de la semana
 	 */
-	private static final Map<String, Integer> MAPEO_DIAS = new HashMap<String, Integer>() {
+	private static final Map<String, Integer> MAPEO_DIAS_SEMANA = new HashMap<String, Integer>() {
 
 		/**
 		 * 
@@ -79,7 +79,23 @@ public final class ParserFecha {
 			put("domingo", Calendar.SUNDAY);
 		}
 	};
+	
+	/**
+	 * Los valores de estas claves serán usados para obtener la fecha
+	 * correspondiente al día del mes
+	 */
+	private static final Map<String, Integer> MAPEO_DIAS_MES = new HashMap<String, Integer>(){
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -4299206735179032010L;
+			{
+				put("primero", 1);
+				put("primer", 1);
+			}
+	};
+	
 	private ParserFecha() {
 	}
 
@@ -111,7 +127,7 @@ public final class ParserFecha {
 			}
 		} else {
 
-			Integer diaSemana = MAPEO_DIAS.get(msg);
+			Integer diaSemana = MAPEO_DIAS_SEMANA.get(msg);
 			if (diaSemana != null) {
 				Calendar calendar = Calendar.getInstance();
 				Date date = new Date();
