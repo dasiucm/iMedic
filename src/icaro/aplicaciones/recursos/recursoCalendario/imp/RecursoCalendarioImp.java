@@ -1,5 +1,6 @@
 package icaro.aplicaciones.recursos.recursoCalendario.imp;
 
+import fj.data.vector.V;
 import icaro.aplicaciones.informacion.gestionCitas.CitaMedica;
 import icaro.aplicaciones.recursos.recursoCalendario.DateUtil;
 
@@ -14,8 +15,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class RecursoCalendarioImp implements Serializable {
 
@@ -259,6 +262,23 @@ public class RecursoCalendarioImp implements Serializable {
 		if (res == null) {
 			res = new HashMap<String, List<CitaMedica>>();
 		}
+
+		StringBuilder sb = new StringBuilder();
+		Iterator<Entry<String, List<CitaMedica>>> iter = res.entrySet()
+				.iterator();
+		while (iter.hasNext()) {
+			Entry<String, List<CitaMedica>> entry = iter.next();
+			sb.append(entry.getKey());
+			sb.append('=').append('"');
+			sb.append(entry.getValue().toString());
+			sb.append('"');
+			if (iter.hasNext()) {
+				sb.append(',').append(' ');
+			}
+		}
+
+		System.err.println("READING INITIAL CALLENDAR:\n" + sb.toString());
+
 		return res;
 	}
 
