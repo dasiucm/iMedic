@@ -1,5 +1,6 @@
 package icaro.aplicaciones.recursos.comunicacionChat;
 
+import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tools.tipoNotifPaciente;
 import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.tipoNotif;
 import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
 import icaro.aplicaciones.recursos.recursoCalendario.DateUtil;
@@ -79,23 +80,23 @@ public final class ParserFecha {
 			put("domingo", Calendar.SUNDAY);
 		}
 	};
-	
+
 	/**
 	 * Los valores de estas claves serán usados para obtener la fecha
 	 * correspondiente al día del mes
 	 */
-	private static final Map<String, Integer> MAPEO_DIAS_MES = new HashMap<String, Integer>(){
+	private static final Map<String, Integer> MAPEO_DIAS_MES = new HashMap<String, Integer>() {
 
-			/**
+		/**
 			 * 
 			 */
-			private static final long serialVersionUID = -4299206735179032010L;
-			{
-				put("primero", 1);
-				put("primer", 1);
-			}
+		private static final long serialVersionUID = -4299206735179032010L;
+		{
+			put("primero", 1);
+			put("primer", 1);
+		}
 	};
-	
+
 	private ParserFecha() {
 	}
 
@@ -112,13 +113,15 @@ public final class ParserFecha {
 		String msg = notif.getMensajeNotificacion();
 
 		Integer dias = MAPEO_FECHAS.get(msg);
-		
+
 		if (dias != null) {
 			Date date = new Date();
 			Date nuevaFecha = DateUtil.addDays(date, dias);
 			if (nuevaFecha.before(date)) {
-				// enviar notificacion a usuario de que la fecha es anterior a la actual.
-				// poner anotacion de fecha anterior a la actual y que el agente espere esta 
+				// enviar notificacion a usuario de que la fecha es anterior a
+				// la actual.
+				// poner anotacion de fecha anterior a la actual y que el agente
+				// espere esta
 				// notificacion para enviar mensaje al usuario.
 				notif.setTipoNotificacion(tipoNotif.fechaAnterior);
 			} else {
@@ -136,8 +139,10 @@ public final class ParserFecha {
 
 				Date msgDate = calendar.getTime();
 				if (msgDate.before(date)) {
-					// enviar notificacion a usuario de que la fecha es anterior a la actual.
-					// poner anotacion de fecha anterior a la actual y que el agente espere esta 
+					// enviar notificacion a usuario de que la fecha es anterior
+					// a la actual.
+					// poner anotacion de fecha anterior a la actual y que el
+					// agente espere esta
 					// notificacion para enviar mensaje al usuario.
 					notif.setTipoNotificacion(tipoNotif.fechaAnterior);
 				} else {
@@ -149,4 +154,46 @@ public final class ParserFecha {
 
 		return notif;
 	}
+
+	public static Object parseaFechaNumero(Notificacion notif) {
+		notif.setTipoNotificacion(tipoNotifPaciente.fecha);
+		String stringNumero;
+		int numero=0;
+		String msg = notif.getMensajeNotificacion();
+		// este mensaje tiene una estructura "el" + <numero>
+		String[] divisiones = msg.split(" ");
+		stringNumero = divisiones[divisiones.length - 1];
+		try {
+			numero = Integer.valueOf(stringNumero);
+		} catch (NumberFormatException exc) {
+			exc.printStackTrace();
+		}
+		Calendar calendar = Calendar.getInstance();
+		Date date = new Date();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, numero);
+		
+		Date msgDate = calendar.getTime();
+		if (msgDate.before(date)) {
+			// enviar notificacion a usuario de que la fecha es anterior
+			// a la actual.
+			// poner anotacion de fecha anterior a la actual y que el
+			// agente espere esta
+			// notificacion para enviar mensaje al usuario.
+			notif.setTipoNotificacion(tipoNotif.fechaAnterior);
+		} else {
+			msg = RecursoCalendarioImp.slashFormatter.format(msgDate);
+			notif.setMensajeNotificacion(msg);
+		}
+		return notif;
+	}
+	/*
+	public static void main(String[] args) {
+		Notificacion notif = new Notificacion();
+		notif.setMensajeNotificacion("el 20");
+		parseaFechaNumero(notif);
+		
+	}
+	*/
+	
 }
