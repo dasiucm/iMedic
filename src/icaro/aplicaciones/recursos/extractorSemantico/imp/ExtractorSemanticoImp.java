@@ -41,19 +41,7 @@ public class ExtractorSemanticoImp {
 	private String rutaCorpus;
 	private Corpus corpus = null;
 	private HashSet tiposAnotacionesRelevantes;
-	// Se crea un atributo de tipo calendario gregoriano para obtener la fecha y la hora actuales que se guardan en los 
-	// atributos actualDate y actualHour
-	Calendar fecha=new GregorianCalendar();
-	private String actualDate= Integer.toString(fecha.get(Calendar.YEAR)) +"/"+Integer.toString(fecha.get(Calendar.MONTH))
-			+"/"+Integer.toString(fecha.get(Calendar.DAY_OF_MONTH));
-	private String actualHour= Integer.toString(fecha.get(Calendar.HOUR_OF_DAY));
-	// Se crean atributos para la fecha y la hora recogidas del extractor semantico (GATE)
-	// Para extraer la fecha es necesario concatenar los strings de los tokens obtenidos a traves de GATE
-	// La idea seria tener un CASE en el extractor o en las reglas para obtener la fecha deseada y la fecha actual 
-	// y crear en dicho case todas las casuisticas posibles con estos datos obtenidos
-	private String extractedDate;
-	private String extractedHour;
-	
+
 	public ExtractorSemanticoImp(String rutaProcesador)
 			throws PersistenceException {
 		// validar las rutas
