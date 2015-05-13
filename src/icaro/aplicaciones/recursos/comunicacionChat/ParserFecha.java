@@ -182,10 +182,10 @@ public final class ParserFecha {
 			// notificacion para enviar mensaje al usuario.
 			//notif.setTipoNotificacion(tipoNotif.fechaAnterior);
 			calendar.set(calendar.get(Calendar.YEAR),(calendar.get(Calendar.MONTH))+1,numero);
-		} else {
-			msg = RecursoCalendarioImp.slashFormatter.format(msgDate);
-			notif.setMensajeNotificacion(msg);
-		}
+			msgDate = calendar.getTime();
+		} 
+		msg = RecursoCalendarioImp.slashFormatter.format(msgDate);
+		notif.setMensajeNotificacion(msg);
 		return notif;
 	}
 	/*
