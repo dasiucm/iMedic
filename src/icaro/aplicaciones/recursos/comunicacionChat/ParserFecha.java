@@ -180,7 +180,8 @@ public final class ParserFecha {
 			// poner anotacion de fecha anterior a la actual y que el
 			// agente espere esta
 			// notificacion para enviar mensaje al usuario.
-			notif.setTipoNotificacion(tipoNotif.fechaAnterior);
+			//notif.setTipoNotificacion(tipoNotif.fechaAnterior);
+			calendar.set(calendar.get(Calendar.YEAR),(calendar.get(Calendar.MONTH))+1,numero);
 		} else {
 			msg = RecursoCalendarioImp.slashFormatter.format(msgDate);
 			notif.setMensajeNotificacion(msg);
