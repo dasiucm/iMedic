@@ -460,6 +460,7 @@ public class InterpreteMsgsIRC {
 		anotacionesBusquedaPrueba.add("nombre");
 		anotacionesBusquedaPrueba.add("despedida");
 		anotacionesBusquedaPrueba.add("fecha");
+		anotacionesBusquedaPrueba.add("fechaNumero");
 		anotacionesBusquedaPrueba.add("inicioAnulacion");
 		anotacionesBusquedaPrueba.add("consulta");
 		anotacionesBusquedaPrueba.add("si");
