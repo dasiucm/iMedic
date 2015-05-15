@@ -7,10 +7,10 @@ public interface ItfUsoRecursoCalendario extends ItfUsoRecursoSimple {
 
 	/*------ Funcionalidad de paciente --------*/
 
-	void insertaCita(String usuario, String medico, String fecha)
+	String insertaCita(String usuario, String medico, String fecha)
 			throws Exception;
 
-	void insertaCita(CitaMedica cita) throws Exception;
+	String insertaCita(CitaMedica cita) throws Exception;
 
 	String consultaCitas(String usuario) throws Exception;
 

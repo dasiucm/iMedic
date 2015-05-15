@@ -1,6 +1,7 @@
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTrazas;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import static icaro.aplicaciones.recursos.recursoCalendario.imp.RecursoCalendarioImp.*;
+import static icaro.aplicaciones.recursos.persistenciaUsuarios.imp.PersistenciaUsuariosImp.*;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
 import icaro.infraestructura.entidadesBasicas.PerformativaUsuario;
@@ -146,7 +147,16 @@ rule "Establecer cita"
  	fu.setFoco(null);
  	
  	// AQUI LLAMAREMOS AL RECURSO DE CALENDARIO Y ALMACENAMOS TODO
- 	insertaCita(cm);
+ 	String msgToMedic = insertaCita(cm);
+ 	
+ 	// Si no hay errores, se pone un mensaje para avisar al medico
+ 	if (msgToMedic == ""){
+ 		msgToMedic = "El paciente " + getNombrePersistenciaUsuarios(cm.getUsuario()) + " ha reservado una cita para el dia " + cm.getFecha();
+    }
+    
+    TareaSincrona informarMedico = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+   	informarMedico.ejecutar(getUsuarioPersistenciaUsuarios(cm.getNombreMedico()),msgToMedic);
+ 	
  	
  	update(fu);
  	retract(cm);
