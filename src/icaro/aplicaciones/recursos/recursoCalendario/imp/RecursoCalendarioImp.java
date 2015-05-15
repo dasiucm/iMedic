@@ -26,7 +26,7 @@ public class RecursoCalendarioImp implements Serializable {
 
 	private static final String slash = "/";
 	private static final String dash = "-";
-	private static final SimpleDateFormat slashFormatter = new SimpleDateFormat(
+	public static final SimpleDateFormat slashFormatter = new SimpleDateFormat(
 			"dd/MM/yyyy");
 	private static final SimpleDateFormat dashFormatter = new SimpleDateFormat(
 			"dd-MM-yyyy");
@@ -53,7 +53,6 @@ public class RecursoCalendarioImp implements Serializable {
 		String msg = "";
 		if (citaValida(cita)) {
 			// TODO - Check the medic and return an error if it's not a valid name
-			
 			List<CitaMedica> citasPaciente = calendarioCitas_pacienteIdx
 					.get(cita.getUsuario());
 			if (citasPaciente == null) {

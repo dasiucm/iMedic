@@ -6,7 +6,7 @@ public class conversacionMedico {
 	public static final String obtenerFechaInicioOK = "Perfecto, ya conozco la fecha de inicio.";
 	public static final String obtenerFechaFin = "Necesito que me digas la fecha a partir de la cual volveras atender citas.";
 	public static final String obtenerFechaFinOK = "Perfecto, ya conozco la fecha de fin.";
-	public static final String validarAnulacionCitas1 = "¿Seguro que quieres anular las citas de la fecha ";
+	public static final String validarAnulacionCitas1 = "Seguro que quieres anular las citas de la fecha ";
 	public static final String validarAnulacionCitas2 = " a la fecha ";
 	public static final String validarAnulacionCitas3 = "?";
 	public static final String anulacionCitasCompleta1 = "Perfecto, he anulado las citas que tenias entre las fechas ";

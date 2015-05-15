@@ -15,6 +15,18 @@ global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
 global String agentId;
 
+rule "Notificar desconocimiento"
+ when
+ 	notif:NotificacionPaciente(user:identNotificador, tipoNotificacion == VocabularioGestionCitas.ExtraccionSemanticaNull )
+ 	fc:FocoUsuario(usuario == user )
+ then
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(NotificarAlUsuarioSinContexto.class);
+    tarea.ejecutar(fc);
+    retract(notif);
+    update(fc);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
 rule "crear foco usuario"
  when 
  	notif:NotificacionPaciente(identInterlc:identNotificador)
@@ -23,7 +35,18 @@ rule "crear foco usuario"
  	//Establezco el foco del usuario
  	FocoUsuario fu = new FocoUsuario(identInterlc);
  	insert(fu);
- 	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+rule "Resolicitar cita"
+ when
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.inicioPeticion);
+ 	fu:FocoUsuario(usuario == identInterlc, foco != null)
+ then
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+ 	tarea.ejecutar(identInterlc,conversacionPaciente.msg("focoRepetido"));
+ 	 	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+ 	retract(notif);
 end
 
 rule "Solicitud peticion de cita"
@@ -34,7 +57,7 @@ rule "Solicitud peticion de cita"
  	Tarea tareadist = gestorTareas.crearTarea(NotificarObjetivo.class);
     tareadist.ejecutar(identInterlc,notif,"PACIENTE"); 	
  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
- 	tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita1dameDatos);
+ 	tarea.ejecutar(identInterlc,conversacionPaciente.msg("dameDatos"));
  	Objetivo cita = new CrearCita();
  	cita.setobjectReferenceId(identInterlc);
  	Objetivo idmedico = new IdentificarMedico();
@@ -64,7 +87,7 @@ rule "Obtener nombre medico"
  	nom.setSolved();
  	cm.nombreMedico = msgg;
  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
- 	tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita3medicoRegistrado);
+ 	tarea.ejecutar(identInterlc,conversacionPaciente.msg("medicoRegistrado"));
  	update(nom);
  	retract(notif);
  	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
@@ -81,7 +104,7 @@ rule "Obtener fecha"
  	nom.setSolved();
  	cm.fecha = msgg;
  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
- 	tarea.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita2fechaRegistrada);
+ 	tarea.ejecutar(identInterlc,conversacionPaciente.msg("fechaRegistrada"));
  	update(nom);
  	retract(notif);
  	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
@@ -108,7 +131,6 @@ rule "Confirmacion de cita"
  	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.si, msgg:mensajeNotificacion )
  	cc:CrearCita(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
  then
- 	
  	Objetivo confirmar = new Confirmacion();
  	confirmar.setobjectReferenceId(identInterlc);
  	confirmar.setSolving();
@@ -144,24 +166,29 @@ rule "Establecer cita"
  	Tarea tareadist2 = gestorTareas.crearTarea(NotificarObjetivo.class);
     tareadist2.ejecutar(identInterlc,null,"RESET"); 
  	
- 	fu.setFoco(null);
- 	
  	// AQUI LLAMAREMOS AL RECURSO DE CALENDARIO Y ALMACENAMOS TODO
- 	String msgToMedic = insertaCita(cm);
+ 	String msgError = insertaCita(cm);
+ 	
+ 	TareaSincrona informarMedico = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+ 	TareaSincrona informarError = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
  	
  	// Si no hay errores, se pone un mensaje para avisar al medico
- 	if (msgToMedic == ""){
- 		msgToMedic = "El paciente " + getNombrePersistenciaUsuarios(cm.getUsuario()) + " ha reservado una cita para el dia " + cm.getFecha();
+ 	if (msgError == ""){
+ 		String msgToMedic = "El paciente " + getNombrePersistenciaUsuarios(cm.getUsuario()) + " ha reservado una cita para el dia " + cm.getFecha();
+ 		informarMedico.ejecutar(getUsuarioPersistenciaUsuarios(cm.getNombreMedico()),msgToMedic);
+ 		
+ 		fu.setFoco(null);
+ 		
+ 		update(fu);
+	 	retract(cm);
+	 	retract(cc);
+	 	retract(obj);
+	 	
+    } else {
+    	informarError.ejecutar(identInterlc,msgError);
     }
-    
-    TareaSincrona informarMedico = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-   	informarMedico.ejecutar(getUsuarioPersistenciaUsuarios(cm.getNombreMedico()),msgToMedic);
  	
  	
- 	update(fu);
- 	retract(cm);
- 	retract(cc);
- 	retract(obj);
  	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
@@ -200,6 +227,18 @@ rule "Consultar citas, teniendo el paciente"
     
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
     tarea.ejecutar(identInterlc,citas);
+    
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+    retract(notif);
+end
+
+rule "Eliminar Session"
+ when
+    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.session )
+ then
+    
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(EliminarSessionUsuario.class);
+    tarea.ejecutar(identInterlc);
     
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);

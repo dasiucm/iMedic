@@ -5,21 +5,21 @@
 
 package icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas;
 
-import icaro.aplicaciones.agentes.AgenteAplicacionDialogoCitasCognitivo.objetivos.ObtenerInfoInterlocutor;
-import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.objetivos.ObtenerNombreUsuario;
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.tipoNotif;
 import icaro.aplicaciones.informacion.gestionCitas.FocoUsuario;
-import icaro.aplicaciones.informacion.gestionCitas.MemUsuario;
-import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
-import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
+import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
+import icaro.aplicaciones.informacion.gestionCitas.NotificacionMedico;
+import icaro.aplicaciones.informacion.gestionCitas.NotificacionPaciente;
+import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
-import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
+import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaComunicacion;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 
 /**
  *
  * @author Francisco J Garijo
  */
-public class EliminarSessionUsuario extends TareaSincrona {
+public class EliminarSessionUsuario extends TareaComunicacion{
 
 	@Override
 	public void ejecutar(Object... params) {
@@ -44,7 +44,16 @@ public class EliminarSessionUsuario extends TareaSincrona {
 				}
 			
 			}
+			Notificacion notif = new Notificacion(usuario);
+			notif.tipoNotificacion = tipoNotif.session;
 
+			this.informaraOtroAgente(new NotificacionMedico(notif),
+					VocabularioGestionCitas.IdentAgenteAplicacionDialogoMedico);
+
+			this.informaraOtroAgente(new NotificacionPaciente(notif),
+					VocabularioGestionCitas.IdentAgenteAplicacionDialogoPaciente);
+
+			
 			// this.getEnvioHechos().insertarHecho(new MemUsuario());
 			// this.getEnvioHechos().insertarHechoWithoutFireRules(new Focus());
 			// this.getEnvioHechos().insertarHecho(new

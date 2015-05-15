@@ -19,6 +19,8 @@ public class FocoUsuario {
 	protected Objetivo foco;
 
 	protected Objetivo[] focosAnteriores = null;
+	
+	public int intentos;
 	/**
 	 * Tamao mximo de la cola circular
 	 */
@@ -36,6 +38,7 @@ public class FocoUsuario {
 		Arrays.fill(this.focosAnteriores, null);
 		this.indice = 0;
 		objetivoFocalizado = null;
+		intentos =0;
 	}
 	
 	protected int indice = 0;
