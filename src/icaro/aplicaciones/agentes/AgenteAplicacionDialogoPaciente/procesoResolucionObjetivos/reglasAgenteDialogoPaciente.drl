@@ -1,6 +1,7 @@
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTrazas;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import static icaro.aplicaciones.recursos.recursoCalendario.imp.RecursoCalendarioImp.*;
+import static icaro.aplicaciones.recursos.persistenciaUsuarios.imp.PersistenciaUsuariosImp.*;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
 import icaro.infraestructura.entidadesBasicas.PerformativaUsuario;
@@ -25,7 +26,6 @@ rule "Notificar desconocimiento"
     update(fc);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
-
 
 rule "crear foco usuario"
  when 
@@ -166,15 +166,29 @@ rule "Establecer cita"
  	Tarea tareadist2 = gestorTareas.crearTarea(NotificarObjetivo.class);
     tareadist2.ejecutar(identInterlc,null,"RESET"); 
  	
- 	fu.setFoco(null);
- 	
  	// AQUI LLAMAREMOS AL RECURSO DE CALENDARIO Y ALMACENAMOS TODO
- 	insertaCita(cm);
+ 	String msgError = insertaCita(cm);
  	
- 	update(fu);
- 	retract(cm);
- 	retract(cc);
- 	retract(obj);
+ 	TareaSincrona informarMedico = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+ 	TareaSincrona informarError = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+ 	
+ 	// Si no hay errores, se pone un mensaje para avisar al medico
+ 	if (msgError == ""){
+ 		String msgToMedic = "El paciente " + getNombrePersistenciaUsuarios(cm.getUsuario()) + " ha reservado una cita para el dia " + cm.getFecha();
+ 		informarMedico.ejecutar(getUsuarioPersistenciaUsuarios(cm.getNombreMedico()),msgToMedic);
+ 		
+ 		fu.setFoco(null);
+ 		
+ 		update(fu);
+	 	retract(cm);
+	 	retract(cc);
+	 	retract(obj);
+	 	
+    } else {
+    	informarError.ejecutar(identInterlc,msgError);
+    }
+ 	
+ 	
  	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 

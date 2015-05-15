@@ -14,15 +14,15 @@ public class ClaseGeneradoraRecursoCalendario extends ImplRecursoSimple implemen
 	}
 
 	@Override
-	public void insertaCita(String usuario, String medico, String fecha) throws Exception {
+	public String insertaCita(String usuario, String medico, String fecha) throws Exception {
 		// TODO Auto-generated method stub
-		RecursoCalendarioImp.insertaCita(usuario, medico, fecha);
+		return RecursoCalendarioImp.insertaCita(usuario, medico, fecha);
 	}
 	
 	@Override
-	public void insertaCita(CitaMedica cita) throws Exception {
+	public String insertaCita(CitaMedica cita) throws Exception {
 		// TODO Auto-generated method stub
-		RecursoCalendarioImp.insertaCita(cita);
+		return RecursoCalendarioImp.insertaCita(cita);
 	}
 
 	@Override

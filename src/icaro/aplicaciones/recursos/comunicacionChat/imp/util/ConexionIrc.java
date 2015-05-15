@@ -53,8 +53,10 @@ public class ConexionIrc {
 
 	// Default settings for the ConexionIrc.
 	private boolean _verbose = false;
-	private String _name = "ConexionIrc";
-	private String _login = "ConexionIrc";
+	//private String _name = "ConexionIrc";
+	private String _name = "AgenteCitas";
+	//private String _login = "ConexionIrc";
+	private String _login = "Citas";
 	private String _version = "ConexionIrc " + VERSION
 			+ " Java IRC Bot - www.jibble.org";
 	private String _finger = "You ought to be arrested for fingering a bot!";
