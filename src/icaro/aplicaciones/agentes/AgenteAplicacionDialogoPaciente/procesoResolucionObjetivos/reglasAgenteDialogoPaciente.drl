@@ -9,6 +9,7 @@ import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.objetivos.*;
 import icaro.aplicaciones.informacion.gestionCitas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tareas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tools.*;
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.*;
 
 global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
@@ -76,6 +77,23 @@ rule "Solicitud peticion de cita"
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
+rule "Notificar semantica incorrecta: pidiendo datos"
+ when
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotif.dni
+ 	|| tipoNotificacion == tipoNotifPaciente.si || tipoNotificacion == tipoNotifPaciente.no );
+ 	obj:CrearCita(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+	fu:FocoUsuario(usuario == identInterlc, foco == obj)
+	cm:CitaMedica(usuario == identInterlc)
+ then
+ 	
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(NotificarAlContextoIncorrecto.class);
+    tarea.ejecutar(fu);
+ 	retract(notif);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+
+
 rule "Obtener nombre medico"
  when
  	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.nombre,  msgg:mensajeNotificacion );
@@ -136,6 +154,21 @@ rule "Confirmacion de cita"
  	confirmar.setSolving();
  	insert(confirmar);
  
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+rule "Notificar semantica incorrecta: confirmando"
+ when
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotif.dni
+ 	|| tipoNotificacion == tipoNotifPaciente.nombre || tipoNotificacion == tipoNotifPaciente.fecha );
+ 	obj:CrearCita(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+	fu:FocoUsuario(usuario == identInterlc, foco == obj)
+	cm:CitaMedica(usuario == identInterlc)
+ then
+ 	
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(NotificarAlContextoIncorrecto.class);
+    tarea.ejecutar(fu);
+ 	retract(notif);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
@@ -217,6 +250,19 @@ rule "Consultar citas, teniendo el paciente"
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
 end
+
+
+rule "Anular cita"
+ when
+  	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotif.anular);
+ then
+ 	Tarea tareadist2 = gestorTareas.crearTarea(NotificarObjetivo.class);
+    tareadist2.ejecutar(identInterlc,null,"RESET"); 
+ 	notif.setTipoNotificacion(tipoNotifPaciente.session);
+ 	update(notif);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
 
 rule "Eliminar Session"
  when

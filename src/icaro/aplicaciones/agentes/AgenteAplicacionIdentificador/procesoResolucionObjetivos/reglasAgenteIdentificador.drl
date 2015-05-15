@@ -363,7 +363,7 @@ rule "Despedirse"
  	 cu:UsuarioContexto(usuario == identInterlc );
 	 then
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
-   TareaSincrona tarea = gestorTareas.crearTareaSincrona(EliminarSessionUsuario.class);
+   Tarea tarea = gestorTareas.crearTarea(EliminarSessionUsuario.class);
      tarea.ejecutar(cu.usuario);
    TareaSincrona tarea2 = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
      tarea2.ejecutar(cu.usuario,  conversacion.msg("despedida"));

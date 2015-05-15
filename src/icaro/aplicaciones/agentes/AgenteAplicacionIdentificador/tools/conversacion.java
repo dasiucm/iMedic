@@ -99,6 +99,11 @@ public class conversacion {
 		peticionDNIimperativo.add("realmente necesito su DNI, el sistema no permite avanzar si el");
 		peticionDNIimperativo.add("NECESITO SU DNI, DEJE DE JUGAR");
 		
+		List<String> semanticoErroneo = new ArrayList<String>(); 
+		semanticoErroneo.add("y que quieres que haga con eso?");
+		semanticoErroneo.add("me gustaria que me diga realmente lo que le pido");
+		semanticoErroneo.add("mmmmm... no me interesa, hablemos de algo mas interesanto");
+		
 		
 		conversacion.put("saludoInicial", saludoInicial);
 		conversacion.put("solicitarNombre", solicitarNombre);
@@ -116,6 +121,7 @@ public class conversacion {
 		conversacion.put("solicitarNombreImperativo", solicitarNombreImperativo);
 		conversacion.put("peticionDNIimperativo", peticionDNIimperativo);
 		conversacion.put("solicitarAccionImperativo", solicitarAccionImperativo);
+		conversacion.put("semanticoErroneo", semanticoErroneo);
 		
 	}
 	

@@ -462,6 +462,7 @@ public class InterpreteMsgsIRC {
 		anotacionesBusquedaPrueba.add("fecha");
 		anotacionesBusquedaPrueba.add("inicioAnulacion");
 		anotacionesBusquedaPrueba.add("consulta");
+		anotacionesBusquedaPrueba.add("anular");
 		anotacionesBusquedaPrueba.add("si");
 		anotacionesBusquedaPrueba.add("no");
 		// esto habria que pasarlo como parametro
