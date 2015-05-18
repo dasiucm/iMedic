@@ -19,7 +19,7 @@ import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.
  *
  * @author Francisco J Garijo
  */
-public class EliminarSessionUsuario extends TareaSincrona {
+public class EliminarSessionUsuarioPaciente extends TareaSincrona {
 
 	@Override
 	public void ejecutar(Object... params) {

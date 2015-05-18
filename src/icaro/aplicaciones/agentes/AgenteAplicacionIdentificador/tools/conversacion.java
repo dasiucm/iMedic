@@ -19,6 +19,12 @@ public class conversacion {
 		saludoInicial.add("Buenas, soy tu agente de confianza para manejo de citas medicas");
 		saludoInicial.add("Buenos dias, soy asistente tu para manejo de citas medicas");
 		
+		
+		List<String> saludoInicialDescortes = new ArrayList<String>();
+		saludoInicialDescortes.add("??? Hola?? Podria ser un poco mas cortés");
+		saludoInicialDescortes.add("Buenos dias?? ");
+		saludoInicialDescortes.add("Para la proxima vez, es de buena educación saludar");
+		
 		List<String> solicitarNombre = new ArrayList<String>();
 		solicitarNombre.add("Con quien tengo el gusto de hablar?");
 		solicitarNombre.add("me darias tu nombre?");
@@ -106,6 +112,7 @@ public class conversacion {
 		
 		
 		conversacion.put("saludoInicial", saludoInicial);
+		conversacion.put("saludoInicialDescortes", saludoInicialDescortes);
 		conversacion.put("solicitarNombre", solicitarNombre);
 		conversacion.put("obtencionNombre", obtencionNombre);
 		conversacion.put("obtencionDNI", obtencionDNI);
@@ -122,6 +129,7 @@ public class conversacion {
 		conversacion.put("peticionDNIimperativo", peticionDNIimperativo);
 		conversacion.put("solicitarAccionImperativo", solicitarAccionImperativo);
 		conversacion.put("semanticoErroneo", semanticoErroneo);
+		
 		
 	}
 	

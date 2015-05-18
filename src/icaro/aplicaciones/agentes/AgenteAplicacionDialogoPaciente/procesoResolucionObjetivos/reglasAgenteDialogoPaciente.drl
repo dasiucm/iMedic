@@ -9,7 +9,9 @@ import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.objetivos.*;
 import icaro.aplicaciones.informacion.gestionCitas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tareas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tools.*;
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.*;
+import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.objetivos.*;
 
 global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
@@ -20,7 +22,7 @@ rule "Notificar desconocimiento"
  	notif:NotificacionPaciente(user:identNotificador, tipoNotificacion == VocabularioGestionCitas.ExtraccionSemanticaNull )
  	fc:FocoUsuario(usuario == user )
  then
- 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(NotificarAlUsuarioSinContexto.class);
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(NotificarAlUsuarioSinContextoPaciente.class);
     tarea.ejecutar(fc);
     retract(notif);
     update(fc);
@@ -111,6 +113,25 @@ rule "Obtener nombre medico"
  	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
+
+rule "Actualizo el nombre medico"
+ when
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.nombre,  msgg:mensajeNotificacion );
+ 	nom:IdentificarMedico(state == Objetivo.SOLVED, objectReferenceId == identInterlc)
+ 	obj:CrearCita(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+	fu:FocoUsuario(usuario == identInterlc, foco == obj)
+	cm:CitaMedica(usuario == identInterlc)
+ then
+ 	nom.setSolved();
+ 	cm.nombreMedico = msgg;
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+ 	tarea.ejecutar(identInterlc,conversacionPaciente.msg("medicoRegistradoActualizar"));
+ 	update(nom);
+ 	retract(notif);
+ 	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+
 rule "Obtener fecha"
  when
  	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.fecha,  msgg:mensajeNotificacion );
@@ -123,6 +144,24 @@ rule "Obtener fecha"
  	cm.fecha = msgg;
  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
  	tarea.ejecutar(identInterlc,conversacionPaciente.msg("fechaRegistrada"));
+ 	update(nom);
+ 	retract(notif);
+ 	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
+
+rule "Actualizar fecha"
+ when
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.fecha,  msgg:mensajeNotificacion );
+ 	nom:ObtenerFechaCita(state == Objetivo.SOLVED, objectReferenceId == identInterlc)
+ 	obj:CrearCita(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+	fu:FocoUsuario(usuario == identInterlc, foco == obj)
+	cm:CitaMedica(usuario == identInterlc)
+ then
+ 	nom.setSolved();
+ 	cm.fecha = msgg;
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+ 	tarea.ejecutar(identInterlc,conversacionPaciente.msg("fechaRegistradaActualizar"));
  	update(nom);
  	retract(notif);
  	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
@@ -156,6 +195,9 @@ rule "Confirmacion de cita"
  
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
+
+
+
 
 rule "Notificar semantica incorrecta: confirmando"
  when
@@ -269,9 +311,130 @@ rule "Eliminar Session"
     notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.session )
  then
     
-    TareaSincrona tarea = gestorTareas.crearTareaSincrona(EliminarSessionUsuario.class);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(EliminarSessionUsuarioPaciente.class);
     tarea.ejecutar(identInterlc);
     
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
+end
+
+
+
+
+/// IDENTIFICACION DEL USUARIO
+
+rule "Cargar de la persistencia usuario la info"
+  when
+  	fc:FocoUsuario(user:usuario)
+  	not( exists (UsuarioContexto(usuario == user )))
+  then
+  // TODO CARGAR EL CONTEXTO DEL USUARIO
+  
+  recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
+
+rule "Finalizar la identificacion"
+ when
+ 	ObtenerDNIUsuario(user:objectReferenceId, state == Objetivo.SOLVED);
+ 	ObtenerNombreUsuario(objectReferenceId == user, state == Objetivo.SOLVED)
+ 	obj:IdentificarUsuario(state == Objetivo.PENDING ,objectReferenceId == user )
+ 	cu:UsuarioContexto(usuario == user)
+ 	fc:FocoUsuario(usuario == user)
+ then
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(UsuarioIdentificado.class);
+ 	tarea.ejecutar(user, cu);
+ 	fc.setFoco(null);
+ 	//TODO GUARDAR EN LA PERSISTENCIA USUARIO PARA PODER USARLA LUEGO 
+ 
+ 
+ 	obj.setSolved();
+ 	update(obj);
+ 	update(fc);
+end
+
+
+rule "Regla de solicitar nombre"
+ when
+ 	
+ 	fc:FocoUsuario(fcuser:usuario , foco == null)
+ 	obj:IdentificarUsuario(state == Objetivo.PENDING ,objectReferenceId == fcuser )
+ 	not( exists (ObtenerNombreUsuario(objectReferenceId == fcuser)))
+ then
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
+  	Objetivo no = new ObtenerNombreUsuario();
+  	no.setobjectReferenceId(fcuser);
+  	fc.setFoco(no);
+  	
+  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tarea.ejecutar(fcuser,conversacion.msg("solicitarNombre"));
+   	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   	update(fc);
+   	insert(no);
+end
+
+rule "Regla de obtencion de nombre"
+ when
+	obj:ObtenerNombreUsuario(user:objectReferenceId, state == Objetivo.PENDING)
+ 	fc:FocoUsuario(usuario == user, foco == obj )
+    notif:Notificacion(identNotificador == user, tipoNotificacion == tipoNotif.nombre, msgg:mensajeNotificacion )
+    cu:UsuarioContexto(usuario == user)
+ then
+ 	obj.setSolved();
+ 	cu.setNombre(msgg);
+ 	cu.actividad();
+ 	fc.setFoco(null);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarNombre.class);
+    tarea.ejecutar(user,conversacion.msg("obtencionNombre"),msgg);
+   	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   	
+   	update(obj);
+   	update(fc);
+   	retract(notif);
+end
+
+
+rule "Regla de solicitud de obtener DNI"
+ when
+ 	fc:FocoUsuario(fcuser:usuario , foco == null)
+ 	obj:IdentificarUsuario(state == Objetivo.PENDING ,objectReferenceId == fcuser )
+ 	not( exists (ObtenerDNIUsuario(objectReferenceId == fcuser)))
+ 	cu:UsuarioContexto(usuario == fcuser)
+ then
+
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
+  	Objetivo ob = new ObtenerDNIUsuario();	
+	ob.setobjectReferenceId(fcuser);
+	insert(ob);
+	fc.setFoco(ob);
+  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+  	if(cu.getNombre() == null){
+  	   tarea.ejecutar(fcuser, conversacion.msg("peticionDNI"));	
+  	}else{
+  	   tarea.ejecutar(fcuser, cu.getNombre()+ ", " + conversacion.msg("solicitarDNI"));
+  	}
+  
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   update(obj);
+   update(fc);
+end
+
+rule "Regla de obtencion de dni"
+ when
+ 	obj:ObtenerDNIUsuario(user:objectReferenceId, state == Objetivo.PENDING)
+ 	fc:FocoUsuario(usuario == user, foco == obj )
+    notif:Notificacion(identNotificador == user, tipoNotificacion == tipoNotif.dni, msgg:mensajeNotificacion )
+    cu:UsuarioContexto(usuario == user)
+ then
+ 	obj.setSolved();
+ 	cu.setDNI(msgg);
+ 	cu.actividad();
+ 	fc.setFoco(null);
+    TareaSincrona tarea = gestorTareas.crearTareaSincrona(SolicitarDNI.class);
+    tarea.ejecutar(user,cu);
+   	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   	
+   	update(obj);
+   	update(fc);
+   	retract(notif);
 end

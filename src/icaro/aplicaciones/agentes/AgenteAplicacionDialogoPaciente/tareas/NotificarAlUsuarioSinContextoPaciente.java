@@ -15,7 +15,7 @@ import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaSincrona;
  *
  * @author Francisco J Garijo
  */
-public class NotificarAlUsuarioSinContexto extends TareaSincrona {
+public class NotificarAlUsuarioSinContextoPaciente extends TareaSincrona {
 	private Objetivo contextoEjecucionTarea = null;
 	@Override
 	public void ejecutar(Object... params) {
