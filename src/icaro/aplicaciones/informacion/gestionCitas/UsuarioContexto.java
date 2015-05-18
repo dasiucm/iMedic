@@ -2,7 +2,9 @@ package icaro.aplicaciones.informacion.gestionCitas;
 
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 
-public class UsuarioContexto {
+import java.io.Serializable;
+
+public class UsuarioContexto implements Serializable {
 
 	public String usuario;
 	public String nombre;
@@ -10,10 +12,7 @@ public class UsuarioContexto {
 	public boolean medico;
 	public long tiempo;
 
-	public Focus foco;
-
 	public UsuarioContexto() {
-		foco = new Focus();
 		tiempo = System.currentTimeMillis();
 	}
 
@@ -51,14 +50,6 @@ public class UsuarioContexto {
 
 	public void setMedico(boolean medico) {
 		this.medico = medico;
-	}
-
-	public Focus getFoco() {
-		return foco;
-	}
-
-	public void setFoco(Focus foco) {
-		this.foco = foco;
 	}
 
 	public boolean inactividad(int i) {
