@@ -401,7 +401,17 @@ rule "Despedirse"
    retract( notif );
 end
 
-
+rule "fechaAnterior"
+	when 
+	 notif:Notificacion(identInterlc:identNotificador, tipoNotificacion == tipoNotif.fechaAnterior)
+	 cu:UsuarioContexto(usuario == identInterlc );
+	 then
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTARA LA REGLA: " + drools.getRule().getName());
+   TareaSincrona tarea2 = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+     tarea2.ejecutar(cu.usuario,  conversacion.msg("fechaAnterior"));
+   recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+   retract( notif );
+end
 
 
 	
