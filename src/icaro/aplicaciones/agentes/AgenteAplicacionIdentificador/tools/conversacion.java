@@ -19,6 +19,11 @@ public class conversacion {
 		saludoInicial.add("Buenas, soy tu agente de confianza para manejo de citas medicas");
 		saludoInicial.add("Buenos dias, soy asistente tu para manejo de citas medicas");
 		
+		List<String> solicitarNuevamenteDNI = new ArrayList<String>();
+		solicitarNuevamenteDNI.add("Para continuar voy a necesitar unos datos tuyos");
+		solicitarNuevamenteDNI.add("ahora voy a necesitar tus datos");
+		solicitarNuevamenteDNI.add("ahora quiero tus datos");
+		
 		
 		List<String> saludoInicialDescortes = new ArrayList<String>();
 		saludoInicialDescortes.add("??? Hola?? Podria ser un poco mas cortés");
@@ -110,14 +115,17 @@ public class conversacion {
 		fechaAnterior.add("Parece que ya ha pasado el día deseado para la cita");
 		fechaAnterior.add("Introduzca una fecha futura");
 		
-		
-		
 		List<String> semanticoErroneo = new ArrayList<String>(); 
 		semanticoErroneo.add("y que quieres que haga con eso?");
 		semanticoErroneo.add("me gustaria que me diga realmente lo que le pido");
 		semanticoErroneo.add("mmmmm... no me interesa, hablemos de algo mas interesanto");
 		
+		List<String> solicitarAccion = new ArrayList<String>(); 
+		solicitarAccion.add("Le sugiero que me diga que le gustaria hacer");
+		solicitarAccion.add("Podria sugerirle, que me diga algo relacionado con pedir citas");
+		solicitarAccion.add("Podria sugerirle, que me diga algo relacionado con consultar citas");
 		
+		conversacion.put("solicitarAccion", solicitarAccion);
 		conversacion.put("saludoInicial", saludoInicial);
 		conversacion.put("saludoInicialDescortes", saludoInicialDescortes);
 		conversacion.put("solicitarNombre", solicitarNombre);
@@ -137,7 +145,7 @@ public class conversacion {
 		conversacion.put("solicitarAccionImperativo", solicitarAccionImperativo);
 		conversacion.put("semanticoErroneo", semanticoErroneo);
 		conversacion.put("fechaAnterior", fechaAnterior);
-		
+		conversacion.put("solicitarNuevamenteDNI", solicitarNuevamenteDNI);		
 	}
 	
 	

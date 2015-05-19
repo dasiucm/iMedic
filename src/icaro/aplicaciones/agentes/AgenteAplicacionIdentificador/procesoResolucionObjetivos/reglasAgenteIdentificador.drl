@@ -10,6 +10,7 @@ import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tareas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionIdentificador.tools.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoPaciente.tools.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoMedico.tools.*;
+import static icaro.aplicaciones.recursos.persistenciaUsuarios.imp.PersistenciaUsuariosImp.*;
 
 global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
@@ -199,14 +200,54 @@ rule "Finalizar la identificacion"
  	tarea.ejecutar(user, cu);
  	fc.setFoco(null);
  	//TODO GUARDAR EN LA PERSISTENCIA USUARIO PARA PODER USARLA LUEGO 
- 
- 
+ 	Tarea tarea2 = gestorTareas.crearTarea(NotificarUsuarioIdentificado.class);
+    tarea2.ejecutar(cu);
+    insertarUsuario(user,cu);
+
+	NotificacionObjetivo f = new NotificacionObjetivo();
+	f.setTipoNotificacion(tipoNotif.objetivo);
+	f.setAgente("INIT");
+	f.identNotificador = user;
+	insert(f);
+
  	obj.setSolved();
  	update(obj);
  	update(fc);
 end
 
+rule "Contexto incorrecto Luego de identificar"
+ when 
+   notif:Notificacion(identInterlc:identNotificador, 
+    		tipoNotificacion != tipoNotifPaciente.inicioPeticion &&
+    		tipoNotificacion != tipoNotifPaciente.consulta && 
+    		tipoNotificacion != tipoNotif.saludo && tipoNotificacion != tipoNotif.despedida)
+    //obj:DistribuirMensajes(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+    fc:FocoUsuario(usuario == identInterlc, foco == null)
+    cu:UsuarioContexto(usuario == identInterlc)
+ then
+  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+  	tarea.ejecutar(identInterlc, cu.getNombre()+ ", " + conversacion.msg("distribucion"));	
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+  	retract(notif);
+end
 
+rule "Recibir Objetivo primera vez"
+ when 
+ 	notif:NotificacionObjetivo(identInterlc:identNotificador, tipoNotificacion == tipoNotif.objetivo, agente == "INIT")
+ 	//obj:DistribuirMensajes(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+ 	obj:IdentificarUsuario(state == Objetivo.SOLVED ,objectReferenceId == identInterlc )
+    fc:FocoUsuario(usuario == identInterlc, foco == null)
+    cu:UsuarioContexto(usuario == identInterlc)
+ then
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+  	tarea.ejecutar(identInterlc, cu.getNombre()+ ", " + conversacion.msg("distribucion"));	
+ 	cu.actividad();
+	fc.refocus();
+	update(fc);
+	update(cu);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+ 	retract(notif);
+end
 /*
 rule "Focalizacion de distribucion de mensajes"
  when
@@ -366,7 +407,6 @@ rule "Detectar Inactividad"
   	}else{
   		tarea.ejecutar(cu.getUsuario(), cu.getNombre() +", "+ conversacion.msg("inactividad"));
   	}
-     tarea.ejecutar(cu.getUsuario(), cu.getNombre() +", "+ conversacion.msg("inactividad"));
    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
