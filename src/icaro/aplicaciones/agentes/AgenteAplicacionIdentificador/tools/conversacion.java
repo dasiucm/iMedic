@@ -52,7 +52,7 @@ public class conversacion {
 		inactividad.add("hola??? sigue alli?.... como molesta que lo dejen hablando solo");
 		
 		List<String> usuarioRegistrado = new ArrayList<String>();
-		usuarioRegistrado.add("Veo que ya se encuentras en el sistema");
+		usuarioRegistrado.add("Veo que ya te encuentras en el sistema");
 		usuarioRegistrado.add("Veo que no es la primera vez que pasas por aqui");
 		usuarioRegistrado.add("mmmm... pues ya te tengo en el sistema, ya estabas registrado");
 		
@@ -62,8 +62,8 @@ public class conversacion {
 		usuarionoRegistrado.add("Al ser la primera vez que utilizas el sistema necesitare mas datos");
 		
 		List<String> resaludar = new ArrayList<String>();
-		resaludar.add("hola?? creo que ya nos saludamos");
-		resaludar.add("hola hola?? podemos estar todo el dia en esto si quieres");
+		resaludar.add("Hola...creo que ya nos saludamos.");
+		resaludar.add("Hola hola...podemos estar todo el dia en esto si quieres.");
 		
 		
 		List<String> sincontexto = new ArrayList<String>(); 
