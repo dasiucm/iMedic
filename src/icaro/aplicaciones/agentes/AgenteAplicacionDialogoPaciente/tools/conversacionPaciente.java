@@ -49,11 +49,23 @@ public class conversacionPaciente {
 		medicoRegistrado.add("Vale, ya tengo el medico");
 		medicoRegistrado.add("Perfecto ya tengo el nombre del medico");
 		
+		List<String> medicoRegistradoActualizar = new ArrayList<String>();
+		medicoRegistradoActualizar.add("Vale ya te cambie el medico");
+		medicoRegistradoActualizar.add("Vale, ya cambio el medico");
+		medicoRegistradoActualizar.add("Te actualizo el medico");
+		
+		List<String> fechaRegistradaActualizar = new ArrayList<String>();
+		fechaRegistradaActualizar.add("Ya te cambio la fecha");
+		fechaRegistradaActualizar.add("Vale, ya te actualize la fecha");
+		fechaRegistradaActualizar.add("Fecha cambiada");
+		
 		List<String> fechaRegistrada = new ArrayList<String>();
 		fechaRegistrada.add("Listo con la fecha");
 		fechaRegistrada.add("Vale, ya tengo la fecha");
 		fechaRegistrada.add("Perfecto ya tengo la fecha");
 		
+		conversacion.put("fechaRegistradaActualizar", fechaRegistradaActualizar);
+		conversacion.put("medicoRegistradoActualizar", medicoRegistradoActualizar);
 		conversacion.put("dameDatos", dameDatos);
 		conversacion.put("focoRepetido", focoRepetido);
 		conversacion.put("imperativoPedirFecha", imperativoPedirFecha);

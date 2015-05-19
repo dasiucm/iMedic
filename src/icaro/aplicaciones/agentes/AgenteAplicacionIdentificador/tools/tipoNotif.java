@@ -8,6 +8,7 @@ public class tipoNotif {
 	public static String pordefinir = "definido";
 	public static String objetivo = "objetivo";
 	public static String session = "session";
+	public static String anular = "inicioAnulacion";
 	public static String fechaAnterior = "fechaAnterior";
 	
 }
