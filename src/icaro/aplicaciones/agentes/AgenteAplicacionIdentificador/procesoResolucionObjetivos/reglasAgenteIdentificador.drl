@@ -219,17 +219,112 @@ rule "Contexto incorrecto Luego de identificar"
  when 
    notif:Notificacion(identInterlc:identNotificador, 
     		tipoNotificacion != tipoNotifPaciente.inicioPeticion &&
-    		tipoNotificacion != tipoNotifPaciente.consulta && 
-    		tipoNotificacion != tipoNotif.saludo && tipoNotificacion != tipoNotif.despedida)
+    		tipoNotificacion != tipoNotifPaciente.consulta && tipoNotificacion != tipoNotif.no && 
+    		tipoNotificacion != tipoNotif.saludo && tipoNotificacion != tipoNotif.despedida && tipoNotificacion != tipoNotif.si)
     //obj:DistribuirMensajes(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
     fc:FocoUsuario(usuario == identInterlc, foco == null)
     cu:UsuarioContexto(usuario == identInterlc)
  then
   	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-  	tarea.ejecutar(identInterlc, cu.getNombre()+ ", " + conversacion.msg("distribucion"));	
+  	tarea.ejecutar(identInterlc,conversacion.msg("semanticoErroneo"));	
   	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
   	retract(notif);
 end
+
+
+rule "Contexto incorrecto antes de identificar"
+ when 
+   notif:Notificacion(identInterlc:identNotificador, 
+    		tipoNotificacion != tipoNotifPaciente.inicioPeticion &&
+    		tipoNotificacion != tipoNotifPaciente.consulta && tipoNotificacion != tipoNotif.no &&
+    		tipoNotificacion != tipoNotif.saludo && tipoNotificacion != tipoNotif.despedida && tipoNotificacion != tipoNotif.si && tipoNotificacion != tipoNotif.dni)
+    obj:ObtenerDNIUsuario(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+    fc:FocoUsuario(usuario == identInterlc, foco == obj)
+    cu:UsuarioContexto(usuario == identInterlc)
+ then
+  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+  	tarea.ejecutar(identInterlc,conversacion.msg("semanticoErroneo"));	
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+  	retract(notif);
+end
+
+
+rule "Contexto incorrecto obtenerNombreUsuario"
+ when 
+   notif:Notificacion(identInterlc:identNotificador, 
+    		tipoNotificacion != tipoNotifPaciente.inicioPeticion &&
+    		tipoNotificacion != tipoNotifPaciente.consulta && tipoNotificacion != tipoNotif.no &&
+    		tipoNotificacion != tipoNotif.saludo && tipoNotificacion != tipoNotif.despedida && tipoNotificacion != tipoNotif.si && tipoNotificacion != tipoNotif.nombre)
+    obj:ObtenerNombreUsuario(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+    fc:FocoUsuario(usuario == identInterlc, foco == obj)
+    cu:UsuarioContexto(usuario == identInterlc)
+ then
+  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+  	tarea.ejecutar(identInterlc,conversacion.msg("semanticoErroneo"));	
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+  	retract(notif);
+end
+
+
+rule "Mensaje confirmacion solicitud DNI"
+ when 
+   notif:Notificacion(identInterlc:identNotificador, 
+     		tipoNotificacion == tipoNotif.si )
+    obj:ObtenerDNIUsuario(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+    fc:FocoUsuario(usuario == identInterlc, foco == obj)
+    cu:UsuarioContexto(usuario == identInterlc)
+ then
+  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+  	tarea.ejecutar(identInterlc,conversacion.msg("solicitud2"));	
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+  	retract(notif);
+end
+
+
+rule "Mensaje confirmacion solicitud nombre"
+ when 
+   notif:Notificacion(identInterlc:identNotificador, 
+     		tipoNotificacion == tipoNotif.si )
+    obj:ObtenerNombreUsuario(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+    fc:FocoUsuario(usuario == identInterlc, foco == obj)
+    cu:UsuarioContexto(usuario == identInterlc)
+ then
+  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+  	tarea.ejecutar(identInterlc,conversacion.msg("solicitud2"));	
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+  	retract(notif);
+end
+
+
+rule "Mensaje denegacion solicitud DNI"
+ when 
+   notif:Notificacion(identInterlc:identNotificador, 
+     		tipoNotificacion == tipoNotif.no )
+    obj:ObtenerDNIUsuario(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+    fc:FocoUsuario(usuario == identInterlc, foco == obj)
+    cu:UsuarioContexto(usuario == identInterlc)
+ then
+  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+  	tarea.ejecutar(identInterlc,conversacion.msg("denegacion2"));	
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+  	retract(notif);
+end
+
+
+rule "Mensaje denegacion solicitud nombre"
+ when 
+   notif:Notificacion(identInterlc:identNotificador, 
+     		tipoNotificacion == tipoNotif.no )
+    obj:ObtenerNombreUsuario(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+    fc:FocoUsuario(usuario == identInterlc, foco == obj)
+    cu:UsuarioContexto(usuario == identInterlc)
+ then
+  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+  	tarea.ejecutar(identInterlc,conversacion.msg("denegacion2"));	
+  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+  	retract(notif);
+end
+
 
 rule "Recibir Objetivo primera vez"
  when 
@@ -382,7 +477,7 @@ rule "Recibir Objetivo Completado"
  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
   	tarea.ejecutar(identInterlc, conversacion.msg("objetivoLogrado"));	
  	cu.actividad();
-	fc.refocus();
+	fc.setFoco(null);
 	update(fc);
 	update(cu);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());

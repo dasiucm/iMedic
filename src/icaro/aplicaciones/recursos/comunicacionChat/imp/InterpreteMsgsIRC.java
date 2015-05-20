@@ -1507,7 +1507,7 @@ public class InterpreteMsgsIRC {
 		while (annotTypesSal.hasNext()) {
 			Annotation annot = (Annotation) annotTypesSal.next();
 			String anotType = annot.getType();
-			if (anotType.equalsIgnoreCase("saludo")) {
+			if (anotType.equalsIgnoreCase("saludo")&& !anotaciones_leidas.contains("saludo")) {
 				anotaciones_leidas.add("saludo");
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(

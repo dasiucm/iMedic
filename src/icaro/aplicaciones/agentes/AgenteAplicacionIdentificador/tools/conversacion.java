@@ -115,6 +115,14 @@ public class conversacion {
 		fechaAnterior.add("Parece que ya ha pasado el día deseado para la cita");
 		fechaAnterior.add("Introduzca una fecha futura");
 		
+		List<String> solicitud2 = new ArrayList<String>(); 
+		solicitud2.add("Bien, adelante");
+		solicitud2.add("Perfecto, continúe");
+		
+		List<String> denegacion2 = new ArrayList<String>(); 
+		denegacion2.add("Pues tú me dirás");
+		denegacion2.add("tienes una pequeña manía persecutoria. Nos espían!");
+		
 		List<String> semanticoErroneo = new ArrayList<String>(); 
 		semanticoErroneo.add("y que quieres que haga con eso?");
 		semanticoErroneo.add("me gustaria que me diga realmente lo que le pido");
@@ -145,7 +153,9 @@ public class conversacion {
 		conversacion.put("solicitarAccionImperativo", solicitarAccionImperativo);
 		conversacion.put("semanticoErroneo", semanticoErroneo);
 		conversacion.put("fechaAnterior", fechaAnterior);
-		conversacion.put("solicitarNuevamenteDNI", solicitarNuevamenteDNI);		
+		conversacion.put("solicitarNuevamenteDNI", solicitarNuevamenteDNI);
+		conversacion.put("solicitud2", solicitud2);
+		conversacion.put("denegacion2", denegacion2);
 	}
 	
 	
