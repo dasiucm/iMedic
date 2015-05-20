@@ -8,6 +8,8 @@ import icaro.aplicaciones.agentes.AgenteAplicacionDialogoMedico.objetivos.*;
 import icaro.aplicaciones.informacion.gestionCitas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoMedico.tareas.*;
 import icaro.aplicaciones.agentes.AgenteAplicacionDialogoMedico.tools.*;
+import static icaro.aplicaciones.recursos.recursoCalendario.imp.RecursoCalendarioImp.*;
+import static icaro.aplicaciones.recursos.persistenciaUsuarios.imp.PersistenciaUsuariosImp.*;
 
 global ItfGestorTareas gestorTareas;
 global ItfUsoRecursoTrazas recursoTrazas;
@@ -46,9 +48,9 @@ rule "Inicio obtención datos anulacion cita"
  	idFechaInicio.setobjectReferenceId(identInterlc);
  	insert(idFechaInicio);
  	
- 	Objetivo idFechaFin = new IdentificarFechaFin();
- 	idFechaFin.setobjectReferenceId(identInterlc);
- 	insert(idFechaFin);
+ 	// Objetivo idFechaFin = new IdentificarFechaFin();
+ 	// idFechaFin.setobjectReferenceId(identInterlc);
+ 	// insert(idFechaFin);
  	
  	fu.setFoco(anularCitas);
  	update(fu);
@@ -99,17 +101,17 @@ end
 rule "Focalizar anular cita"
  when
     fechaIni:IdentificarFechaInicio(state == Objetivo.SOLVED, identInterlc:objectReferenceId) 
-    fechaFin:IdentificarFechaFin(state == Objetivo.SOLVED, objectReferenceId == identInterlc)
+    // fechaFin:IdentificarFechaFin(state == Objetivo.SOLVED, objectReferenceId == identInterlc)
     obj:AnularCitas(state == Objetivo.PENDING, objectReferenceId == identInterlc)
  then
     obj.setSolving();
     
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
-    tarea.ejecutar(identInterlc,conversacionMedico.validarAnulacionCitas1 + obj.getFechaInicio() + conversacionMedico.validarAnulacionCitas2 + obj.getFechaFin() + conversacionMedico.validarAnulacionCitas3);
+    tarea.ejecutar(identInterlc,conversacionMedico.validarAnulacionCitas1 + obj.getFechaInicio() + conversacionMedico.validarAnulacionCitas3);
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
  	
  	retract(fechaIni);
- 	retract(fechaFin);
+ 	// retract(fechaFin);
  	
  	update(obj);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
@@ -151,15 +153,25 @@ rule "Anulacion confirmada"
     validar:ValidarAnular(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
 	fu:FocoUsuario(usuario == identInterlc, foco == anular)
  then
- 	TareaSincrona tareadist = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
  	String fechaI = anular.getFechaInicio();
-    String fechaF = anular.getFechaFin();
- 	String msgToSend = conversacionMedico.anulacionCitasCompleta1 + fechaI + conversacionMedico.anulacionCitasCompleta2 + fechaF + conversacionMedico.anulacionCitasCompleta3;
-    tareadist.ejecutar(identInterlc,msgToSend); 	
+    //String fechaF = anular.getFechaFin();
  	Tarea tareadist2 = gestorTareas.crearTarea(NotificarObjetivo.class);
     tareadist2.ejecutar(identInterlc,null,"RESET"); 
     
     // AQUI LLAMAREMOS AL RECURSO DE CANLENDARIO PARA BORRAR LAS FECHAS QUE TOQUEN Y AVISAR A LOS USUARIOS 	
+    String nombremedico = getNombrePersistenciaUsuarios(identInterlc);
+ 	TareaSincrona tareadist = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    if(nombremedico.isEmpty()) {
+    	
+ 		String msgToSend = conversacionMedico.errorAnulrCitas1;
+    	tareadist.ejecutar(identInterlc,msgToSend); 	
+    } else {
+    
+    	darBajaCitas(nombremedico, fechaI);
+    	
+ 		String msgToSend = conversacionMedico.anulacionCitasCompleta1 + fechaI;
+    	tareadist.ejecutar(identInterlc,msgToSend); 	
+    }
  	fu.setFoco(null);
  	update(fu);
  	

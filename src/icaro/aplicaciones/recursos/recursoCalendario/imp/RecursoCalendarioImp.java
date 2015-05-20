@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.time.DateUtils;
+
 public class RecursoCalendarioImp implements Serializable {
 
 	/**
@@ -131,15 +133,14 @@ public class RecursoCalendarioImp implements Serializable {
 
 	/*------ Funcionalidad de medico --------*/
 
-	public static Boolean darBajaCitas(String medico, String fechaInicio,
-			String fechaFin) throws Exception {
+	public static Boolean darBajaCitas(String medico, String fechaInicio) throws Exception {
 
 		Boolean borrado = false;
 		List<CitaMedica> citasMedicas = calendarioCitas_medicoIdx.get(medico);
 		if (citasMedicas != null) {
 			for (int i = 0; i < citasMedicas.size(); ++i) {
 				CitaMedica citaMedica = citasMedicas.get(i);
-				if (citaEnRangoFecha(citaMedica, fechaInicio, fechaFin)) {
+				if (citaEnRangoFecha(citaMedica, fechaInicio)) {
 					darBajaCita(citaMedica);
 					borrado = true;
 				}
@@ -178,14 +179,12 @@ public class RecursoCalendarioImp implements Serializable {
 	}
 
 	private static Boolean citaEnRangoFecha(CitaMedica cita,
-			String fechaInicio, String fechaFin) {
+			String fechaInicio) {
 		Date date = getDateFromString(cita.getFecha());
 		if (date != null) {
 			Date initialDate = getDateFromString(fechaInicio);
 			if (initialDate != null) {
-				Date finalDate = getDateFromString(fechaFin);
-				return finalDate != null
-						&& (date.after(initialDate) && date.before(finalDate));
+				return DateUtils.isSameDay(date, initialDate);
 			}
 			return false;
 		}
