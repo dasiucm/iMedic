@@ -53,7 +53,7 @@ public class ClaseGeneradoraRecursoCalendario extends ImplRecursoSimple implemen
 	@Override
 	public Boolean darBajaCitas(String medico, String fechaInicio, String fechaFin) throws Exception {
 		// TODO Auto-generated method stub
-		return RecursoCalendarioImp.darBajaCitas(medico, fechaInicio, fechaFin);
+		return RecursoCalendarioImp.darBajaCitas(medico, fechaInicio);
 	}
 
 	@Override
