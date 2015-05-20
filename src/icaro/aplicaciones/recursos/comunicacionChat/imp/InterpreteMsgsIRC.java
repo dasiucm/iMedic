@@ -1494,7 +1494,8 @@ public class InterpreteMsgsIRC {
 		// recorremos las anotaciones obtenidas y las traducimos a objetos del
 		// modelo de información
 		ArrayList anotacionesInterpretadas = new ArrayList();
-		// int i=0;
+		ArrayList<String> anotaciones_leidas = new ArrayList<String>();
+		// int i=0; 
 		Iterator annotTypesSal = anotacionesRelevantes.iterator();
 		/*
 		 * Esto es porque, cada vez que detecta la palabra "cita" crea DOS
@@ -1507,83 +1508,75 @@ public class InterpreteMsgsIRC {
 			Annotation annot = (Annotation) annotTypesSal.next();
 			String anotType = annot.getType();
 			if (anotType.equalsIgnoreCase("saludo")) {
+				anotaciones_leidas.add("saludo");
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
 								contextoInterpretacion, annot));
 				// i++;
 			} else if (!tienePeticion
-					&& anotType.equalsIgnoreCase("iniciopeticion")) {
+					&& anotType.equalsIgnoreCase("iniciopeticion")&& !anotaciones_leidas.contains("iniciopeticion")) {
+				anotaciones_leidas.add("iniciopeticion");
 				tienePeticion = true;
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
 								contextoInterpretacion, annot));
 
-			} else if (anotType.equalsIgnoreCase("nombre")) {
+			} else if (anotType.equalsIgnoreCase("nombre")&& !anotaciones_leidas.contains("nombre")) {
+				anotaciones_leidas.add("nombre");
 				tienePeticion = true;
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
 								contextoInterpretacion, annot));
 
-			} else if (anotType.equalsIgnoreCase("dni")) {
+			} else if (anotType.equalsIgnoreCase("dni")&& !anotaciones_leidas.contains("dni")) {
+				anotaciones_leidas.add("dni");
 				tienePeticion = true;
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
 								contextoInterpretacion, annot));
 
-			} else if (anotType.equalsIgnoreCase("despedida")) {
+			} else if (anotType.equalsIgnoreCase("despedida")&& !anotaciones_leidas.contains("despedida")) {
+				anotaciones_leidas.add("despedida");
 				tienePeticion = true;
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
 								contextoInterpretacion, annot));
 
-			} else if (anotType.equalsIgnoreCase("fecha")) {
+			} else if (anotType.equalsIgnoreCase("fecha")&& !anotaciones_leidas.contains("fecha")) {
+				anotaciones_leidas.add("fecha");
 				tienePeticion = true;
 				anotacionesInterpretadas.add(ParserFecha
 						.parseaFecha(interpretarAnotacionSaludoEInicioPeticion(
 								contextoInterpretacion, annot)));
 
-			} else if (anotType.equalsIgnoreCase("fechaNumero")) {
+			} else if (anotType.equalsIgnoreCase("fechaNumero")&& !anotaciones_leidas.contains("fechaNumero")) {
+				anotaciones_leidas.add("fechaNumero");
 				tienePeticion = true;
 				anotacionesInterpretadas.add(ParserFecha
 						.parseaFechaNumero(interpretarAnotacionSaludoEInicioPeticion(
 								contextoInterpretacion, annot)));
 
-			} else if (anotType.equalsIgnoreCase("inicioAnulacion")) {
+			} else if (anotType.equalsIgnoreCase("inicioAnulacion")&& !anotaciones_leidas.contains("inicioAnulacion")) {
+				anotaciones_leidas.add("inicioAnulacion");
 				tienePeticion = true;
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
 								contextoInterpretacion, annot));
 
-			} else if (anotType.equalsIgnoreCase("consulta")) {
+			} else if (anotType.equalsIgnoreCase("consulta") && !anotaciones_leidas.contains("consulta")) {
+				anotaciones_leidas.add("consulta");
 				tienePeticion = true;
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
 								contextoInterpretacion, annot));
-
-			} else if (anotType.equalsIgnoreCase("nombre")) {
+			} else if (anotType.equalsIgnoreCase("si") && !anotaciones_leidas.contains("si")) {
+				anotaciones_leidas.add("si");
 				tienePeticion = true;
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
 								contextoInterpretacion, annot));
-
-			} else if (anotType.equalsIgnoreCase("dni")) {
-				tienePeticion = true;
-				anotacionesInterpretadas
-						.add(interpretarAnotacionSaludoEInicioPeticion(
-								contextoInterpretacion, annot));
-
-			} else if (anotType.equalsIgnoreCase("despedida")) {
-				tienePeticion = true;
-				anotacionesInterpretadas
-						.add(interpretarAnotacionSaludoEInicioPeticion(
-								contextoInterpretacion, annot));
-
-			} else if (anotType.equalsIgnoreCase("si")) {
-				tienePeticion = true;
-				anotacionesInterpretadas
-						.add(interpretarAnotacionSaludoEInicioPeticion(
-								contextoInterpretacion, annot));
-			} else if (anotType.equalsIgnoreCase("no")) {
+			} else if (anotType.equalsIgnoreCase("no") && !anotaciones_leidas.contains("no")) {
+				anotaciones_leidas.add("no");
 				tienePeticion = true;
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
