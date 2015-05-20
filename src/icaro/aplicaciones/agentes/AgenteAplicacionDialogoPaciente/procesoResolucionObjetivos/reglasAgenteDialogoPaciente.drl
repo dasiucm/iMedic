@@ -285,7 +285,16 @@ rule "Establecer cita"
  	cm.nombrePaciente = cu.nombre;
  	
  	// AQUI LLAMAREMOS AL RECURSO DE CALENDARIO Y ALMACENAMOS TODO
- 	insertaCita(cm);
+ 
+ 	String msgToMedic = null;
+ 	TareaSincrona informar = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+ 	// Si no hay errores, se pone un mensaje para avisar al medico
+ 	if (insertaCita(cm)){
+ 		msgToMedic = "El paciente " + getNombrePersistenciaUsuarios(cm.getUsuario()) + " ha reservado una cita para el dia " + cm.getFecha();
+  		informar.ejecutar(getUsuarioPersistenciaUsuarios(cm.getNombreMedico()),msgToMedic);  
+    } else {
+  		informar.ejecutar(identInterlc, "Ha ocurrido un error inesperado, por favor vuelve a intentarlo mas tarde. La cita posiblemente no sea valida.");
+	}
  	
  	update(fu);
  	retract(cm);

@@ -41,13 +41,13 @@ public class RecursoCalendarioImp implements Serializable {
 
 	/*------ Funcionalidad de paciente --------*/
 
-	public static void insertaCita(String usuario, String medico, String fecha)
+	public static boolean insertaCita(String usuario, String medico, String fecha)
 			throws Exception {
 		CitaMedica cita = new CitaMedica(usuario, medico, fecha);
-		insertaCita(cita);
+		return insertaCita(cita);
 	}
 
-	public static void insertaCita(CitaMedica cita) throws Exception {
+	public static boolean insertaCita(CitaMedica cita) throws Exception {
 		if (citaValida(cita)) {
 			List<CitaMedica> citasPaciente = calendarioCitas_pacienteIdx
 					.get(cita.getUsuario());
@@ -65,8 +65,12 @@ public class RecursoCalendarioImp implements Serializable {
 			citasMedico.add(cita);
 			calendarioCitas_medicoIdx.put(cita.getMedico(), citasMedico);
 			guardaCalendarios();
+			return true;
 		}
+		return false;
 	}
+	
+	
 
 	public static String consultaCitas(String usuario) throws Exception {
 		String msg = null;
