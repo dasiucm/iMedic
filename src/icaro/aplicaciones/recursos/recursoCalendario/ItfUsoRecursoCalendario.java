@@ -1,6 +1,7 @@
 package icaro.aplicaciones.recursos.recursoCalendario;
 
 import icaro.aplicaciones.informacion.gestionCitas.CitaMedica;
+import icaro.aplicaciones.recursos.recursoCalendario.imp.RecursoCalendarioImp;
 import icaro.infraestructura.patronRecursoSimple.ItfUsoRecursoSimple;
 
 public interface ItfUsoRecursoCalendario extends ItfUsoRecursoSimple {
@@ -27,5 +28,10 @@ public interface ItfUsoRecursoCalendario extends ItfUsoRecursoSimple {
 			throws Exception;
 
 	String consultarHorario(String medico) throws Exception;
+	
+	/* --------------- RECOMENDACIONES -------------------- */
+	String recomiendaFecha(String usuario) throws Exception;
+	
+	String recomiendaMedico(String usuario) throws Exception;
 
 }
