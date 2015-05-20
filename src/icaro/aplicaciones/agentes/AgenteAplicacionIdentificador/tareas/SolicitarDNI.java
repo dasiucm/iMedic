@@ -53,7 +53,7 @@ public class SolicitarDNI extends TareaSincrona {
 
 				if (recComunicacionChat != null) {
 					recComunicacionChat.comenzar(identAgenteOrdenante);
-					String mensajeAenviar = conversacion.usuarioRegistrado;
+					String mensajeAenviar = conversacion.msg("usuarioRegistrado");
 					recComunicacionChat.enviarMensagePrivado(identInterlocutor,
 							mensajeAenviar);
 				}
@@ -62,7 +62,7 @@ public class SolicitarDNI extends TareaSincrona {
 
 				if (recComunicacionChat != null) {
 					recComunicacionChat.comenzar(identAgenteOrdenante);
-					String mensajeAenviar = conversacion.usuarioNoRegistrado;
+					String mensajeAenviar = conversacion.msg("usuarionoRegistrado");
 					recComunicacionChat.enviarMensagePrivado(identInterlocutor,
 							mensajeAenviar);
 				}

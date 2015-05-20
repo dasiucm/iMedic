@@ -1,6 +1,7 @@
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.ItfUsoRecursoTrazas;
 import icaro.infraestructura.recursosOrganizacion.recursoTrazas.imp.componentes.InfoTraza;
 import static icaro.aplicaciones.recursos.recursoCalendario.imp.RecursoCalendarioImp.*;
+import static icaro.aplicaciones.recursos.persistenciaUsuarios.imp.PersistenciaUsuariosImp.*;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.*;
 import icaro.infraestructura.patronAgenteCognitivo.procesadorObjetivos.gestorTareas.ItfGestorTareas;
 import icaro.infraestructura.entidadesBasicas.PerformativaUsuario;
@@ -29,6 +30,20 @@ rule "Notificar desconocimiento"
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
 end
 
+rule "Recibir usuario identificado"
+ when
+ 	notif:NotificacionIdentificado(user:identNotificador)
+ then
+ 	Objetivo id = new IdentificarUsuario();
+ 	id.setobjectReferenceId(user);
+ 	id.setSolved();
+ 	UsuarioContexto cu = obtenerContextoUsuario(user);
+ 	insert(cu);
+    retract(notif);
+    insert(id);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
+end
+
 
 rule "crear foco usuario"
  when 
@@ -37,6 +52,7 @@ rule "crear foco usuario"
  then
  	//Establezco el foco del usuario
  	FocoUsuario fu = new FocoUsuario(identInterlc);
+ 	 	
  	insert(fu);
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
@@ -159,6 +175,7 @@ rule "Actualizar fecha"
 	cm:CitaMedica(usuario == identInterlc)
  then
  	nom.setSolved();
+ 	
  	cm.fecha = msgg;
  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
  	tarea.ejecutar(identInterlc,conversacionPaciente.msg("fechaRegistradaActualizar"));
@@ -187,16 +204,37 @@ rule "Confirmacion de cita"
  when
  	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.si, msgg:mensajeNotificacion )
  	cc:CrearCita(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+ 	obj:IdentificarUsuario(state == Objetivo.SOLVED, objectReferenceId == identInterlc)
  then
  	Objetivo confirmar = new Confirmacion();
  	confirmar.setobjectReferenceId(identInterlc);
  	confirmar.setSolving();
  	insert(confirmar);
+ 	retract(notif)
  
  	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
-
+rule "Confirmacion de cita sin identificar al usuario"
+ when
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.si, msgg:mensajeNotificacion )
+ 	cc:CrearCita(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
+ 	not( exists( IdentificarUsuario(objectReferenceId == identInterlc ) ))
+ 	fc:FocoUsuario(fcuser:usuario)
+ then
+ 	Objetivo id = new IdentificarUsuario();
+ 	id.setobjectReferenceId(identInterlc);
+ 	insert(id);
+ 	fc.setFoco(null);
+ 	UsuarioContexto cu = new UsuarioContexto();
+ 	cu.usuario = identInterlc;
+ 	insert( cu );
+ 	
+ 	TareaSincrona tareadist = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tareadist.ejecutar(identInterlc,conversacion.msg("solicitarNuevamenteDNI")); 	
+ 	update(fc);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
 
 
 rule "Notificar semantica incorrecta: confirmando"
@@ -232,9 +270,10 @@ end
 rule "Establecer cita"
  when
  	obj:CrearCita(state == Objetivo.SOLVING, identInterlc:objectReferenceId)
-	fu:FocoUsuario(usuario == identInterlc, foco == obj)
+	fu:FocoUsuario(usuario == identInterlc)
 	cc:Confirmacion(state == Objetivo.SOLVING, objectReferenceId == identInterlc)
 	cm:CitaMedica(usuario == identInterlc)
+	cu:UsuarioContexto(usuario == identInterlc)
  then
  	TareaSincrona tareadist = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
     tareadist.ejecutar(identInterlc,conversacionPaciente.obtenerInfoCita4todoCompletado); 	
@@ -242,6 +281,8 @@ rule "Establecer cita"
     tareadist2.ejecutar(identInterlc,null,"RESET"); 
  	
  	fu.setFoco(null);
+ 	cm.dniPaciente = cu.DNI;
+ 	cm.nombrePaciente = cu.nombre;
  	
  	// AQUI LLAMAREMOS AL RECURSO DE CALENDARIO Y ALMACENAMOS TODO
  	insertaCita(cm);
@@ -278,10 +319,10 @@ rule "Cancelar cita"
 end
 
 
-// Regla para consultar las citas por parte del paciente
 rule "Consultar citas, teniendo el paciente"
  when
     notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.consulta, msgg:mensajeNotificacion )
+ 	obj:IdentificarUsuario(state == Objetivo.SOLVED, objectReferenceId == identInterlc )
  then
  	// aqui habria que ir al recurso calendario para obtener las citas una a una
     String citas = consultaCitas(identInterlc);
@@ -289,9 +330,34 @@ rule "Consultar citas, teniendo el paciente"
     TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
     tarea.ejecutar(identInterlc,citas);
     
+    Tarea tarea2 = gestorTareas.crearTarea(NotificarObjetivo.class);
+    tarea2.ejecutar(identInterlc,notif,"RESET"); 	
+    
     recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
     retract(notif);
 end
+
+rule "Consultar citas, teniendo el paciente no identificado"
+ when
+    notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.consulta, msgg:mensajeNotificacion )
+    not( exists( IdentificarUsuario(objectReferenceId == identInterlc ) ))
+ then
+ 	Tarea tarea = gestorTareas.crearTarea(NotificarObjetivo.class);
+    tarea.ejecutar(identInterlc,notif,"PACIENTE"); 	
+ 
+ 	UsuarioContexto cu = new UsuarioContexto();
+ 	cu.usuario = identInterlc;
+ 	insert( cu );
+ 	Objetivo id = new IdentificarUsuario();
+ 	id.setobjectReferenceId(identInterlc);
+ 	insert(id);
+ 	
+ 	TareaSincrona tareadist = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+    tareadist.ejecutar(identInterlc,conversacion.msg("solicitarNuevamenteDNI")); 	
+ 	
+    recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
 
 
 rule "Anular cita"
@@ -323,15 +389,6 @@ end
 
 /// IDENTIFICACION DEL USUARIO
 
-rule "Cargar de la persistencia usuario la info"
-  when
-  	fc:FocoUsuario(user:usuario)
-  	not( exists (UsuarioContexto(usuario == user )))
-  then
-  // TODO CARGAR EL CONTEXTO DEL USUARIO
-  
-  recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName());
-end
 
 
 rule "Finalizar la identificacion"
@@ -345,8 +402,11 @@ rule "Finalizar la identificacion"
  	TareaSincrona tarea = gestorTareas.crearTareaSincrona(UsuarioIdentificado.class);
  	tarea.ejecutar(user, cu);
  	fc.setFoco(null);
- 	//TODO GUARDAR EN LA PERSISTENCIA USUARIO PARA PODER USARLA LUEGO 
- 
+ 	
+ 	Tarea tarea2 = gestorTareas.crearTarea(NotificarUsuarioIdentificado.class);
+    tarea2.ejecutar(cu);
+    insertarUsuario(user,cu);
+ 	
  
  	obj.setSolved();
  	update(obj);
@@ -377,7 +437,7 @@ rule "Regla de obtencion de nombre"
  when
 	obj:ObtenerNombreUsuario(user:objectReferenceId, state == Objetivo.PENDING)
  	fc:FocoUsuario(usuario == user, foco == obj )
-    notif:Notificacion(identNotificador == user, tipoNotificacion == tipoNotif.nombre, msgg:mensajeNotificacion )
+    notif:NotificacionPaciente(identNotificador == user, tipoNotificacion == tipoNotif.nombre, msgg:mensajeNotificacion )
     cu:UsuarioContexto(usuario == user)
  then
  	obj.setSolved();
@@ -423,7 +483,7 @@ rule "Regla de obtencion de dni"
  when
  	obj:ObtenerDNIUsuario(user:objectReferenceId, state == Objetivo.PENDING)
  	fc:FocoUsuario(usuario == user, foco == obj )
-    notif:Notificacion(identNotificador == user, tipoNotificacion == tipoNotif.dni, msgg:mensajeNotificacion )
+    notif:NotificacionPaciente(identNotificador == user, tipoNotificacion == tipoNotif.dni, msgg:mensajeNotificacion )
     cu:UsuarioContexto(usuario == user)
  then
  	obj.setSolved();

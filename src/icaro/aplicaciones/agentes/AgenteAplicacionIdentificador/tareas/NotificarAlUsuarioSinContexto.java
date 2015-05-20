@@ -43,6 +43,9 @@ public class NotificarAlUsuarioSinContexto extends TareaSincrona {
 				}else if(foUsuario.getFoco().getgoalId().equals("DistribuirMensaje")){
 					mensajeAenviar = conversacion.msg("solicitarAccionImperativo");
 					foUsuario.intentos =0 ;
+				}else if(foUsuario.getFoco() == null){
+					mensajeAenviar = conversacion.msg("");
+					foUsuario.intentos =0 ;
 				}
 				
 			}

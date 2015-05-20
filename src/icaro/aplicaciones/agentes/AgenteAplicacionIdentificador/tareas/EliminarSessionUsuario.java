@@ -10,6 +10,7 @@ import icaro.aplicaciones.informacion.gestionCitas.FocoUsuario;
 import icaro.aplicaciones.informacion.gestionCitas.Notificacion;
 import icaro.aplicaciones.informacion.gestionCitas.NotificacionMedico;
 import icaro.aplicaciones.informacion.gestionCitas.NotificacionPaciente;
+import icaro.aplicaciones.informacion.gestionCitas.UsuarioContexto;
 import icaro.aplicaciones.informacion.gestionCitas.VocabularioGestionCitas;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Objetivo;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.TareaComunicacion;
@@ -38,6 +39,13 @@ public class EliminarSessionUsuario extends TareaComunicacion{
 
 				if(g instanceof FocoUsuario ){
 					FocoUsuario ob = (FocoUsuario) g;
+					if(ob.getUsuario().equals(usuario)){
+						this.getEnvioHechos().eliminarHechoWithoutFireRules(ob);
+					}
+				}
+				
+				if(g instanceof UsuarioContexto ){
+					UsuarioContexto ob = (UsuarioContexto) g;
 					if(ob.getUsuario().equals(usuario)){
 						this.getEnvioHechos().eliminarHechoWithoutFireRules(ob);
 					}
