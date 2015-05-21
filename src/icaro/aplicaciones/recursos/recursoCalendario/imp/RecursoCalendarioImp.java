@@ -5,11 +5,16 @@ import icaro.aplicaciones.informacion.gestionCitas.CitaMedica;
 import icaro.aplicaciones.recursos.recursoCalendario.DateUtil;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang.time.DateUtils;
 
@@ -22,18 +27,14 @@ public class RecursoCalendarioImp implements Serializable {
 
 	private static final String slash = "/";
 	private static final String dash = "-";
-	public static final SimpleDateFormat slashFormatter = new SimpleDateFormat(
-			"dd/MM/yyyy");
-	private static final SimpleDateFormat dashFormatter = new SimpleDateFormat(
-			"dd-MM-yyyy");
+	public static final SimpleDateFormat slashFormatter = new SimpleDateFormat("dd/MM/yyyy");
+	private static final SimpleDateFormat dashFormatter = new SimpleDateFormat("dd-MM-yyyy");
 
 	private static final String PACIENTES_PATH = "pacientes";
 	private static final String MEDICOS_PATH = "medicos";
 
-	private static final Map<String, List<CitaMedica>> calendarioCitas_pacienteIdx = IOUtils
-			.read(PACIENTES_PATH);
-	private static final Map<String, List<CitaMedica>> calendarioCitas_medicoIdx = IOUtils
-			.read(MEDICOS_PATH);
+	private static final Map<String, List<CitaMedica>> calendarioCitas_pacienteIdx = IOUtils.read(PACIENTES_PATH);
+	private static final Map<String, List<CitaMedica>> calendarioCitas_medicoIdx = IOUtils.read(MEDICOS_PATH);
 
 	private RecursoCalendarioImp() {
 		// Ocultar el constructor
@@ -41,24 +42,21 @@ public class RecursoCalendarioImp implements Serializable {
 
 	/*------ Funcionalidad de paciente --------*/
 
-	public static boolean insertaCita(String usuario, String medico, String fecha)
-			throws Exception {
+	public static boolean insertaCita(String usuario, String medico, String fecha) throws Exception {
 		CitaMedica cita = new CitaMedica(usuario, medico, fecha);
 		return insertaCita(cita);
 	}
 
 	public static boolean insertaCita(CitaMedica cita) throws Exception {
 		if (citaValida(cita)) {
-			List<CitaMedica> citasPaciente = calendarioCitas_pacienteIdx
-					.get(cita.getUsuario());
+			List<CitaMedica> citasPaciente = calendarioCitas_pacienteIdx.get(cita.getUsuario());
 			if (citasPaciente == null) {
 				citasPaciente = new ArrayList<CitaMedica>();
 			}
 			citasPaciente.add(cita);
 			calendarioCitas_pacienteIdx.put(cita.getUsuario(), citasPaciente);
 
-			List<CitaMedica> citasMedico = calendarioCitas_medicoIdx.get(cita
-					.getMedico());
+			List<CitaMedica> citasMedico = calendarioCitas_medicoIdx.get(cita.getMedico());
 			if (citasMedico == null) {
 				citasMedico = new ArrayList<CitaMedica>();
 			}
@@ -69,14 +67,11 @@ public class RecursoCalendarioImp implements Serializable {
 		}
 		return false;
 	}
-	
-	
 
 	public static String consultaCitas(String usuario) throws Exception {
 		String msg = null;
 
-		List<CitaMedica> citasPaciente = calendarioCitas_pacienteIdx
-				.get(usuario);
+		List<CitaMedica> citasPaciente = calendarioCitas_pacienteIdx.get(usuario);
 		if (citasPaciente == null || citasPaciente.isEmpty()) {
 			msg = "No tiene citas.";
 		} else {
@@ -85,8 +80,7 @@ public class RecursoCalendarioImp implements Serializable {
 		return msg;
 	}
 
-	public static Boolean darBajaCita(String usuario, String fecha)
-			throws Exception {
+	public static Boolean darBajaCita(String usuario, String fecha) throws Exception {
 		return darBajaCita(new CitaMedica(usuario, null, fecha));
 	}
 
@@ -94,8 +88,7 @@ public class RecursoCalendarioImp implements Serializable {
 
 		Boolean borrado = false;
 
-		List<CitaMedica> citasPaciente = calendarioCitas_pacienteIdx.get(cita
-				.getUsuario());
+		List<CitaMedica> citasPaciente = calendarioCitas_pacienteIdx.get(cita.getUsuario());
 		if (citasPaciente != null) {
 			for (int i = 0; i < citasPaciente.size(); ++i) {
 				CitaMedica citaPaciente = citasPaciente.get(i);
@@ -106,8 +99,7 @@ public class RecursoCalendarioImp implements Serializable {
 			}
 		}
 
-		List<CitaMedica> citasMedico = calendarioCitas_medicoIdx.get(cita
-				.getMedico());
+		List<CitaMedica> citasMedico = calendarioCitas_medicoIdx.get(cita.getMedico());
 		if (citasMedico != null) {
 			for (int i = 0; i < citasMedico.size(); ++i) {
 				CitaMedica citaMedico = citasMedico.get(i);
@@ -125,8 +117,8 @@ public class RecursoCalendarioImp implements Serializable {
 
 	}
 
-	public static Boolean cambiarCita(String usuario, String medico,
-			String fechaNueva, String fechaAntigua) throws Exception {
+	public static Boolean cambiarCita(String usuario, String medico, String fechaNueva, String fechaAntigua)
+			throws Exception {
 		if (darBajaCita(usuario, fechaAntigua)) {
 			insertaCita(usuario, medico, fechaNueva);
 			return true;
@@ -182,8 +174,7 @@ public class RecursoCalendarioImp implements Serializable {
 		return false;
 	}
 
-	private static Boolean citaEnRangoFecha(CitaMedica cita,
-			String fechaInicio) {
+	private static Boolean citaEnRangoFecha(CitaMedica cita, String fechaInicio) {
 		Date date = getDateFromString(cita.getFecha());
 		if (date != null) {
 			Date initialDate = getDateFromString(fechaInicio);
@@ -226,5 +217,90 @@ public class RecursoCalendarioImp implements Serializable {
 	private static void guardaCalendarios() {
 		IOUtils.write(PACIENTES_PATH, calendarioCitas_pacienteIdx);
 		IOUtils.write(MEDICOS_PATH, calendarioCitas_medicoIdx);
+	}
+
+	/* --------------- RECOMENDACIONES -------------------- */
+	public static String recomiendaFecha(String usuario) {
+		List<CitaMedica> citasMedicas = calendarioCitas_pacienteIdx.get(usuario);
+		int diaRepetido = 0;
+		int maxRepeticiones = 0;
+
+		// Array para almacenar los contadores de los dias de la semana
+		int weekDays[] = new int[7];
+		for (int i = 0; i < 7; i++) {
+			weekDays[i] = 0;
+		}
+
+		// Iterar las citas medicas del usuario para ir rellenando el array
+		for (int i = 0; i < citasMedicas.size(); ++i) {
+			String fecha = citasMedicas.get(i).getFecha();
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+			try {
+				cal.setTime(sdf.parse(fecha));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			int weekDay = cal.get(Calendar.DAY_OF_WEEK);
+
+			weekDays[weekDay]++;
+
+		}
+
+		// Iterar sobre el array para ver que dia es el mas repetido
+		for (int i = 0; i < 7; i++) {
+			if (maxRepeticiones <= weekDays[i]) {
+				maxRepeticiones = weekDays[i];
+				diaRepetido = i;
+			}
+		}
+
+		// Sacar el siguiente dia mas repetido en formato fecha como un string
+		// Get actual date as a calendar
+		Calendar fechaRecomendada = Calendar.getInstance();
+
+		while (fechaRecomendada.get(Calendar.DAY_OF_WEEK) != diaRepetido) {
+			fechaRecomendada.add(Calendar.DATE, 1);
+		}
+
+		String fechaRecomString = fechaRecomendada.toString();
+
+		return fechaRecomString;
+
+	}
+
+	public static String recomiendaMedico(String usuario) {
+		List<CitaMedica> citasMedicas = calendarioCitas_pacienteIdx.get(usuario);
+		String medicoMasRepetido = "";
+		int maxRepeticiones = 0;
+
+		HashMap<String, Integer> repeticionesMedicos = new HashMap<String, Integer>();
+
+		// Iterar las citas medicas del usuario para ir rellenando el array
+		for (int i = 0; i < citasMedicas.size(); ++i) {
+			if (repeticionesMedicos.get(citasMedicas.get(i).getMedico()) == null) {
+				repeticionesMedicos.put(citasMedicas.get(i).getMedico(), 0);
+			} else {
+				Integer value = repeticionesMedicos.get(citasMedicas.get(i).getMedico());
+				value++;
+				repeticionesMedicos.put(citasMedicas.get(i).getMedico(), value);
+			}
+		}
+		
+		// Iterar el mapa para coger el medico mas repetido
+		Iterator<Entry<String, Integer>> it = repeticionesMedicos.entrySet().iterator();
+		
+		while(it.hasNext()){
+			Map.Entry<String, Integer> entry = (Map.Entry<String, Integer>) it.next();
+			if(maxRepeticiones <= entry.getValue()){
+				maxRepeticiones = entry.getValue();
+				medicoMasRepetido = entry.getKey();
+			}
+		}
+		
+		return medicoMasRepetido;
 	}
 }
