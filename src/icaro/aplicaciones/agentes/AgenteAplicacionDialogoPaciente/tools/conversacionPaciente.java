@@ -64,6 +64,11 @@ public class conversacionPaciente {
 		fechaRegistrada.add("Vale, ya tengo la fecha");
 		fechaRegistrada.add("Perfecto ya tengo la fecha");
 		
+		List<String> cualquierCita = new ArrayList<String>();
+		cualquierCita.add("Perfecto, voy a mirar un medico que este libre cuanto antes");
+		cualquierCita.add("Muy bien, le dare la primera cita libre");
+		cualquierCita.add("Estupendo, dejeme mirar el horario de nuestros medicos");
+		
 		conversacion.put("fechaRegistradaActualizar", fechaRegistradaActualizar);
 		conversacion.put("medicoRegistradoActualizar", medicoRegistradoActualizar);
 		conversacion.put("dameDatos", dameDatos);
@@ -74,6 +79,7 @@ public class conversacionPaciente {
 		conversacion.put("imperativoConfirmar", imperativoConfirmar);
 		conversacion.put("fechaRegistrada", fechaRegistrada);
 		conversacion.put("imperativoPedirDatos", imperativoPedirDatos);
+		conversacion.put("cualquierCita", cualquierCita);
 		
 		
 	}

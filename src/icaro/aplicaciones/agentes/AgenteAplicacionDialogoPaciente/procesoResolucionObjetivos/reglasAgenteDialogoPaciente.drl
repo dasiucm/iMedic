@@ -221,6 +221,35 @@ rule "Obtener nombre medico"
  	 recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
 end
 
+rule "Obtener cualquier cita"
+ when
+ 	notif:NotificacionPaciente(identInterlc:identNotificador, tipoNotificacion == tipoNotifPaciente.todoIndeterminado,  msgg:mensajeNotificacion );
+ 	nom:IdentificarMedico(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+ 	nom2:ObtenerFechaCita(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+ 	obj:CrearCita(state == Objetivo.PENDING, objectReferenceId == identInterlc)
+	fu:FocoUsuario(usuario == identInterlc, foco == obj)
+	cm:CitaMedica(usuario == identInterlc)
+ then
+ 	nom.setSolved();
+ 	nom2.setSolved();
+ 	
+ 	TareaSincrona tarea = gestorTareas.crearTareaSincrona(MensajeGenerico.class);
+ 	tarea.ejecutar(identInterlc, conversacionPaciente.msg("cualquierCita"));
+ 	
+ 	CitaMedica cualquierCita = dameCualquierCita(identInterlc);
+ 	cm.nombreMedico = cualquierCita.nombreMedico;
+ 	cm.fecha = cualquierCita.fecha;
+ 	
+ 	Objetivo validarCualquierMedico = new ValidarCualquierMedico();
+ 	validarCualquierMedico.setobjectReferenceId(identInterlc);
+ 	insert(validarCualquierMedico);
+ 	
+ 	update(nom);
+ 	update(nom2);
+ 	retract(notif);
+ 	recursoTrazas.aceptaNuevaTrazaEjecReglas(agentId," EJECUTO LA REGLA: " + drools.getRule().getName()); 
+end
+
 
 rule "Actualizo el nombre medico"
  when
