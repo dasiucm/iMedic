@@ -8,4 +8,5 @@ public class tipoNotifPaciente {
 	public static String no = "no";
 	public static String consulta = "consulta";
 	public static String session = "session";
+	public static String todoIndeterminado = "todoIndeterminado";
 }

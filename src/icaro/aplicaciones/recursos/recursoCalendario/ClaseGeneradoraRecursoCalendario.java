@@ -62,4 +62,15 @@ public class ClaseGeneradoraRecursoCalendario extends ImplRecursoSimple implemen
 		return RecursoCalendarioImp.consultarHorario(medico);
 	}
 	
+	/* --------------- RECOMENDACIONES -------------------- */
+	@Override
+	public String recomiendaFecha(String usuario){
+		return RecursoCalendarioImp.recomiendaFecha(usuario);
+	}
+	
+	@Override
+	public String recomiendaMedico(String usuario){
+		return RecursoCalendarioImp.recomiendaMedico(usuario);
+	}
+	
 }

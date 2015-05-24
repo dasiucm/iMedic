@@ -10,5 +10,7 @@ public class tipoNotif {
 	public static String session = "session";
 	public static String anular = "inicioAnulacion";
 	public static String fechaAnterior = "fechaAnterior";
+	public static String si = "si";
+	public static String no = "no";
 	
 }

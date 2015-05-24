@@ -465,6 +465,7 @@ public class InterpreteMsgsIRC {
 		anotacionesBusquedaPrueba.add("consulta");
 		anotacionesBusquedaPrueba.add("si");
 		anotacionesBusquedaPrueba.add("no");
+		anotacionesBusquedaPrueba.add("todoIndeterminado");
 		// esto habria que pasarlo como parametro
 		if (infoConecxInterlocutor == null) {
 			infoConecxInterlocutor = new InfoConexionUsuario();
@@ -1507,7 +1508,7 @@ public class InterpreteMsgsIRC {
 		while (annotTypesSal.hasNext()) {
 			Annotation annot = (Annotation) annotTypesSal.next();
 			String anotType = annot.getType();
-			if (anotType.equalsIgnoreCase("saludo")) {
+			if (anotType.equalsIgnoreCase("saludo")&& !anotaciones_leidas.contains("saludo")) {
 				anotaciones_leidas.add("saludo");
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
@@ -1577,6 +1578,12 @@ public class InterpreteMsgsIRC {
 								contextoInterpretacion, annot));
 			} else if (anotType.equalsIgnoreCase("no") && !anotaciones_leidas.contains("no")) {
 				anotaciones_leidas.add("no");
+				tienePeticion = true;
+				anotacionesInterpretadas
+						.add(interpretarAnotacionSaludoEInicioPeticion(
+								contextoInterpretacion, annot));
+			} else if (anotType.equalsIgnoreCase("todoIndeterminado") && !anotaciones_leidas.contains("todoIndeterminado")) {
+				anotaciones_leidas.add("todoIndeterminado");
 				tienePeticion = true;
 				anotacionesInterpretadas
 						.add(interpretarAnotacionSaludoEInicioPeticion(
