@@ -221,6 +221,10 @@ public class RecursoCalendarioImp implements Serializable {
 
 	/* --------------- RECOMENDACIONES -------------------- */
 	public static String recomiendaFecha(String usuario) {
+		boolean eliminaresto = true;
+		if(eliminaresto) return "12/12/2015";
+		
+		
 		List<CitaMedica> citasMedicas = calendarioCitas_pacienteIdx.get(usuario);
 		int diaRepetido = 0;
 		int maxRepeticiones = 0;
@@ -273,6 +277,9 @@ public class RecursoCalendarioImp implements Serializable {
 	}
 
 	public static String recomiendaMedico(String usuario) {
+		boolean eliminaresto = true;
+		if(eliminaresto) return "Alberto";
+		
 		List<CitaMedica> citasMedicas = calendarioCitas_pacienteIdx.get(usuario);
 		String medicoMasRepetido = "";
 		int maxRepeticiones = 0;

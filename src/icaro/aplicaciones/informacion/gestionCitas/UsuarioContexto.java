@@ -1,5 +1,8 @@
 package icaro.aplicaciones.informacion.gestionCitas;
 
+import icaro.aplicaciones.recursos.comunicacionChat.ItfUsoComunicacionChat;
+import icaro.aplicaciones.recursos.recursoCalendario.ItfUsoRecursoCalendario;
+import icaro.infraestructura.entidadesBasicas.NombresPredefinidos;
 import icaro.infraestructura.entidadesBasicas.procesadorCognitivo.Focus;
 
 import java.io.Serializable;
@@ -50,6 +53,59 @@ public class UsuarioContexto implements Serializable {
 
 	public void setMedico(boolean medico) {
 		this.medico = medico;
+	}
+	
+	public String obtenerRecomendacionMedico(){
+		try {
+			ItfUsoRecursoCalendario recursoCalendario = (ItfUsoRecursoCalendario) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ
+					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoCalendario);
+			
+			return recursoCalendario.recomiendaMedico(usuario);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+		
+	}
+	
+	public String obtenerRecomendacionFecha(){
+		try {
+			ItfUsoRecursoCalendario recursoCalendario = (ItfUsoRecursoCalendario) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ
+					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoCalendario);
+			
+			return recursoCalendario.recomiendaFecha(usuario);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+		
+	}
+	
+	
+	public boolean puedeRecibirRecomendacion(){
+		try {
+			ItfUsoRecursoCalendario recursoCalendario = (ItfUsoRecursoCalendario) NombresPredefinidos.REPOSITORIO_INTERFACES_OBJ
+					.obtenerInterfazUso(VocabularioGestionCitas.IdentRecursoCalendario);
+			
+			
+			
+			String fecha = recursoCalendario.recomiendaFecha(usuario);
+			
+			String medico = recursoCalendario.recomiendaMedico(usuario);
+			
+			if(fecha != null && medico != null){
+				return true;
+			}
+			
+			return false;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public boolean inactividad(int i) {
